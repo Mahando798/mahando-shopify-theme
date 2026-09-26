@@ -164,11 +164,11 @@
 
   .mahando-hero__waves {
     position: absolute;
-    right: -6%;
-    bottom: -18%;
-    width: min(62%, 720px);
+    right: -3%;
+    bottom: -14%;
+    width: min(58%, 680px);
     height: auto;
-    opacity: 0.18;
+    opacity: 0.28;
     pointer-events: none;
     z-index: -1;
   }
@@ -195,7 +195,16 @@
   .mahando-hero--dark .button-secondary,
   .mahando-hero--teal .button-secondary,
   .mahando-hero--image .button-secondary {
+    background: transparent;
     border-color: rgb(255 255 255 / 0.6);
+    color: #fff;
+  }
+
+  .mahando-hero--dark .button-secondary:hover,
+  .mahando-hero--teal .button-secondary:hover,
+  .mahando-hero--image .button-secondary:hover {
+    background: rgb(255 255 255 / 0.12);
+    border-color: #fff;
     color: #fff;
   }
 
