@@ -103,3 +103,32 @@ product-card a.contents p[role="heading"] {
 .mahando-section-head .mahando-eyebrow {
   margin-bottom: 8px;
 }
+
+/* Produktseite: Galerie etwas schmaler als die Detailspalte (45/55 statt 50/50) */
+@media screen and (min-width: 990px) {
+  .product-information__grid:not(.product-information--media-none).product-information__grid--half.product-information--media-left {
+    grid-template-columns:
+      var(--full-page-grid-margin) calc(var(--full-page-grid-central-column-width) * 0.45)
+      calc(var(--full-page-grid-central-column-width) * 0.55) var(--full-page-grid-margin);
+  }
+}
+
+/* Produktseite: Titel kompakter, Kaufbox-Elemente in voller Breite */
+.product-details h1 {
+  line-height: 1.15;
+}
+
+.product-details .group-block .buy-buttons-block {
+  width: 100%;
+}
+
+/* Beschreibungstext: Listen und Absätze etwas luftiger, Bilder nie breiter als die Spalte */
+.mahando-section-head + .text-block .rte p,
+.mahando-section-head + .text-block .rte li {
+  line-height: 1.6;
+}
+
+.text-block .rte img {
+  max-width: 100%;
+  height: auto;
+}

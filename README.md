@@ -63,7 +63,7 @@ im Theme-Editor werden zurück ins Repo committet.
 
    | Schlüssel | Typ | Inhalt |
    |---|---|---|
-   | `zustand` | Einzeiliger Text | `neu` (Standard, leer lassen), `verpackung-beschaedigt`, `b-ware`, `auslaufmodell` |
+   | `zustand` | Einzeiliger Text | `neu` (Standard, leer lassen), `verpackung-beschaedigt`, `b-ware`, `refurbished`, `auslaufmodell` |
    | `zustand_hinweis` | Einzeiliger Text | Erklärtext zum Zustand (optional, sonst Standardtext) |
    | `technische_daten` | Mehrzeiliger Text | eine Zeile je Eintrag: `Spannung: 20 V` |
    | `lieferumfang` | Mehrzeiliger Text | eine Zeile je Position, optional mit `- ` als Aufzählung |
@@ -81,7 +81,7 @@ im Theme-Editor werden zurück ins Repo committet.
 |---|---|---|
 | Titel, Beschreibung, Bilder, Preis, Bestand | Standard-Sync | Produktkarte, Produktseite, Verfügbarkeit („Nur noch X Stück“ ab Bestand ≤ 5) |
 | Vergleichspreis | UVP **nur bei reduzierten Artikeln** setzen | Streichpreis + Badge „−X %“, Kollektion `sale` |
-| Tags | **Unterkategorie exakt wie im Shop benannt** (z. B. `Küche`, `Netzwerk`, `TV & Audio`) – reicht für Unter- und Hauptkategorie; Zustand (`verpackung-beschaedigt`, `b-ware`, `auslaufmodell`); `neu`; `einzelstueck`; `elektro`/`akku`/`batterie` | Kategorie-Kollektionen, Badges, Zustandshinweis, Entsorgungshinweis (ElektroG/BattG) |
+| Tags | **Unterkategorie exakt wie im Shop benannt** (z. B. `Küche`, `Netzwerk`, `TV & Audio`) – reicht für Unter- und Hauptkategorie; Zustand (`verpackung-beschaedigt`, `b-ware`, `refurbished`, `auslaufmodell`); `neu`; `einzelstueck`; `elektro`/`akku`/`batterie` | Kategorie-Kollektionen, Badges, Zustandshinweis, Entsorgungshinweis (ElektroG/BattG) |
 | Produkttyp | Artikelart (z. B. `Kochtopf`, `Rasentrimmer`) – frei wählbar | Label auf den Produktkarten, Filter; Kategorie-Namen als Typ funktionieren ebenfalls |
 | SKU | Artikelnummer | „Art.-Nr.“ auf der Produktseite |
 | Barcode | EAN | „EAN“ auf der Produktseite |

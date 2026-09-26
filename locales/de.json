@@ -364,9 +364,11 @@
       "packaging_damaged": "Neu – Originalverpackung beschädigt",
       "packaging_damaged_short": "Verpackung beschädigt",
       "b_ware": "B-Ware",
+      "refurbished": "Refurbished – generalüberholt",
       "discontinued": "Auslaufmodell",
       "default_note_packaging": "Der Artikel ist ungebraucht und vollständig. Nur die Umverpackung weist Transport- oder Lagerspuren auf, daher der reduzierte Preis.",
       "default_note_b_ware": "Der Artikel wurde geprüft und funktioniert einwandfrei. Er kann leichte Gebrauchs- oder Lagerspuren aufweisen, daher der reduzierte Preis.",
+      "default_note_refurbished": "Der Artikel wurde geprüft, gereinigt und auf volle Funktion getestet. Er kann leichte Gebrauchsspuren aufweisen; Verpackung und Zubehör können vom Neuzustand abweichen, daher der reduzierte Preis.",
       "default_note_discontinued": "Auslaufmodell des Herstellers – neu und unbenutzt, wird nicht mehr nachproduziert."
     },
     "availability": {
@@ -391,7 +393,12 @@
       "gpsr_responsible": "Verantwortliche Person in der EU",
       "gpsr_note": "Angaben nach der EU-Produktsicherheitsverordnung (GPSR).",
       "sku_label": "Art.-Nr.",
-      "ean_label": "EAN"
+      "ean_label": "EAN",
+      "vendor_label": "Hersteller",
+      "category_label": "Kategorie",
+      "availability_label": "Verfügbarkeit",
+      "shipping_label": "Versand",
+      "weight_label": "Gewicht"
     },
     "price": {
       "shipping_note_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",

@@ -383,9 +383,11 @@
       "packaging_damaged": "New – packaging damaged",
       "packaging_damaged_short": "Packaging damaged",
       "b_ware": "B-stock",
+      "refurbished": "Refurbished",
       "discontinued": "Discontinued",
       "default_note_packaging": "The item is unused and complete. Only the outer packaging shows transport or storage marks, hence the price.",
       "default_note_b_ware": "The item has been tested and works flawlessly. It may show slight signs of use or storage, hence the price.",
+      "default_note_refurbished": "The item has been inspected, cleaned and fully tested. It may show slight signs of use; packaging and accessories may differ from new.",
       "default_note_discontinued": "Discontinued by the manufacturer – new and unused, no longer produced."
     },
     "availability": {
@@ -401,8 +403,13 @@
     },
     "product": {
       "sku": "SKU {{ sku }}",
-      "sku_label": "SKU",
+      "sku_label": "Item no.",
       "ean_label": "EAN",
+      "vendor_label": "Brand",
+      "category_label": "Category",
+      "availability_label": "Availability",
+      "shipping_label": "Shipping",
+      "weight_label": "Weight",
       "ean": "EAN {{ ean }}",
       "specs_heading": "Specifications",
       "gpsr_heading": "Manufacturer information",

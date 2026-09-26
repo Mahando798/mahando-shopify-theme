@@ -1,0 +1,206 @@
+{%- comment -%}
+  Breadcrumb-Navigation (Startseite › Kategorie › Unterkategorie › Artikel).
+  Produktseiten: Kategorie und Unterkategorie aus dem Hauptmenü (erste Kollektion, die den Artikel enthält).
+  Kollektionsseiten: Position der Kollektion im Hauptmenü. Seiten, Blogs, Suche: Titel der Seite.
+  Auf Mobilgeräten wird der aktuelle Titel ausgeblendet (nur der Pfad bleibt).
+{%- endcomment -%}
+
+{%- liquid
+  assign menu_handle = section.settings.menu.handle | default: 'main-menu'
+  assign crumbs = ''
+  assign current = ''
+
+  case template.name
+    when 'product'
+      assign product = closest.product
+      capture category_items
+        render 'mahando-product-category', product: product, format: 'breadcrumb', menu: menu_handle
+      endcapture
+      assign crumbs = category_items | strip
+      assign current = product.title
+    when 'collection'
+      assign collection = closest.collection
+      assign parent_link = null
+      for link in linklists[menu_handle].links
+        if link.type != 'collection_link' or link.object == blank
+          continue
+        endif
+        if link.object.handle == collection.handle
+          assign parent_link = link
+          break
+        endif
+        for sub in link.links
+          if sub.type == 'collection_link' and sub.object != blank and sub.object.handle == collection.handle
+            assign parent_link = link
+            break
+          endif
+        endfor
+        if parent_link != null
+          break
+        endif
+      endfor
+      if parent_link != null and parent_link.object.handle != collection.handle
+        capture crumbs
+          echo '<li><a href="'
+          echo parent_link.url
+          echo '">'
+          echo parent_link.title
+          echo '</a></li>'
+        endcapture
+      endif
+      assign current = collection.title
+    when 'page'
+      assign current = page.title
+    when 'article'
+      capture crumbs
+        echo '<li><a href="'
+        echo blog.url
+        echo '">'
+        echo blog.title
+        echo '</a></li>'
+      endcapture
+      assign current = article.title
+    when 'blog'
+      assign current = blog.title
+    when 'search'
+      assign current = 'Suche'
+    when 'list-collections'
+      assign current = 'Alle Kategorien'
+    when 'cart'
+      assign current = 'Warenkorb'
+    when '404'
+      assign current = 'Seite nicht gefunden'
+  endcase
+-%}
+
+{%- if current != blank -%}
+  <nav
+    class="mahando-breadcrumb section section--{{ section.settings.section_width }} spacing-style"
+    aria-label="Breadcrumb"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <ol class="mahando-breadcrumb__list">
+      <li><a href="{{ routes.root_url }}">{{ section.settings.home_label }}</a></li>
+      {{ crumbs }}
+      <li aria-current="page"><span>{{ current }}</span></li>
+    </ol>
+  </nav>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-breadcrumb {
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-breadcrumb__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mahando-breadcrumb__list li {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .mahando-breadcrumb__list li + li::before {
+    content: '›';
+    margin: 0 7px;
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-breadcrumb__list a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .mahando-breadcrumb__list a:hover {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .mahando-breadcrumb__list [aria-current='page'] span {
+    color: var(--color-foreground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60vw;
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-breadcrumb__list [aria-current='page'] {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Breadcrumb (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["product", "collection", "page", "article", "blog", "search", "list-collections", "cart", "404"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menü für Kategorien",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Beschriftung Startseite",
+      "default": "Startseite"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumb (Mahando)",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

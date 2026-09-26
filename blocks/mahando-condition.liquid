@@ -1,27 +1,21 @@
 {%- doc -%}
   Zustandshinweis auf der Produktseite. Erscheint nur, wenn der Artikel nicht "neu, original verpackt" ist.
-  Quelle: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | auslaufmodell) oder gleichnamige Tags.
+  Quelle: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | refurbished | auslaufmodell) oder gleichnamige Tags.
   Der Erklärtext kommt aus dem Metafeld mahando.zustand_hinweis, sonst aus dem Standardtext je Zustand.
   Im Theme-Editor wird ohne Zustand eine Vorschau angezeigt, damit der Block platzierbar bleibt.
 {%- enddoc -%}
 
 {%- liquid
   assign product = closest.product
-  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-  if zustand == blank
-    for tag in product.tags
-      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
-        assign zustand = t
-        break
-      endif
-    endfor
-  endif
+  capture zustand
+    render 'mahando-zustand', product: product
+  endcapture
+  assign zustand = zustand | strip
 
   assign title = ''
   assign note = product.metafields.mahando.zustand_hinweis | strip
   case zustand
-    when 'verpackung-beschaedigt', 'ovp-beschaedigt'
+    when 'verpackung-beschaedigt'
       assign title = 'mahando.condition.packaging_damaged' | t
       if note == blank
         assign note = 'mahando.condition.default_note_packaging' | t
@@ -30,6 +24,11 @@
       assign title = 'mahando.condition.b_ware' | t
       if note == blank
         assign note = 'mahando.condition.default_note_b_ware' | t
+      endif
+    when 'refurbished'
+      assign title = 'mahando.condition.refurbished' | t
+      if note == blank
+        assign note = 'mahando.condition.default_note_refurbished' | t
       endif
     when 'auslaufmodell'
       assign title = 'mahando.condition.discontinued' | t
@@ -42,7 +41,7 @@
   if title == blank and request.design_mode
     assign is_preview = true
     assign title = 'mahando.condition.packaging_damaged' | t
-    assign note = 'Vorschau im Theme-Editor: Dieser Hinweis erscheint im Shop nur bei Artikeln mit Zustand „Verpackung beschädigt“, „B-Ware“ oder „Auslaufmodell“.'
+    assign note = 'Vorschau im Theme-Editor: Dieser Hinweis erscheint im Shop nur bei Artikeln mit Zustand „Verpackung beschädigt“, „B-Ware“, „Refurbished“ oder „Auslaufmodell“.'
   endif
 -%}
 

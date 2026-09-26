@@ -26,7 +26,7 @@
 -%}
 
 <div
-  class="mahando-availability mahando-availability--{{ status }} spacing-style"
+  class="mahando-availability mahando-availability--{{ status }} mahando-availability--{{ block.settings.style | default: 'inline' }} spacing-style"
   style="{% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
@@ -78,6 +78,23 @@
   .mahando-availability--out_of_stock {
     --mahando-availability-color: var(--color-foreground-muted);
   }
+
+  /* Variante „Box“ für die Kaufbox: farbige Fläche wie bei Marktplatz-Kaufboxen */
+  .mahando-availability--pill {
+    display: inline-flex;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: var(--font-size--sm);
+    background: var(--mahando-availability-bg, #e9f6ee);
+  }
+
+  .mahando-availability--pill.mahando-availability--low {
+    --mahando-availability-bg: #fdf1dc;
+  }
+
+  .mahando-availability--pill.mahando-availability--out_of_stock {
+    --mahando-availability-bg: #eef1f3;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -94,6 +111,16 @@
       "id": "show_delivery_time",
       "label": "Lieferzeit anzeigen",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Darstellung",
+      "options": [
+        { "value": "inline", "label": "Textzeile mit Punkt" },
+        { "value": "pill", "label": "Farbige Box (Kaufbox)" }
+      ],
+      "default": "inline"
     },
     {
       "type": "header",

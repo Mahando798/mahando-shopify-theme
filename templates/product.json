@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "breadcrumb": {
+      "type": "mahando-breadcrumb",
+      "settings": {
+        "menu": "main-menu",
+        "home_label": "Startseite",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 8
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -50,7 +60,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 16,
+            "gap": 14,
             "sticky_details_desktop": true,
             "background_media": "none",
             "video_position": "cover",
@@ -59,30 +69,43 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 8,
-            "padding-block-end": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
             "kopf": {
               "type": "group",
-              "name": "Kopf",
               "settings": {
                 "content_direction": "column",
-                "gap": 8,
-                "width": "fill",
-                "width_mobile": "fill",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
                 "background_media": "none",
-                "border": "none"
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
-                "kategorie": {
+                "hersteller": {
                   "type": "mahando-product-type",
                   "settings": {
-                    "source": "type",
+                    "source": "vendor",
                     "padding-block-start": 0
                   }
                 },
@@ -108,94 +131,347 @@
                 }
               },
               "block_order": [
-                "kategorie",
+                "hersteller",
                 "titel",
                 "meta"
-              ]
+              ],
+              "name": "Kopf"
+            },
+            "highlights": {
+              "type": "mahando-highlights",
+              "settings": {
+                "heading": "Auf einen Blick",
+                "max_items": 4,
+                "fallback_description": true,
+                "more_text": "Mehr Details anzeigen",
+                "more_anchor": "beschreibung"
+              }
+            },
+            "chips": {
+              "type": "mahando-product-chips",
+              "settings": {
+                "show_vendor": true,
+                "show_category": true
+              }
             },
             "zustand": {
               "type": "mahando-condition",
               "settings": {}
             },
-            "preis": {
-              "type": "price",
+            "kaufbox": {
+              "type": "group",
               "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": true,
-                "type_preset": "h2",
-                "width": "100%",
-                "alignment": "left",
-                "padding-block-start": 4,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "lager": {
-              "type": "product-inventory",
-              "settings": {
-                "inventory_threshold": 5,
-                "show_inventory_quantity": true
-              }
-            },
-            "versand": {
-              "type": "mahando-shipping-info",
-              "settings": {
-                "show_delivery": true,
-                "show_cutoff": true,
-                "show_shipping_cost": true
-              }
-            },
-            "varianten": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": true,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "kaufen": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": false,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "border_radius": 8,
-                "padding-block-start": 4,
-                "padding-block-end": 4
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "background_media": "none",
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12,
+                "padding-block-start": 18,
+                "padding-block-end": 16,
+                "padding-inline-start": 16,
+                "padding-inline-end": 16,
+                "background_color": "#FFFFFF",
+                "border_color": "#DCE5E9"
               },
               "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
+                "preis": {
+                  "type": "price",
                   "settings": {
-                    "style_class": "button"
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": true,
+                    "type_preset": "h2",
+                    "width": "100%",
+                    "alignment": "left",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0
                   },
                   "blocks": {}
                 },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
+                "verfuegbarkeit": {
+                  "type": "mahando-availability",
+                  "settings": {
+                    "show_delivery_time": false,
+                    "style": "pill",
+                    "padding-block-start": 0
+                  }
+                },
+                "lieferung": {
+                  "type": "mahando-delivery-box",
+                  "settings": {
+                    "cutoff_hour": 13,
+                    "min_days": 1,
+                    "max_days": 3,
+                    "text_today": "Versand noch heute bei Bestellung bis {cutoff} Uhr",
+                    "text_next": "Versand am {day}",
+                    "text_window": "Lieferung voraussichtlich {from} – {to}",
+                    "note": "Versand aus Deutschland · gilt werktags bei Zahlungseingang und Verfügbarkeit",
+                    "show_shipping_cost": true
+                  }
+                },
+                "varianten": {
+                  "type": "variant-picker",
+                  "settings": {
+                    "variant_style": "buttons",
+                    "show_swatches": true,
+                    "alignment": "left",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0
+                  },
                   "blocks": {}
+                },
+                "kaufen": {
+                  "type": "buy-buttons",
+                  "settings": {
+                    "stacking": false,
+                    "show_pickup_availability": false,
+                    "gift_card_form": true,
+                    "border_radius": 8,
+                    "padding-block-start": 4,
+                    "padding-block-end": 4
+                  },
+                  "blocks": {
+                    "quantity": {
+                      "type": "quantity",
+                      "static": true,
+                      "settings": {},
+                      "blocks": {}
+                    },
+                    "add-to-cart": {
+                      "type": "add-to-cart",
+                      "static": true,
+                      "settings": {
+                        "style_class": "button"
+                      },
+                      "blocks": {}
+                    },
+                    "accelerated-checkout": {
+                      "type": "accelerated-checkout",
+                      "static": true,
+                      "settings": {},
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": []
+                },
+                "vertrauen": {
+                  "type": "mahando-trust-list",
+                  "settings": {
+                    "icon_1": "shield",
+                    "text_1": "Sicherer Checkout, SSL-verschlüsselt",
+                    "icon_2": "truck",
+                    "text_2": "Versand aus Deutschland",
+                    "icon_3": "undo",
+                    "text_3": "14 Tage Widerrufsrecht",
+                    "url_3": "/policies/refund-policy",
+                    "padding-block-start": 4
+                  }
+                },
+                "zahlung_label": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p><strong>Sicher bezahlen mit</strong></p>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0
+                  },
+                  "blocks": {}
+                },
+                "zahlung": {
+                  "type": "payment-icons",
+                  "settings": {
+                    "horizontal_alignment": "flex-start",
+                    "gap": 6,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0
+                  }
                 }
               },
-              "block_order": []
+              "block_order": [
+                "preis",
+                "verfuegbarkeit",
+                "lieferung",
+                "varianten",
+                "kaufen",
+                "vertrauen",
+                "zahlung_label",
+                "zahlung"
+              ],
+              "name": "Kaufbox"
+            }
+          },
+          "block_order": [
+            "kopf",
+            "highlights",
+            "chips",
+            "zustand",
+            "kaufbox"
+          ]
+        },
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "disclosures"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 40,
+        "padding-block-start": 0,
+        "padding-block-end": 32
+      }
+    },
+    "details": {
+      "type": "section",
+      "name": "Beschreibung & Details",
+      "blocks": {
+        "inhalt": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 24,
+            "width": "custom",
+            "custom_width": 64,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "titel_beschreibung": {
+              "type": "mahando-section-title",
+              "settings": {
+                "eyebrow": "Beschreibung",
+                "heading": "Produktbeschreibung",
+                "level": "h2",
+                "size": "h3",
+                "anchor": "beschreibung"
+              }
+            },
+            "beschreibung": {
+              "type": "product-description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            },
+            "lieferumfang": {
+              "type": "mahando-metafield-text",
+              "settings": {
+                "heading": "Lieferumfang",
+                "namespace": "mahando",
+                "key": "lieferumfang",
+                "use_disposal_setting": false,
+                "padding-block-start": 8
+              }
             },
             "daten": {
               "type": "mahando-specs",
               "settings": {
+                "heading": "Technische Daten",
                 "columns": "2",
-                "max_rows": 12
+                "max_rows": 60,
+                "padding-block-start": 8
+              }
+            }
+          },
+          "block_order": [
+            "titel_beschreibung",
+            "beschreibung",
+            "lieferumfang",
+            "daten"
+          ],
+          "name": "Inhalt"
+        },
+        "seite": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 20,
+            "width": "custom",
+            "custom_width": 36,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "details": {
+              "type": "mahando-details-table",
+              "settings": {
+                "heading": "Produktdetails",
+                "show_vendor": true,
+                "show_sku": true,
+                "show_ean": true,
+                "show_category": true,
+                "show_condition": true,
+                "show_availability": true,
+                "show_shipping": true,
+                "shipping_text": "aus Deutschland, {delivery}",
+                "show_weight": false
               }
             },
             "akkordeon": {
@@ -203,59 +479,43 @@
               "settings": {
                 "icon": "plus",
                 "dividers": true,
-                "type_preset": "h5",
-                "padding-block-start": 8
+                "type_preset": "h6",
+                "padding-block-start": 4
               },
               "blocks": {
-                "row_beschreibung": {
+                "row_versand": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Beschreibung",
-                    "open_by_default": true,
-                    "icon": "none",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "beschreibung": {
-                      "type": "product-description",
-                      "settings": {
-                        "text": "{{ closest.product.description }}",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "type_preset": "rte"
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "beschreibung"
-                  ]
-                },
-                "row_lieferumfang": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "Lieferumfang",
+                    "heading": "Versand & Rückgabe",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
                   "blocks": {
-                    "lieferumfang": {
-                      "type": "mahando-metafield-text",
+                    "versandtext": {
+                      "type": "text",
                       "settings": {
-                        "namespace": "mahando",
-                        "key": "lieferumfang"
-                      }
+                        "text": "<p>Versand mit DHL oder GLS aus eigenem Lager in Deutschland. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendungen melden Sie über das Formular im Kundenkonto an; das Rücksendelabel erhalten Sie per E-Mail.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
-                    "lieferumfang"
+                    "versandtext"
                   ]
                 },
                 "row_sicherheit": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Sicherheits- und Entsorgungshinweise",
+                    "heading": "Sicherheit & Hinweise",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -295,73 +555,43 @@
                   "block_order": [
                     "gpsr"
                   ]
-                },
-                "row_versand": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "Versand & Rückgabe",
-                    "open_by_default": false,
-                    "icon": "none",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "versandtext": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>Versand mit DHL oder GLS aus eigenem Lager in Deutschland. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendungen melden Sie über das Formular im Kundenkonto an; das Rücksendelabel erhalten Sie per E-Mail.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "type_preset": "rte"
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "versandtext"
-                  ]
                 }
               },
               "block_order": [
-                "row_beschreibung",
-                "row_lieferumfang",
+                "row_versand",
                 "row_sicherheit",
-                "row_gpsr",
-                "row_versand"
+                "row_gpsr"
               ]
             }
           },
           "block_order": [
-            "kopf",
-            "zustand",
-            "preis",
-            "lager",
-            "versand",
-            "varianten",
-            "kaufen",
-            "daten",
+            "details",
             "akkordeon"
-          ]
-        },
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
+          ],
+          "name": "Seitenleiste"
         }
       },
       "block_order": [
-        "disclosures"
+        "inhalt",
+        "seite"
       ],
       "settings": {
-        "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
-        "equal_columns": false,
-        "limit_details_width": false,
-        "gap": 48,
-        "padding-block-start": 0,
-        "padding-block-end": 24
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 40,
+        "section_width": "page-width",
+        "background_media": "none",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 32
       }
     },
     "product_recommendations_qggXJq": {
@@ -371,7 +601,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>Oft zusammen gekauft</h2>",
+            "text": "<h2>Das könnte Sie auch interessieren</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -502,7 +732,9 @@
     }
   },
   "order": [
+    "breadcrumb",
     "main",
+    "details",
     "product_recommendations_qggXJq"
   ]
 }
