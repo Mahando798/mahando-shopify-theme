@@ -49,6 +49,8 @@
     render 'mahando-product-category', product: product, format: 'links'
   endcapture
   assign category = category | strip
+
+  assign shipping_text = block.settings.shipping_text | replace: '{delivery}', settings.mahando_delivery_time
 -%}
 
 <script src="{{ 'mahando-product-meta.js' | asset_url }}" type="module" fetchpriority="low"></script>
@@ -104,9 +106,9 @@
         <dt>{{ 'mahando.product.shipping_label' | t }}</dt>
         <dd>
           {%- if shop.shipping_policy.body != blank -%}
-            <a href="{{ shop.shipping_policy.url }}">{{ block.settings.shipping_text | replace: '{delivery}', settings.mahando_delivery_time }}</a>
+            <a href="{{ shop.shipping_policy.url }}">{{ shipping_text }}</a>
           {%- else -%}
-            {{ block.settings.shipping_text | replace: '{delivery}', settings.mahando_delivery_time }}
+            {{ shipping_text }}
           {%- endif -%}
         </dd>
       </div>
