@@ -371,5 +371,54 @@
       "default_title": "Default Title",
       "sticky_add_to_cart": "Quick add to cart bar"
     }
+  },
+  "mahando": {
+    "badges": {
+      "new": "New",
+      "single": "One of a kind"
+    },
+    "condition": {
+      "label": "Condition",
+      "new": "New, original packaging",
+      "packaging_damaged": "New – packaging damaged",
+      "packaging_damaged_short": "Packaging damaged",
+      "b_ware": "B-stock",
+      "discontinued": "Discontinued",
+      "default_note_packaging": "The item is unused and complete. Only the outer packaging shows transport or storage marks, hence the price.",
+      "default_note_b_ware": "The item has been tested and works flawlessly. It may show slight signs of use or storage, hence the price.",
+      "default_note_discontinued": "Discontinued by the manufacturer – new and unused, no longer produced."
+    },
+    "availability": {
+      "in_stock": "In stock · {{ delivery }}",
+      "in_stock_plain": "In stock – ships now",
+      "low_stock": {
+        "one": "Only {{ count }} left",
+        "other": "Only {{ count }} left"
+      },
+      "out_of_stock": "Sold out",
+      "delivery_time": "Delivery {{ delivery }} within Germany",
+      "shipping_flat": "Shipping {{ flat }} flat · free from {{ free }}"
+    },
+    "product": {
+      "sku": "SKU {{ sku }}",
+      "sku_label": "SKU",
+      "ean_label": "EAN",
+      "ean": "EAN {{ ean }}",
+      "specs_heading": "Specifications",
+      "gpsr_heading": "Manufacturer information",
+      "gpsr_manufacturer": "Manufacturer",
+      "gpsr_address": "Address",
+      "gpsr_contact": "Contact",
+      "gpsr_responsible": "Responsible person in the EU",
+      "gpsr_note": "Information according to the EU General Product Safety Regulation (GPSR)."
+    },
+    "price": {
+      "shipping_note_html": "plus <a href=\"{{ link }}\">shipping</a>",
+      "shipping_note": "plus shipping",
+      "you_save": "You save {{ amount }}"
+    },
+    "usp": {
+      "phone_label": "Phone"
+    }
   }
 }

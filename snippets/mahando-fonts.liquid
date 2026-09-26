@@ -1,0 +1,81 @@
+{%- doc -%}
+  Selbst gehostete Mahando-Schriften (Outfit für Überschriften, Source Sans 3 für Fließtext).
+  Die Dateien liegen im Theme (assets/mahando-*.woff2, SIL Open Font License) und werden vom
+  Shopify-CDN ausgeliefert – keine Verbindung zu Google-Servern (DSGVO).
+
+  Aktiv, wenn die Theme-Einstellung "Mahando-Schriften verwenden" gesetzt ist. Dann werden die
+  Font-Variablen von Horizon (--font-body--family usw.) überschrieben; die Font-Picker in den
+  Theme-Einstellungen bleiben als Fallback erhalten.
+{%- enddoc -%}
+
+{%- if settings.mahando_fonts -%}
+  {{ 'mahando-outfit-600.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'mahando-source-sans-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+
+  {% style %}
+    @font-face {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('{{ 'mahando-outfit-500.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('{{ 'mahando-outfit-600.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('{{ 'mahando-outfit-700.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('{{ 'mahando-source-sans-400.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('{{ 'mahando-source-sans-400-italic.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('{{ 'mahando-source-sans-600.woff2' | asset_url }}') format('woff2');
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('{{ 'mahando-source-sans-700.woff2' | asset_url }}') format('woff2');
+    }
+
+    :root {
+      --font-body--family: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-body--style: normal;
+      --font-body--weight: 400;
+      --font-subheading--family: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-subheading--style: normal;
+      --font-subheading--weight: 600;
+      --font-heading--family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-heading--style: normal;
+      --font-heading--weight: 600;
+      --font-accent--family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-accent--style: normal;
+      --font-accent--weight: 700;
+    }
+  {% endstyle %}
+{%- endif -%}

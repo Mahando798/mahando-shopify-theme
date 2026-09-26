@@ -1,0 +1,70 @@
+{%- doc -%}
+  Mahando-Icons (Linienstil, 24x24, currentColor). Ergänzt die Horizon-Icons um Shop-typische Symbole.
+
+  @param {string} icon - Name des Icons (laptop, camera, gamepad, phone, pot, drill, teddy, sofa, drop, tag,
+                         truck, shield, undo, headset, box, check, clock, info, mail, search, user, heart, cart, star)
+  @param {string} [class] - Zusätzliche CSS-Klasse
+{%- enddoc -%}
+
+{%- liquid
+  assign svg_class = 'mahando-icon'
+  if class != blank
+    assign svg_class = svg_class | append: ' ' | append: class
+  endif
+-%}
+<svg class="{{ svg_class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {%- case icon -%}
+    {%- when 'laptop' -%}
+      <rect x="3" y="5" width="18" height="11" rx="2"/><path d="M2 19h20"/>
+    {%- when 'camera' -%}
+      <path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>
+    {%- when 'gamepad' -%}
+      <path d="M7 7h10a5 5 0 0 1 5 5v2a3 3 0 0 1-5.4 1.8L15.2 14H8.8l-1.4 1.8A3 3 0 0 1 2 14v-2a5 5 0 0 1 5-5z"/><path d="M7 10v3M5.5 11.5h3M16.5 10.5h.01M18.5 12.5h.01"/>
+    {%- when 'phone' -%}
+      <rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>
+    {%- when 'pot' -%}
+      <path d="M4 10h16v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3zM2 10h20M9 6c0-2.5 6-2.5 6 0"/>
+    {%- when 'drill' -%}
+      <path d="M3 8h10l3-1.5v7L13 12H3zM6 12v6.5A1.5 1.5 0 0 0 7.5 20H10l1-8M16 9.5h5"/>
+    {%- when 'teddy' -%}
+      <circle cx="12" cy="9" r="4.5"/><circle cx="7.5" cy="5.5" r="1.8"/><circle cx="16.5" cy="5.5" r="1.8"/><path d="M7.5 15.5c0-1.5 2-2 4.5-2s4.5.5 4.5 2v4.5H7.5z"/>
+    {%- when 'sofa' -%}
+      <path d="M4 12V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M2 13a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v5H2zM4 18v2M20 18v2"/>
+    {%- when 'drop' -%}
+      <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>
+    {%- when 'tag' -%}
+      <path d="M20 12.5 12.5 20 3 10.5V3h7.5z"/><circle cx="7.5" cy="7.5" r="1.5"/>
+    {%- when 'truck' -%}
+      <path d="M2 7h12v9H2zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>
+    {%- when 'shield' -%}
+      <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/>
+    {%- when 'undo' -%}
+      <path d="M4 10a8 8 0 1 1 2.3 6.3"/><path d="M4 4v6h6"/>
+    {%- when 'headset' -%}
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19a3 3 0 0 1-3 3h-3"/>
+    {%- when 'box' -%}
+      <path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/>
+    {%- when 'check' -%}
+      <path d="m5 12 5 5 9-10"/>
+    {%- when 'clock' -%}
+      <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+    {%- when 'info' -%}
+      <circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>
+    {%- when 'mail' -%}
+      <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+    {%- when 'search' -%}
+      <circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/>
+    {%- when 'user' -%}
+      <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+    {%- when 'heart' -%}
+      <path d="M12 20.5 4.2 13A4.8 4.8 0 0 1 12 6.8 4.8 4.8 0 0 1 19.8 13Z"/>
+    {%- when 'cart' -%}
+      <path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H7"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/>
+    {%- when 'star' -%}
+      <path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>
+    {%- when 'percent' -%}
+      <path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>
+    {%- else -%}
+      <circle cx="12" cy="12" r="9"/>
+  {%- endcase -%}
+</svg>

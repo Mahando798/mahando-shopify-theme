@@ -1,0 +1,107 @@
+{%- doc -%}
+  Kleines Kategorie-Label über dem Produkttitel (Produkttyp oder Hersteller), Großbuchstaben, gedämpft.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  case block.settings.source
+    when 'vendor'
+      assign label = product.vendor
+    when 'collection'
+      assign label = product.collections.first.title
+    else
+      assign label = product.type
+  endcase
+-%}
+
+{%- if label != blank or product == blank -%}
+  <p
+    class="mahando-product-type spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if product == blank -%}Kategorie{%- else -%}{{ label }}{%- endif -%}
+  </p>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-product-type {
+    margin: 0;
+    font-size: var(--font-size--2xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-foreground-muted);
+    line-height: 1.3;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kategorie-Label (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Quelle",
+      "options": [
+        { "value": "type", "label": "Produkttyp (Kategorie aus Xentral)" },
+        { "value": "vendor", "label": "Hersteller / Marke" },
+        { "value": "collection", "label": "Erste Kollektion" }
+      ],
+      "default": "type"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kategorie-Label (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

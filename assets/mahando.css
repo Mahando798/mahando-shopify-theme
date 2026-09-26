@@ -1,0 +1,84 @@
+/*
+  Mahando – globale Feinjustierung über Horizon.
+  Wird nach base.css und den gebündelten Komponenten-Styles geladen (layout/theme.liquid).
+  Bewusst klein gehalten: Farben, Schriften und Abstände kommen aus den Theme-Einstellungen.
+*/
+
+/* Badges: mehrere Badges untereinander, neutrales Badge mit Rahmen */
+.mahando-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.mahando-badges .product-badges__badge {
+  --badge-font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.mahando-badge--neutral {
+  border: 1px solid var(--color-border);
+}
+
+/* Preise: Angebotspreis in Sale-Pink, Streichpreis gedämpft */
+product-price:has(.compare-at-price) .price-item__group.price,
+.mahando-hero__card-price:has(.compare-at-price) .price-item__group.price {
+  color: #d82a6f;
+}
+
+.compare-at-price {
+  color: var(--color-foreground-muted);
+}
+
+.tax-note {
+  font-size: var(--font-size--2xs);
+  color: var(--color-foreground-muted);
+}
+
+.tax-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Produktkarten: Titel maximal zwei Zeilen */
+product-card .product-card__title,
+product-card .product-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer-Logo (Custom-Liquid-Block in der Footer-Gruppe) */
+.mahando-footer-logo {
+  display: inline-block;
+  line-height: 0;
+}
+
+.mahando-footer-logo svg,
+.mahando-footer-logo img {
+  display: block;
+  height: 96px;
+  width: auto;
+}
+
+@media screen and (max-width: 749px) {
+  .mahando-footer-logo svg,
+  .mahando-footer-logo img {
+    height: 72px;
+  }
+}
+
+/* Sale-Menüpunkt im Hauptmenü hervorheben: Link mit Titel "Sale" */
+.menu-list__link[href*="/collections/sale"],
+.mega-menu__link[href*="/collections/sale"] {
+  color: #d82a6f;
+}
+
+/* Etwas ruhigere Akkordeon-Überschriften auf der Produktseite */
+.details__header {
+  font-family: var(--font-heading--family);
+}

@@ -1,0 +1,150 @@
+{%- doc -%}
+  Verfügbarkeit auf Produktkarten: grüner Punkt + "Auf Lager · 1–3 Werktage",
+  amber "Nur noch X Stück" (ab Schwellwert aus den Theme-Einstellungen) oder grau "Ausverkauft".
+  Liest die ausgewählte bzw. erste verfügbare Variante von closest.product.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+  assign threshold = settings.mahando_low_stock_threshold | default: 5
+  assign status = 'in_stock'
+  assign quantity = 0
+
+  if product == blank
+    assign status = 'in_stock'
+  elsif product.available == false
+    assign status = 'out_of_stock'
+  elsif variant.inventory_management == 'shopify' and variant.inventory_policy != 'continue'
+    assign quantity = variant.inventory_quantity
+    if quantity <= 0
+      assign status = 'out_of_stock'
+    elsif quantity <= threshold
+      assign status = 'low'
+    endif
+  endif
+-%}
+
+<div
+  class="mahando-availability mahando-availability--{{ status }} spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <span class="mahando-availability__dot" aria-hidden="true"></span>
+  <span class="mahando-availability__text">
+    {%- case status -%}
+      {%- when 'low' -%}
+        {{ 'mahando.availability.low_stock' | t: count: quantity }}
+      {%- when 'out_of_stock' -%}
+        {{ 'mahando.availability.out_of_stock' | t }}
+      {%- else -%}
+        {%- if block.settings.show_delivery_time and settings.mahando_delivery_time != blank -%}
+          {{ 'mahando.availability.in_stock' | t: delivery: settings.mahando_delivery_time }}
+        {%- else -%}
+          {{ 'mahando.availability.in_stock_plain' | t }}
+        {%- endif -%}
+    {%- endcase -%}
+  </span>
+</div>
+
+{% stylesheet %}
+  .mahando-availability {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size--xs);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--mahando-availability-color, var(--color-instock));
+    min-width: 0;
+  }
+
+  .mahando-availability__dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .mahando-availability--in_stock {
+    --mahando-availability-color: #157a45;
+  }
+
+  .mahando-availability--low {
+    --mahando-availability-color: #8a5306;
+  }
+
+  .mahando-availability--out_of_stock {
+    --mahando-availability-color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Verfügbarkeit (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Zeigt Lagerstatus und Lieferzeit der ausgewählten Variante. Schwellwert und Lieferzeit-Text stehen in den Theme-Einstellungen unter „Mahando“."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery_time",
+      "label": "Lieferzeit anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Verfügbarkeit (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

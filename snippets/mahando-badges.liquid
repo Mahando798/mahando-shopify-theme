@@ -1,0 +1,118 @@
+{%- doc -%}
+  Ermittelt die Badges eines Produkts (Mahando-Logik) und gibt sie entweder als Markup
+  oder – mit mode: 'check' – nur als "true"/"" aus (für Layout-Entscheidungen).
+
+  Reihenfolge: Ausverkauft > Rabatt (−X %) > Zustand > Neu > Einzelstück, maximal 3 Badges.
+
+  Datenquellen:
+  - Rabatt: Vergleichspreis (UVP) der ausgewählten Variante > Preis
+  - Zustand: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | auslaufmodell | neu)
+             oder Tags: verpackung-beschaedigt, b-ware, auslaufmodell
+  - Neu: Tag "neu" oder Anlagedatum jünger als settings.mahando_new_badge_days
+  - Einzelstück: Tag "einzelstueck" oder Bestand genau 1 (nur bei einer Variante)
+
+  @param {product} product - Das Produkt
+  @param {string} [mode] - 'check' gibt nur "true" aus, wenn mindestens ein Badge vorhanden ist
+{%- enddoc -%}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign badge_list = ''
+
+  if product.available == false
+    assign badge_list = badge_list | append: 'soldout|'
+  elsif variant.compare_at_price > variant.price
+    if settings.mahando_badge_sale_percent
+      assign diff = variant.compare_at_price | minus: variant.price
+      assign pct = diff | times: 100.0 | divided_by: variant.compare_at_price | round
+      assign badge_list = badge_list | append: 'sale:' | append: pct | append: '|'
+    else
+      assign badge_list = badge_list | append: 'sale|'
+    endif
+  endif
+
+  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+  if zustand == blank
+    for tag in product.tags
+      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
+        assign zustand = t
+        break
+      endif
+    endfor
+  endif
+  if zustand == 'verpackung-beschaedigt' or zustand == 'ovp-beschaedigt'
+    assign badge_list = badge_list | append: 'cond:verpackung|'
+  elsif zustand == 'b-ware'
+    assign badge_list = badge_list | append: 'cond:bware|'
+  elsif zustand == 'auslaufmodell'
+    assign badge_list = badge_list | append: 'neutral:auslaufmodell|'
+  endif
+
+  assign is_new = false
+  if product.tags contains 'neu' or product.tags contains 'Neu'
+    assign is_new = true
+  elsif settings.mahando_new_badge_days > 0
+    assign created_ts = product.created_at | date: '%s' | plus: 0
+    assign now_ts = 'now' | date: '%s' | plus: 0
+    assign age_days = now_ts | minus: created_ts | divided_by: 86400
+    if age_days <= settings.mahando_new_badge_days
+      assign is_new = true
+    endif
+  endif
+  if is_new and product.available
+    assign badge_list = badge_list | append: 'new|'
+  endif
+
+  if settings.mahando_badge_single and product.available
+    assign is_single = false
+    if product.tags contains 'einzelstueck' or product.tags contains 'Einzelstück'
+      assign is_single = true
+    elsif product.variants.size == 1 and variant.inventory_management == 'shopify' and variant.inventory_quantity == 1
+      assign is_single = true
+    endif
+    if is_single
+      assign badge_list = badge_list | append: 'neutral:einzelstueck|'
+    endif
+  endif
+
+  assign badges = badge_list | split: '|'
+-%}
+
+{%- if mode == 'check' -%}
+  {%- if badges.size > 0 -%}true{%- endif -%}
+{%- elsif badges.size > 0 -%}
+  <div
+    class="product-badges product-badges--{{ settings.badge_position }} mahando-badges"
+    style="
+      --badge-border-radius: {{ settings.badge_corner_radius }}px;
+      --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: 700; --badge-text-transform: {{ settings.badge_text_transform }};
+    "
+  >
+    {%- for badge in badges limit: 3 -%}
+      {%- liquid
+        assign parts = badge | split: ':'
+        assign kind = parts[0]
+        assign value = parts[1]
+      -%}
+      {%- case kind -%}
+        {%- when 'soldout' -%}
+          <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sold-out">{{ 'content.product_badge_sold_out' | t }}</div>
+        {%- when 'sale' -%}
+          <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sale">
+            {%- if value != blank -%}&minus;{{ value }}&nbsp;%{%- else -%}{{ 'content.product_badge_sale' | t }}{%- endif -%}
+          </div>
+        {%- when 'cond' -%}
+          <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-condition">
+            {%- if value == 'bware' -%}{{ 'mahando.condition.b_ware' | t }}{%- else -%}{{ 'mahando.condition.packaging_damaged_short' | t }}{%- endif -%}
+          </div>
+        {%- when 'new' -%}
+          <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-new">{{ 'mahando.badges.new' | t }}</div>
+        {%- when 'neutral' -%}
+          <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-neutral mahando-badge--neutral">
+            {%- if value == 'einzelstueck' -%}{{ 'mahando.badges.single' | t }}{%- else -%}{{ 'mahando.condition.discontinued' | t }}{%- endif -%}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

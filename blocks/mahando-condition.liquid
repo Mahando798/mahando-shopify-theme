@@ -1,0 +1,163 @@
+{%- doc -%}
+  Zustandshinweis auf der Produktseite. Erscheint nur, wenn der Artikel nicht "neu, original verpackt" ist.
+  Quelle: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | auslaufmodell) oder gleichnamige Tags.
+  Der Erklärtext kommt aus dem Metafeld mahando.zustand_hinweis, sonst aus dem Standardtext je Zustand.
+  Im Theme-Editor wird ohne Zustand eine Vorschau angezeigt, damit der Block platzierbar bleibt.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+  if zustand == blank
+    for tag in product.tags
+      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
+        assign zustand = t
+        break
+      endif
+    endfor
+  endif
+
+  assign title = ''
+  assign note = product.metafields.mahando.zustand_hinweis | strip
+  case zustand
+    when 'verpackung-beschaedigt', 'ovp-beschaedigt'
+      assign title = 'mahando.condition.packaging_damaged' | t
+      if note == blank
+        assign note = 'mahando.condition.default_note_packaging' | t
+      endif
+    when 'b-ware'
+      assign title = 'mahando.condition.b_ware' | t
+      if note == blank
+        assign note = 'mahando.condition.default_note_b_ware' | t
+      endif
+    when 'auslaufmodell'
+      assign title = 'mahando.condition.discontinued' | t
+      if note == blank
+        assign note = 'mahando.condition.default_note_discontinued' | t
+      endif
+  endcase
+
+  assign is_preview = false
+  if title == blank and request.design_mode
+    assign is_preview = true
+    assign title = 'mahando.condition.packaging_damaged' | t
+    assign note = 'Vorschau im Theme-Editor: Dieser Hinweis erscheint im Shop nur bei Artikeln mit Zustand „Verpackung beschädigt“, „B-Ware“ oder „Auslaufmodell“.'
+  endif
+-%}
+
+{%- if title != blank -%}
+  <div
+    class="mahando-condition spacing-style{% if is_preview %} mahando-condition--preview{% endif %}"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    role="note"
+    {{ block.shopify_attributes }}
+  >
+    {% render 'mahando-icon', icon: 'info', class: 'mahando-condition__icon' %}
+    <div class="mahando-condition__body">
+      <strong class="mahando-condition__title">{{ 'mahando.condition.label' | t }}: {{ title }}</strong>
+      {%- if note != blank -%}
+        <p class="mahando-condition__text">{{ note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-condition {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fdf1dc;
+    color: #34454e;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: var(--font-size--sm);
+    line-height: 1.45;
+  }
+
+  .mahando-condition__icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: #8a5306;
+  }
+
+  .mahando-condition__title {
+    display: block;
+    color: #8a5306;
+    font-weight: 600;
+  }
+
+  .mahando-condition__text {
+    margin: 2px 0 0;
+  }
+
+  .mahando-condition--preview {
+    outline: 1px dashed #8a5306;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Zustandshinweis (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Zeigt einen Hinweis, wenn das Metafeld mahando.zustand auf „verpackung-beschaedigt“, „b-ware“ oder „auslaufmodell“ steht (alternativ per Tag). Erklärtext aus mahando.zustand_hinweis, sonst Standardtext."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zustandshinweis (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

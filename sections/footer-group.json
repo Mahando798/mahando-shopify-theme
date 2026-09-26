@@ -14,177 +14,159 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "group_wErUQf": {
+        "group_kontakt": {
           "type": "group",
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "vertical_alignment": "flex-start",
+            "gap": 14,
             "width": "fill",
-            "custom_width": 100,
             "width_mobile": "fill",
-            "custom_width_mobile": 100,
             "height": "fit",
-            "custom_height": 100,
             "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "border": "none"
           },
           "blocks": {
-            "text_pF6rVi": {
-              "type": "text",
-              "name": "t:names.heading",
+            "custom_liquid_logo": {
+              "type": "custom-liquid",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "custom_liquid": "<a href=\"{{ routes.root_url }}\" class=\"mahando-footer-logo\" aria-label=\"Mahando – Startseite\">{% if settings.logo != blank %}{{ settings.logo | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Mahando' }}{% else %}{{ 'mahando-logo.svg' | inline_asset_content }}{% endif %}</a>"
+              }
             },
-            "text_HafH7P": {
+            "text_adresse": {
               "type": "text",
-              "name": "t:names.text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p><strong>Marco Haase · Mahando</strong><br>Silbeker Weg 45<br>33142 Büren<br>Tel. {{ settings.mahando_phone }} · {{ settings.mahando_hours }}<br>marco@mahando.de</p>",
                 "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "email-signup_HafH7P": {
-              "type": "email-signup",
-              "name": "t:names.email_signup",
-              "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "heading": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "input_style": "custom",
-                "border_width": 1,
-                "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.color1 }}",
-                "input_border_color": "",
-                "input_type_preset": "paragraph",
-                "style_class": "button-secondary",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "display_type": "text",
-                "label": "Sign up",
-                "integrated_button": false,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
-            "text_pF6rVi",
-            "text_HafH7P",
-            "email-signup_HafH7P"
+            "custom_liquid_logo",
+            "text_adresse"
           ]
         },
-        "menu_footer": {
+        "menu_informationen": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
-            "heading": "",
-            "menu_spacing": 12,
+            "menu": "informationen",
+            "heading": "Informationen",
+            "menu_spacing": 8,
             "show_as_accordion": false,
-            "accordion_icon": "plus",
-            "accordion_dividers": false,
-            "heading_preset": "paragraph",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "heading_preset": "h6",
+            "link_preset": "paragraph"
           }
         },
-        "menu_main": {
+        "menu_rechtliches": {
           "type": "menu",
           "settings": {
-            "menu": "main-menu",
-            "heading": "",
-            "menu_spacing": 12,
+            "menu": "rechtliches",
+            "heading": "Rechtliches",
+            "menu_spacing": 8,
             "show_as_accordion": false,
-            "accordion_icon": "plus",
-            "accordion_dividers": false,
-            "heading_preset": "paragraph",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "heading_preset": "h6",
+            "link_preset": "paragraph"
           }
+        },
+        "group_newsletter": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "gap": 12,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "text_nl_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Newsletter</h2>",
+                "width": "100%",
+                "type_preset": "h6",
+                "alignment": "left"
+              }
+            },
+            "text_nl_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Neuheiten und Sale-Artikel zuerst erfahren.</p>",
+                "width": "100%",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
+            },
+            "email_signup_nl": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "heading": "",
+                "border_style": "all",
+                "input_style": "custom",
+                "border_width": 1,
+                "border_radius": 8,
+                "input_background_color": "#26343C",
+                "input_border_color": "#3B4B54",
+                "style_class": "button",
+                "display_type": "text",
+                "label": "Anmelden",
+                "integrated_button": false,
+                "button_type_preset": "paragraph"
+              }
+            },
+            "text_nl_hint": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Abmeldung jederzeit möglich. Hinweise in der Datenschutzerklärung.</p>",
+                "width": "100%",
+                "type_preset": "custom",
+                "font_size": "0.75rem",
+                "alignment": "left"
+              }
+            }
+          },
+          "block_order": [
+            "text_nl_heading",
+            "text_nl_text",
+            "email_signup_nl",
+            "text_nl_hint"
+          ]
         }
       },
       "block_order": [
-        "group_wErUQf",
-        "menu_footer",
-        "menu_main"
+        "group_kontakt",
+        "menu_informationen",
+        "menu_rechtliches",
+        "group_newsletter"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 40,
-        "background_color": "{{ settings.color_palette.color1 }}",
-        "padding-block-start": 36,
-        "padding-block-end": 36
+        "gap": 32,
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "padding-block-start": 44,
+        "padding-block-end": 28
+      }
+    },
+    "zahlungsarten": {
+      "type": "mahando-footer-bar",
+      "settings": {
+        "section_width": "page-width",
+        "show_payment_icons": true,
+        "payment_label": "Zahlungsarten",
+        "note": "Alle Preise inkl. gesetzlicher MwSt., zzgl. Versandkosten.",
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "text_color": "#C9D5DB",
+        "divider_color": "#3B4B54"
       }
     },
     "utilities": {
@@ -193,46 +175,28 @@
         "copyright": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "show_powered_by": false,
             "font_size": "0.75rem",
             "case": "none"
-          }
-        },
-        "policy_list": {
-          "type": "footer-policy-list",
-          "settings": {
-            "font_size": "0.75rem",
-            "case": "none"
-          }
-        },
-        "social_icons": {
-          "type": "social-links",
-          "settings": {
-            "facebook_url": "https://www.facebook.com",
-            "instagram_url": "https://www.instagram.com",
-            "youtube_url": "https://www.youtube.com",
-            "tiktok_url": "https://www.tiktok.com",
-            "twitter_url": "https://www.twitter.com"
           }
         }
       },
       "block_order": [
-        "copyright",
-        "policy_list",
-        "social_icons"
+        "copyright"
       ],
       "settings": {
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "{{ settings.color_palette.color1 }}",
-        "divider_thickness": 1,
-        "padding-block-start": 12,
-        "padding-block-end": 16
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "divider_thickness": 0,
+        "padding-block-start": 4,
+        "padding-block-end": 20
       }
     }
   },
   "order": [
     "footer",
+    "zahlungsarten",
     "utilities"
   ]
 }

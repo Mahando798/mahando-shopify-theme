@@ -1,0 +1,289 @@
+{%- doc -%}
+  Kategorie-Kacheln: Icon, Name, Untertitel, verlinkt auf eine Kollektion. 4 Spalten Desktop, 2 mobil.
+  Ohne ausgewählte Kollektion wird der eingetragene Titel angezeigt (Vorschau).
+{%- enddoc -%}
+
+{% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
+
+<div class="section-background color-custom-{{ section.id }}"></div>
+<div
+  class="section section--page-width color-custom-{{ section.id }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <div class="mahando-section-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mahando-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="mahando-categories">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign collection = block.settings.collection
+        assign title = block.settings.title
+        if title == blank
+          assign title = collection.title
+        endif
+        assign url = collection.url
+        if url == blank
+          assign url = '#'
+        endif
+      -%}
+      <a
+        class="mahando-category{% if block.settings.highlight %} mahando-category--highlight{% endif %}"
+        href="{{ url }}"
+        {{ block.shopify_attributes }}
+      >
+        <span class="mahando-category__icon">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}
+          {%- else -%}
+            {% render 'mahando-icon', icon: block.settings.icon %}
+          {%- endif -%}
+        </span>
+        <span class="mahando-category__body">
+          <strong class="mahando-category__title">{{ title | default: 'Kategorie' }}</strong>
+          {%- if block.settings.subtitle != blank -%}
+            <span class="mahando-category__subtitle">{{ block.settings.subtitle }}</span>
+          {%- endif -%}
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-categories {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .mahando-category {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    color: inherit;
+    text-decoration: none;
+    min-width: 0;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .mahando-category:hover {
+    border-color: var(--color-primary-button-background, var(--color-foreground));
+    box-shadow: 0 10px 28px -14px rgb(var(--color-foreground-rgb) / 0.22);
+  }
+
+  .mahando-category__icon {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+    color: var(--color-foreground-subdued);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .mahando-category__icon .mahando-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mahando-category__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mahando-category--highlight .mahando-category__icon {
+    color: var(--color-badge-sale, #d82a6f);
+  }
+
+  .mahando-category__body {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .mahando-category__title {
+    font-family: var(--font-heading--family);
+    font-weight: 600;
+    font-size: var(--font-size--md);
+    line-height: 1.2;
+  }
+
+  .mahando-category__subtitle {
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  @media screen and (max-width: 989px) {
+    .mahando-categories {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-categories {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mahando-category {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .mahando-category__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+
+    .mahando-category__icon .mahando-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .mahando-category__title {
+      font-size: var(--font-size--sm);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kategorie-Kacheln (Mahando)",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Zeile über der Überschrift",
+      "default": "Kategorien"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Alles aus einem Lager"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Kategorie",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Kollektion"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel (optional, sonst Kollektionsname)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Untertitel"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "laptop", "label": "Notebook (Computer + Tablets)" },
+            { "value": "camera", "label": "Kamera (Foto + Video)" },
+            { "value": "gamepad", "label": "Controller (Gaming)" },
+            { "value": "phone", "label": "Smartphone (Handy)" },
+            { "value": "pot", "label": "Topf (Haushalt + Garten)" },
+            { "value": "drill", "label": "Bohrmaschine (Werkzeug)" },
+            { "value": "teddy", "label": "Teddy (Spielzeug)" },
+            { "value": "sofa", "label": "Sofa (Wohnen)" },
+            { "value": "drop", "label": "Tropfen (Beauty + Wellness)" },
+            { "value": "tag", "label": "Preisschild (Sale)" },
+            { "value": "star", "label": "Stern" },
+            { "value": "box", "label": "Paket" }
+          ],
+          "default": "box"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Eigenes Bild (optional, ersetzt das Icon)"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Als Sale hervorheben (pinkes Icon)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kategorie-Kacheln (Mahando)",
+      "category": "t:categories.collections",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Computer + Tablets", "subtitle": "Notebooks, Tablets, Monitore, Zubehör", "icon": "laptop" } },
+        { "type": "category", "settings": { "title": "Foto + Video", "subtitle": "Actioncams, Drohnen, Überwachung", "icon": "camera" } },
+        { "type": "category", "settings": { "title": "Gaming", "subtitle": "Konsolen, Controller, PC-Hardware", "icon": "gamepad" } },
+        { "type": "category", "settings": { "title": "Handy", "subtitle": "Smartphones, Hüllen, Ladegeräte", "icon": "phone" } },
+        { "type": "category", "settings": { "title": "Haushalt + Garten", "subtitle": "Küche, Reinigung, Werkzeug, Garten", "icon": "pot" } },
+        { "type": "category", "settings": { "title": "Spielzeug", "subtitle": "Puzzles, Spielfiguren, Outdoor-Spielzeug", "icon": "teddy" } },
+        { "type": "category", "settings": { "title": "Wohnen", "subtitle": "Lampen, Smart Home, TV & Video", "icon": "sofa" } },
+        { "type": "category", "settings": { "title": "Beauty + Wellness", "subtitle": "Haarpflege, Zahnpflege, Massage", "icon": "drop" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

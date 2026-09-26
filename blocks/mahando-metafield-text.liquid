@@ -1,0 +1,205 @@
+{%- doc -%}
+  Zeigt den Inhalt eines Produkt-Metafelds als Text (z. B. Lieferumfang, Sicherheitshinweise).
+  Mehrzeiliger Text wird zu Absätzen/Zeilen; Zeilen, die mit "- " oder "• " beginnen, werden zu einer Liste.
+  Rich-Text-Metafelder werden direkt gerendert. Optional ein fester Zusatztext (z. B. Entsorgungshinweis),
+  der nur bei bestimmten Tags erscheint.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign ns = block.settings.namespace | default: 'mahando'
+  assign key = block.settings.key | strip
+  assign field = product.metafields[ns][key]
+  assign field_type = field.type
+  assign value = field.value
+
+  assign extra = ''
+  if block.settings.extra_text != blank
+    if block.settings.extra_tags == blank
+      assign extra = block.settings.extra_text
+    else
+      assign wanted = block.settings.extra_tags | downcase | split: ','
+      for tag in product.tags
+        assign t = tag | downcase | strip
+        for w in wanted
+          assign ws = w | strip
+          if ws != blank and t == ws
+            assign extra = block.settings.extra_text
+            break
+          endif
+        endfor
+        if extra != blank
+          break
+        endif
+      endfor
+    endif
+  endif
+  if block.settings.extra_text != blank and block.settings.extra_tags == blank
+    assign extra = block.settings.extra_text
+  endif
+-%}
+
+{%- if value != blank or extra != blank -%}
+  <div
+    class="mahando-metafield-text rte spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if value != blank -%}
+      {%- if field_type == 'rich_text_field' -%}
+        {{ value | metafield_tag }}
+      {%- elsif field_type == 'multi_line_text_field' -%}
+        {%- assign lines = value | newline_to_br | split: '<br />' -%}
+        {%- assign in_list = false -%}
+        {%- for line in lines -%}
+          {%- assign clean = line | strip_html | strip -%}
+          {%- if clean == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign first = clean | slice: 0, 2 -%}
+          {%- if first == '- ' or first == '• ' or first == '* ' -%}
+            {%- unless in_list -%}<ul>{%- assign in_list = true -%}{%- endunless -%}
+            <li>{{ clean | remove_first: first }}</li>
+          {%- else -%}
+            {%- if in_list -%}</ul>{%- assign in_list = false -%}{%- endif -%}
+            <p>{{ clean }}</p>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if in_list -%}</ul>{%- endif -%}
+      {%- else -%}
+        <p>{{ value }}</p>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if extra != blank -%}
+      <div class="mahando-metafield-text__extra">{{ extra }}</div>
+    {%- endif -%}
+  </div>
+{%- elsif request.design_mode -%}
+  <p class="mahando-metafield-text__hint" {{ block.shopify_attributes }}>Metafeld „{{ ns }}.{{ key }}“ ist bei diesem Produkt leer – der Block bleibt im Shop unsichtbar.</p>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-metafield-text {
+    font-size: var(--font-size--sm);
+    max-width: 68ch;
+  }
+
+  .mahando-metafield-text p,
+  .mahando-metafield-text ul {
+    margin: 0 0 8px;
+  }
+
+  .mahando-metafield-text ul {
+    padding-inline-start: 18px;
+  }
+
+  .mahando-metafield-text__extra {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-metafield-text__extra p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-metafield-text__hint {
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Metafeld-Text (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "namespace",
+      "label": "Namespace",
+      "default": "mahando"
+    },
+    {
+      "type": "text",
+      "id": "key",
+      "label": "Schlüssel",
+      "info": "z. B. lieferumfang oder sicherheitshinweise",
+      "default": "lieferumfang"
+    },
+    {
+      "type": "header",
+      "content": "Zusatztext"
+    },
+    {
+      "type": "richtext",
+      "id": "extra_text",
+      "label": "Fester Zusatztext",
+      "info": "Wird unter dem Metafeld-Inhalt angezeigt – auch wenn das Metafeld leer ist."
+    },
+    {
+      "type": "text",
+      "id": "extra_tags",
+      "label": "Nur bei Tags anzeigen",
+      "info": "Kommagetrennt, z. B. „elektro, akku“. Leer = immer."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Metafeld-Text (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,197 @@
+{%- doc -%}
+  Technische Daten als zweispaltige Faktenliste.
+  Quelle: Metafeld mahando.technische_daten (mehrzeiliger Text), eine Zeile pro Eintrag im Format
+  "Bezeichnung: Wert", z. B. "Spannung: 20 V". Alternativ mahando.technische_daten_json (Liste von Objekten
+  mit label/value) – wird ebenfalls unterstützt.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign raw = product.metafields.mahando.technische_daten | strip
+  assign lines = raw | newline_to_br | split: '<br />'
+  assign rows = ''
+  for line in lines
+    assign clean = line | strip_html | strip
+    if clean contains ':'
+      assign rows = rows | append: clean | append: '||'
+    endif
+  endfor
+  assign rows = rows | split: '||'
+-%}
+
+{%- if rows.size > 0 -%}
+  <div
+    class="mahando-specs spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.heading != blank -%}
+      <h3 class="mahando-specs__heading h6">{{ block.settings.heading }}</h3>
+    {%- endif -%}
+    <dl class="mahando-specs__list mahando-specs__list--{{ block.settings.columns }}">
+      {%- for row in rows limit: block.settings.max_rows -%}
+        {%- assign parts = row | split: ':' -%}
+        {%- assign label = parts[0] | strip -%}
+        {%- assign value = row | remove_first: parts[0] | remove_first: ':' | strip -%}
+        <div class="mahando-specs__row">
+          <dt>{{ label }}</dt>
+          <dd>{{ value }}</dd>
+        </div>
+      {%- endfor -%}
+    </dl>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="mahando-specs mahando-specs--empty" {{ block.shopify_attributes }}>
+    <p class="mahando-specs__hint">Technische Daten: Metafeld „mahando.technische_daten“ ist bei diesem Produkt leer. Format: eine Zeile je Eintrag, z. B. „Spannung: 20 V“.</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-specs__heading {
+    margin: 0 0 8px;
+  }
+
+  .mahando-specs__list {
+    margin: 0;
+    display: grid;
+    gap: 2px 20px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-specs__list--2 {
+    @media screen and (min-width: 750px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .mahando-specs__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 6px;
+    border-bottom: 1px dashed var(--color-border);
+    min-width: 0;
+  }
+
+  .mahando-specs__row:last-child {
+    border-bottom: 0;
+  }
+
+  .mahando-specs__list--2 .mahando-specs__row:nth-last-child(2):nth-child(odd) {
+    @media screen and (min-width: 750px) {
+      border-bottom: 0;
+    }
+  }
+
+  .mahando-specs__row dt {
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-specs__row dd {
+    margin: 0;
+    font-weight: 600;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mahando-specs__hint {
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Technische Daten (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Liest das Metafeld mahando.technische_daten (mehrzeiliger Text, eine Zeile je Eintrag: „Bezeichnung: Wert“)."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Spalten (Desktop)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "max_rows",
+      "label": "Maximale Einträge",
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Technische Daten (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

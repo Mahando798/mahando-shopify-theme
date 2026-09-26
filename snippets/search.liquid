@@ -9,7 +9,26 @@
   {% render 'search', style: 'default', class: 'custom-class', display_style: 'icon' %}
 {%- enddoc -%}
 
-{% unless style == 'none' %}
+{% if style != 'none' and variant == 'bar' %}
+  <search-button
+    class="search-action search-action--bar{% if class != blank %} {{ class | strip }}{% endif %}"
+  >
+    <button
+      on:click="#search-modal/showDialog"
+      class="button-unstyled mahando-search-bar"
+      aria-label="{{ 'content.search_input_label' | t }}"
+      aria-haspopup="dialog"
+    >
+      <span class="mahando-search-bar__placeholder">{% if settings.mahando_search_placeholder != blank %}{{ settings.mahando_search_placeholder }}{% else %}{{ 'content.search' | t }}{% endif %}</span>
+      <span class="mahando-search-bar__submit">
+        <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
+        <span class="mahando-search-bar__label">{{ 'content.search' | t }}</span>
+      </span>
+    </button>
+  </search-button>
+{% endif %}
+
+{% unless style == 'none' or variant == 'bar' %}
   <search-button
     class="search-action{% if display_style == 'text' %} search-action--text{% endif %}{% if class != blank %} {{ class | strip }}{% endif %}"
   >
@@ -31,6 +50,69 @@
 {% endunless %}
 
 {% stylesheet %}
+  .search-action--bar {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 640px;
+    width: 100%;
+  }
+
+  .mahando-search-bar {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 44px;
+    border: 1.5px solid var(--color-input-border, var(--color-border));
+    border-radius: var(--style-border-radius-inputs, 8px);
+    background: var(--color-input-background, var(--color-background));
+    color: var(--color-input-text, var(--color-foreground));
+    overflow: hidden;
+    cursor: text;
+    text-align: start;
+  }
+
+  .mahando-search-bar:focus-visible {
+    outline: 2px solid var(--color-primary-button-background);
+    outline-offset: 1px;
+  }
+
+  .mahando-search-bar__placeholder {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size--sm);
+    color: rgb(var(--color-input-text-rgb, var(--color-foreground-rgb)) / 0.55);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mahando-search-bar__submit {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    background: var(--color-primary-button-background);
+    color: var(--color-primary-button-text);
+    font-weight: 600;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-search-bar__submit .svg-wrapper,
+  .mahando-search-bar__submit svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .search-action--bar {
+      display: none;
+    }
+  }
+
   .search-action {
     --search-border-radius: var(--style-border-radius-inputs);
     --search-border-width: var(--style-border-width-inputs);

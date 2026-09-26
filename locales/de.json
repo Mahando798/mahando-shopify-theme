@@ -147,15 +147,15 @@
     "checkout": "Auschecken",
     "cart_title": "Warenkorb",
     "price": "Preis",
-    "price_regular": "Normaler Preis",
+    "price_regular": "UVP",
     "price_compare_at": "Vergleichspreis",
     "price_sale": "Angebotspreis",
     "duties_and_taxes_included": "Inkl. Zollgebühren und Steuern.",
     "duties_included": "Inkl. Zollgebühren.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Versand</a> wird beim Checkout berechnet.",
-    "taxes_included": "Inkl. Steuern.",
+    "taxes_included": "inkl. MwSt.,",
     "product_badge_sold_out": "Ausverkauft",
-    "product_badge_sale": "Sale",
+    "product_badge_sale": "Angebot",
     "search_input_label": "Suchen",
     "search_input_placeholder": "Suchen",
     "search_results": "Suchergebnisse",
@@ -217,16 +217,16 @@
     "taxes_included_shipping_at_checkout_without_policy_without_discounts": "Inkl. Steuern. Versand wird beim Checkout berechnet.",
     "wrong_password": "Falsches Passwort",
     "view_more_details": "Weitere Details anzeigen",
-    "inventory_low_stock": "Niedriger Lagerbestand",
-    "inventory_in_stock": "Auf Lager",
-    "inventory_out_of_stock": "Nicht vorrätig",
+    "inventory_low_stock": "Nur noch wenige Stück",
+    "inventory_in_stock": "Auf Lager – sofort lieferbar",
+    "inventory_out_of_stock": "Ausverkauft",
     "page_placeholder_title": "Seitentitel",
     "page_placeholder_content": "Wähle eine Seite aus, die angezeigt werden soll.",
     "placeholder_image": "Platzhalterbild",
-    "shipping_policy": "Versandkosten werden beim Checkout berechnet.",
+    "shipping_policy": "zzgl. Versandkosten",
     "inventory_low_stock_show_count": {
-      "one": "{{ count }} übrig",
-      "other": "{{ count }} übrig"
+      "one": "Nur noch {{ count }} Stück",
+      "other": "Nur noch {{ count }} Stück"
     },
     "powered_by": "Dieser Shop wird unterstützt werden von",
     "store_owner_link_html": "Bist du der Shop-Inhaber? <a href=\"{{ link }}\">Hier einloggen</a>",
@@ -305,7 +305,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "In den Warenkorb legen",
+      "add_to_cart": "In den Warenkorb",
       "added_to_cart": "Zum Warenkorb hinzugefügt",
       "adding_to_cart": "Wird hinzugefügt...",
       "add_to_cart_error": "Fehler beim Hinzufügen zum Warenkorb",
@@ -342,6 +342,55 @@
       "post": "Kommentar posten",
       "success_moderated": "Kommentar gepostet, Moderation ausstehend",
       "success": "Kommentar gepostet"
+    }
+  },
+  "mahando": {
+    "badges": {
+      "new": "Neu",
+      "single": "Einzelstück"
+    },
+    "condition": {
+      "label": "Zustand",
+      "new": "Neu, original verpackt",
+      "packaging_damaged": "Neu – Originalverpackung beschädigt",
+      "packaging_damaged_short": "Verpackung beschädigt",
+      "b_ware": "B-Ware",
+      "discontinued": "Auslaufmodell",
+      "default_note_packaging": "Der Artikel ist ungebraucht und vollständig. Nur die Umverpackung hat Transport- oder Lagerspuren, deshalb der Preis.",
+      "default_note_b_ware": "Der Artikel wurde geprüft und funktioniert einwandfrei. Er kann leichte Gebrauchs- oder Lagerspuren haben, deshalb der Preis.",
+      "default_note_discontinued": "Auslaufmodell des Herstellers – neu und unbenutzt, wird nicht mehr nachproduziert."
+    },
+    "availability": {
+      "in_stock": "Auf Lager · {{ delivery }}",
+      "in_stock_plain": "Auf Lager – sofort lieferbar",
+      "low_stock": {
+        "one": "Nur noch {{ count }} Stück",
+        "other": "Nur noch {{ count }} Stück"
+      },
+      "out_of_stock": "Ausverkauft",
+      "delivery_time": "Lieferzeit {{ delivery }} innerhalb Deutschlands",
+      "shipping_flat": "Versand {{ flat }} pauschal · ab {{ free }} kostenlos"
+    },
+    "product": {
+      "sku": "Art.-Nr. {{ sku }}",
+      "ean": "EAN {{ ean }}",
+      "specs_heading": "Technische Daten",
+      "gpsr_heading": "Herstellerangaben",
+      "gpsr_manufacturer": "Hersteller",
+      "gpsr_address": "Anschrift",
+      "gpsr_contact": "Kontakt",
+      "gpsr_responsible": "Verantwortliche Person in der EU",
+      "gpsr_note": "Angaben nach der EU-Produktsicherheitsverordnung (GPSR).",
+      "sku_label": "Art.-Nr.",
+      "ean_label": "EAN"
+    },
+    "price": {
+      "shipping_note_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
+      "shipping_note": "zzgl. Versandkosten",
+      "you_save": "Du sparst {{ amount }}"
+    },
+    "usp": {
+      "phone_label": "Telefon"
     }
   }
 }

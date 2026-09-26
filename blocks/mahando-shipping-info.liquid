@@ -1,0 +1,146 @@
+{%- doc -%}
+  Versand- und Lieferinfos auf der Produktseite: Lieferzeit, Versandhinweis (Cut-off), Versandkosten.
+  Alle Texte kommen aus den Theme-Einstellungen unter "Mahando".
+{%- enddoc -%}
+
+<ul
+  class="mahando-shipping spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.show_delivery and settings.mahando_delivery_time != blank -%}
+    <li>
+      {% render 'mahando-icon', icon: 'truck' %}
+      <span>{{ 'mahando.availability.delivery_time' | t: delivery: settings.mahando_delivery_time }}</span>
+    </li>
+  {%- endif -%}
+  {%- if block.settings.show_cutoff and settings.mahando_cutoff_text != blank -%}
+    <li>
+      {% render 'mahando-icon', icon: 'clock' %}
+      <span>{{ settings.mahando_cutoff_text }}</span>
+    </li>
+  {%- endif -%}
+  {%- if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank -%}
+    <li>
+      {% render 'mahando-icon', icon: 'box' %}
+      <span>
+        {%- if shop.shipping_policy.body != blank -%}
+          <a href="{{ shop.shipping_policy.url }}">{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</a>
+        {%- else -%}
+          {{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}
+        {%- endif -%}
+      </span>
+    </li>
+  {%- endif -%}
+</ul>
+
+{% stylesheet %}
+  .mahando-shipping {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-shipping li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mahando-shipping .mahando-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-shipping a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Versand & Lieferzeit (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Texte werden in den Theme-Einstellungen unter „Mahando“ gepflegt."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery",
+      "label": "Lieferzeit anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cutoff",
+      "label": "Versandhinweis (Cut-off) anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_cost",
+      "label": "Versandkosten anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Versand & Lieferzeit (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

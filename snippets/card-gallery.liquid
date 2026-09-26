@@ -17,7 +17,10 @@
   assign has_badges = false
   assign badge_position = null
   if product != blank
-    if product.available == false or product.compare_at_price > product.price
+    capture mahando_badge_check
+      render 'mahando-badges', product: product, mode: 'check'
+    endcapture
+    if mahando_badge_check contains 'true'
       assign has_badges = true
       assign badge_position = settings.badge_position
     endif

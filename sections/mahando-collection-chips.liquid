@@ -1,0 +1,179 @@
+{%- doc -%}
+  Unterkategorie-Chips auf Kollektionsseiten. Nimmt automatisch das Menü, dessen Handle dem
+  Kollektions-Handle entspricht (z. B. Menü "haushalt-garten" für die Kollektion /collections/haushalt-garten).
+  Alternativ kann ein festes Menü gewählt werden. Der erste Chip "Alle" zeigt auf die aktuelle Kollektion.
+{%- enddoc -%}
+
+{%- liquid
+  assign collection = closest.collection
+  assign menu = null
+  if section.settings.menu != blank
+    assign menu = linklists[section.settings.menu]
+  endif
+  if menu == null or menu.links.size == 0
+    assign auto_menu = linklists[collection.handle]
+    if auto_menu.links.size > 0
+      assign menu = auto_menu
+    endif
+  endif
+  if menu.links.size == 0 and section.settings.parent_menu != blank
+    assign parent = linklists[section.settings.parent_menu]
+    for link in parent.links
+      if link.url == collection.url or link.child_active or link.active
+        if link.links.size > 0
+          assign menu = link
+        endif
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if menu != null and menu.links.size > 0 -%}
+  {%- liquid
+    assign any_active = false
+    for link in menu.links
+      if link.active
+        assign any_active = true
+        break
+      endif
+    endfor
+  -%}
+  <div class="section section--page-width spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+    <nav class="mahando-chips" aria-label="Unterkategorien">
+      {%- if section.settings.show_all -%}
+        <a class="mahando-chip{% unless any_active %} mahando-chip--on{% endunless %}" href="{{ collection.url }}">{{ section.settings.all_label }}</a>
+      {%- endif -%}
+      {%- for link in menu.links -%}
+        <a class="mahando-chip{% if link.active %} mahando-chip--on{% endif %}" href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="section section--page-width">
+    <p class="mahando-chips__hint">Unterkategorie-Chips: Lege ein Menü mit dem Handle „{{ collection.handle }}“ an (Navigation) oder wähle in den Sektionseinstellungen ein Menü.</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mahando-chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: var(--font-size--sm);
+    font-weight: 600;
+    background: var(--color-background);
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mahando-chip:hover {
+    border-color: var(--color-foreground);
+  }
+
+  .mahando-chip--on {
+    background: var(--color-foreground);
+    border-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .mahando-chips__hint {
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .mahando-chips::-webkit-scrollbar {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Unterkategorie-Chips (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Automatik: Ein Menü, dessen Handle dem Kollektions-Handle entspricht, wird als Chips angezeigt. Alternativ ein Menü wählen oder das Hauptmenü angeben – dann werden die Unterpunkte der aktuellen Kategorie genutzt."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Festes Menü (optional)"
+    },
+    {
+      "type": "link_list",
+      "id": "parent_menu",
+      "label": "Hauptmenü für Unterpunkte (optional)",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all",
+      "label": "Chip „Alle“ voranstellen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "Beschriftung „Alle“",
+      "default": "Alle"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unterkategorie-Chips (Mahando)",
+      "category": "t:categories.collection"
+    }
+  ]
+}
+{% endschema %}

@@ -131,8 +131,12 @@
       endif
     endif
   endif
+  assign search_variant = 'default'
+  if settings.mahando_search_bar
+    assign search_variant = 'bar'
+  endif
   capture search
-    render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
+    render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style, variant: search_variant
   endcapture
 
   # Skip drawer search under specific conditions:

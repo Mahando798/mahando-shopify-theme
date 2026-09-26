@@ -68,7 +68,9 @@
       {%- endif -%}
 
       {%- if shop.shipping_policy.body != blank -%}
-        {{ 'content.shipping_policy' | t }}
+        {{ 'mahando.price.shipping_note_html' | t: link: shop.shipping_policy.url }}
+      {%- else -%}
+        {{ 'mahando.price.shipping_note' | t }}
       {%- endif -%}
     </div>
   {% endif %}

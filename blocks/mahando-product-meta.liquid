@@ -1,0 +1,146 @@
+{%- doc -%}
+  Meta-Zeile unter dem Produkttitel: Artikelnummer (SKU), EAN (Barcode) und Zustand.
+  SKU und EAN folgen der ausgewählten Variante (mahando-product-meta.js).
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+
+  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+  if zustand == blank
+    for tag in product.tags
+      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
+        assign zustand = t
+        break
+      endif
+    endfor
+  endif
+  case zustand
+    when 'verpackung-beschaedigt', 'ovp-beschaedigt'
+      assign zustand_label = 'mahando.condition.packaging_damaged_short' | t
+    when 'b-ware'
+      assign zustand_label = 'mahando.condition.b_ware' | t
+    when 'auslaufmodell'
+      assign zustand_label = 'mahando.condition.discontinued' | t
+    else
+      assign zustand_label = 'mahando.condition.new' | t
+  endcase
+-%}
+
+<script src="{{ 'mahando-product-meta.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+<mahando-product-meta
+  class="mahando-product-meta spacing-style"
+  data-product-id="{{ product.id }}"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.show_sku -%}
+    <span class="mahando-product-meta__item" ref="skuItem"{% if variant.sku == blank %} hidden{% endif %}>
+      {{ 'mahando.product.sku_label' | t }} <span ref="sku">{{ variant.sku }}</span>
+    </span>
+  {%- endif -%}
+  {%- if block.settings.show_ean -%}
+    <span class="mahando-product-meta__item" ref="eanItem"{% if variant.barcode == blank %} hidden{% endif %}>
+      {{ 'mahando.product.ean_label' | t }} <span ref="ean">{{ variant.barcode }}</span>
+    </span>
+  {%- endif -%}
+  {%- if block.settings.show_condition -%}
+    <span class="mahando-product-meta__item">{{ zustand_label }}</span>
+  {%- endif -%}
+</mahando-product-meta>
+
+{% stylesheet %}
+  .mahando-product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mahando-product-meta__item[hidden] {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Artikelnummer & EAN (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Artikelnummer (SKU) anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ean",
+      "label": "EAN (Barcode) anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_condition",
+      "label": "Zustand anzeigen",
+      "info": "Aus dem Metafeld mahando.zustand oder den Tags verpackung-beschaedigt, b-ware, auslaufmodell. Ohne Angabe: „Neu, original verpackt“.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Artikelnummer & EAN (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

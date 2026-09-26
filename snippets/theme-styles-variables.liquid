@@ -685,3 +685,25 @@
   section_id: 'badge-sold-out',
   preset: 'ui'
 %}
+
+{% render 'contrast-override',
+  background_color: settings.mahando_badge_new_background,
+  text_color: settings.mahando_badge_new_text,
+  section_id: 'badge-new',
+  preset: 'ui'
+%}
+
+{% render 'contrast-override',
+  background_color: settings.mahando_badge_condition_background,
+  text_color: settings.mahando_badge_condition_text,
+  section_id: 'badge-condition',
+  preset: 'ui'
+%}
+
+{% render 'contrast-override',
+  background_color: settings.mahando_badge_neutral_background,
+  text_color: settings.mahando_badge_neutral_text,
+  border_color: settings.mahando_badge_neutral_border,
+  section_id: 'badge-neutral',
+  preset: 'ui'
+%}

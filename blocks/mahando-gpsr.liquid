@@ -1,0 +1,158 @@
+{%- doc -%}
+  Herstellerangaben nach EU-Produktsicherheitsverordnung (GPSR, Pflicht seit 13.12.2024).
+  Metafelder (Namespace mahando): hersteller_name, hersteller_anschrift (mehrzeilig), hersteller_kontakt,
+  eu_verantwortlicher (nur bei Herstellern außerhalb der EU). Fällt zurück auf den Hersteller (vendor),
+  wenn nur der Name bekannt ist.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign m = product.metafields.mahando
+  assign name = m.hersteller_name | strip
+  if name == blank and block.settings.fallback_vendor
+    assign name = product.vendor
+  endif
+  assign address = m.hersteller_anschrift
+  assign contact = m.hersteller_kontakt | strip
+  assign responsible = m.eu_verantwortlicher
+-%}
+
+{%- if name != blank or address != blank or contact != blank -%}
+  <div
+    class="mahando-gpsr spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <dl class="mahando-gpsr__list">
+      {%- if name != blank -%}
+        <div><dt>{{ 'mahando.product.gpsr_manufacturer' | t }}</dt><dd>{{ name }}</dd></div>
+      {%- endif -%}
+      {%- if address != blank -%}
+        <div><dt>{{ 'mahando.product.gpsr_address' | t }}</dt><dd>{{ address | newline_to_br }}</dd></div>
+      {%- endif -%}
+      {%- if contact != blank -%}
+        <div><dt>{{ 'mahando.product.gpsr_contact' | t }}</dt><dd>{%- if contact contains '@' -%}<a href="mailto:{{ contact }}">{{ contact }}</a>{%- else -%}{{ contact }}{%- endif -%}</dd></div>
+      {%- endif -%}
+      {%- if responsible != blank -%}
+        <div><dt>{{ 'mahando.product.gpsr_responsible' | t }}</dt><dd>{{ responsible | newline_to_br }}</dd></div>
+      {%- endif -%}
+    </dl>
+    {%- if block.settings.show_note -%}
+      <p class="mahando-gpsr__note">{{ 'mahando.product.gpsr_note' | t }}</p>
+    {%- endif -%}
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="mahando-gpsr mahando-gpsr--empty" {{ block.shopify_attributes }}>
+    <p class="mahando-gpsr__note">Herstellerangaben (GPSR): Metafelder mahando.hersteller_name / hersteller_anschrift / hersteller_kontakt sind bei diesem Produkt leer.</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-gpsr__list {
+    margin: 0;
+    display: grid;
+    gap: 0;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-gpsr__list > div {
+    display: grid;
+    grid-template-columns: minmax(120px, 40%) 1fr;
+    gap: 12px;
+    padding-block: 6px;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .mahando-gpsr__list > div:last-child {
+    border-bottom: 0;
+  }
+
+  .mahando-gpsr__list dt {
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-gpsr__list dd {
+    margin: 0;
+  }
+
+  .mahando-gpsr__note {
+    margin: 8px 0 0;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Herstellerangaben GPSR (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Pflichtangabe nach EU-Produktsicherheitsverordnung. Metafelder: mahando.hersteller_name, mahando.hersteller_anschrift, mahando.hersteller_kontakt, mahando.eu_verantwortlicher."
+    },
+    {
+      "type": "checkbox",
+      "id": "fallback_vendor",
+      "label": "Hersteller-Feld (Vendor) verwenden, wenn kein Name im Metafeld steht",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Hinweis auf GPSR anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Herstellerangaben GPSR (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

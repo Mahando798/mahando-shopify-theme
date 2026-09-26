@@ -1,0 +1,164 @@
+{%- doc -%}
+  Footer-Leiste mit Zahlungsarten (Icons aus shop.enabled_payment_types), Preis-/MwSt.-Hinweis
+  und optionalem Badge-Code (z. B. idealo-Bewertungs-Badge).
+{%- enddoc -%}
+
+{% render 'contrast-override', background_color: section.settings.background_color, text_color: section.settings.text_color, section_id: section.id %}
+
+<div class="section-background color-custom-{{ section.id }}"></div>
+<div
+  class="mahando-footer-bar section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
+  style="--mahando-footer-divider: {{ section.settings.divider_color | default: 'rgb(255 255 255 / 0.12)' }};"
+>
+  <div class="mahando-footer-bar__inner">
+    {%- if section.settings.show_payment_icons -%}
+      <div class="mahando-footer-bar__payments">
+        {%- if section.settings.payment_label != blank -%}
+          <span class="mahando-footer-bar__label">{{ section.settings.payment_label }}</span>
+        {%- endif -%}
+        <ul class="mahando-footer-bar__icons" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.badge_html != blank -%}
+      <div class="mahando-footer-bar__badge">{{ section.settings.badge_html }}</div>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}
+      <p class="mahando-footer-bar__note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-footer-bar__inner {
+    border-top: 1px solid var(--mahando-footer-divider);
+    padding-block: 22px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-footer-bar__payments {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mahando-footer-bar__label {
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .mahando-footer-bar__icons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .mahando-footer-bar__icons li {
+    background: #fff;
+    border-radius: 4px;
+    line-height: 0;
+    padding: 2px;
+  }
+
+  .mahando-footer-bar__icons svg {
+    width: 38px;
+    height: 24px;
+  }
+
+  .mahando-footer-bar__badge {
+    display: flex;
+    align-items: center;
+  }
+
+  .mahando-footer-bar__note {
+    margin: 0;
+    flex-basis: 100%;
+    opacity: 0.8;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Zahlungsarten & Hinweis (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Zahlungsarten anzeigen",
+      "info": "Icons der im Shop aktivierten Zahlungsarten.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "payment_label",
+      "label": "Beschriftung",
+      "default": "Zahlungsarten"
+    },
+    {
+      "type": "liquid",
+      "id": "badge_html",
+      "label": "Badge-Code (optional)",
+      "info": "z. B. das idealo-Bewertungs-Badge oder ein Trusted-Shops-Siegel."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Hinweiszeile",
+      "default": "Alle Preise inkl. gesetzlicher MwSt., zzgl. Versandkosten."
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text",
+      "default": "#C9D5DB"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Trennlinie",
+      "default": "#3B4B54"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zahlungsarten & Hinweis (Mahando)",
+      "category": "t:categories.footer"
+    }
+  ]
+}
+{% endschema %}

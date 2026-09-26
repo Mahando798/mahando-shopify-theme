@@ -1279,6 +1279,54 @@
           }
         ],
         "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Mahando-Badges"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_new_background",
+        "label": "Badge „Neu“ – Hintergrund",
+        "default": "#EEF3F5"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_new_text",
+        "label": "Badge „Neu“ – Text",
+        "default": "#34454E"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_condition_background",
+        "label": "Zustands-Badge – Hintergrund",
+        "info": "Verpackung beschädigt, B-Ware",
+        "default": "#FDF1DC"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_condition_text",
+        "label": "Zustands-Badge – Text",
+        "default": "#8A5306"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_neutral_background",
+        "label": "Neutrales Badge – Hintergrund",
+        "info": "Auslaufmodell, Einzelstück",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_neutral_text",
+        "label": "Neutrales Badge – Text",
+        "default": "#1D2B33"
+      },
+      {
+        "type": "color",
+        "id": "mahando_badge_neutral_border",
+        "label": "Neutrales Badge – Rahmen",
+        "default": "#B9C8CF"
       }
     ]
   },
@@ -2114,6 +2162,158 @@
           }
         ],
         "default": "equal-width-buttons"
+      }
+    ]
+  },
+  {
+    "name": "Mahando",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Schriften"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_fonts",
+        "label": "Mahando-Schriften verwenden (Outfit + Source Sans 3, selbst gehostet)",
+        "info": "Die Schriften liegen im Theme und werden über das Shopify-CDN geladen – keine Google-Server. Ausschalten, um die Font-Picker unter „Typografie“ zu nutzen.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_logo_fallback",
+        "label": "Eingebautes Mahando-Logo (SVG) verwenden, solange kein Logo hochgeladen ist",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Suche im Header"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_search_bar",
+        "label": "Große Suchleiste im Header (Desktop) statt Lupen-Icon",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mahando_search_placeholder",
+        "label": "Platzhaltertext",
+        "default": "Wonach suchst du? z. B. Tablet, Bohrschrauber, Puzzle …"
+      },
+      {
+        "type": "header",
+        "content": "Badges auf Produktkarten"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_badge_sale_percent",
+        "label": "Rabatt als Prozentwert anzeigen (z. B. „−40 %“)",
+        "info": "Erscheint nur, wenn ein Vergleichspreis (UVP) über dem Preis liegt. Sonst zeigt das Badge „Sale“.",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "mahando_new_badge_days",
+        "label": "Badge „Neu“ für Artikel jünger als",
+        "min": 0,
+        "max": 90,
+        "step": 5,
+        "unit": "d",
+        "info": "0 = nur per Tag „neu“. Ein Artikel mit dem Tag „neu“ bekommt das Badge immer.",
+        "default": 30
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_badge_single",
+        "label": "Badge „Einzelstück“ bei Bestand 1 oder Tag „einzelstueck“",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Verfügbarkeit"
+      },
+      {
+        "type": "range",
+        "id": "mahando_low_stock_threshold",
+        "label": "„Nur noch X Stück“ ab Bestand von",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "text",
+        "id": "mahando_delivery_time",
+        "label": "Lieferzeit-Text",
+        "default": "1–3 Werktage"
+      },
+      {
+        "type": "text",
+        "id": "mahando_cutoff_text",
+        "label": "Versandhinweis (Produktseite)",
+        "default": "Bestellung bis 13 Uhr: Versand am selben Werktag"
+      },
+      {
+        "type": "header",
+        "content": "Versandkosten (Anzeige)"
+      },
+      {
+        "type": "text",
+        "id": "mahando_shipping_flat",
+        "label": "Versandkosten pauschal",
+        "default": "4,99 €"
+      },
+      {
+        "type": "text",
+        "id": "mahando_free_shipping_from",
+        "label": "Versandkostenfrei ab",
+        "default": "300 €"
+      },
+      {
+        "type": "paragraph",
+        "content": "Die echten Versandkosten werden in den Shopify-Versandprofilen eingerichtet. Diese Texte dienen nur der Anzeige im Theme."
+      },
+      {
+        "type": "header",
+        "content": "Kontakt"
+      },
+      {
+        "type": "text",
+        "id": "mahando_phone",
+        "label": "Telefonnummer",
+        "default": "+49 1575 4851510"
+      },
+      {
+        "type": "text",
+        "id": "mahando_hours",
+        "label": "Servicezeiten",
+        "default": "Mo–Fr 8–15 Uhr"
+      },
+      {
+        "type": "header",
+        "content": "Produktdaten"
+      },
+      {
+        "type": "paragraph",
+        "content": "Zustand, technische Daten, Lieferumfang und Herstellerangaben (GPSR) kommen aus Metafeldern im Namespace „mahando“ (siehe README des Themes)."
+      },
+      {
+        "type": "richtext",
+        "id": "mahando_disposal_text",
+        "label": "Entsorgungshinweis Elektrogeräte/Batterien",
+        "info": "Wird auf Produktseiten mit dem Tag „elektro“ oder „akku“ angezeigt.",
+        "default": "<p><strong>Altgeräte und Batterien (ElektroG/BattG):</strong> Elektrogeräte, Akkus und Batterien gehören nicht in den Hausmüll. Du kannst sie kostenlos bei uns oder bei kommunalen Sammelstellen zurückgeben. Akkus und Batterien vor der Rückgabe entnehmen.</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "mahando_return_text",
+        "label": "Text „Versand & Rückgabe“ (Produktseite)",
+        "default": "<p>Versand mit DHL oder GLS ab Lager Büren. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendung über das Formular im Kundenkonto anmelden, das Rücksendelabel kommt per E-Mail.</p>"
       }
     ]
   }
