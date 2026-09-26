@@ -32,7 +32,7 @@
             "custom_liquid_logo": {
               "type": "custom-liquid",
               "settings": {
-                "custom_liquid": "<a href=\"{{ routes.root_url }}\" class=\"mahando-footer-logo\" aria-label=\"Mahando – Startseite\">{% if settings.logo != blank %}{{ settings.logo | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Mahando' }}{% else %}{{ 'mahando-logo.svg' | inline_asset_content }}{% endif %}</a>"
+                "custom_liquid": "<a href=\"{{ routes.root_url }}\" class=\"mahando-footer-logo\" aria-label=\"Mahando – Startseite\">{% if settings.logo != blank %}{{ settings.logo | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Mahando' }}{% else %}<img src=\"{{ 'mahando-logo.svg' | asset_url }}\" alt=\"Mahando – Marco Haase\" width=\"231\" height=\"166\" loading=\"lazy\">{% endif %}</a>"
               }
             },
             "text_adresse": {

@@ -1,5 +1,9 @@
 {% assign block_settings = block.settings %}
 
+{% comment %} Mahando: Zeile ausblenden, wenn ihre Blöcke nichts ausgeben (z. B. leere Metafelder) {% endcomment %}
+{% capture accordion_row_content %}{% content_for 'blocks' %}{% endcapture %}
+{% assign accordion_row_content_check = accordion_row_content | strip %}
+{% unless accordion_row_content_check == blank and request.design_mode == false %}
 {% capture accordion_row_children %}
   <details
     class="details"
@@ -26,7 +30,7 @@
     </summary>
 
     <div class="details-content">
-      {% content_for 'blocks' %}
+      {{ accordion_row_content }}
     </div>
   </details>
 {% endcapture %}
@@ -35,6 +39,7 @@
   open_by_default_on_desktop: block_settings.open_by_default,
   open_by_default_on_mobile: block_settings.open_by_default
 %}
+{% endunless %}
 
 {% schema %}
 {

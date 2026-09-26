@@ -7,19 +7,18 @@
 {%- liquid
   assign collection = closest.collection
   assign menu = null
-  if section.settings.menu != blank
-    assign menu = linklists[section.settings.menu]
+  if section.settings.menu != blank and section.settings.menu.links.size > 0
+    assign menu = section.settings.menu
   endif
-  if menu == null or menu.links.size == 0
+  if menu == null
     assign auto_menu = linklists[collection.handle]
     if auto_menu.links.size > 0
       assign menu = auto_menu
     endif
   endif
-  if menu.links.size == 0 and section.settings.parent_menu != blank
-    assign parent = linklists[section.settings.parent_menu]
-    for link in parent.links
-      if link.url == collection.url or link.child_active or link.active
+  if menu == null and section.settings.parent_menu != blank
+    for link in section.settings.parent_menu.links
+      if link.active or link.child_active
         if link.links.size > 0
           assign menu = link
         endif

@@ -60,9 +60,8 @@
       <span
         class="header-logo__svg"
         style="--header-logo-image-height: {{ settings.logo_height }}px; --header-logo-image-height-mobile: {{ settings.logo_height_mobile }}px;"
-        aria-label="{{ alt_text_fallback }}"
       >
-        {{ 'mahando-logo-horizontal.svg' | inline_asset_content }}
+        <img src="{{ 'mahando-logo-horizontal.svg' | asset_url }}" alt="{{ alt_text_fallback }}" width="414" height="101" fetchpriority="high">
       </span>
     {%- else -%}
       {% render 'image',
@@ -136,7 +135,7 @@
     line-height: 0;
   }
 
-  .header-logo__svg svg {
+  .header-logo__svg img {
     display: block;
     height: var(--header-logo-image-height-mobile);
     width: auto;

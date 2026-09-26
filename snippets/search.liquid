@@ -29,9 +29,9 @@
   </search-button>
 {% endif %}
 
-{% unless style == 'none' or variant == 'bar' %}
+{% unless style == 'none' %}
   <search-button
-    class="search-action{% if display_style == 'text' %} search-action--text{% endif %}{% if class != blank %} {{ class | strip }}{% endif %}"
+    class="search-action{% if display_style == 'text' %} search-action--text{% endif %}{% if variant == 'bar' %} search-action--bar-fallback{% endif %}{% if class != blank %} {{ class | strip }}{% endif %}"
   >
     <button
       on:click="#search-modal/showDialog"
@@ -110,6 +110,16 @@
 
   @media screen and (max-width: 989px) {
     .search-action--bar {
+      display: none;
+    }
+  }
+
+  #header-component[data-menu-style='drawer'] .search-action--bar {
+    display: none;
+  }
+
+  @media screen and (min-width: 990px) {
+    #header-component[data-menu-style='menu'] .search-action--bar-fallback {
       display: none;
     }
   }

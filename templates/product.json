@@ -276,8 +276,8 @@
                       "settings": {
                         "namespace": "mahando",
                         "key": "sicherheitshinweise",
-                        "extra_text": "<p><strong>Altgeräte und Batterien (ElektroG/BattG):</strong> Elektrogeräte, Akkus und Batterien gehören nicht in den Hausmüll. Du kannst sie kostenlos bei uns oder bei kommunalen Sammelstellen zurückgeben. Akkus und Batterien vor der Rückgabe entnehmen.</p>",
-                        "extra_tags": "elektro, akku, batterie"
+                        "extra_tags": "elektro, akku, batterie",
+                        "use_disposal_setting": true
                       }
                     }
                   },

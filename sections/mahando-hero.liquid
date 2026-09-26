@@ -42,6 +42,7 @@
             if title == blank
               assign title = product.title
             endif
+            assign img_alt = product.featured_image.alt | default: title
           -%}
           <a
             class="mahando-hero__card"
@@ -50,7 +51,7 @@
           >
             <span class="mahando-hero__card-image">
               {%- if product.featured_image != blank -%}
-                {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 160', sizes: '72px', alt: product.featured_image.alt | default: title }}
+                {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 160', sizes: '72px', alt: img_alt }}
               {%- else -%}
                 {{ 'product-apparel-1' | placeholder_svg_tag: 'mahando-hero__placeholder' }}
               {%- endif -%}
