@@ -49,7 +49,7 @@
         "show_contact": true,
         "background_color": "{{ settings.color_palette.foreground }}",
         "text_color": "#dce5e9",
-        "alignment": "center"
+        "alignment": "spread"
       }
     },
     "header_section": {
