@@ -31,7 +31,7 @@
     endif
   endfor
 
-  assign image = section.settings.image | default: collection.image
+  assign image = section.settings.image
 -%}
 
 <div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
@@ -271,7 +271,7 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Bild (sonst Kollektionsbild)"
+      "label": "Foto für die rechte Karte (optional)"
     },
     {
       "type": "text",

@@ -32,8 +32,9 @@
         endif
 
         # Bildkette: eigenes Bild → Kollektionsbild → erstes Produktbild → Icon
+        # Produktfreisteller werden eingepasst (nicht beschnitten); "Zuschneiden" nur, wenn im Block gewählt.
         assign photo = block.settings.image
-        assign photo_fit = 'cover'
+        assign photo_fit = block.settings.image_fit | default: 'contain'
         if photo == blank and collection.image != blank
           assign photo = collection.image
         endif
@@ -170,7 +171,7 @@
   .mahando-category__media {
     display: block;
     aspect-ratio: 4 / 3;
-    background: #f5f8f9;
+    background: #fff;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border);
   }
@@ -178,13 +179,14 @@
   .mahando-category__media img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 7%;
     transition: transform 0.3s ease;
   }
 
-  .mahando-category__media--contain img {
-    object-fit: contain;
-    padding: 12%;
+  .mahando-category__media--cover img {
+    object-fit: cover;
+    padding: 0;
   }
 
   .mahando-category--photo:hover .mahando-category__media img {
@@ -365,6 +367,16 @@
           "type": "image_picker",
           "id": "image",
           "label": "Eigenes Bild (optional, ersetzt das Icon)"
+        },
+        {
+          "type": "select",
+          "id": "image_fit",
+          "label": "Bild einpassen",
+          "options": [
+            { "value": "contain", "label": "Einpassen (Freisteller)" },
+            { "value": "cover", "label": "Zuschneiden (Foto)" }
+          ],
+          "default": "contain"
         },
         {
           "type": "checkbox",
