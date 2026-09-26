@@ -45,7 +45,7 @@
       "settings": {
         "eyebrow": "Markenware · Ab Lager",
         "heading": "Ihr Onlinehändler für Technik, Haushalt und Spielzeug",
-        "text": "<p>Markenware</p>",
+        "text": "",
         "button_label": "Bestseller ansehen",
         "button_link": "shopify://collections/bestseller",
         "button_label_2": "Alle Kategorien",
@@ -71,7 +71,7 @@
           "type": "card",
           "settings": {
             "icon": "box",
-            "heading": "Versand 4,99 € pauschal",
+            "heading": "Versand - 4,99 €",
             "text": "Ab 300 € Bestellwert kostenlos"
           }
         },
