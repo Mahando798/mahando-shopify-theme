@@ -318,7 +318,7 @@
                     "versandtext": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Versand mit DHL oder GLS ab Lager Büren. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendung über das Formular im Kundenkonto anmelden, das Rücksendelabel kommt per E-Mail.</p>",
+                        "text": "<p>Versand mit DHL oder GLS ab Lager Büren. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendungen melden Sie über das Formular im Kundenkonto an; das Rücksendelabel erhalten Sie per E-Mail.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "type_preset": "rte"

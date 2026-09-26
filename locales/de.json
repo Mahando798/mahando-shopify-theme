@@ -5,7 +5,7 @@
     "email_signup": {
       "label": "E-Mail",
       "placeholder": "E-Mail-Adresse",
-      "success": "Danke für deine Anmeldung!"
+      "success": "Vielen Dank für Ihre Anmeldung."
     },
     "filter": "Filtern",
     "payment_methods": "Zahlungsmethoden",
@@ -14,8 +14,8 @@
       "email": "E-Mail-Adresse",
       "phone": "Telefonnummer",
       "comment": "Kommentar",
-      "post_success": "Danke, dass du uns kontaktiert hast. Wir werden uns so schnell wie möglich bei dir melden.",
-      "error_heading": "Bitte passe Folgendes an:"
+      "post_success": "Vielen Dank für Ihre Nachricht. Wir melden uns so schnell wie möglich bei Ihnen.",
+      "error_heading": "Bitte korrigieren Sie Folgendes:"
     },
     "slider_label": "Slider"
   },
@@ -26,7 +26,7 @@
     "country_results_count": "{{ count }} Ergebnisse",
     "slideshow_pause": "Slideshow pausieren",
     "slideshow_play": "Slideshow abspielen",
-    "remove_item": "Entferne {{ title}}",
+    "remove_item": "{{ title }} entfernen",
     "skip_to_text": "Direkt zum Inhalt",
     "skip_to_product_info": "Zu Produktinformationen springen",
     "skip_to_results_list": "Zur Ergebnisliste springen",
@@ -81,11 +81,11 @@
     "add_to_cart": "In den Warenkorb legen",
     "clear_all": "Alle löschen",
     "remove": "Entfernen",
-    "view_in_your_space": "In deinem Raum ansehen",
+    "view_in_your_space": "In Ihrem Raum ansehen",
     "show_filters": "Filtern",
     "clear": "Löschen",
     "continue_shopping": "Weiter einkaufen",
-    "log_in_html": "Hast du ein Konto? <a href=\"{{ link }}\">Logge dich ein</a>, damit es beim Checkout schneller geht.",
+    "log_in_html": "Sie haben bereits ein Konto? <a href=\"{{ link }}\">Melden Sie sich an</a>, damit es beim Checkout schneller geht.",
     "see_items": {
       "one": "{{ count }} Artikel anzeigen",
       "other": "{{ count }} Artikel ansehen"
@@ -126,7 +126,7 @@
     "localization_region_and_language": "Region und Sprache",
     "no_results_found": "Keine Ergebnisse gefunden",
     "cart_total": "Gesamtbetrag im Warenkorb",
-    "your_cart_is_empty": "Dein Warenkorb ist leer",
+    "your_cart_is_empty": "Ihr Warenkorb ist leer",
     "product_image": "Produktbild",
     "product_information": "Produktinformationen",
     "quantity": "Anzahl",
@@ -160,7 +160,7 @@
     "search_input_placeholder": "Suchen",
     "search_results": "Suchergebnisse",
     "search_results_label": "Suchergebnisse",
-    "search_results_no_results": "Keine Ergebnisse für „{{ terms }}“ gefunden. Versuche es mit einem anderen Suchbegriff.",
+    "search_results_no_results": "Keine Ergebnisse für „{{ terms }}“ gefunden. Versuchen Sie es mit einem anderen Suchbegriff.",
     "search_results_resource_articles": "Blog-Beiträge",
     "search_results_resource_collections": "Kollektionen",
     "search_results_resource_pages": "Seiten",
@@ -195,7 +195,7 @@
     "filters": "Filter",
     "no_products_found": "Keine Produkte gefunden.",
     "price_filter_html": "Der höchste Preis ist {{ price }}",
-    "use_fewer_filters_html": "Versuche, weniger Filter zu verwenden oder <a class=\"{{ class }}\" href=\"{{ link }}\">alle Filter zu löschen</a>.",
+    "use_fewer_filters_html": "Versuchen Sie es mit weniger Filtern oder <a class=\"{{ class }}\" href=\"{{ link }}\">löschen Sie alle Filter</a>.",
     "account_title": "Konto",
     "account_title_personalized": "Hallo {{ first_name }}",
     "account_orders": "Bestellungen",
@@ -221,7 +221,7 @@
     "inventory_in_stock": "Auf Lager – sofort lieferbar",
     "inventory_out_of_stock": "Ausverkauft",
     "page_placeholder_title": "Seitentitel",
-    "page_placeholder_content": "Wähle eine Seite aus, die angezeigt werden soll.",
+    "page_placeholder_content": "Wählen Sie eine Seite aus, die angezeigt werden soll.",
     "placeholder_image": "Platzhalterbild",
     "shipping_policy": "zzgl. Versandkosten",
     "inventory_low_stock_show_count": {
@@ -229,7 +229,7 @@
       "other": "Nur noch {{ count }} Stück"
     },
     "powered_by": "Dieser Shop wird unterstützt werden von",
-    "store_owner_link_html": "Bist du der Shop-Inhaber? <a href=\"{{ link }}\">Hier einloggen</a>",
+    "store_owner_link_html": "Sind Sie der Shop-Inhaber? <a href=\"{{ link }}\">Hier anmelden</a>",
     "shipping_discount_error": "Versandrabatte werden beim Checkout angezeigt, nachdem die Adresse hinzugefügt wurde",
     "discount_code_error": "Rabattcode kann nicht auf den Warenkorb angewendet werden",
     "recipient_form_send_to": "Senden an",
@@ -264,13 +264,13 @@
     "product_subtotal": "Produktzwischensumme",
     "quantity_per_item": "/Stk.",
     "remove_all": "Alle entfernen",
-    "remove_all_items_confirmation": "Alle {{ count }} Artikel aus deinem Warenkorb entfernen?",
+    "remove_all_items_confirmation": "Alle {{ count }} Artikel aus Ihrem Warenkorb entfernen?",
     "remove_one_item_confirmation": "1 Artikel aus dem Warenkorb entfernen?",
     "total_items": "Artikel gesamt",
     "variant": "Variante",
     "variant_total": "Varianten insgesamt",
     "view_cart": "Warenkorb ansehen",
-    "your_cart": "Dein Warenkorb",
+    "your_cart": "Ihr Warenkorb",
     "items_added_to_cart": {
       "one": "1 Artikel zum Warenkorb hinzugefügt",
       "other": "{{ count }} Artikel zum Warenkorb hinzugefügt"
@@ -280,9 +280,9 @@
   },
   "gift_cards": {
     "issued": {
-      "how_to_use_gift_card": "Verwende diesen Geschenkgutscheincode online oder verwende den QR-Code im Shop",
-      "title": "Hier ist dein {{ value }}-Gutschein für {{ shop }}!",
-      "subtext": "Dein Gutschein",
+      "how_to_use_gift_card": "Verwenden Sie diesen Geschenkgutscheincode online oder den QR-Code im Shop",
+      "title": "Hier ist Ihr {{ value }}-Gutschein für {{ shop }}",
+      "subtext": "Ihr Gutschein",
       "shop_link": "Onlineshop besuchen",
       "add_to_apple_wallet": "Zu Apple Wallet hinzufügen",
       "qr_image_alt": "QR-Code – Scannen, um Gutschein einzulösen",
@@ -301,7 +301,7 @@
     "blog_post_title": "Titel",
     "blog_post_author": "Autor",
     "blog_post_date": "Datum",
-    "blog_post_description": "Ein Auszug aus dem Inhalt deines Blog-Beitrags"
+    "blog_post_description": "Ein Auszug aus dem Inhalt Ihres Blog-Beitrags"
   },
   "products": {
     "product": {
@@ -335,9 +335,9 @@
     "comment_form": {
       "email": "E-Mail",
       "error": "Kommentar konnte nicht gepostet werden. Bitte beachte Folgendes:",
-      "heading": "Hinterlasse einen Kommentar",
+      "heading": "Kommentar hinterlassen",
       "message": "Nachricht",
-      "moderated": "Bitte beachte, dass Kommentare vor der Veröffentlichung freigegeben werden müssen.",
+      "moderated": "Bitte beachten Sie, dass Kommentare vor der Veröffentlichung freigegeben werden müssen.",
       "name": "Name",
       "post": "Kommentar posten",
       "success_moderated": "Kommentar gepostet, Moderation ausstehend",
@@ -356,8 +356,8 @@
       "packaging_damaged_short": "Verpackung beschädigt",
       "b_ware": "B-Ware",
       "discontinued": "Auslaufmodell",
-      "default_note_packaging": "Der Artikel ist ungebraucht und vollständig. Nur die Umverpackung hat Transport- oder Lagerspuren, deshalb der Preis.",
-      "default_note_b_ware": "Der Artikel wurde geprüft und funktioniert einwandfrei. Er kann leichte Gebrauchs- oder Lagerspuren haben, deshalb der Preis.",
+      "default_note_packaging": "Der Artikel ist ungebraucht und vollständig. Nur die Umverpackung weist Transport- oder Lagerspuren auf, daher der reduzierte Preis.",
+      "default_note_b_ware": "Der Artikel wurde geprüft und funktioniert einwandfrei. Er kann leichte Gebrauchs- oder Lagerspuren aufweisen, daher der reduzierte Preis.",
       "default_note_discontinued": "Auslaufmodell des Herstellers – neu und unbenutzt, wird nicht mehr nachproduziert."
     },
     "availability": {
@@ -387,7 +387,7 @@
     "price": {
       "shipping_note_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
       "shipping_note": "zzgl. Versandkosten",
-      "you_save": "Du sparst {{ amount }}"
+      "you_save": "Sie sparen {{ amount }}"
     },
     "usp": {
       "phone_label": "Telefon"

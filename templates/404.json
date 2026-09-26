@@ -132,7 +132,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Entdecke etwas Neues</p>",
+                "text": "<p>Aktuelle Angebote</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",

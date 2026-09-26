@@ -2203,7 +2203,7 @@
         "type": "text",
         "id": "mahando_search_placeholder",
         "label": "Platzhaltertext",
-        "default": "Wonach suchst du? z. B. Tablet, Bohrschrauber, Puzzle …"
+        "default": "Suchbegriff, Artikelnummer oder EAN eingeben …"
       },
       {
         "type": "header",
@@ -2307,7 +2307,7 @@
         "id": "mahando_disposal_text",
         "label": "Entsorgungshinweis Elektrogeräte/Batterien",
         "info": "Wird auf Produktseiten mit dem Tag „elektro“ oder „akku“ angezeigt.",
-        "default": "<p><strong>Altgeräte und Batterien (ElektroG/BattG):</strong> Elektrogeräte, Akkus und Batterien gehören nicht in den Hausmüll. Du kannst sie kostenlos bei uns oder bei kommunalen Sammelstellen zurückgeben. Akkus und Batterien vor der Rückgabe entnehmen.</p>"
+        "default": "<p><strong>Altgeräte und Batterien (ElektroG/BattG):</strong> Elektrogeräte, Akkus und Batterien gehören nicht in den Hausmüll. Sie können sie kostenlos bei uns oder bei kommunalen Sammelstellen zurückgeben. Akkus und Batterien bitte vor der Rückgabe entnehmen.</p>"
       }
     ]
   }

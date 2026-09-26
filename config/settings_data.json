@@ -142,7 +142,7 @@
     "mahando_badge_neutral_text": "#1D2B33",
     "mahando_badge_neutral_border": "#B9C8CF",
     "mahando_search_bar": true,
-    "mahando_search_placeholder": "Wonach suchst du? z. B. Tablet, Bohrschrauber, Puzzle …"
+    "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …"
   },
   "presets": {
     "Mahando": {
@@ -278,7 +278,7 @@
       "mahando_badge_neutral_text": "#1D2B33",
       "mahando_badge_neutral_border": "#B9C8CF",
       "mahando_search_bar": true,
-      "mahando_search_placeholder": "Wonach suchst du? z. B. Tablet, Bohrschrauber, Puzzle …"
+      "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …"
     }
   }
 }

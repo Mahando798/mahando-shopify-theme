@@ -43,10 +43,10 @@
         "hero_product_3"
       ],
       "settings": {
-        "eyebrow": "Markenware · Neu & refurbished",
-        "heading": "Technik, Haushalt und Spielzeug – direkt ab Lager.",
-        "text": "<p>Mehr als 200.000 Kunden haben bereits über Amazon, eBay & Kaufland bei uns gekauft.<br/>Breites Sortiment, schneller Versand & transparente Bestände!</p>",
-        "button_label": "Bestseller entdecken",
+        "eyebrow": "Markenware · Ab Lager Büren",
+        "heading": "Ihr Onlinehändler für Technik, Haushalt und Spielzeug",
+        "text": "<p>Mehr als 200.000 Verkäufe über Amazon, eBay und Kaufland. Ab sofort auch direkt: gleiches Sortiment, gleiche Leistungen, ohne Marktplatzgebühren. Alle Artikel sind bei uns auf Lager in Büren und werden innerhalb von 1–3 Werktagen versendet.</p>",
+        "button_label": "Bestseller ansehen",
         "button_link": "shopify://collections/bestseller",
         "button_label_2": "Alle Kategorien",
         "button_link_2": "shopify://collections",
@@ -790,7 +790,7 @@
           "settings": {
             "icon": "box",
             "heading": "Ware liegt bei uns",
-            "text": "Alles, was du siehst, liegt in unserem Lager in Büren. Bestellungen an Werktagen gehen in der Regel am nächsten Werktag raus."
+            "text": "Alle Artikel befinden sich in unserem Lager in Büren. Bestellungen an Werktagen werden in der Regel am nächsten Werktag versendet."
           }
         },
         "why_2": {
@@ -798,7 +798,7 @@
           "settings": {
             "icon": "check",
             "heading": "Ehrliche Zustandsangabe",
-            "text": "Standard ist neu und original verpackt. Ist ein Artikel im Sale reduziert, steht der Grund dabei: Auslaufmodell, beschädigte Verpackung oder B-Ware."
+            "text": "Standard ist Neuware in Originalverpackung. Reduzierte Artikel im Sale sind entsprechend gekennzeichnet: Auslaufmodell, beschädigte Verpackung oder B-Ware."
           }
         },
         "why_3": {
@@ -806,7 +806,7 @@
           "settings": {
             "icon": "headset",
             "heading": "Persönlicher Service",
-            "text": "Mo–Fr 8–15 Uhr per Telefon und E-Mail. Rücksendungen meldest du in zwei Minuten über das Formular im Kundenkonto an."
+            "text": "Mo–Fr 8–15 Uhr per Telefon und E-Mail. Rücksendungen melden Sie über das Formular im Kundenkonto an."
           }
         }
       },
@@ -895,7 +895,7 @@
             "idealo_text": {
               "type": "text",
               "settings": {
-                "text": "<p>Nach dem Start listen wir den Shop bei idealo. Das Bewertungs-Badge wird hier eingebunden.</p>",
+                "text": "<p>Unsere Kundenbewertungen bei idealo werden hier nach dem Start des Shops eingebunden.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -973,7 +973,7 @@
             "nl_heading": {
               "type": "text",
               "settings": {
-                "text": "<h3>Neuheiten und Sale zuerst erfahren</h3>",
+                "text": "<h3>Newsletter</h3>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -998,7 +998,7 @@
             "nl_text": {
               "type": "text",
               "settings": {
-                "text": "<p>Neue Artikel und reduzierte Einzelstücke bequem per E-Mail, bevor sie weg sind.</p>",
+                "text": "<p>Informationen zu neuen Artikeln und Angeboten per E-Mail.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1055,7 +1055,7 @@
             "nl_hint": {
               "type": "text",
               "settings": {
-                "text": "<p>Abmeldung jederzeit möglich. Hinweise in der Datenschutzerklärung.</p>",
+                "text": "<p>Abmeldung jederzeit möglich. Hinweise zum Datenschutz finden Sie in der Datenschutzerklärung.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",

@@ -99,7 +99,7 @@
             "text_nl_text": {
               "type": "text",
               "settings": {
-                "text": "<p>Neuheiten und Sale-Artikel zuerst erfahren.</p>",
+                "text": "<p>Informationen zu neuen Artikeln und Angeboten per E-Mail.</p>",
                 "width": "100%",
                 "type_preset": "paragraph",
                 "alignment": "left"
@@ -126,7 +126,7 @@
             "text_nl_hint": {
               "type": "text",
               "settings": {
-                "text": "<p>Abmeldung jederzeit möglich. Hinweise in der Datenschutzerklärung.</p>",
+                "text": "<p>Abmeldung jederzeit möglich. Hinweise zum Datenschutz finden Sie in der Datenschutzerklärung.</p>",
                 "width": "100%",
                 "type_preset": "custom",
                 "font_size": "0.75rem",
