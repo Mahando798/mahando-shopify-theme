@@ -132,3 +132,31 @@ product-card a.contents p[role="heading"] {
   max-width: 100%;
   height: auto;
 }
+
+/* Kategorieseite: Filter als Karte links, Karten mit gleicher Höhe und Button am Fuß */
+@media screen and (min-width: 750px) {
+  .facets-block-wrapper--vertical .facets--vertical:not(.facets--drawer) {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 18px 16px;
+  }
+}
+
+.facets--horizontal .facets--filters-title {
+  font-family: var(--font-heading--family);
+}
+
+/* Produktkarten: Bildfläche leicht abgesetzt, Titel reserviert zwei Zeilen, Button unten bündig */
+.product-card .card-gallery {
+  background: #f5f8f9;
+}
+
+product-card a.contents p[role="heading"] {
+  min-height: calc(2 * 1.2em);
+}
+
+.product-card__content .mahando-card-buy {
+  position: relative;
+  z-index: 2;
+}

@@ -374,9 +374,9 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "{{ settings.color_palette.color3 }}",
-            "border_radius": 12,
+            "border_radius": 14,
             "padding-block-start": 12,
-            "padding-block-end": 14,
+            "padding-block-end": 12,
             "padding-inline-start": 12,
             "padding-inline-end": 12
           },
@@ -386,10 +386,7 @@
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 8,
+                "border_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -400,13 +397,9 @@
             "card-type": {
               "type": "mahando-product-type",
               "settings": {
-                "source": "type",
-                "padding-block-start": 8,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "source": "vendor",
+                "padding-block-start": 8
+              }
             },
             "card-title": {
               "type": "product-title",
@@ -421,14 +414,8 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
                 "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 0
               },
               "blocks": {}
             },
@@ -441,16 +428,8 @@
                 "type_preset": "h5",
                 "width": "100%",
                 "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "text_color": "",
                 "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 0
               },
               "blocks": {}
             },
@@ -458,12 +437,17 @@
               "type": "mahando-availability",
               "settings": {
                 "show_delivery_time": true,
-                "padding-block-start": 6,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "padding-block-start": 6
+              }
+            },
+            "card-button": {
+              "type": "mahando-card-button",
+              "settings": {
+                "label": "In den Warenkorb",
+                "label_options": "Optionen wählen",
+                "style": "secondary",
+                "show_icon": false
+              }
             }
           },
           "block_order": [
@@ -471,7 +455,8 @@
             "card-type",
             "card-title",
             "card-price",
-            "card-availability"
+            "card-availability",
+            "card-button"
           ]
         }
       },
@@ -660,9 +645,9 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "{{ settings.color_palette.color3 }}",
-            "border_radius": 12,
+            "border_radius": 14,
             "padding-block-start": 12,
-            "padding-block-end": 14,
+            "padding-block-end": 12,
             "padding-inline-start": 12,
             "padding-inline-end": 12
           },
@@ -672,10 +657,7 @@
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 8,
+                "border_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -686,13 +668,9 @@
             "card-type": {
               "type": "mahando-product-type",
               "settings": {
-                "source": "type",
-                "padding-block-start": 8,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "source": "vendor",
+                "padding-block-start": 8
+              }
             },
             "card-title": {
               "type": "product-title",
@@ -707,14 +685,8 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
                 "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 0
               },
               "blocks": {}
             },
@@ -727,16 +699,8 @@
                 "type_preset": "h5",
                 "width": "100%",
                 "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "text_color": "",
                 "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 0
               },
               "blocks": {}
             },
@@ -744,12 +708,17 @@
               "type": "mahando-availability",
               "settings": {
                 "show_delivery_time": true,
-                "padding-block-start": 6,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "padding-block-start": 6
+              }
+            },
+            "card-button": {
+              "type": "mahando-card-button",
+              "settings": {
+                "label": "In den Warenkorb",
+                "label_options": "Optionen wählen",
+                "style": "secondary",
+                "show_icon": false
+              }
             }
           },
           "block_order": [
@@ -757,7 +726,8 @@
             "card-type",
             "card-title",
             "card-price",
-            "card-availability"
+            "card-availability",
+            "card-button"
           ]
         }
       },
