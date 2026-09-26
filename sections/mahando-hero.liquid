@@ -186,26 +186,32 @@
     color: rgb(255 255 255 / 0.82);
   }
 
-  .mahando-hero--teal .button:not(.button-secondary) {
-    background: #fff;
-    color: #0a7e83;
-    border-color: #fff;
-  }
-
   .mahando-hero--dark .button-secondary,
   .mahando-hero--teal .button-secondary,
   .mahando-hero--image .button-secondary {
-    background: transparent;
-    border-color: rgb(255 255 255 / 0.6);
-    color: #fff;
+    --button-background-color: transparent;
+    --button-color: #fff;
+    --button-border-color: rgb(255 255 255 / 0.6);
   }
 
   .mahando-hero--dark .button-secondary:hover,
   .mahando-hero--teal .button-secondary:hover,
   .mahando-hero--image .button-secondary:hover {
-    background: rgb(255 255 255 / 0.12);
-    border-color: #fff;
-    color: #fff;
+    --button-background-color: rgb(255 255 255 / 0.12);
+    --button-color: #fff;
+    --button-border-color: #fff;
+  }
+
+  .mahando-hero--teal .button:not(.button-secondary) {
+    --button-background-color: #fff;
+    --button-color: #0a7e83;
+    --button-border-color: #fff;
+  }
+
+  .mahando-hero--teal .button:not(.button-secondary):hover {
+    --button-background-color: #e9f6ee;
+    --button-color: #0a7e83;
+    --button-border-color: #e9f6ee;
   }
 
   .mahando-hero--dark .mahando-hero__card,
