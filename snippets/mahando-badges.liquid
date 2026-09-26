@@ -6,8 +6,8 @@
 
   Datenquellen:
   - Rabatt: Vergleichspreis (UVP) der ausgewählten Variante > Preis
-  - Zustand: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | auslaufmodell | neu)
-             oder Tags: verpackung-beschaedigt, b-ware, auslaufmodell
+  - Zustand: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | refurbished | auslaufmodell | neu)
+             oder Tags: verpackung-beschaedigt, b-ware, refurbished, auslaufmodell
   - Neu: Tag "neu" oder Anlagedatum jünger als settings.mahando_new_badge_days
   - Einzelstück: Tag "einzelstueck" oder Bestand genau 1 (nur bei einer Variante)
 
@@ -31,20 +31,16 @@
     endif
   endif
 
-  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-  if zustand == blank
-    for tag in product.tags
-      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
-        assign zustand = t
-        break
-      endif
-    endfor
-  endif
-  if zustand == 'verpackung-beschaedigt' or zustand == 'ovp-beschaedigt'
+  capture zustand
+    render 'mahando-zustand', product: product
+  endcapture
+  assign zustand = zustand | strip
+  if zustand == 'verpackung-beschaedigt'
     assign badge_list = badge_list | append: 'cond:verpackung|'
   elsif zustand == 'b-ware'
     assign badge_list = badge_list | append: 'cond:bware|'
+  elsif zustand == 'refurbished'
+    assign badge_list = badge_list | append: 'cond:refurbished|'
   elsif zustand == 'auslaufmodell'
     assign badge_list = badge_list | append: 'neutral:auslaufmodell|'
   endif
@@ -104,7 +100,7 @@
           </div>
         {%- when 'cond' -%}
           <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-condition">
-            {%- if value == 'bware' -%}{{ 'mahando.condition.b_ware' | t }}{%- else -%}{{ 'mahando.condition.packaging_damaged_short' | t }}{%- endif -%}
+            {%- if value == 'bware' -%}{{ 'mahando.condition.b_ware' | t }}{%- elsif value == 'refurbished' -%}{{ 'mahando.condition.refurbished' | t }}{%- else -%}{{ 'mahando.condition.packaging_damaged_short' | t }}{%- endif -%}
           </div>
         {%- when 'new' -%}
           <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-new">{{ 'mahando.badges.new' | t }}</div>

@@ -1,0 +1,35 @@
+{%- doc -%}
+  Gibt den normalisierten Zustands-Schlüssel eines Produkts aus (ohne Umbrüche):
+  verpackung-beschaedigt | b-ware | refurbished | auslaufmodell | leer (= neu, original verpackt).
+  Quelle: Metafeld mahando.zustand, sonst gleichnamige Tags. Aufruf per capture:
+    {%- capture zustand -%}{%- render 'mahando-zustand', product: product -%}{%- endcapture -%}
+
+  @param {object} product - Produkt
+{%- enddoc -%}
+{%- liquid
+  assign key = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+  if key == 'ovp-beschaedigt'
+    assign key = 'verpackung-beschaedigt'
+  elsif key == 'generalueberholt' or key == 'refurbed'
+    assign key = 'refurbished'
+  endif
+  if key == blank
+    for tag in product.tags
+      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell' or t == 'refurbished'
+        assign key = t
+        break
+      elsif t == 'ovp-beschaedigt'
+        assign key = 'verpackung-beschaedigt'
+        break
+      elsif t == 'generalueberholt'
+        assign key = 'refurbished'
+        break
+      endif
+    endfor
+  endif
+  if key == 'neu'
+    assign key = ''
+  endif
+  echo key
+-%}

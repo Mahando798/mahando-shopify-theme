@@ -8,21 +8,17 @@
   assign product = closest.product
   assign variant = product.selected_or_first_available_variant
 
-  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-  if zustand == blank
-    for tag in product.tags
-      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
-      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
-        assign zustand = t
-        break
-      endif
-    endfor
-  endif
+  capture zustand
+    render 'mahando-zustand', product: product
+  endcapture
+  assign zustand = zustand | strip
   case zustand
-    when 'verpackung-beschaedigt', 'ovp-beschaedigt'
+    when 'verpackung-beschaedigt'
       assign zustand_label = 'mahando.condition.packaging_damaged' | t
     when 'b-ware'
       assign zustand_label = 'mahando.condition.b_ware' | t
+    when 'refurbished'
+      assign zustand_label = 'mahando.condition.refurbished' | t
     when 'auslaufmodell'
       assign zustand_label = 'mahando.condition.discontinued' | t
     else
