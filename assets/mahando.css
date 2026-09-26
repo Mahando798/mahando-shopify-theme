@@ -201,3 +201,50 @@ product-card a.contents p[role="heading"] {
   position: relative;
   z-index: 2;
 }
+
+/* Rechtstexte (Versand, Widerruf, AGB, Datenschutz, Impressum): lesbare Spalte, klare Zwischenüberschriften */
+.shopify-policy__container {
+  max-width: 76ch;
+  margin-inline: auto;
+  padding-block: 40px 72px;
+}
+
+.shopify-policy__title h1 {
+  font-size: var(--font-size--2xl);
+  margin-bottom: 8px;
+}
+
+.shopify-policy__title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 14px 0 28px;
+  border-radius: 2px;
+  background: var(--color-primary-button-background, #0a7e83);
+}
+
+.shopify-policy__body {
+  line-height: 1.65;
+  font-size: var(--font-size--md);
+}
+
+.shopify-policy__body h2 {
+  font-size: var(--font-size--lg);
+  margin: 1.8em 0 0.5em;
+}
+
+.shopify-policy__body h3 {
+  font-size: var(--font-size--md);
+  margin: 1.4em 0 0.4em;
+}
+
+.shopify-policy__body p {
+  margin: 0 0 1em;
+}
+
+.shopify-policy__body a {
+  color: var(--color-primary-button-background, #0a7e83);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

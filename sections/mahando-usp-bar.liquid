@@ -106,6 +106,22 @@
     border-inline-start: 1px solid rgb(255 255 255 / 0.25);
   }
 
+  /* Verteilte Leiste: alle Einträge gleichmäßig über die volle Breite */
+  @media screen and (min-width: 750px) {
+    .mahando-usp__inner--spread {
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mahando-usp__inner--spread .mahando-usp__list {
+      display: contents;
+    }
+
+    .mahando-usp__inner--spread .mahando-usp__contact {
+      margin-inline-start: 0;
+    }
+  }
+
   .mahando-usp__phone {
     color: inherit;
     font-weight: 700;
@@ -142,7 +158,8 @@
       "label": "Ausrichtung",
       "options": [
         { "value": "left", "label": "Vorteile links, Kontakt rechts" },
-        { "value": "center", "label": "Alles zentriert" }
+        { "value": "center", "label": "Alles zentriert" },
+        { "value": "spread", "label": "Gleichmäßig über die volle Breite" }
       ],
       "default": "left"
     },
