@@ -2275,6 +2275,18 @@
         "default": "300 €"
       },
       {
+        "type": "number",
+        "id": "mahando_free_shipping_amount",
+        "label": "Versandkostenfrei ab (Betrag in Euro, für die Fortschrittsanzeige)",
+        "default": 300
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_shipping_bar",
+        "label": "Fortschrittsanzeige zum versandkostenfreien Betrag im Warenkorb",
+        "default": true
+      },
+      {
         "type": "paragraph",
         "content": "Die echten Versandkosten werden in den Shopify-Versandprofilen eingerichtet. Diese Texte dienen nur der Anzeige im Theme."
       },

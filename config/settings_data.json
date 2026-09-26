@@ -55,7 +55,7 @@
     "cart_type": "drawer",
     "cart_price_font": "body",
     "show_cart_note": false,
-    "show_add_discount_code": true,
+    "show_add_discount_code": false,
     "icon_stroke": "default",
     "input_border_width": 1,
     "inputs_border_radius": 8,
@@ -143,7 +143,9 @@
     "mahando_badge_neutral_border": "#B9C8CF",
     "mahando_search_bar": true,
     "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …",
-    "auto_open_cart_drawer": true
+    "auto_open_cart_drawer": true,
+    "mahando_free_shipping_amount": 300,
+    "mahando_shipping_bar": true
   },
   "presets": {
     "Mahando": {

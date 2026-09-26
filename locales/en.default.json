@@ -424,6 +424,11 @@
       "shipping_note": "plus shipping",
       "you_save": "You save {{ amount }}"
     },
+    "cart": {
+      "shipping_bar_remaining_html": "Add <strong>{{ amount }}</strong> more for free shipping",
+      "shipping_bar_reached": "Free shipping – your order ships at no shipping cost",
+      "shipping_bar_note": "Applies to deliveries within Germany from {{ threshold }} order value."
+    },
     "usp": {
       "phone_label": "Phone"
     }

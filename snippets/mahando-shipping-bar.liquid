@@ -1,0 +1,111 @@
+{%- doc -%}
+  Fortschrittsanzeige zum versandkostenfreien Betrag (Deutschland) im Warenkorb-Drawer und auf der Warenkorbseite.
+  Schwelle: Theme-Einstellung mahando_free_shipping_amount (Euro). Vergleichsbasis ist cart.total_price
+  (Zwischensumme nach Rabatten, vor Versand). Wird mit dem Warenkorb-Abschnitt automatisch neu gerendert.
+
+  @param {string} [context] - 'drawer' oder 'page' (nur Klassen)
+{%- enddoc -%}
+
+{%- liquid
+  assign threshold_eur = settings.mahando_free_shipping_amount | default: 0
+  assign threshold = threshold_eur | times: 100
+-%}
+
+{%- if settings.mahando_shipping_bar and threshold > 0 and cart.item_count > 0 -%}
+  {%- liquid
+    assign remaining = threshold | minus: cart.total_price
+    assign percent = cart.total_price | times: 100.0 | divided_by: threshold | round
+    if percent > 100
+      assign percent = 100
+    endif
+    assign threshold_money = threshold | money
+    assign remaining_money = remaining | money
+  -%}
+  <div
+    class="mahando-shipbar mahando-shipbar--{{ context | default: 'drawer' }}{% if remaining <= 0 %} mahando-shipbar--reached{% endif %}"
+    role="status"
+    aria-live="polite"
+  >
+    <p class="mahando-shipbar__text">
+      {%- if remaining > 0 -%}
+        {{ 'mahando.cart.shipping_bar_remaining_html' | t: amount: remaining_money, threshold: threshold_money }}
+      {%- else -%}
+        {% render 'mahando-icon', icon: 'check', class: 'mahando-shipbar__icon' %}
+        {{ 'mahando.cart.shipping_bar_reached' | t }}
+      {%- endif -%}
+    </p>
+    <div class="mahando-shipbar__track" aria-hidden="true">
+      <span class="mahando-shipbar__fill" style="width: {{ percent }}%;"></span>
+    </div>
+    <p class="mahando-shipbar__note">{{ 'mahando.cart.shipping_bar_note' | t: threshold: threshold_money }}</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-shipbar {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #eef3f5;
+    font-size: var(--font-size--xs);
+    line-height: 1.35;
+  }
+
+  .mahando-shipbar--reached {
+    background: #e9f6ee;
+  }
+
+  .mahando-shipbar__text {
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mahando-shipbar__text strong {
+    font-weight: 700;
+  }
+
+  .mahando-shipbar__icon {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    color: #157a45;
+  }
+
+  .mahando-shipbar__track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgb(29 43 51 / 0.12);
+    overflow: hidden;
+  }
+
+  .mahando-shipbar__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--color-primary-button-background, #0a7e83);
+    transition: width 0.4s ease;
+  }
+
+  .mahando-shipbar--reached .mahando-shipbar__fill {
+    background: #157a45;
+  }
+
+  .mahando-shipbar__note {
+    margin: 0;
+    font-size: var(--font-size--2xs);
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-shipbar--drawer {
+    flex: none;
+    margin: 0 var(--cart-drawer-padding, var(--padding-lg)) 8px;
+  }
+
+  .mahando-shipbar--page {
+    margin: 0 0 16px;
+  }
+{% endstylesheet %}
