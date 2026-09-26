@@ -495,7 +495,7 @@
                     "versandtext": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Versand mit DHL oder GLS aus eigenem Lager in Deutschland. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendungen melden Sie über das Formular im Kundenkonto an; das Rücksendelabel erhalten Sie per E-Mail.</p>",
+                        "text": "<p>Versand aus eigenem Lager in Deutschland, in der Regel mit DHL; hochwertige oder sperrige Artikel liefern wir per Spedition. Deutschland: 4,99 € pro Bestellung, ab 300 € Bestellwert versandkostenfrei. EU-Länder: 13,99 €.</p><p>14 Tage Widerrufsrecht. Den Ablauf einer Rücksendung finden Sie in der Widerrufsbelehrung.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "type_preset": "custom",

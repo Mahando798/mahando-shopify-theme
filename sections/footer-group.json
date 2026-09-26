@@ -38,7 +38,7 @@
             "text_adresse": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Marco Haase · Mahando</strong><br>Silbeker Weg 45<br>33142 Büren<br>Tel. +49 1575 4851510 · Mo–Fr 8–15 Uhr<br>marco@mahando.de</p>",
+                "text": "<p><strong>Marco Haase · Mahando</strong><br>Silbeker Weg 45<br>33142 Büren<br>Tel. +49 1575 4851510 · Mo–Fr 8–15 Uhr<br>support@mahando.de</p>",
                 "width": "100%",
                 "type_preset": "paragraph",
                 "alignment": "left"
