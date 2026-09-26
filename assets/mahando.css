@@ -133,13 +133,54 @@ product-card a.contents p[role="heading"] {
   height: auto;
 }
 
-/* Kategorieseite: Filter als Karte links, Karten mit gleicher Höhe und Button am Fuß */
+/* Kategorieseite: schmale Filterkarte links (2 von 12 Spalten), vier Karten je Reihe */
 @media screen and (min-width: 750px) {
   .facets-block-wrapper--vertical .facets--vertical:not(.facets--drawer) {
     background: var(--color-background);
     border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 18px 16px;
+    border-radius: 14px;
+    padding: 12px 12px 6px;
+    font-size: var(--font-size--xs);
+  }
+
+  .facets--vertical:not(.facets--drawer) .facets__summary {
+    padding-block: 8px;
+    font-size: var(--font-size--xs);
+  }
+
+  .facets--vertical:not(.facets--drawer) .facets__label {
+    font-size: var(--font-size--xs);
+    font-weight: 600;
+  }
+
+  .facets--vertical:not(.facets--drawer) .facets__inputs-list label,
+  .facets--vertical:not(.facets--drawer) .facets__inputs-list .facets__status {
+    font-size: var(--font-size--xs);
+  }
+
+  .facets--vertical:not(.facets--drawer) .facets__panel-content {
+    padding-block: 2px 10px;
+  }
+
+  .facets--vertical:not(.facets--drawer) .price-facet__input {
+    font-size: var(--font-size--xs);
+    padding-block: 6px;
+  }
+
+  .main-collection-grid .product-grid--grid:not([product-grid-view='zoom-out']),
+  .main-search-grid .product-grid--grid:not([product-grid-view='zoom-out']) {
+    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .collection-wrapper {
+    --facets-vertical-col-width: 4;
+  }
+
+  .main-collection-grid .product-grid--grid:not([product-grid-view='zoom-out']),
+  .main-search-grid .product-grid--grid:not([product-grid-view='zoom-out']) {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
   }
 }
 
