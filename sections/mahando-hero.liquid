@@ -3,11 +3,27 @@
   (Bild, Titel, Untertitel, Preis) als "Angebote der Woche". Ruhige, helle Fläche mit Rahmen.
 {%- endcomment -%}
 
-{% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
+{%- liquid
+  assign hero_style = section.settings.style | default: 'light'
+  case hero_style
+    when 'dark'
+      assign hero_bg = '#1d2b33'
+    when 'teal'
+      assign hero_bg = '#0a7e83'
+    when 'image'
+      assign hero_bg = '#1d2b33'
+    else
+      assign hero_bg = section.settings.background_color
+  endcase
+  if hero_style == 'image' and section.settings.background_image == blank
+    assign hero_style = 'dark'
+  endif
+-%}
 
-<div class="section-background color-custom-{{ section.id }}"></div>
+{% render 'contrast-override', background_color: hero_bg, section_id: section.id %}
+
 <div
-  class="mahando-hero-section section section--page-width color-custom-{{ section.id }} spacing-style"
+  class="mahando-hero-section section section--page-width spacing-style"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
   {%- liquid
@@ -18,7 +34,18 @@
       endif
     endfor
   -%}
-  <div class="mahando-hero{% if visible_cards == 0 %} mahando-hero--single{% endif %}">
+  <div class="mahando-hero mahando-hero--{{ hero_style }} color-custom-{{ section.id }}{% if visible_cards == 0 %} mahando-hero--single{% endif %}">
+    {%- if hero_style == 'image' -%}
+      {{
+        section.settings.background_image
+        | image_url: width: 2000
+        | image_tag: loading: 'eager', class: 'mahando-hero__bg', alt: '', widths: '900, 1400, 2000', sizes: '(min-width: 1400px) 1320px, 100vw'
+      }}
+      <span class="mahando-hero__overlay" style="opacity: {{ section.settings.overlay_opacity | default: 70 | divided_by: 100.0 }};"></span>
+    {%- endif -%}
+    {%- if section.settings.show_waves and hero_style != 'light' -%}
+      <img class="mahando-hero__waves" src="{{ 'mahando-logo-mark.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" width="231" height="101">
+    {%- endif -%}
     <div class="mahando-hero__content">
       {%- if section.settings.eyebrow != blank -%}
         <p class="mahando-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -99,6 +126,115 @@
 
   .mahando-hero--single {
     grid-template-columns: 1fr;
+  }
+
+  /* Dunkle, türkise und Bild-Varianten */
+  .mahando-hero--dark,
+  .mahando-hero--teal,
+  .mahando-hero--image {
+    position: relative;
+    overflow: hidden;
+    border-color: transparent;
+    isolation: isolate;
+  }
+
+  .mahando-hero--teal {
+    background: linear-gradient(135deg, #0a7e83 0%, #0b5f66 100%);
+  }
+
+  .mahando-hero--image {
+    background: #1d2b33;
+  }
+
+  .mahando-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .mahando-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #10181e 0%, #10181e 45%, rgb(16 24 30 / 0.55) 100%);
+    z-index: -1;
+  }
+
+  .mahando-hero__waves {
+    position: absolute;
+    right: -3%;
+    bottom: -14%;
+    width: min(58%, 680px);
+    height: auto;
+    opacity: 0.28;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .mahando-hero--single .mahando-hero__waves {
+    width: min(48%, 640px);
+  }
+
+  .mahando-hero--dark .mahando-hero__text,
+  .mahando-hero--teal .mahando-hero__text,
+  .mahando-hero--image .mahando-hero__text,
+  .mahando-hero--dark .mahando-eyebrow,
+  .mahando-hero--teal .mahando-eyebrow,
+  .mahando-hero--image .mahando-eyebrow {
+    color: rgb(255 255 255 / 0.82);
+  }
+
+  .mahando-hero--dark .button-secondary,
+  .mahando-hero--teal .button-secondary,
+  .mahando-hero--image .button-secondary {
+    --button-background-color: transparent;
+    --button-color: #fff;
+    --button-border-color: rgb(255 255 255 / 0.6);
+  }
+
+  .mahando-hero--dark .button-secondary:hover,
+  .mahando-hero--teal .button-secondary:hover,
+  .mahando-hero--image .button-secondary:hover {
+    --button-background-color: rgb(255 255 255 / 0.12);
+    --button-color: #fff;
+    --button-border-color: #fff;
+  }
+
+  .mahando-hero--teal .button:not(.button-secondary) {
+    --button-background-color: #fff;
+    --button-color: #0a7e83;
+    --button-border-color: #fff;
+  }
+
+  .mahando-hero--teal .button:not(.button-secondary):hover {
+    --button-background-color: #e9f6ee;
+    --button-color: #0a7e83;
+    --button-border-color: #e9f6ee;
+  }
+
+  .mahando-hero--dark .mahando-hero__card,
+  .mahando-hero--teal .mahando-hero__card,
+  .mahando-hero--image .mahando-hero__card {
+    background: #fff;
+    color: #1d2b33;
+    border-color: rgb(255 255 255 / 0.35);
+  }
+
+  .mahando-hero--dark .mahando-hero__card-text small,
+  .mahando-hero--teal .mahando-hero__card-text small,
+  .mahando-hero--image .mahando-hero__card-text small,
+  .mahando-hero--dark .mahando-hero__card-price .compare-at-price,
+  .mahando-hero--teal .mahando-hero__card-price .compare-at-price,
+  .mahando-hero--image .mahando-hero__card-price .compare-at-price {
+    color: #6b7a83;
+  }
+
+  .mahando-hero--dark .mahando-hero__card-image,
+  .mahando-hero--teal .mahando-hero__card-image,
+  .mahando-hero--image .mahando-hero__card-image {
+    background: #f5f8f9;
   }
 
   .mahando-hero__heading {
@@ -278,6 +414,40 @@
     {
       "type": "header",
       "content": "t:content.colors"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Darstellung",
+      "options": [
+        { "value": "light", "label": "Hell (weiße Karte)" },
+        { "value": "dark", "label": "Dunkel" },
+        { "value": "teal", "label": "Türkis" },
+        { "value": "image", "label": "Foto mit dunkler Überlagerung" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Hintergrundfoto (bei „Foto“)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Abdunklung des Fotos",
+      "min": 30,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "show_waves",
+      "label": "Logo-Wellen als Grafik einblenden",
+      "info": "Nur bei Dunkel, Türkis und Foto",
+      "default": true
     },
     {
       "type": "color",
