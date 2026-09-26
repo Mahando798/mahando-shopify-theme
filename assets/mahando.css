@@ -209,6 +209,10 @@ product-card a.contents p[role="heading"] {
   padding-block: 40px 72px;
 }
 
+.shopify-policy__title {
+  text-align: start;
+}
+
 .shopify-policy__title h1 {
   font-size: var(--font-size--2xl);
   margin-bottom: 8px;
