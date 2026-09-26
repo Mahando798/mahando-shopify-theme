@@ -1,0 +1,132 @@
+{%- doc -%}
+  Abschnittstitel mit optionaler Dachzeile und Anker-ID (z. B. „beschreibung“ als Sprungziel
+  für „Mehr Details anzeigen“). Verwendet die gemeinsamen Klassen aus assets/mahando.css.
+{%- enddoc -%}
+
+{%- liquid
+  assign anchor = block.settings.anchor | strip | remove: '#'
+  assign level = block.settings.level | default: 'h2'
+-%}
+
+{%- if block.settings.heading != blank -%}
+  <div
+    class="mahando-section-head mahando-section-head--block spacing-style"
+    {% if anchor != blank %}id="{{ anchor }}"{% endif %}
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.eyebrow != blank -%}
+      <p class="mahando-eyebrow">{{ block.settings.eyebrow }}</p>
+    {%- endif -%}
+    <{{ level }} class="mahando-section-head__title {{ block.settings.size }}">{{ block.settings.heading }}</{{ level }}>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-section-head--block {
+    margin-bottom: 0;
+    scroll-margin-top: calc(var(--header-height, 0px) + 24px);
+  }
+
+  .mahando-section-head__title {
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Abschnittstitel (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Dachzeile",
+      "default": "Beschreibung"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Produktbeschreibung"
+    },
+    {
+      "type": "select",
+      "id": "level",
+      "label": "HTML-Ebene",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Größe",
+      "options": [
+        { "value": "h2", "label": "Groß" },
+        { "value": "h3", "label": "Mittel" },
+        { "value": "h4", "label": "Klein" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anker-ID",
+      "info": "Sprungziel ohne #, z. B. beschreibung"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Abschnittstitel (Mahando)",
+      "category": "t:categories.basic"
+    }
+  ]
+}
+{% endschema %}

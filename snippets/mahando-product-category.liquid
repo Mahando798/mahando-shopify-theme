@@ -1,0 +1,77 @@
+{%- doc -%}
+  Ermittelt die Kategorie eines Produkts über das Hauptmenü: der erste Menüpunkt (und ggf. Unterpunkt),
+  dessen Kollektion das Produkt enthält. Fällt sonst auf den Produkttyp zurück.
+
+  @param {object} product - Produkt
+  @param {string} [format] - 'links' (Kategorie › Unterkategorie als Links), 'text' (nur Text),
+                             'breadcrumb' (<li>-Elemente) oder 'chips' (Pills). Standard: 'links'
+  @param {string} [menu] - Handle des Menüs, Standard: main-menu
+{%- enddoc -%}
+
+{%- liquid
+  assign fmt = format | default: 'links'
+  assign menu_handle = menu | default: 'main-menu'
+  assign parent_title = ''
+  assign parent_url = ''
+  assign child_title = ''
+  assign child_url = ''
+
+  if product != blank
+    for link in linklists[menu_handle].links
+      if link.type != 'collection_link' or link.object == blank
+        continue
+      endif
+      assign found = false
+      for c in product.collections
+        if c.handle == link.object.handle
+          assign found = true
+          break
+        endif
+      endfor
+      if found
+        assign parent_title = link.title
+        assign parent_url = link.url
+        for sub in link.links
+          if sub.type != 'collection_link' or sub.object == blank
+            continue
+          endif
+          for c in product.collections
+            if c.handle == sub.object.handle
+              assign child_title = sub.title
+              assign child_url = sub.url
+              break
+            endif
+          endfor
+          if child_title != blank
+            break
+          endif
+        endfor
+        break
+      endif
+    endfor
+
+    if parent_title == blank and product.type != blank
+      assign parent_title = product.type
+      assign parent_url = product.type | url_for_type
+    endif
+  endif
+-%}
+
+{%- if parent_title != blank -%}
+  {%- case fmt -%}
+    {%- when 'text' -%}
+      {{ parent_title }}{% if child_title != blank %} › {{ child_title }}{% endif %}
+    {%- when 'breadcrumb' -%}
+      <li><a href="{{ parent_url }}">{{ parent_title }}</a></li>
+      {%- if child_title != blank -%}
+        <li><a href="{{ child_url }}">{{ child_title }}</a></li>
+      {%- endif -%}
+    {%- when 'chips' -%}
+      <a class="mahando-pchip" href="{{ parent_url }}">{{ parent_title }}</a>
+      {%- if child_title != blank -%}
+        <a class="mahando-pchip" href="{{ child_url }}">{{ child_title }}</a>
+      {%- endif -%}
+    {%- else -%}
+      <a href="{{ parent_url }}">{{ parent_title }}</a>{% if child_title != blank %} › <a href="{{ child_url }}">{{ child_title }}</a>{% endif %}
+  {%- endcase -%}
+{%- endif -%}

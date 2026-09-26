@@ -15,16 +15,21 @@ import { StandardEvents } from '@shopify/events';
 class MahandoProductMeta extends Component {
   connectedCallback() {
     super.connectedCallback();
-    const target = this.closest('[id*="ProductInformation-"], [id*="QuickAdd-"], product-card');
-    if (!target) return;
-    target.addEventListener(StandardEvents.productSelect, this.#handleProductSelect);
+    this.#target().addEventListener(StandardEvents.productSelect, this.#handleProductSelect);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    const target = this.closest('[id*="ProductInformation-"], [id*="QuickAdd-"], product-card');
-    if (!target) return;
-    target.removeEventListener(StandardEvents.productSelect, this.#handleProductSelect);
+    this.#target().removeEventListener(StandardEvents.productSelect, this.#handleProductSelect);
+  }
+
+  /**
+   * Innerhalb der Produktsektion wird direkt dort gelauscht; außerhalb (z. B. Tabelle „Produktdetails“
+   * in einer eigenen Sektion) am Dokument – das Event steigt auf.
+   * @returns {EventTarget}
+   */
+  #target() {
+    return this.closest('[id*="ProductInformation-"], [id*="QuickAdd-"], product-card') ?? document;
   }
 
   /** @param {CustomEvent & { promise: Promise<any> }} event */
@@ -36,6 +41,8 @@ class MahandoProductMeta extends Component {
         if (newProduct) this.dataset.productId = newProduct.id;
         if (detail.productId && detail.productId !== this.dataset.productId) return;
         if (!resource) return;
+        // Am Dokument lauschen mehrere Instanzen – nur die zum Produkt passende reagiert.
+        if (resource.product_id && String(resource.product_id) !== this.dataset.productId) return;
 
         this.#update(this.refs.skuItem, this.refs.sku, resource.sku);
         this.#update(this.refs.eanItem, this.refs.ean, resource.barcode);

@@ -1,0 +1,305 @@
+{%- doc -%}
+  Tabelle „Produktdetails“ (Vorbild: sfhandel.com): Hersteller, Artikelnummer, EAN, Kategorie, Zustand,
+  Verfügbarkeit, Versand, Gewicht. Artikelnummer, EAN und Gewicht folgen der gewählten Variante
+  (mahando-product-meta.js). Zeilen ohne Wert werden ausgelassen.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+
+  assign zustand = product.metafields.mahando.zustand | strip | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+  if zustand == blank
+    for tag in product.tags
+      assign t = tag | downcase | replace: ' ', '-' | replace: 'ä', 'ae'
+      if t == 'verpackung-beschaedigt' or t == 'b-ware' or t == 'auslaufmodell'
+        assign zustand = t
+        break
+      endif
+    endfor
+  endif
+  case zustand
+    when 'verpackung-beschaedigt', 'ovp-beschaedigt'
+      assign zustand_label = 'mahando.condition.packaging_damaged' | t
+    when 'b-ware'
+      assign zustand_label = 'mahando.condition.b_ware' | t
+    when 'auslaufmodell'
+      assign zustand_label = 'mahando.condition.discontinued' | t
+    else
+      assign zustand_label = 'mahando.condition.new' | t
+  endcase
+
+  assign threshold = settings.mahando_low_stock_threshold | default: 5
+  assign availability = 'mahando.availability.in_stock_plain' | t
+  assign availability_class = 'in_stock'
+  if product.available == false
+    assign availability = 'mahando.availability.out_of_stock' | t
+    assign availability_class = 'out_of_stock'
+  elsif variant.inventory_management == 'shopify' and variant.inventory_policy != 'continue'
+    if variant.inventory_quantity <= 0
+      assign availability = 'mahando.availability.out_of_stock' | t
+      assign availability_class = 'out_of_stock'
+    elsif variant.inventory_quantity <= threshold
+      assign availability = 'mahando.availability.low_stock' | t: count: variant.inventory_quantity
+      assign availability_class = 'low'
+    endif
+  endif
+
+  capture category
+    render 'mahando-product-category', product: product, format: 'links'
+  endcapture
+  assign category = category | strip
+-%}
+
+<script src="{{ 'mahando-product-meta.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+<mahando-product-meta
+  class="mahando-details spacing-style"
+  data-product-id="{{ product.id }}"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.heading != blank -%}
+    <h3 class="mahando-details__heading h6">{{ block.settings.heading }}</h3>
+  {%- endif -%}
+  <dl class="mahando-details__list">
+    {%- if block.settings.show_vendor and product.vendor != blank -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.product.vendor_label' | t }}</dt>
+        <dd><a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a></dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_sku -%}
+      <div class="mahando-details__row" ref="skuItem"{% if variant.sku == blank %} hidden{% endif %}>
+        <dt>{{ 'mahando.product.sku_label' | t }}</dt>
+        <dd ref="sku">{{ variant.sku }}</dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_ean -%}
+      <div class="mahando-details__row" ref="eanItem"{% if variant.barcode == blank %} hidden{% endif %}>
+        <dt>{{ 'mahando.product.ean_label' | t }}</dt>
+        <dd ref="ean">{{ variant.barcode }}</dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_category and category != blank -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.product.category_label' | t }}</dt>
+        <dd>{{ category }}</dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_condition -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.condition.label' | t }}</dt>
+        <dd>{{ zustand_label }}</dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_availability -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.product.availability_label' | t }}</dt>
+        <dd class="mahando-details__availability mahando-details__availability--{{ availability_class }}">{{ availability }}</dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_shipping and block.settings.shipping_text != blank -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.product.shipping_label' | t }}</dt>
+        <dd>
+          {%- if shop.shipping_policy.body != blank -%}
+            <a href="{{ shop.shipping_policy.url }}">{{ block.settings.shipping_text | replace: '{delivery}', settings.mahando_delivery_time }}</a>
+          {%- else -%}
+            {{ block.settings.shipping_text | replace: '{delivery}', settings.mahando_delivery_time }}
+          {%- endif -%}
+        </dd>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.show_weight and variant.weight > 0 -%}
+      <div class="mahando-details__row">
+        <dt>{{ 'mahando.product.weight_label' | t }}</dt>
+        <dd>{{ variant.weight | weight_with_unit: variant.weight_unit }}</dd>
+      </div>
+    {%- endif -%}
+  </dl>
+</mahando-product-meta>
+
+{% stylesheet %}
+  .mahando-details {
+    display: block;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-details__heading {
+    margin: 0 0 10px;
+  }
+
+  .mahando-details__list {
+    margin: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .mahando-details__row {
+    display: grid;
+    grid-template-columns: minmax(96px, 38%) 1fr;
+    gap: 12px;
+    padding: 9px 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mahando-details__row:first-child {
+    border-top: 0;
+  }
+
+  .mahando-details__row:nth-child(odd) {
+    background: rgb(var(--color-foreground-rgb) / 0.03);
+  }
+
+  .mahando-details__row dt {
+    font-weight: 600;
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-details__row dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .mahando-details__row a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .mahando-details__availability--in_stock {
+    color: #157a45;
+    font-weight: 600;
+  }
+
+  .mahando-details__availability--low {
+    color: #8a5306;
+    font-weight: 600;
+  }
+
+  .mahando-details__availability--out_of_stock {
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Produktdetails (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Produktdetails"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Hersteller",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Artikelnummer",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ean",
+      "label": "EAN",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "Kategorie",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_condition",
+      "label": "Zustand",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_availability",
+      "label": "Verfügbarkeit",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping",
+      "label": "Versand",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Versand-Text",
+      "info": "{delivery} = Lieferzeit aus den Theme-Einstellungen",
+      "default": "aus Deutschland, {delivery}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_weight",
+      "label": "Gewicht",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produktdetails (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

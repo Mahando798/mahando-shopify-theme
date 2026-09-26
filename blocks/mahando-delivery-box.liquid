@@ -1,0 +1,255 @@
+{%- doc -%}
+  Versand- und Lieferbox in der Kaufbox (Vorbild: sfhandel.com).
+  Serverseitig: Cut-off-Text und Lieferzeit aus den Theme-Einstellungen (Mahando).
+  Clientseitig (mahando-delivery.js): konkreter Versandtag (heute / nächster Werktag) und voraussichtliches
+  Lieferfenster in Werktagen, Wochenenden und bundesweite Feiertage (plus NRW) ausgenommen.
+  Bei nicht lieferbaren Artikeln bleibt die Box unsichtbar.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign available = true
+  if product != blank and product.available == false
+    assign available = false
+  endif
+  assign cutoff = block.settings.cutoff_hour | default: 13
+  assign min_days = block.settings.min_days | default: 1
+  assign max_days = block.settings.max_days | default: 3
+-%}
+
+{%- if available or request.design_mode -%}
+  <script src="{{ 'mahando-delivery.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+  <mahando-delivery
+    class="mahando-delivery spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    data-cutoff="{{ cutoff }}"
+    data-min-days="{{ min_days }}"
+    data-max-days="{{ max_days }}"
+    data-text-today="{{ block.settings.text_today | escape }}"
+    data-text-next="{{ block.settings.text_next | escape }}"
+    data-text-window="{{ block.settings.text_window | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="mahando-delivery__box">
+      {% render 'mahando-icon', icon: 'truck', class: 'mahando-delivery__icon' %}
+      <div class="mahando-delivery__body">
+        <strong class="mahando-delivery__title" ref="title">
+          {%- if settings.mahando_cutoff_text != blank -%}
+            {{ settings.mahando_cutoff_text }}
+          {%- else -%}
+            {{ block.settings.text_next }}
+          {%- endif -%}
+        </strong>
+        <span class="mahando-delivery__window" ref="window">
+          {%- if settings.mahando_delivery_time != blank -%}
+            {{ 'mahando.availability.delivery_time' | t: delivery: settings.mahando_delivery_time }}
+          {%- endif -%}
+        </span>
+        {%- if block.settings.note != blank -%}
+          <span class="mahando-delivery__note">{{ block.settings.note }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank -%}
+      <p class="mahando-delivery__cost">
+        {% render 'mahando-icon', icon: 'box', class: 'mahando-delivery__cost-icon' %}
+        {%- if shop.shipping_policy.body != blank -%}
+          <a href="{{ shop.shipping_policy.url }}">{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</a>
+        {%- else -%}
+          <span>{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+  </mahando-delivery>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-delivery {
+    display: block;
+    font-size: var(--font-size--sm);
+    line-height: 1.4;
+  }
+
+  .mahando-delivery__box {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #e9f6ee;
+    border: 1px solid #cfe9d9;
+    color: #1d2b33;
+  }
+
+  .mahando-delivery__icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: #157a45;
+  }
+
+  .mahando-delivery__body {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .mahando-delivery__title {
+    font-weight: 700;
+  }
+
+  .mahando-delivery__window {
+    font-weight: 600;
+  }
+
+  .mahando-delivery__note {
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-delivery__cost {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 0;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-delivery__cost-icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .mahando-delivery__cost a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lieferbox (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Cut-off-Text, Lieferzeit und Versandkosten kommen aus Theme-Einstellungen → Mahando. Die konkreten Daten berechnet der Browser (Werktage, Feiertage ausgenommen)."
+    },
+    {
+      "type": "range",
+      "id": "cutoff_hour",
+      "label": "Bestellschluss (Uhr)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "min_days",
+      "label": "Lieferzeit mindestens (Werktage)",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "max_days",
+      "label": "Lieferzeit höchstens (Werktage)",
+      "min": 1,
+      "max": 14,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "text_today",
+      "label": "Text: Versand heute",
+      "info": "{cutoff} = Bestellschluss",
+      "default": "Versand noch heute bei Bestellung bis {cutoff} Uhr"
+    },
+    {
+      "type": "text",
+      "id": "text_next",
+      "label": "Text: Versand am nächsten Werktag",
+      "info": "{day} = Wochentag und Datum",
+      "default": "Versand am {day}"
+    },
+    {
+      "type": "text",
+      "id": "text_window",
+      "label": "Text: Lieferfenster",
+      "info": "{from} und {to} = Datum",
+      "default": "Lieferung voraussichtlich {from} – {to}"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Hinweiszeile",
+      "default": "Versand aus Deutschland · gilt werktags bei Zahlungseingang und Verfügbarkeit"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_cost",
+      "label": "Versandkosten-Zeile anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lieferbox (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
