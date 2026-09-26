@@ -125,6 +125,7 @@
 {% stylesheet %}
   .mahando-details {
     display: block;
+    width: 100%;
     font-size: var(--font-size--sm);
   }
 
@@ -147,7 +148,12 @@
     border-top: 1px solid var(--color-border);
   }
 
-  .mahando-details__row:first-child {
+  .mahando-details__row[hidden] {
+    display: none;
+  }
+
+  .mahando-details__row:first-child,
+  .mahando-details__row[hidden] + .mahando-details__row {
     border-top: 0;
   }
 
