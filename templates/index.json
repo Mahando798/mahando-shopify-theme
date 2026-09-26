@@ -186,10 +186,10 @@
         "cat_beauty": {
           "type": "category",
           "settings": {
-            "collection": "beauty-wellness",
-            "title": "Beauty + Wellness",
-            "subtitle": "Haarpflege, Zahnpflege, Massage",
-            "icon": "drop",
+            "collection": "sport-freizeit",
+            "title": "Sport + Freizeit",
+            "subtitle": "Fußball, Fitness, Outdoor, Fanartikel",
+            "icon": "ball",
             "highlight": false
           }
         }

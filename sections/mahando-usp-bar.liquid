@@ -10,7 +10,7 @@
   class="mahando-usp section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
   aria-label="Vorteile und Kontakt"
 >
-  <div class="mahando-usp__inner">
+  <div class="mahando-usp__inner mahando-usp__inner--{{ section.settings.alignment | default: 'left' }}">
     <ul class="mahando-usp__list">
       {%- for block in section.blocks -%}
         {%- if block.settings.text == blank -%}{%- continue -%}{%- endif -%}
@@ -94,6 +94,18 @@
     white-space: nowrap;
   }
 
+  /* Zentrierte Leiste: Vorteile und Kontakt mittig in einer Reihe */
+  .mahando-usp__inner--center {
+    justify-content: center;
+    gap: 22px;
+  }
+
+  .mahando-usp__inner--center .mahando-usp__contact {
+    margin-inline-start: 0;
+    padding-inline-start: 22px;
+    border-inline-start: 1px solid rgb(255 255 255 / 0.25);
+  }
+
   .mahando-usp__phone {
     color: inherit;
     font-weight: 700;
@@ -124,6 +136,16 @@
   },
   "max_blocks": 4,
   "settings": [
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Ausrichtung",
+      "options": [
+        { "value": "left", "label": "Vorteile links, Kontakt rechts" },
+        { "value": "center", "label": "Alles zentriert" }
+      ],
+      "default": "left"
+    },
     {
       "type": "select",
       "id": "section_width",

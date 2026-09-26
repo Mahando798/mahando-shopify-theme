@@ -36,7 +36,7 @@ im Theme-Editor werden zurück ins Repo committet.
 
 1. **Navigation** (Onlineshop → Navigation)
    - `main-menu` (Hauptmenü): Computer + Tablets · Foto + Video · Gaming · Handy · Haushalt + Garten · Spielzeug ·
-     Wohnen · Beauty + Wellness · Sale. Jeder Punkt zeigt auf seine Kollektion; Unterpunkte (z. B. Notebooks, Tablets)
+     Wohnen · Sport + Freizeit · Sale. Jeder Punkt zeigt auf seine Kollektion; Unterpunkte (z. B. Notebooks, Tablets)
      erscheinen im Mega-Menü und als Chips auf der Kategorieseite.
    - `informationen`: Über uns, Kontakt, Zahlung & Versand, Rücksendung anmelden, Fragen & Antworten.
    - `rechtliches`: Impressum, AGB, Widerrufsbelehrung, Datenschutzerklärung, Batteriegesetz-Hinweise, Elektro-Altgeräte.
