@@ -42,11 +42,14 @@ im Theme-Editor werden zurück ins Repo committet.
    - `rechtliches`: Impressum, AGB, Widerrufsbelehrung, Datenschutzerklärung, Batteriegesetz-Hinweise, Elektro-Altgeräte.
    - Optional je Kategorie ein Menü, dessen **Handle dem Kollektions-Handle entspricht** (z. B. `haushalt-garten`) –
      dann nutzt die Chips-Sektion dieses Menü statt der Unterpunkte des Hauptmenüs.
-2. **Kollektionen** (Produkte → Kollektionen), alle automatisch:
-   - Je Kategorie: Bedingung „Produkttyp ist gleich …“ (Produkttyp kommt aus Xentral, siehe unten).
-   - Unterkategorien: Bedingung „Produkt-Tag ist gleich …“.
-   - `bestseller`: Sortierung „Bestseller“, Bedingung z. B. „Bestand > 0“.
-   - `sale`: Bedingung „Vergleichspreis ist größer als 0“ (Sale = Artikel mit gesetztem Vergleichspreis/UVP).
+2. **Kollektionen** (Produkte → Kollektionen), alle automatisch, Bedingungen mit „beliebige Bedingung“:
+   - Unterkategorien (z. B. `kueche`): „Produkttyp ist gleich Küche“ ODER „Produkt-Tag ist gleich Küche“.
+   - Kategorien (z. B. `haushalt-garten`): eigener Name **plus alle Namen der Unterkategorien** (Typ oder Tag) –
+     ein Artikel mit Tag `Küche` landet damit automatisch auch in „Haushalt + Garten“.
+   - `bestseller`: Sortierung „Bestseller“, Bedingung „Preis > 0“.
+   - `sale`: Bedingung „Preis ist reduziert“ (Sale = Artikel mit gesetztem Vergleichspreis/UVP).
+   - **Wichtig:** Per API angelegte Kollektionen sind zunächst für keinen Vertriebskanal freigegeben (404 im Shop,
+     Kacheln ohne Link). Im Admin unter Kollektion → „Vertriebskanäle“ den Onlineshop aktivieren.
 3. **Versand** (Einstellungen → Versand): Deutschland pauschal 4,99 €, kostenlos ab 300 € Bestellwert. Die Anzeige-
    Texte im Theme stehen unter Theme-Einstellungen → Mahando → Versandkosten.
 4. **Rechtstexte** (Einstellungen → Richtlinien): Versandrichtlinie unbedingt ausfüllen – der Link „zzgl. Versandkosten“
@@ -78,8 +81,8 @@ im Theme-Editor werden zurück ins Repo committet.
 |---|---|---|
 | Titel, Beschreibung, Bilder, Preis, Bestand | Standard-Sync | Produktkarte, Produktseite, Verfügbarkeit („Nur noch X Stück“ ab Bestand ≤ 5) |
 | Vergleichspreis | UVP **nur bei reduzierten Artikeln** setzen | Streichpreis + Badge „−X %“, Kollektion `sale` |
-| Produkttyp | Kategorie | Kategorie-Label auf Karten, automatische Kategorie-Kollektionen |
-| Tags | Unterkategorie; Zustand (`verpackung-beschaedigt`, `b-ware`, `auslaufmodell`); `neu`; `einzelstueck`; `elektro`/`akku`/`batterie` | Unterkategorie-Kollektionen, Badges, Zustandshinweis, Entsorgungshinweis (ElektroG/BattG) |
+| Tags | **Unterkategorie exakt wie im Shop benannt** (z. B. `Küche`, `Netzwerk`, `TV & Audio`) – reicht für Unter- und Hauptkategorie; Zustand (`verpackung-beschaedigt`, `b-ware`, `auslaufmodell`); `neu`; `einzelstueck`; `elektro`/`akku`/`batterie` | Kategorie-Kollektionen, Badges, Zustandshinweis, Entsorgungshinweis (ElektroG/BattG) |
+| Produkttyp | Artikelart (z. B. `Kochtopf`, `Rasentrimmer`) – frei wählbar | Label auf den Produktkarten, Filter; Kategorie-Namen als Typ funktionieren ebenfalls |
 | SKU | Artikelnummer | „Art.-Nr.“ auf der Produktseite |
 | Barcode | EAN | „EAN“ auf der Produktseite |
 | Hersteller (Vendor) | Hersteller | Filter, GPSR-Fallback |
