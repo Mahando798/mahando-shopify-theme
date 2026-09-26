@@ -26,7 +26,7 @@
           "type": "usp",
           "settings": {
             "icon": "shield",
-            "text": "Sichere Zahlung: PayPal, Klarna, Karte, Rechnung",
+            "text": "Sichere Zahlung: PayPal, Klarna, Karte",
             "link": ""
           }
         },
@@ -34,7 +34,7 @@
           "type": "usp",
           "settings": {
             "icon": "box",
-            "text": "Versand 4,99 € pauschal · ab 300 € kostenlos",
+            "text": "Versand ab 300 € kostenlos",
             "link": ""
           }
         }
@@ -48,7 +48,7 @@
         "section_width": "page-width",
         "show_contact": true,
         "background_color": "{{ settings.color_palette.foreground }}",
-        "text_color": "#DCE5E9"
+        "text_color": "#dce5e9"
       }
     },
     "header_section": {
@@ -69,6 +69,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "regular",
             "type_font_primary_link": "subheading",
@@ -78,6 +80,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 8,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": true,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": true
@@ -89,6 +93,7 @@
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "bottom",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -108,14 +113,25 @@
         "border_width": 1,
         "bottom_border_color": "{{ settings.color_palette.color3 }}",
         "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "background_color_top": "{{ settings.color_palette.background }}",
+        "text_color_top": "",
         "background_color_bottom": "{{ settings.color_palette.background }}",
+        "text_color_bottom": "",
         "bubble_style": "custom",
         "bubble_background_color": "{{ settings.color_palette.foreground }}",
         "bubble_text_color": "{{ settings.color_palette.background }}",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     }
   },
