@@ -106,7 +106,7 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 12,
-            "facets_margin_right": 24
+            "facets_margin_right": 20
           },
           "blocks": {}
         },
@@ -208,7 +208,7 @@
       },
       "settings": {
         "layout_type": "grid",
-        "product_card_size": "large",
+        "product_card_size": "medium",
         "mobile_product_card_size": "small",
         "product_grid_width": "centered",
         "full_width_on_mobile": true,
