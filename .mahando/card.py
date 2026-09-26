@@ -10,14 +10,14 @@ HEADER = """/*
  */
 """
 
-def product_card(static=True, with_availability=True):
+def product_card(static=True, with_availability=True, with_button=True, eyebrow_source="vendor"):
     blocks = {
         "card-gallery": {
             "type": "_product-card-gallery",
             "settings": {
                 "image_ratio": "square",
                 "border": "none",
-                "border_radius": 8,
+                "border_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -27,7 +27,7 @@ def product_card(static=True, with_availability=True):
         },
         "card-type": {
             "type": "mahando-product-type",
-            "settings": {"source": "type", "padding-block-start": 8}
+            "settings": {"source": eyebrow_source, "padding-block-start": 8}
         },
         "card-title": {
             "type": "product-title",
@@ -69,6 +69,12 @@ def product_card(static=True, with_availability=True):
             "settings": {"show_delivery_time": True, "padding-block-start": 6}
         }
         order.append("card-availability")
+    if with_button:
+        blocks["card-button"] = {
+            "type": "mahando-card-button",
+            "settings": {"label": "In den Warenkorb", "label_options": "Optionen wählen", "style": "secondary", "show_icon": False}
+        }
+        order.append("card-button")
     card = {
         "type": "_product-card",
         "settings": {
@@ -78,9 +84,9 @@ def product_card(static=True, with_availability=True):
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "{{ settings.color_palette.color3 }}",
-            "border_radius": 12,
+            "border_radius": 14,
             "padding-block-start": 12,
-            "padding-block-end": 14,
+            "padding-block-end": 12,
             "padding-inline-start": 12,
             "padding-inline-end": 12
         },

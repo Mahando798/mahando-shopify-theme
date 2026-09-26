@@ -1,0 +1,167 @@
+{%- doc -%}
+  Fester „In den Warenkorb“-Button am Fuß der Produktkarte (Vorbild: sfhandel.com).
+  Artikel mit einer Variante werden direkt in den Warenkorb gelegt (Horizon-Produktformular, Cart-Drawer);
+  Artikel mit mehreren Varianten verlinken auf die Produktseite; ausverkaufte Artikel zeigen „Ausverkauft“.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'MahandoCardForm-' | append: product.id | append: '-' | append: block.id
+  assign label = block.settings.label | default: 'In den Warenkorb'
+  assign style_class = 'button-secondary'
+  if block.settings.style == 'primary'
+    assign style_class = ''
+  endif
+  assign button_class = style_class | append: ' mahando-card-buy__button'
+-%}
+
+{%- if product != blank -%}
+  <div
+    class="mahando-card-buy spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if product.available == false -%}
+      <span class="button {{ style_class }} mahando-card-buy__button mahando-card-buy__button--soldout" aria-disabled="true">{{ 'mahando.availability.out_of_stock' | t }}</span>
+    {%- elsif product.variants_count > 1 -%}
+      <a class="button {{ style_class }} mahando-card-buy__button" href="{{ product.url }}">{{ block.settings.label_options | default: 'Optionen wählen' }}</a>
+    {%- else -%}
+      <product-form-component
+        data-section-id="{{ section.id }}"
+        data-product-id="{{ product.id }}"
+        on:submit="/handleSubmit"
+        class="mahando-card-buy__form"
+      >
+        <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+        {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" ref="variantId" value="{{ variant.id }}">
+          <input type="hidden" name="quantity" value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}">
+          {% render 'add-to-cart-button',
+            add_to_cart_text: label,
+            class: button_class,
+            can_add_to_cart: variant.available,
+            show_icon: block.settings.show_icon,
+            product: product
+          %}
+        {%- endform -%}
+      </product-form-component>
+      {% render 'add-to-cart-button-styles' %}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-card-buy {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .mahando-card-buy__form,
+  .mahando-card-buy__form .shopify-product-form,
+  .mahando-card-buy__form add-to-cart-component {
+    display: block;
+    width: 100%;
+  }
+
+  .mahando-card-buy__button {
+    width: 100%;
+    min-height: 40px;
+    padding-block: 8px;
+    font-size: var(--font-size--sm);
+    justify-content: center;
+  }
+
+  .mahando-card-buy__button--soldout {
+    opacity: 0.55;
+    cursor: default;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Warenkorb-Button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Beschriftung",
+      "default": "In den Warenkorb"
+    },
+    {
+      "type": "text",
+      "id": "label_options",
+      "label": "Beschriftung bei Varianten",
+      "default": "Optionen wählen"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Stil",
+      "options": [
+        { "value": "secondary", "label": "Umrandet" },
+        { "value": "primary", "label": "Gefüllt" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Warenkorb-Icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Warenkorb-Button",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

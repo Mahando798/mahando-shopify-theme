@@ -83,9 +83,9 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "{{ settings.color_palette.color3 }}",
-            "border_radius": 12,
+            "border_radius": 14,
             "padding-block-start": 12,
-            "padding-block-end": 14,
+            "padding-block-end": 12,
             "padding-inline-start": 12,
             "padding-inline-end": 12
           },
@@ -95,7 +95,7 @@
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
-                "border_radius": 8,
+                "border_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -106,7 +106,7 @@
             "card-type": {
               "type": "mahando-product-type",
               "settings": {
-                "source": "type",
+                "source": "vendor",
                 "padding-block-start": 8
               }
             },
@@ -148,6 +148,15 @@
                 "show_delivery_time": true,
                 "padding-block-start": 6
               }
+            },
+            "card-button": {
+              "type": "mahando-card-button",
+              "settings": {
+                "label": "In den Warenkorb",
+                "label_options": "Optionen wählen",
+                "style": "secondary",
+                "show_icon": false
+              }
             }
           },
           "block_order": [
@@ -155,7 +164,8 @@
             "card-type",
             "card-title",
             "card-price",
-            "card-availability"
+            "card-availability",
+            "card-button"
           ],
           "static": true
         }

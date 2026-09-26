@@ -1,0 +1,348 @@
+{%- comment -%}
+  Kopfbereich der Kategorieseite (Vorbild: sfhandel.com/collections/elektronik):
+  links eine Karte mit Dachzeile (übergeordnete Kategorie), Titel, Beschreibung und zwei Buttons,
+  rechts eine dunkle Karte mit Kollektionsbild (sofern hinterlegt) und drei Vertrauenspunkten.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = closest.collection
+  assign menu_handle = section.settings.menu.handle | default: 'main-menu'
+  assign eyebrow = section.settings.eyebrow_default
+  assign description = collection.description
+  if description == blank
+    assign description = section.settings.fallback_text
+  endif
+
+  for link in linklists[menu_handle].links
+    if link.type != 'collection_link' or link.object == blank
+      continue
+    endif
+    if link.object.handle == collection.handle
+      break
+    endif
+    for sub in link.links
+      if sub.type == 'collection_link' and sub.object != blank and sub.object.handle == collection.handle
+        assign eyebrow = link.title
+        break
+      endif
+    endfor
+    if eyebrow != section.settings.eyebrow_default
+      break
+    endif
+  endfor
+
+  assign image = section.settings.image | default: collection.image
+-%}
+
+<div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="mahando-colhead{% if section.settings.show_side %} mahando-colhead--with-side{% endif %}">
+    <div class="mahando-colhead__main">
+      {%- if eyebrow != blank -%}
+        <p class="mahando-eyebrow">{{ eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="mahando-colhead__title h2">{{ collection.title }}</h1>
+      {%- if description != blank -%}
+        <div class="mahando-colhead__text rte">{{ description }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="mahando-colhead__actions">
+          {%- if section.settings.button_1_label != blank -%}
+            <a class="button" href="{{ section.settings.button_1_url | default: '#produkte' }}">{{ section.settings.button_1_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a class="button button-secondary" href="{{ section.settings.button_2_url | default: routes.collections_url }}">{{ section.settings.button_2_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_side -%}
+      <aside class="mahando-colhead__side{% if image != blank %} mahando-colhead__side--image{% endif %}">
+        {%- if image != blank -%}
+          {{
+            image
+            | image_url: width: 900
+            | image_tag: loading: 'lazy', class: 'mahando-colhead__image', alt: collection.title, widths: '450, 700, 900', sizes: '(min-width: 990px) 360px, 100vw'
+          }}
+        {%- endif -%}
+        <div class="mahando-colhead__side-body">
+          {%- if section.settings.side_heading != blank -%}
+            <p class="mahando-colhead__side-title">{{ section.settings.side_heading }}</p>
+          {%- endif -%}
+          {%- if section.settings.side_text != blank -%}
+            <p class="mahando-colhead__side-text">{{ section.settings.side_text }}</p>
+          {%- endif -%}
+          <ul class="mahando-colhead__usps" role="list">
+            {%- for i in (1..3) -%}
+              {%- assign key = 'usp_' | append: i -%}
+              {%- if section.settings[key] != blank -%}
+                <li>{% render 'mahando-icon', icon: 'check' %}<span>{{ section.settings[key] }}</span></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </aside>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-colhead {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .mahando-colhead--with-side {
+      grid-template-columns: minmax(0, 1fr) 360px;
+    }
+  }
+
+  .mahando-colhead__main {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 28px 28px 26px;
+    min-width: 0;
+  }
+
+  .mahando-colhead__title {
+    margin: 0 0 10px;
+  }
+
+  .mahando-colhead__text {
+    max-width: 64ch;
+    font-size: var(--font-size--sm);
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-colhead__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-colhead__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .mahando-colhead__side {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    min-height: 180px;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    background: linear-gradient(135deg, #0a7e83 0%, #1d2b33 100%);
+  }
+
+  .mahando-colhead__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mahando-colhead__side--image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(16 24 30 / 0.85) 0%, rgb(16 24 30 / 0.35) 60%, rgb(16 24 30 / 0.15) 100%);
+  }
+
+  .mahando-colhead__side-body {
+    position: relative;
+    z-index: 1;
+    padding: 22px 22px 20px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .mahando-colhead__side-title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: var(--font-size--lg);
+    line-height: 1.2;
+  }
+
+  .mahando-colhead__side-text {
+    margin: 0;
+    font-size: var(--font-size--xs);
+    opacity: 0.9;
+  }
+
+  .mahando-colhead__usps {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 5px;
+    font-size: var(--font-size--xs);
+    font-weight: 600;
+  }
+
+  .mahando-colhead__usps li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mahando-colhead__usps .mahando-icon {
+    width: 15px;
+    height: 15px;
+    flex: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-colhead__main {
+      padding: 20px 18px;
+    }
+
+    .mahando-colhead__side {
+      min-height: 140px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kategorie-Kopf (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Hauptmenü (für die Dachzeile)",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_default",
+      "label": "Dachzeile bei Hauptkategorien",
+      "default": "Sortiment"
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_text",
+      "label": "Text, wenn die Kollektion keine Beschreibung hat",
+      "default": "<p>Markenware, neu und original verpackt. Versand aus eigenem Lager in Deutschland, 14 Tage Widerrufsrecht.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1",
+      "default": "Produkte ansehen"
+    },
+    {
+      "type": "text",
+      "id": "button_1_url",
+      "label": "Button 1 – Ziel",
+      "info": "Standard: #produkte (springt zur Produktliste)"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2",
+      "default": "Alle Kategorien"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Button 2 – Ziel",
+      "info": "Standard: Kategorieübersicht"
+    },
+    {
+      "type": "header",
+      "content": "Rechte Karte"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_side",
+      "label": "Rechte Karte anzeigen",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild (sonst Kollektionsbild)"
+    },
+    {
+      "type": "text",
+      "id": "side_heading",
+      "label": "Überschrift",
+      "default": "Markenware ab Lager"
+    },
+    {
+      "type": "text",
+      "id": "side_text",
+      "label": "Text",
+      "default": "Geprüfte Neuware, faire Preise und schneller Versand aus eigenem Lager."
+    },
+    {
+      "type": "text",
+      "id": "usp_1",
+      "label": "Punkt 1",
+      "default": "Versand aus Deutschland"
+    },
+    {
+      "type": "text",
+      "id": "usp_2",
+      "label": "Punkt 2",
+      "default": "Sichere Zahlung: PayPal, Klarna, Karte"
+    },
+    {
+      "type": "text",
+      "id": "usp_3",
+      "label": "Punkt 3",
+      "default": "14 Tage Widerrufsrecht"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kategorie-Kopf (Mahando)",
+      "category": "t:categories.collection"
+    }
+  ]
+}
+{% endschema %}
