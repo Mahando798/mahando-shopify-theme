@@ -59,12 +59,14 @@ im Theme-Editor werden zurück ins Repo committet.
 6. **Steuern:** Einstellungen → Steuern → „Alle Preise inkl. Steuern“ aktivieren, sonst fehlt „inkl. MwSt.“.
 7. **Filter:** App „Shopify Search & Discovery“ installieren und Filter aktivieren: Verfügbarkeit, Preis, Produkttyp,
    Hersteller, Metafeld `mahando.zustand`.
-8. **Metafeld-Definitionen** (Einstellungen → Benutzerdefinierte Daten → Produkte), Namespace `mahando`:
+8. **Metafeld-Definitionen** (Einstellungen → Benutzerdefinierte Daten → Produkte), Namespace `mahando` –
+   sind im Shop bereits angelegt (angepinnt, Storefront-Zugriff), hier die Übersicht:
 
    | Schlüssel | Typ | Inhalt |
    |---|---|---|
    | `zustand` | Einzeiliger Text | `neu` (Standard, leer lassen), `verpackung-beschaedigt`, `b-ware`, `refurbished`, `auslaufmodell` |
    | `zustand_hinweis` | Einzeiliger Text | Erklärtext zum Zustand (optional, sonst Standardtext) |
+   | `highlights` | Mehrzeiliger Text | „Auf einen Blick“ auf der Produktseite, eine Zeile je Stichpunkt (sonst Listenpunkte aus der Beschreibung) |
    | `technische_daten` | Mehrzeiliger Text | eine Zeile je Eintrag: `Spannung: 20 V` |
    | `lieferumfang` | Mehrzeiliger Text | eine Zeile je Position, optional mit `- ` als Aufzählung |
    | `sicherheitshinweise` | Mehrzeiliger Text | Warn-/Sicherheitshinweise |
@@ -73,7 +75,8 @@ im Theme-Editor werden zurück ins Repo committet.
    | `hersteller_kontakt` | Einzeiliger Text | E-Mail oder Telefon |
    | `eu_verantwortlicher` | Mehrzeiliger Text | nur bei Herstellern außerhalb der EU |
 
-   Alle Metafelder als „Storefront-Zugriff“ freigeben, damit das Theme sie lesen kann.
+   Filter nach Hersteller/Produkttyp kommen aus der App „Shopify Search & Discovery“ (installiert) – dort unter
+   „Filter“ anlegen; das Theme zeigt alle konfigurierten Filter automatisch links an.
 
 ## Datenfluss aus Xentral
 
