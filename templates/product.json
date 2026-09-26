@@ -318,7 +318,7 @@
                     "versandtext": {
                       "type": "text",
                       "settings": {
-                        "text": "{{ settings.mahando_return_text }}",
+                        "text": "<p>Versand mit DHL oder GLS ab Lager Büren. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendung über das Formular im Kundenkonto anmelden, das Rücksendelabel kommt per E-Mail.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "type_preset": "rte"

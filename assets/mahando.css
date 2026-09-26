@@ -82,3 +82,25 @@ product-card .product-title {
 .details__header {
   font-family: var(--font-heading--family);
 }
+
+/* Gemeinsame Bausteine der Mahando-Sections */
+.mahando-eyebrow {
+  margin: 0 0 10px;
+  font-size: var(--font-size--2xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+
+.mahando-section-head {
+  margin-bottom: 22px;
+}
+
+.mahando-section-head h2 {
+  margin: 0;
+}
+
+.mahando-section-head .mahando-eyebrow {
+  margin-bottom: 8px;
+}

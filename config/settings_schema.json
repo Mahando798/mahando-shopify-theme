@@ -2308,12 +2308,6 @@
         "label": "Entsorgungshinweis Elektrogeräte/Batterien",
         "info": "Wird auf Produktseiten mit dem Tag „elektro“ oder „akku“ angezeigt.",
         "default": "<p><strong>Altgeräte und Batterien (ElektroG/BattG):</strong> Elektrogeräte, Akkus und Batterien gehören nicht in den Hausmüll. Du kannst sie kostenlos bei uns oder bei kommunalen Sammelstellen zurückgeben. Akkus und Batterien vor der Rückgabe entnehmen.</p>"
-      },
-      {
-        "type": "richtext",
-        "id": "mahando_return_text",
-        "label": "Text „Versand & Rückgabe“ (Produktseite)",
-        "default": "<p>Versand mit DHL oder GLS ab Lager Büren. 4,99 € pauschal pro Bestellung, ab 300 € Bestellwert versandkostenfrei (Deutschland).</p><p>14 Tage Widerrufsrecht. Rücksendung über das Formular im Kundenkonto anmelden, das Rücksendelabel kommt per E-Mail.</p>"
       }
     ]
   }

@@ -34,9 +34,6 @@
       endfor
     endif
   endif
-  if block.settings.extra_text != blank and block.settings.extra_tags == blank
-    assign extra = block.settings.extra_text
-  endif
 -%}
 
 {%- if value != blank or extra != blank -%}
@@ -50,7 +47,6 @@
         {{ value | metafield_tag }}
       {%- elsif field_type == 'multi_line_text_field' -%}
         {%- assign lines = value | newline_to_br | split: '<br />' -%}
-        {%- assign in_list = false -%}
         {%- for line in lines -%}
           {%- assign clean = line | strip_html | strip -%}
           {%- if clean == blank -%}
@@ -58,14 +54,11 @@
           {%- endif -%}
           {%- assign first = clean | slice: 0, 2 -%}
           {%- if first == '- ' or first == '• ' or first == '* ' -%}
-            {%- unless in_list -%}<ul>{%- assign in_list = true -%}{%- endunless -%}
-            <li>{{ clean | remove_first: first }}</li>
+            <p class="mahando-metafield-text__li">{{ clean | remove_first: first }}</p>
           {%- else -%}
-            {%- if in_list -%}</ul>{%- assign in_list = false -%}{%- endif -%}
             <p>{{ clean }}</p>
           {%- endif -%}
         {%- endfor -%}
-        {%- if in_list -%}</ul>{%- endif -%}
       {%- else -%}
         <p>{{ value }}</p>
       {%- endif -%}
@@ -91,6 +84,22 @@
 
   .mahando-metafield-text ul {
     padding-inline-start: 18px;
+  }
+
+  .mahando-metafield-text__li {
+    position: relative;
+    padding-inline-start: 16px;
+    margin-bottom: 4px;
+  }
+
+  .mahando-metafield-text__li::before {
+    content: '•';
+    position: absolute;
+    inset-inline-start: 2px;
+  }
+
+  .mahando-metafield-text__li + p:not(.mahando-metafield-text__li) {
+    margin-top: 8px;
   }
 
   .mahando-metafield-text__extra {

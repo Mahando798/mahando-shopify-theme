@@ -1,8 +1,8 @@
-{%- doc -%}
+{%- comment -%}
   Icon-Karten in zwei Stilen:
   - "compact": kleine Kacheln mit Icon, Titel und Untertitel (Vertrauensleiste unter dem Hero)
   - "card": größere Karten mit Icon, Überschrift und Absatz ("Warum Mahando")
-{%- enddoc -%}
+{%- endcomment -%}
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
@@ -42,14 +42,6 @@
 </div>
 
 {% stylesheet %}
-  .mahando-section-head {
-    margin-bottom: 22px;
-  }
-
-  .mahando-section-head h2 {
-    margin: 0;
-  }
-
   .mahando-icon-cards {
     display: grid;
     gap: 14px;

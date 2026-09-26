@@ -1,7 +1,7 @@
-{%- doc -%}
+{%- comment -%}
   Footer-Leiste mit Zahlungsarten (Icons aus shop.enabled_payment_types), Preis-/MwSt.-Hinweis
   und optionalem Badge-Code (z. B. idealo-Bewertungs-Badge).
-{%- enddoc -%}
+{%- endcomment -%}
 
 {% render 'contrast-override', background_color: section.settings.background_color, text_color: section.settings.text_color, section_id: section.id %}
 
@@ -90,7 +90,7 @@
 
 {% schema %}
 {
-  "name": "Zahlungsarten & Hinweis (Mahando)",
+  "name": "Zahlungsarten & Hinweis",
   "class": "section-wrapper",
   "enabled_on": {
     "groups": ["footer"]
@@ -156,7 +156,7 @@
   ],
   "presets": [
     {
-      "name": "Zahlungsarten & Hinweis (Mahando)",
+      "name": "Zahlungsarten & Hinweis",
       "category": "t:categories.footer"
     }
   ]

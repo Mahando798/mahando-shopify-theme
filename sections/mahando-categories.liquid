@@ -1,7 +1,7 @@
-{%- doc -%}
+{%- comment -%}
   Kategorie-Kacheln: Icon, Name, Untertitel, verlinkt auf eine Kollektion. 4 Spalten Desktop, 2 mobil.
   Ohne ausgewählte Kollektion wird der eingetragene Titel angezeigt (Vorschau).
-{%- enddoc -%}
+{%- endcomment -%}
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
@@ -162,7 +162,7 @@
 
 {% schema %}
 {
-  "name": "Kategorie-Kacheln (Mahando)",
+  "name": "Kategorie-Kacheln",
   "class": "section-wrapper",
   "disabled_on": {
     "groups": ["header", "footer"]
@@ -271,7 +271,7 @@
   ],
   "presets": [
     {
-      "name": "Kategorie-Kacheln (Mahando)",
+      "name": "Kategorie-Kacheln",
       "category": "t:categories.collections",
       "blocks": [
         { "type": "category", "settings": { "title": "Computer + Tablets", "subtitle": "Notebooks, Tablets, Monitore, Zubehör", "icon": "laptop" } },

@@ -1,92 +1,126 @@
-# Horizon
+# Mahando Shopify-Theme
 
-[Getting started](#getting-started) |
-[Staying up to date with Horizon changes](#staying-up-to-date-with-horizon-changes) |
-[Developer tools](#developer-tools) |
-[Contributing](#contributing) |
-[License](#license)
+Eigenes Theme für den Mahando-Shop auf Basis von **Shopify Horizon 4.2.0** (Upstream-Commit `5acd1b6`, 21.09.2026).
+Horizon liefert Header, Mega-Menü, Suche, Warenkorb-Drawer, Filter, Varianten und deutsche Texte;
+alles Mahando-Spezifische liegt in eigenen Dateien mit dem Präfix `mahando-`.
 
-Horizon is the flagship of a new generation of first party Shopify themes. It incorporates the latest Liquid Storefronts features, including [theme blocks](https://shopify.dev/docs/storefronts/themes/architecture/blocks/theme-blocks/quick-start?framework=liquid).
+## Design
 
-- **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-- **Lean, fast, and reliable:** Functionality and design defaults to "no" until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn't support each and every feature in Shopify.
-- **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don't belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-- **Functional, not pixel-perfect:** The Web doesn't require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+| Was | Wert | Wo |
+|---|---|---|
+| Primärfarbe (Buttons, Links) | Türkis `#0A7E83` | `config/settings_data.json` → `color_palette.color1` |
+| Rabatt/Sale | Pink `#D82A6F` | `badge_sale_background_color` |
+| Text | Dunkelgrau `#1D2B33` | `color_palette.foreground` |
+| Flächen / Rahmen | `#EEF3F5` / `#DCE5E9` | `color2` / `color3` |
+| Seitenhintergrund | `#F5F8F9` | `page_background_color` |
+| Überschriften | Outfit 600/700 | `snippets/mahando-fonts.liquid` |
+| Fließtext, Preise | Source Sans 3 | `snippets/mahando-fonts.liquid` |
 
-## Getting started
+Die Schriften liegen als WOFF2 im Theme (`assets/mahando-*.woff2`, SIL Open Font License) und werden vom
+Shopify-CDN ausgeliefert – **keine Google-Fonts-Verbindung** (Abmahnrisiko). Über Theme-Einstellungen → Mahando
+→ „Mahando-Schriften verwenden“ lässt sich auf die Shopify-Font-Picker zurückschalten.
 
-We recommend using the Skeleton Theme as a starting point for a theme development project. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
+Das Logo ist als SVG eingebaut (`assets/mahando-logo*.svg`) und wird verwendet, solange unter
+Theme-Einstellungen → Logo kein eigenes Bild hochgeladen ist. Favicon ebenfalls (Wellen).
 
-To create a new theme project based on Horizon:
+## Installation
 
-```sh
-git clone https://github.com/Shopify/horizon.git
-```
+**Variante A – ZIP:** Onlineshop → Themes → „Theme hinzufügen“ → „ZIP-Datei hochladen“. Dann „Anpassen“, prüfen,
+zuletzt „Veröffentlichen“. Der alte Look bleibt bis dahin online.
 
-Install the [Shopify CLI](https://shopify.dev/docs/storefronts/themes/tools/cli) to connect your local project to a Shopify store. Learn about the [theme developer tools](https://shopify.dev/docs/storefronts/themes/tools) available, and the suggested [developer tools](#developer-tools) below.
+**Variante B – GitHub:** Repo unter GitHub anlegen, dieses Verzeichnis pushen, in Shopify unter Onlineshop → Themes →
+„Theme hinzufügen“ → „Aus GitHub verbinden“ den Branch `main` wählen. Jeder Push aktualisiert das Theme; Änderungen
+im Theme-Editor werden zurück ins Repo committet.
 
-Please note that the `main` branch may include code for features not yet released. You may encounter Liquid API properties that are not publicly documented, but will be when the feature is officially rolled out.
+## Einrichtung im Shopify-Admin (Pflicht)
 
-### Shopify Theme Store development
+1. **Navigation** (Onlineshop → Navigation)
+   - `main-menu` (Hauptmenü): Computer + Tablets · Foto + Video · Gaming · Handy · Haushalt + Garten · Spielzeug ·
+     Wohnen · Beauty + Wellness · Sale. Jeder Punkt zeigt auf seine Kollektion; Unterpunkte (z. B. Notebooks, Tablets)
+     erscheinen im Mega-Menü und als Chips auf der Kategorieseite.
+   - `informationen`: Über uns, Kontakt, Zahlung & Versand, Rücksendung anmelden, Fragen & Antworten.
+   - `rechtliches`: Impressum, AGB, Widerrufsbelehrung, Datenschutzerklärung, Batteriegesetz-Hinweise, Elektro-Altgeräte.
+   - Optional je Kategorie ein Menü, dessen **Handle dem Kollektions-Handle entspricht** (z. B. `haushalt-garten`) –
+     dann nutzt die Chips-Sektion dieses Menü statt der Unterpunkte des Hauptmenüs.
+2. **Kollektionen** (Produkte → Kollektionen), alle automatisch:
+   - Je Kategorie: Bedingung „Produkttyp ist gleich …“ (Produkttyp kommt aus Xentral, siehe unten).
+   - Unterkategorien: Bedingung „Produkt-Tag ist gleich …“.
+   - `bestseller`: Sortierung „Bestseller“, Bedingung z. B. „Bestand > 0“.
+   - `sale`: Bedingung „Vergleichspreis ist größer als 0“ (Sale = Artikel mit gesetztem Vergleichspreis/UVP).
+3. **Versand** (Einstellungen → Versand): Deutschland pauschal 4,99 €, kostenlos ab 300 € Bestellwert. Die Anzeige-
+   Texte im Theme stehen unter Theme-Einstellungen → Mahando → Versandkosten.
+4. **Rechtstexte** (Einstellungen → Richtlinien): Versandrichtlinie unbedingt ausfüllen – der Link „zzgl. Versandkosten“
+   an jedem Preis zeigt dorthin. Widerruf, AGB, Datenschutz, Impressum als Seiten anlegen und im Menü `rechtliches`
+   verlinken. Rechtstexte am besten über einen Anbieter (IT-Recht Kanzlei / Händlerbund) mit Shopify-Schnittstelle.
+5. **Zahlungen:** Shopify Payments (Karte, Apple/Google Pay, Klarna) + PayPal. Die Icons im Footer folgen automatisch.
+6. **Steuern:** Einstellungen → Steuern → „Alle Preise inkl. Steuern“ aktivieren, sonst fehlt „inkl. MwSt.“.
+7. **Filter:** App „Shopify Search & Discovery“ installieren und Filter aktivieren: Verfügbarkeit, Preis, Produkttyp,
+   Hersteller, Metafeld `mahando.zustand`.
+8. **Metafeld-Definitionen** (Einstellungen → Benutzerdefinierte Daten → Produkte), Namespace `mahando`:
 
-If you're building a theme for the Shopify Theme Store, then do not use Horizon as a starting point. Themes based on, derived from, or incorporating Horizon are not eligible for submission to to the Shopify Theme Store. Use the [Skeleton Theme](https://github.com/Shopify/skeleton-theme) instead.
+   | Schlüssel | Typ | Inhalt |
+   |---|---|---|
+   | `zustand` | Einzeiliger Text | `neu` (Standard, leer lassen), `verpackung-beschaedigt`, `b-ware`, `auslaufmodell` |
+   | `zustand_hinweis` | Einzeiliger Text | Erklärtext zum Zustand (optional, sonst Standardtext) |
+   | `technische_daten` | Mehrzeiliger Text | eine Zeile je Eintrag: `Spannung: 20 V` |
+   | `lieferumfang` | Mehrzeiliger Text | eine Zeile je Position, optional mit `- ` als Aufzählung |
+   | `sicherheitshinweise` | Mehrzeiliger Text | Warn-/Sicherheitshinweise |
+   | `hersteller_name` | Einzeiliger Text | GPSR-Pflichtangabe |
+   | `hersteller_anschrift` | Mehrzeiliger Text | GPSR-Pflichtangabe |
+   | `hersteller_kontakt` | Einzeiliger Text | E-Mail oder Telefon |
+   | `eu_verantwortlicher` | Mehrzeiliger Text | nur bei Herstellern außerhalb der EU |
 
-## Staying up to date with Horizon changes
+   Alle Metafelder als „Storefront-Zugriff“ freigeben, damit das Theme sie lesen kann.
 
-Say you're building a new theme off Horizon but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Horizon repository.
+## Datenfluss aus Xentral
 
-1. Navigate to your local theme folder.
-2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
+| Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
+|---|---|---|
+| Titel, Beschreibung, Bilder, Preis, Bestand | Standard-Sync | Produktkarte, Produktseite, Verfügbarkeit („Nur noch X Stück“ ab Bestand ≤ 5) |
+| Vergleichspreis | UVP **nur bei reduzierten Artikeln** setzen | Streichpreis + Badge „−X %“, Kollektion `sale` |
+| Produkttyp | Kategorie | Kategorie-Label auf Karten, automatische Kategorie-Kollektionen |
+| Tags | Unterkategorie; Zustand (`verpackung-beschaedigt`, `b-ware`, `auslaufmodell`); `neu`; `einzelstueck`; `elektro`/`akku`/`batterie` | Unterkategorie-Kollektionen, Badges, Zustandshinweis, Entsorgungshinweis (ElektroG/BattG) |
+| SKU | Artikelnummer | „Art.-Nr.“ auf der Produktseite |
+| Barcode | EAN | „EAN“ auf der Produktseite |
+| Hersteller (Vendor) | Hersteller | Filter, GPSR-Fallback |
+| Metafelder `mahando.*` | Freifelder (Zuordnung im Xentral-Connector prüfen, alternativ per Matrixify/Flow) | Zustand, technische Daten, Lieferumfang, GPSR |
 
-```sh
-git remote -v
-```
+Badge „Neu“ erscheint automatisch für Artikel jünger als 30 Tage (Theme-Einstellung) oder mit Tag `neu`.
 
-3. If you don't see an `upstream`, you can add one that points to Shopify's Horizon repository:
+## Theme-Einstellungen → Mahando
 
-```sh
-git remote add upstream https://github.com/Shopify/horizon.git
-```
+Schriften, eingebautes Logo, Suchleiste im Header, Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle,
+Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
 
-4. Pull in the latest Horizon changes into your repository:
+## Eigene Dateien (alles mit Präfix `mahando-`)
 
-```sh
-git fetch upstream
-git pull upstream main
-```
+- `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`, `mahando-product-meta.js`
+- `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`
+- `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
+  `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`
+- `sections/`: `mahando-usp-bar`, `mahando-hero`, `mahando-icon-cards`, `mahando-categories`,
+  `mahando-collection-chips`, `mahando-footer-bar`
 
-## Developer tools
+Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar bleiben): `layout/theme.liquid`,
+`layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
+`blocks/_product-card.liquid`, `blocks/product-card.liquid`, `blocks/_product-card-group.liquid`,
+`snippets/card-gallery.liquid`, `snippets/theme-styles-variables.liquid`, `snippets/search.liquid`, `snippets/fonts.liquid`,
+`sections/header.liquid`, `config/*`, `locales/de.json`, `locales/en.default.json`, Templates und Section-Groups.
+Andere Sprachdateien wurden entfernt (Shop läuft auf Deutsch, Englisch bleibt als Fallback).
 
-There are a number of really useful tools that the Shopify Themes team uses during development. Horizon is already set up to work with these tools.
-
-### Shopify CLI
-
-[Shopify CLI](https://shopify.dev/docs/storefronts/themes/tools/cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
-
-You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
-
-### Theme Check
-
-We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
-
-We've added Theme Check to Horizon's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Horizon.
-
-You can also run it from a terminal with the following Shopify CLI command:
+## Entwicklung
 
 ```bash
+# Theme Check (Shopify CLI)
 shopify theme check
+
+# Lokale Vorschau gegen den Store (Login nötig)
+shopify theme dev --store <shop>.myshopify.com
+
+# Horizon-Updates einspielen
+git remote add horizon https://github.com/Shopify/horizon.git
+git fetch horizon && git merge horizon/main
 ```
 
-You can follow the [theme check documentation](https://shopify.dev/docs/storefronts/themes/tools/theme-check) for more details.
-
-#### Shopify/theme-check-action
-
-Horizon runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
-
-## Contributing
-
-We are not accepting contributions to Horizon at this time.
-
-## License
-
-Copyright (c) 2025-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+Commit 1 ist der unveränderte Horizon-Stand, alles Weitere sind Mahando-Anpassungen – so bleibt jederzeit sichtbar,
+was vom Upstream kommt und was eigen ist.

@@ -1,7 +1,7 @@
-{%- doc -%}
+{%- comment -%}
   Startseiten-Hero: links Eyebrow, Überschrift, Text und zwei Buttons; rechts bis zu drei Produktkarten
   (Bild, Titel, Untertitel, Preis) als "Angebote der Woche". Ruhige, helle Fläche mit Rahmen.
-{%- enddoc -%}
+{%- endcomment -%}
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
@@ -95,15 +95,6 @@
     margin: 0;
     max-width: 20ch;
     text-wrap: balance;
-  }
-
-  .mahando-eyebrow {
-    margin: 0 0 10px;
-    font-size: var(--font-size--2xs);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-foreground-muted);
   }
 
   .mahando-hero__text {

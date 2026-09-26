@@ -1,8 +1,8 @@
-{%- doc -%}
+{%- comment -%}
   Unterkategorie-Chips auf Kollektionsseiten. Nimmt automatisch das Menü, dessen Handle dem
   Kollektions-Handle entspricht (z. B. Menü "haushalt-garten" für die Kollektion /collections/haushalt-garten).
   Alternativ kann ein festes Menü gewählt werden. Der erste Chip "Alle" zeigt auf die aktuelle Kollektion.
-{%- enddoc -%}
+{%- endcomment -%}
 
 {%- liquid
   assign collection = closest.collection
@@ -111,7 +111,7 @@
 
 {% schema %}
 {
-  "name": "Unterkategorie-Chips (Mahando)",
+  "name": "Unterkategorie-Chips",
   "class": "section-wrapper",
   "enabled_on": {
     "templates": ["collection"]
@@ -171,7 +171,7 @@
   ],
   "presets": [
     {
-      "name": "Unterkategorie-Chips (Mahando)",
+      "name": "Unterkategorie-Chips",
       "category": "t:categories.collection"
     }
   ]
