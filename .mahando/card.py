@@ -10,7 +10,7 @@ HEADER = """/*
  */
 """
 
-def product_card(static=True, with_availability=True, with_button=True, eyebrow_source="vendor"):
+def product_card(static=True, with_availability=True, with_button=False, eyebrow_source="vendor"):
     blocks = {
         "card-gallery": {
             "type": "_product-card-gallery",

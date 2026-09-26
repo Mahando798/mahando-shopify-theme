@@ -234,15 +234,6 @@
                 "show_delivery_time": true,
                 "padding-block-start": 6
               }
-            },
-            "card-button": {
-              "type": "mahando-card-button",
-              "settings": {
-                "label": "In den Warenkorb",
-                "label_options": "Optionen wählen",
-                "style": "secondary",
-                "show_icon": false
-              }
             }
           },
           "block_order": [
@@ -250,8 +241,7 @@
             "card-type",
             "card-title",
             "card-price",
-            "card-availability",
-            "card-button"
+            "card-availability"
           ]
         }
       },
