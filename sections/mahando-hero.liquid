@@ -10,7 +10,15 @@
   class="mahando-hero-section section section--page-width color-custom-{{ section.id }} spacing-style"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
-  <div class="mahando-hero{% if section.blocks.size == 0 %} mahando-hero--single{% endif %}">
+  {%- liquid
+    assign visible_cards = 0
+    for block in section.blocks
+      if block.settings.product != blank or request.design_mode
+        assign visible_cards = visible_cards | plus: 1
+      endif
+    endfor
+  -%}
+  <div class="mahando-hero{% if visible_cards == 0 %} mahando-hero--single{% endif %}">
     <div class="mahando-hero__content">
       {%- if section.settings.eyebrow != blank -%}
         <p class="mahando-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -33,9 +41,10 @@
       {%- endif -%}
     </div>
 
-    {%- if section.blocks.size > 0 -%}
+    {%- if visible_cards > 0 -%}
       <div class="mahando-hero__stack" aria-label="{{ section.settings.stack_label | escape }}">
         {%- for block in section.blocks -%}
+          {%- if block.settings.product == blank and request.design_mode == false -%}{%- continue -%}{%- endif -%}
           {%- liquid
             assign product = block.settings.product
             assign title = block.settings.title

@@ -1,10 +1,16 @@
 {% liquid
+  # Mahando: Sektion im Shop ausblenden, solange die Kollektion leer ist (im Theme-Editor bleibt sie sichtbar)
+  assign mahando_hide = false
+  if request.design_mode == false and section.settings.collection != blank and section.settings.collection.products_count == 0
+    assign mahando_hide = true
+  endif
   assign max_items = section.settings.max_products
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
 %}
 
+{%- unless mahando_hide -%}
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
@@ -83,6 +89,7 @@
     {%- content_for 'blocks' -%}
   </div>
 </div>
+{%- endunless -%}
 
 {% schema %}
 {

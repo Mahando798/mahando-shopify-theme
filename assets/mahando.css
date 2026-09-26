@@ -44,8 +44,7 @@ product-price:has(.compare-at-price) .price-item__group.price,
 }
 
 /* Produktkarten: Titel maximal zwei Zeilen */
-product-card .product-card__title,
-product-card .product-title {
+product-card a.contents p[role="heading"] {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
