@@ -111,7 +111,7 @@ Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar blei
 `layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
 `blocks/_product-card.liquid`, `blocks/product-card.liquid`, `blocks/_product-card-group.liquid`,
 `snippets/card-gallery.liquid`, `snippets/theme-styles-variables.liquid`, `snippets/search.liquid`, `snippets/fonts.liquid`,
-`sections/header.liquid`, `config/*`, `locales/de.json`, `locales/en.default.json`, Templates und Section-Groups.
+`sections/header.liquid`, `snippets/meta-tags.liquid`, `snippets/cart-drawer.liquid`, `sections/main-cart.liquid`, `config/*`, `locales/de.json`, `locales/en.default.json`, Templates und Section-Groups.
 Andere Sprachdateien wurden entfernt (Shop läuft auf Deutsch, Englisch bleibt als Fallback).
 
 ## Entwicklung
