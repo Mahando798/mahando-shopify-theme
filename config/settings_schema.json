@@ -2287,6 +2287,24 @@
         "default": true
       },
       {
+        "type": "header",
+        "content": "Startseite – Suchmaschinen"
+      },
+      {
+        "type": "text",
+        "id": "mahando_seo_title",
+        "label": "Titel der Startseite",
+        "info": "Überschreibt den Titel aus Onlineshop → Konfigurationen. Bis 70 Zeichen.",
+        "default": "Mahando – Technik, Haushalt und Spielzeug online kaufen"
+      },
+      {
+        "type": "textarea",
+        "id": "mahando_seo_description",
+        "label": "Meta-Beschreibung der Startseite",
+        "info": "Bis 160 Zeichen.",
+        "default": "Markenware zu fairen Preisen: Computer, Foto, Gaming, Handy, Haushalt & Garten, Spielzeug, Wohnen, Sport. Versand aus Deutschland, ab 300 € versandkostenfrei."
+      },
+      {
         "type": "paragraph",
         "content": "Die echten Versandkosten werden in den Shopify-Versandprofilen eingerichtet. Diese Texte dienen nur der Anzeige im Theme."
       },
