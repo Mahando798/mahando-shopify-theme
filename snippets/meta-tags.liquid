@@ -19,10 +19,24 @@
 >
 
 {%- liquid
-  assign og_title = page_title | default: shop.name
+  # Mahando: Titel und Beschreibung der Startseite aus den Theme-Einstellungen (überschreiben die Onlineshop-Konfiguration)
+  assign seo_title = page_title
+  assign seo_description = page_description
+  if template.name == 'index'
+    if settings.mahando_seo_title != blank
+      assign seo_title = settings.mahando_seo_title
+    endif
+    if settings.mahando_seo_description != blank
+      assign seo_description = settings.mahando_seo_description
+    endif
+  elsif template.name == 'cart'
+    assign seo_title = 'content.your_cart' | t
+  endif
+
+  assign og_title = seo_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_description = seo_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -104,14 +118,10 @@
 >
 
 <title>
-  {%- if template.name == 'cart' -%}
-    {{ 'content.your_cart' | t }}
-  {%- else -%}
-    {{ page_title }}
-  {%- endif -%}
+  {{ seo_title }}
   {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
   {%- if current_page != 1 %} &ndash; Seite {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless seo_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
@@ -119,9 +129,9 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if seo_description %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ seo_description | escape }}"
   >
 {% endif %}
