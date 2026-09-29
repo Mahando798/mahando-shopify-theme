@@ -405,6 +405,11 @@
       "shipping_note": "zzgl. Versandkosten",
       "you_save": "Sie sparen {{ amount }}"
     },
+    "cart": {
+      "shipping_bar_remaining_html": "Noch <strong>{{ amount }}</strong> bis zum kostenlosen Versand",
+      "shipping_bar_reached": "Versandkostenfrei – Ihre Bestellung wird ohne Versandkosten geliefert",
+      "shipping_bar_note": "Gilt für Lieferungen innerhalb Deutschlands ab {{ threshold }} Bestellwert."
+    },
     "usp": {
       "phone_label": "Telefon"
     }
