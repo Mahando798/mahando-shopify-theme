@@ -252,3 +252,10 @@ product-card a.contents p[role="heading"] {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Warenkorb: Artikelbilder einpassen statt beschneiden (Freisteller auf Weiß) */
+.cart-items__media-image {
+  object-fit: contain;
+  background: #f5f8f9;
+  padding: 4px;
+}
