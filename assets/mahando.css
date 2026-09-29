@@ -259,3 +259,16 @@ product-card a.contents p[role="heading"] {
   background: #f5f8f9;
   padding: 4px;
 }
+
+/* Kontaktseite: Titel und Seitentext auf voller Seitenbreite, bündig mit den Kontaktkarten */
+main[data-template="page.contact"] .page-width-content {
+  --page-content-width: var(--normal-page-width);
+}
+
+.page-width-narrow main[data-template="page.contact"] .page-width-content {
+  --page-content-width: var(--narrow-page-width);
+}
+
+.page-width-wide main[data-template="page.contact"] .page-width-content {
+  --page-content-width: var(--wide-page-width);
+}
