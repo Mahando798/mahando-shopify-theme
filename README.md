@@ -50,13 +50,19 @@ im Theme-Editor werden zurück ins Repo committet.
    - `sale`: Bedingung „Preis ist reduziert“ (Sale = Artikel mit gesetztem Vergleichspreis/UVP).
    - **Wichtig:** Per API angelegte Kollektionen sind zunächst für keinen Vertriebskanal freigegeben (404 im Shop,
      Kacheln ohne Link). Im Admin unter Kollektion → „Vertriebskanäle“ den Onlineshop aktivieren.
-3. **Versand** (Einstellungen → Versand): Deutschland pauschal 4,99 €, kostenlos ab 300 € Bestellwert. Die Anzeige-
-   Texte im Theme stehen unter Theme-Einstellungen → Mahando → Versandkosten.
+3. **Versand** (Einstellungen → Versand): Deutschland pauschal 4,99 €, kostenlos ab 300 € Bestellwert. Es wird nur
+   innerhalb Deutschlands geliefert – im Versandprofil darf nur die Zone „Deutschland“ existieren (Zonen „EU“ und
+   „International“ löschen). Die Anzeige-Texte im Theme stehen unter Theme-Einstellungen → Mahando → Versandkosten,
+   der Hinweis „Wir liefern derzeit ausschließlich innerhalb Deutschlands“ steht in der Versandrichtlinie und im
+   Akkordeon „Versand & Rückgabe“ der Produktseite (`templates/product.json`).
 4. **Rechtstexte** (Einstellungen → Richtlinien): Versandrichtlinie unbedingt ausfüllen – der Link „zzgl. Versandkosten“
    an jedem Preis zeigt dorthin. Widerruf, AGB, Datenschutz, Impressum als Seiten anlegen und im Menü `rechtliches`
    verlinken. Rechtstexte am besten über einen Anbieter (IT-Recht Kanzlei / Händlerbund) mit Shopify-Schnittstelle.
 5. **Zahlungen:** Shopify Payments (Karte, Apple/Google Pay, Klarna) + PayPal. Die Icons im Footer folgen automatisch.
-6. **Steuern:** Einstellungen → Steuern → „Alle Preise inkl. Steuern“ aktivieren, sonst fehlt „inkl. MwSt.“.
+6. **Steuern:** Einstellungen → Steuern und Zollgebühren: „Umsatzsteuer in Produktpreis und Versandtarif einschließen“
+   und „Umsatzsteuer auf Versand erheben“ an; unter „Europäische Union“ muss für Deutschland die MwSt.-Erhebung mit
+   der USt-IdNr. aktiv sein (seit 29.09.2026 aktiv – vorher rechnete Shopify mit 0 %). Kein OSS, da nur Deutschland
+   beliefert wird.
 7. **Filter:** App „Shopify Search & Discovery“ installieren und Filter aktivieren: Verfügbarkeit, Preis, Produkttyp,
    Hersteller, Metafeld `mahando.zustand`.
 8. **Metafeld-Definitionen** (Einstellungen → Benutzerdefinierte Daten → Produkte), Namespace `mahando` –
@@ -77,6 +83,38 @@ im Theme-Editor werden zurück ins Repo committet.
 
    Filter nach Hersteller/Produkttyp kommen aus der App „Shopify Search & Discovery“ (installiert) – dort unter
    „Filter“ anlegen; das Theme zeigt alle konfigurierten Filter automatisch links an.
+
+9. **Kategorietexte:** Alle Haupt- und Unterkategorien sowie Sale haben eine Beschreibung (2–3 Sätze, Sie-Form,
+   gesetzt am 29.09.2026). Sie erscheint im Kopf der Kategorieseite; fehlt sie, zeigt das Theme einen Standardtext.
+
+## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
+
+| Feld | Inhalt | Beispiel |
+|---|---|---|
+| Titel | Marke Modell – Art, wichtigste Merkmale (Zustand) | `Kärcher LTR 3-18 Dual Battery Set – Akku-Rasentrimmer 36 V, 30 cm, inkl. 2 Akkus & Ladegerät (Neu & OVP)` |
+| Beschreibung | 2 kurze Absätze, sachlich, Sie-Form, keine Werbesprüche, keine Aufzählung (die kommt aus `highlights`) | „Der Kärcher LTR 3-18 ist ein Akku-Rasentrimmer mit 30 cm Schnittkreis …“ |
+| Produkttyp | Artikelart, ein Wort/Begriff | `Rasentrimmer`, `Router`, `Kochtopf`, `Gel-Blaster` |
+| Tags | Unterkategorie exakt wie im Shop (`Garten`, `Netzwerk`, `Küche`, …) + `elektro` (Elektrogerät), `akku`/`batterie` (enthält Akku/Batterie), `refurbished`/`b-ware`/… (Zustand) | `Garten, elektro, akku` |
+| `mahando.highlights` | 4–5 Zeilen „Auf einen Blick“ | `36 V Dual-Akku-System mit zwei 18-V-Akkus` |
+| `mahando.technische_daten` | eine Zeile je Wert `Schlüssel: Wert` | `Schnittkreis: 30 cm` |
+| `mahando.lieferumfang` | eine Zeile je Position; nur angeben, wenn sicher bekannt | `2 × Akku Battery Power 18 V / 2,0 Ah` |
+| `mahando.sicherheitshinweise` | Warnhinweise (Spielzeug ab 14, Akkus, Kleinteile) | „Nicht auf Augen oder Gesicht zielen.“ |
+| `mahando.zustand` / `zustand_hinweis` | nur bei Nicht-Neuware | `refurbished` / „Professionell aufbereitet, geprüft …“ |
+| `mahando.hersteller_*`, `eu_verantwortlicher` | GPSR-Angaben je Marke (siehe Tabelle) | |
+
+**GPSR-Herstellerangaben je Marke** (Stand 29.09.2026, Quellen: Hersteller-Impressum/-Anleitungen, GPSR-Blöcke bei Otto/Alternate/Hornbach; in Xentral als Hersteller-Stammdaten pflegen):
+
+| Marke | Hersteller | Anschrift | Kontakt | EU-Verantwortlicher |
+|---|---|---|---|---|
+| ABUS | ABUS August Bremicker Söhne KG | Altenhofer Weg 25, 58300 Wetter (Ruhr), DE | info@abus.de, +49 2335 634-0 | – |
+| AVM / FRITZ! | FRITZ! GmbH (vormals AVM GmbH) | Alt-Moabit 95, 10559 Berlin, DE | info@fritz.com, +49 30 39976-0 | – |
+| Bosch (Home & Garden) | Robert Bosch Power Tools GmbH | Max-Lang-Straße 40-46, 70771 Leinfelden-Echterdingen, DE | kontakt@bosch.de, +49 711 400 40990 | – |
+| Derbystar | DERBYSTAR Sportartikelfabrik GmbH | Feldstraße 195, 47574 Goch, DE | info@derbystar.de, +49 2823 325-0 | – |
+| Hisense (Audio) | Xin Yang (Hong Kong) Co., Ltd. | 148 Connaught Road West, Hongkong | xyzlb@xinyangitc.com | Gorenje gospodinjski aparati, d.o.o., Partizanska cesta 12, 3320 Velenje, SI, info@gorenje.com – **mit Verpackung abgleichen** |
+| Kärcher | Alfred Kärcher SE & Co. KG | Alfred-Kärcher-Straße 28-40, 71364 Winnenden, DE | info@karcher.com, +49 7195 14-0 | – |
+| New Era | New Era Cap Co., Inc. | 160 Delaware Avenue, Buffalo, NY 14202, USA | customer.care@neweracap.com | New Era Cap GmbH, Lichtstraße 25, 50825 Köln, germany@neweracap.com |
+| Tefal | SEB S.A.S. (Groupe SEB) | 21260 Selongey, FR | Tefal-Service +49 7331 256 256, tefal.de/contact-form | – (Vertrieb DE: Groupe SEB WMF Consumer GmbH, Geislingen) – **mit Verpackung abgleichen** |
+| X-SHOT (ZURU) | ZURU Inc. | Energy Plaza, 92 Granville Road, Kowloon, Hongkong | care@zuru.com, +852 3746 9003 | ZURU Germany GmbH, Bleichstraße 8-10, 40211 Düsseldorf, care@zuru.com |
 
 ## Datenfluss aus Xentral
 
@@ -100,12 +138,17 @@ Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
 
 ## Eigene Dateien (alles mit Präfix `mahando-`)
 
-- `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`, `mahando-product-meta.js`
-- `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`
+- `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`,
+  `mahando-product-meta.js`, `mahando-delivery.js`
+- `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`, `mahando-zustand`, `mahando-product-category`,
+  `mahando-shipping-bar`
 - `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
-  `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`
+  `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`, `mahando-highlights`,
+  `mahando-delivery-box`, `mahando-trust-list`, `mahando-details-table`, `mahando-section-title`,
+  `mahando-product-chips`, `mahando-card-button`
 - `sections/`: `mahando-usp-bar`, `mahando-hero`, `mahando-icon-cards`, `mahando-categories`,
-  `mahando-collection-chips`, `mahando-footer-bar`
+  `mahando-collection-chips`, `mahando-collection-header`, `mahando-breadcrumb`, `mahando-contact-info`,
+  `mahando-footer-bar`
 
 Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar bleiben): `layout/theme.liquid`,
 `layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
