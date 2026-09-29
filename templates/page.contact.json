@@ -19,7 +19,7 @@
             "text": "<h1>{{ closest.page.title }}</h1>",
             "width": "100%",
             "max_width": "normal",
-            "alignment": "center",
+            "alignment": "left",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
@@ -44,7 +44,7 @@
             "text": "{{ closest.page.content }}",
             "width": "100%",
             "max_width": "narrow",
-            "alignment": "center",
+            "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "",
@@ -69,8 +69,8 @@
       ],
       "settings": {
         "content_direction": "column",
-        "gap": 32,
-        "padding-block-start": 40,
+        "gap": 16,
+        "padding-block-start": 16,
         "padding-block-end": 0
       }
     },
@@ -105,9 +105,35 @@
             }
           },
           "block_order": []
+        },
+        "form_heading": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h2>Nachricht schreiben</h2><p>Wir antworten in der Regel innerhalb eines Werktags an die angegebene E-Mail-Adresse.</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
+        "form_heading",
         "contact_form_UwiCkQ"
       ],
       "name": "t:names.contact_form",
@@ -117,9 +143,9 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
+        "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 32,
+        "gap": 16,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
@@ -134,13 +160,36 @@
         "border_width": 1,
         "border_opacity": 100,
         "border_radius": 0,
-        "padding-block-start": 32,
-        "padding-block-end": 84
+        "padding-block-start": 8,
+        "padding-block-end": 64
+      }
+    },
+    "kontakt": {
+      "type": "mahando-contact-info",
+      "settings": {
+        "eyebrow": "Kundenservice",
+        "heading": "So erreichen Sie uns",
+        "text": "<p>Unser Kundenservice hilft Ihnen bei Fragen zu Bestellung, Versand und Rücksendung. Bitte nennen Sie bei Anfragen zu einer Bestellung Ihre Bestellnummer, dann können wir Ihr Anliegen schneller bearbeiten.</p>",
+        "email_label": "E-Mail",
+        "email": "support@mahando.de",
+        "email_note": "Antwort in der Regel innerhalb eines Werktags.",
+        "phone_label": "Telefon",
+        "phone": "",
+        "hours_prefix": "Erreichbar",
+        "hours": "",
+        "returns_label": "Rücksendung",
+        "returns_link": "Rücksendung anmelden",
+        "returns_subject": "Rücksendung anmelden",
+        "returns_note": "Bitte melden Sie Rücksendungen vorab per E-Mail mit Ihrer Bestellnummer an. Sie erhalten dann die Rücksendeadresse und alle weiteren Schritte.",
+        "section_width": "page-width",
+        "padding-block-start": 8,
+        "padding-block-end": 24
       }
     }
   },
   "order": [
     "main",
+    "kontakt",
     "form"
   ]
 }

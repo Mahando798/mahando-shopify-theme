@@ -1,0 +1,288 @@
+{%- comment -%}
+  Kontaktkarten für die Kontaktseite: E-Mail, Telefon mit Servicezeiten, Rücksendung.
+  Telefon und Servicezeiten kommen aus den Theme-Einstellungen (Mahando → Kontakt), sofern hier nichts anderes steht.
+{%- endcomment -%}
+
+{%- liquid
+  assign email = section.settings.email | default: 'support@mahando.de'
+  assign phone = section.settings.phone | default: settings.mahando_phone
+  assign hours = section.settings.hours | default: settings.mahando_hours
+  assign phone_href = phone | replace: ' ', '' | replace: '(0)', '' | replace: '-', '' | replace: '/', ''
+-%}
+
+<div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+    <div class="mahando-contact__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mahando-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="h3 mahando-contact__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="mahando-contact__text rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="mahando-contact__grid">
+    <div class="mahando-contact__card">
+      <span class="mahando-contact__icon">{% render 'mahando-icon', icon: 'mail' %}</span>
+      <p class="mahando-contact__label">{{ section.settings.email_label }}</p>
+      <a class="mahando-contact__value" href="mailto:{{ email }}">{{ email }}</a>
+      {%- if section.settings.email_note != blank -%}<p class="mahando-contact__note">{{ section.settings.email_note }}</p>{%- endif -%}
+    </div>
+
+    {%- if phone != blank -%}
+      <div class="mahando-contact__card">
+        <span class="mahando-contact__icon">{% render 'mahando-icon', icon: 'headset' %}</span>
+        <p class="mahando-contact__label">{{ section.settings.phone_label }}</p>
+        <a class="mahando-contact__value" href="tel:{{ phone_href }}">{{ phone }}</a>
+        {%- if hours != blank -%}
+          <p class="mahando-contact__note">{{ section.settings.hours_prefix }} {{ hours }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.returns_label != blank -%}
+      <div class="mahando-contact__card">
+        <span class="mahando-contact__icon">{% render 'mahando-icon', icon: 'undo' %}</span>
+        <p class="mahando-contact__label">{{ section.settings.returns_label }}</p>
+        <a class="mahando-contact__value" href="mailto:{{ email }}?subject={{ section.settings.returns_subject | url_encode }}">{{ section.settings.returns_link }}</a>
+        {%- if section.settings.returns_note != blank -%}<p class="mahando-contact__note">{{ section.settings.returns_note }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-contact__head {
+    max-width: 70ch;
+    margin-bottom: 20px;
+  }
+
+  .mahando-contact__heading {
+    margin: 0 0 8px;
+  }
+
+  .mahando-contact__text {
+    font-size: var(--font-size--sm);
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-contact__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-contact__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .mahando-contact__card {
+    display: grid;
+    gap: 4px;
+    align-content: start;
+    padding: 20px 20px 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-background);
+  }
+
+  .mahando-contact__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #eef3f5;
+    color: var(--color-primary-button-background, #0a7e83);
+    margin-bottom: 8px;
+  }
+
+  .mahando-contact__icon .mahando-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mahando-contact__label {
+    margin: 0;
+    font-size: var(--font-size--xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-contact__value {
+    font-family: var(--font-heading--family);
+    font-weight: 600;
+    font-size: var(--font-size--md);
+    line-height: 1.3;
+    color: var(--color-foreground);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .mahando-contact__value:hover {
+    color: var(--color-primary-button-background, #0a7e83);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .mahando-contact__note {
+    margin: 2px 0 0;
+    font-size: var(--font-size--sm);
+    color: var(--color-foreground-subdued);
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kontaktkarten (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Dachzeile",
+      "default": "Kundenservice"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "So erreichen Sie uns"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Unser Kundenservice hilft Ihnen bei Fragen zu Bestellung, Versand und Rücksendung. Bitte nennen Sie bei Anfragen zu einer Bestellung Ihre Bestellnummer, dann können wir Ihr Anliegen schneller bearbeiten.</p>"
+    },
+    {
+      "type": "header",
+      "content": "E-Mail"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Beschriftung",
+      "default": "E-Mail"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Adresse",
+      "default": "support@mahando.de"
+    },
+    {
+      "type": "text",
+      "id": "email_note",
+      "label": "Hinweis",
+      "default": "Antwort in der Regel innerhalb eines Werktags."
+    },
+    {
+      "type": "header",
+      "content": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Beschriftung",
+      "default": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Nummer",
+      "info": "Leer lassen, um die Nummer aus den Theme-Einstellungen (Mahando → Kontakt) zu verwenden."
+    },
+    {
+      "type": "text",
+      "id": "hours_prefix",
+      "label": "Text vor den Servicezeiten",
+      "default": "Erreichbar"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Servicezeiten",
+      "info": "Leer lassen, um die Servicezeiten aus den Theme-Einstellungen zu verwenden."
+    },
+    {
+      "type": "header",
+      "content": "Rücksendung"
+    },
+    {
+      "type": "text",
+      "id": "returns_label",
+      "label": "Beschriftung (leer = Karte ausblenden)",
+      "default": "Rücksendung"
+    },
+    {
+      "type": "text",
+      "id": "returns_link",
+      "label": "Linktext",
+      "default": "Rücksendung anmelden"
+    },
+    {
+      "type": "text",
+      "id": "returns_subject",
+      "label": "Betreff der E-Mail",
+      "default": "Rücksendung anmelden"
+    },
+    {
+      "type": "text",
+      "id": "returns_note",
+      "label": "Hinweis",
+      "default": "Bitte melden Sie Rücksendungen vorab per E-Mail mit Ihrer Bestellnummer an. Sie erhalten dann die Rücksendeadresse und alle weiteren Schritte."
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kontaktkarten (Mahando)",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}
