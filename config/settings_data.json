@@ -115,7 +115,7 @@
     "currency_code_enabled_cart_total": false,
     "quick_add": true,
     "mobile_quick_add": false,
-    "show_second_image_on_hover": true,
+    "show_second_image_on_hover": false,
     "product_card_carousel": false,
     "quick_add_background": "{{ settings.color_palette.color1 }}",
     "quick_add_text": "{{ settings.color_palette.background }}",
