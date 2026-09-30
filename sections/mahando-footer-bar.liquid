@@ -26,6 +26,18 @@
     {%- if section.settings.badge_html != blank -%}
       <div class="mahando-footer-bar__badge">{{ section.settings.badge_html }}</div>
     {%- endif -%}
+    {%- if section.settings.show_withdraw -%}
+      {%- comment -%}
+        Widerrufsbutton nach § 356a BGB: Link mit #widerrufsbutton öffnet das Formular der App „EU Widerrufsbutton“
+        (App-Einbettung „Widerrufsbutton Embed“ muss aktiv sein). Ohne App führt der Link zur Widerrufsbelehrung.
+      {%- endcomment -%}
+      <div class="mahando-footer-bar__withdraw">
+        <a class="mahando-withdraw-button" href="{{ section.settings.withdraw_url | default: '#widerrufsbutton' }}">{{ section.settings.withdraw_label | default: 'Vertrag widerrufen' }}</a>
+        {%- if section.settings.withdraw_note != blank -%}
+          <span class="mahando-footer-bar__withdraw-note">{{ section.settings.withdraw_note }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     {%- if section.settings.note != blank -%}
       <p class="mahando-footer-bar__note">{{ section.settings.note }}</p>
     {%- endif -%}
@@ -86,6 +98,59 @@
     flex-basis: 100%;
     opacity: 0.8;
   }
+
+  .mahando-footer-bar__withdraw {
+    margin-inline-start: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  /* Eigene Optik behalten, auch wenn die App ihre !important-Styles nachlädt (höhere Spezifität) */
+  .mahando-footer-bar a.mahando-withdraw-button,
+  .mahando-footer-bar a.mahando-withdraw-button[href$='#widerrufsbutton'] {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 22px !important;
+    border-radius: 8px !important;
+    border: 2px solid #fff !important;
+    background-color: transparent !important;
+    color: #fff !important;
+    font-family: var(--font-heading--family);
+    font-weight: 700 !important;
+    font-size: var(--font-size--sm) !important;
+    letter-spacing: 0.01em;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    cursor: pointer;
+  }
+
+  .mahando-footer-bar a.mahando-withdraw-button:hover,
+  .mahando-footer-bar a.mahando-withdraw-button:focus-visible {
+    background-color: #fff !important;
+    color: #1d2b33 !important;
+  }
+
+  .mahando-footer-bar__withdraw-note {
+    opacity: 0.8;
+    text-align: end;
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-footer-bar__withdraw {
+      margin-inline-start: 0;
+      align-items: flex-start;
+      flex-basis: 100%;
+    }
+
+    .mahando-footer-bar__withdraw-note {
+      text-align: start;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -130,6 +195,35 @@
       "id": "note",
       "label": "Hinweiszeile",
       "default": "Alle Preise inkl. gesetzlicher MwSt., zzgl. Versandkosten."
+    },
+    {
+      "type": "header",
+      "content": "Widerrufsbutton (§ 356a BGB)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_withdraw",
+      "label": "Button „Vertrag widerrufen“ anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "withdraw_label",
+      "label": "Beschriftung",
+      "default": "Vertrag widerrufen"
+    },
+    {
+      "type": "text",
+      "id": "withdraw_url",
+      "label": "Ziel",
+      "info": "#widerrufsbutton öffnet das Formular der App „EU Widerrufsbutton“.",
+      "default": "#widerrufsbutton"
+    },
+    {
+      "type": "text",
+      "id": "withdraw_note",
+      "label": "Hinweis unter dem Button",
+      "default": "Widerruf innerhalb von 14 Tagen – Formular öffnet sich direkt"
     },
     {
       "type": "header",

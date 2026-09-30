@@ -166,7 +166,11 @@
         "note": "Alle Preise inkl. gesetzlicher MwSt., zzgl. Versandkosten.",
         "background_color": "{{ settings.color_palette.foreground }}",
         "text_color": "#C9D5DB",
-        "divider_color": "#3B4B54"
+        "divider_color": "#3B4B54",
+        "show_withdraw": true,
+        "withdraw_label": "Vertrag widerrufen",
+        "withdraw_url": "#widerrufsbutton",
+        "withdraw_note": "Widerruf innerhalb von 14 Tagen – Formular öffnet sich direkt"
       }
     },
     "utilities": {
