@@ -1,0 +1,643 @@
+{%- comment -%}
+  „Über uns“-Seite: Einleitung, großes Lagerfoto, Kennzahlen, Geschichte mit Foto, „So arbeiten wir“-Karten,
+  zweites Lagerfoto, Inhaber-Karte und Kontakt-Hinweis. Bilder kommen aus „Inhalt → Dateien“ (Bildauswahl),
+  ohne Auswahl werden die mitgelieferten Theme-Fotos (assets/mahando-ueber-uns-*.jpg) verwendet.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_fallback = 'mahando-ueber-uns-halle.jpg' | asset_url
+  assign story_fallback = 'mahando-ueber-uns-verpacken.jpg' | asset_url
+  assign wide_fallback = 'mahando-ueber-uns-ware.jpg' | asset_url
+  assign owner_fallback = 'mahando-ueber-uns-marco.jpg' | asset_url
+-%}
+
+<div class="section section--{{ section.settings.section_width }} spacing-style mahando-about" style="{% render 'spacing-style', settings: section.settings %}">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank -%}
+    <div class="mahando-about__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="mahando-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="h2 mahando-about__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.intro != blank -%}<div class="mahando-about__intro rte">{{ section.settings.intro }}</div>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <figure class="mahando-about__figure mahando-about__figure--hero">
+    {%- if section.settings.hero_image != blank -%}
+      {{ section.settings.hero_image | image_url: width: 2000 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600, 2000', sizes: '(min-width: 1400px) 1320px, 100vw', alt: section.settings.hero_alt | escape }}
+    {%- else -%}
+      <img src="{{ hero_fallback }}" width="1320" height="957" alt="{{ section.settings.hero_alt | escape }}" loading="eager">
+    {%- endif -%}
+    {%- if section.settings.hero_caption != blank -%}<figcaption>{{ section.settings.hero_caption }}</figcaption>{%- endif -%}
+  </figure>
+
+  {%- assign facts = section.blocks | where: 'type', 'fact' -%}
+  {%- if facts.size > 0 -%}
+    <ul class="mahando-about__facts mahando-about__facts--{{ facts.size }}" role="list">
+      {%- for block in facts -%}
+        <li class="mahando-about__fact" {{ block.shopify_attributes }}>
+          <strong class="mahando-about__fact-value">{{ block.settings.value }}</strong>
+          <span class="mahando-about__fact-label">{{ block.settings.label }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- if section.settings.story_heading != blank or section.settings.story_text != blank -%}
+    <div class="mahando-about__story">
+      <div class="mahando-about__story-text">
+        {%- if section.settings.story_heading != blank -%}<h2 class="h3">{{ section.settings.story_heading }}</h2>{%- endif -%}
+        {%- if section.settings.story_text != blank -%}<div class="rte">{{ section.settings.story_text }}</div>{%- endif -%}
+      </div>
+      <figure class="mahando-about__figure mahando-about__figure--story">
+        {%- if section.settings.story_image != blank -%}
+          {{ section.settings.story_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 800, 1200', sizes: '(min-width: 990px) 560px, 100vw', alt: section.settings.story_alt | escape }}
+        {%- else -%}
+          <img src="{{ story_fallback }}" width="1320" height="844" alt="{{ section.settings.story_alt | escape }}" loading="lazy">
+        {%- endif -%}
+        {%- if section.settings.story_caption != blank -%}<figcaption>{{ section.settings.story_caption }}</figcaption>{%- endif -%}
+      </figure>
+    </div>
+  {%- endif -%}
+
+  {%- assign points = section.blocks | where: 'type', 'point' -%}
+  {%- if points.size > 0 -%}
+    <div class="mahando-about__points-wrap">
+      {%- if section.settings.points_heading != blank -%}<h2 class="h3 mahando-about__points-heading">{{ section.settings.points_heading }}</h2>{%- endif -%}
+      <div class="mahando-about__points">
+        {%- for block in points -%}
+          <div class="mahando-about__point" {{ block.shopify_attributes }}>
+            <span class="mahando-about__point-icon">{% render 'mahando-icon', icon: block.settings.icon %}</span>
+            {%- if block.settings.heading != blank -%}<strong class="mahando-about__point-heading">{{ block.settings.heading }}</strong>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="mahando-about__point-text">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_wide_image -%}
+    <figure class="mahando-about__figure mahando-about__figure--wide">
+      {%- if section.settings.wide_image != blank -%}
+        {{ section.settings.wide_image | image_url: width: 2000 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600, 2000', sizes: '(min-width: 1400px) 1320px, 100vw', alt: section.settings.wide_alt | escape }}
+      {%- else -%}
+        <img src="{{ wide_fallback }}" width="1932" height="1932" alt="{{ section.settings.wide_alt | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if section.settings.wide_caption != blank -%}<figcaption>{{ section.settings.wide_caption }}</figcaption>{%- endif -%}
+    </figure>
+  {%- endif -%}
+
+  {%- if section.settings.owner_name != blank -%}
+    <div class="mahando-about__owner">
+      <div class="mahando-about__owner-image">
+        {%- if section.settings.owner_image != blank -%}
+          {{ section.settings.owner_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 800', sizes: '(min-width: 750px) 300px, 60vw', alt: section.settings.owner_name | escape }}
+        {%- else -%}
+          <img src="{{ owner_fallback }}" width="840" height="840" alt="{{ section.settings.owner_name | escape }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="mahando-about__owner-body">
+        <p class="mahando-eyebrow">{{ section.settings.owner_role }}</p>
+        <h2 class="h3 mahando-about__owner-name">{{ section.settings.owner_name }}</h2>
+        {%- if section.settings.owner_text != blank -%}<div class="rte">{{ section.settings.owner_text }}</div>{%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.cta_text != blank or section.settings.cta_label != blank -%}
+    <div class="mahando-about__cta">
+      {%- if section.settings.cta_text != blank -%}<p class="mahando-about__cta-text">{{ section.settings.cta_text }}</p>{%- endif -%}
+      {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+        <a class="button button--secondary mahando-about__cta-button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .mahando-about {
+    display: grid;
+    gap: 40px;
+  }
+
+  .mahando-about__head {
+    max-width: 78ch;
+  }
+
+  .mahando-about__heading {
+    margin: 0 0 14px;
+    line-height: 1.15;
+  }
+
+  .mahando-about__intro {
+    font-size: var(--font-size--md);
+    line-height: 1.6;
+  }
+
+  .mahando-about__intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-about__figure {
+    margin: 0;
+  }
+
+  .mahando-about__figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+
+  .mahando-about__figure--hero img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .mahando-about__figure--wide img {
+    aspect-ratio: 21 / 9;
+    object-position: center 60%;
+  }
+
+  .mahando-about__figure figcaption {
+    margin-top: 8px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-about__facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .mahando-about__fact {
+    display: grid;
+    gap: 4px;
+    padding: 20px 20px 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-background);
+  }
+
+  .mahando-about__fact-value {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--2xl);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-about__fact-label {
+    font-size: var(--font-size--sm);
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-about__story {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+  }
+
+  .mahando-about__story-text h2 {
+    margin: 0 0 12px;
+  }
+
+  .mahando-about__story-text .rte {
+    line-height: 1.6;
+  }
+
+  .mahando-about__story-text .rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-about__figure--story img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .mahando-about__points-heading {
+    margin: 0 0 16px;
+  }
+
+  .mahando-about__points {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .mahando-about__point {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 22px 20px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-background);
+  }
+
+  .mahando-about__point-icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #eef3f5;
+    color: var(--color-primary-button-background, #0a7e83);
+    margin-bottom: 4px;
+  }
+
+  .mahando-about__point-icon .mahando-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mahando-about__point-heading {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--md);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .mahando-about__point-text {
+    margin: 0;
+    font-size: var(--font-size--sm);
+    line-height: 1.5;
+    color: var(--color-foreground-subdued);
+  }
+
+  .mahando-about__owner {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+    padding: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-background);
+  }
+
+  .mahando-about__owner-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .mahando-about__owner-name {
+    margin: 0 0 10px;
+  }
+
+  .mahando-about__owner-body .rte {
+    line-height: 1.6;
+  }
+
+  .mahando-about__owner-body .rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mahando-about__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    padding: 24px 28px;
+    border-radius: 14px;
+    background: #eef3f5;
+  }
+
+  .mahando-about__cta-text {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--lg);
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 989px) {
+    .mahando-about__facts,
+    .mahando-about__points {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mahando-about__story {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .mahando-about__owner {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-about {
+      gap: 32px;
+    }
+
+    .mahando-about__facts {
+      gap: 10px;
+    }
+
+    .mahando-about__fact {
+      padding: 16px;
+    }
+
+    .mahando-about__points {
+      grid-template-columns: 1fr;
+    }
+
+    .mahando-about__figure--hero img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .mahando-about__figure--wide img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .mahando-about__owner {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+
+    .mahando-about__owner-image {
+      max-width: 220px;
+    }
+
+    .mahando-about__cta {
+      padding: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Über uns (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Einleitung"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Dachzeile",
+      "default": "Über uns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Onlinehandel aus Büren – seit 2022 auf Amazon, eBay und Kaufland, jetzt auch direkt."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Einleitungstext"
+    },
+    {
+      "type": "header",
+      "content": "Großes Foto"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Foto",
+      "info": "Leer lassen für das mitgelieferte Lagerfoto."
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Bildbeschreibung (Alt-Text)",
+      "default": "Lagerhalle von Mahando in Büren"
+    },
+    {
+      "type": "text",
+      "id": "hero_caption",
+      "label": "Bildunterschrift"
+    },
+    {
+      "type": "header",
+      "content": "Geschichte"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Überschrift",
+      "default": "Wie Mahando entstanden ist"
+    },
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Foto",
+      "info": "Leer lassen für das mitgelieferte Foto."
+    },
+    {
+      "type": "text",
+      "id": "story_alt",
+      "label": "Bildbeschreibung (Alt-Text)",
+      "default": "Verpacken von Bestellungen bei Mahando"
+    },
+    {
+      "type": "text",
+      "id": "story_caption",
+      "label": "Bildunterschrift"
+    },
+    {
+      "type": "header",
+      "content": "So arbeiten wir"
+    },
+    {
+      "type": "text",
+      "id": "points_heading",
+      "label": "Überschrift",
+      "default": "So arbeiten wir"
+    },
+    {
+      "type": "header",
+      "content": "Zweites großes Foto"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wide_image",
+      "label": "Anzeigen",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "wide_image",
+      "label": "Foto",
+      "info": "Leer lassen für das mitgelieferte Foto."
+    },
+    {
+      "type": "text",
+      "id": "wide_alt",
+      "label": "Bildbeschreibung (Alt-Text)",
+      "default": "Palettenlager von Mahando"
+    },
+    {
+      "type": "text",
+      "id": "wide_caption",
+      "label": "Bildunterschrift"
+    },
+    {
+      "type": "header",
+      "content": "Inhaber"
+    },
+    {
+      "type": "image_picker",
+      "id": "owner_image",
+      "label": "Foto",
+      "info": "Leer lassen für das mitgelieferte Foto."
+    },
+    {
+      "type": "text",
+      "id": "owner_role",
+      "label": "Rolle",
+      "default": "Inhaber"
+    },
+    {
+      "type": "text",
+      "id": "owner_name",
+      "label": "Name",
+      "default": "Marco Haase"
+    },
+    {
+      "type": "richtext",
+      "id": "owner_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Kontakt-Hinweis"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "Fragen zu einem Artikel oder zu Ihrer Bestellung?"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button-Beschriftung",
+      "default": "Zum Kundenservice"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button-Ziel"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Kennzahl",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Zahl",
+          "default": "200.000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Beschreibung",
+          "default": "Bestellungen"
+        }
+      ]
+    },
+    {
+      "type": "point",
+      "name": "Arbeitsweise",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "box", "label": "Paket" },
+            { "value": "truck", "label": "Versand" },
+            { "value": "check", "label": "Haken" },
+            { "value": "shield", "label": "Schild" },
+            { "value": "headset", "label": "Kundenservice" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "star", "label": "Stern" },
+            { "value": "user", "label": "Person" },
+            { "value": "mail", "label": "E-Mail" },
+            { "value": "undo", "label": "Rückgabe" },
+            { "value": "search", "label": "Lupe" },
+            { "value": "tag", "label": "Preisschild" }
+          ],
+          "default": "box"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Überschrift"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Über uns (Mahando)",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

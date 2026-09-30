@@ -1,0 +1,146 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 16,
+        "padding-block-start": 24,
+        "padding-block-end": 0
+      }
+    },
+    "ueber_uns": {
+      "type": "mahando-about",
+      "blocks": {
+        "fact_bestellungen": {
+          "type": "fact",
+          "settings": {
+            "value": "200.000+",
+            "label": "Bestellungen seit 2022 – rund 80.000 davon allein 2026"
+          }
+        },
+        "fact_paletten": {
+          "type": "fact",
+          "settings": {
+            "value": "600+",
+            "label": "Paletten Ware auf Lager"
+          }
+        },
+        "fact_flaeche": {
+          "type": "fact",
+          "settings": {
+            "value": "1.200 m²",
+            "label": "Lagerfläche in drei Hallen in Büren"
+          }
+        },
+        "fact_versand": {
+          "type": "fact",
+          "settings": {
+            "value": "Bis 13 Uhr",
+            "label": "bestellt – Versand noch am selben Werktag"
+          }
+        },
+        "point_lager": {
+          "type": "point",
+          "settings": {
+            "icon": "box",
+            "heading": "Eigenes Lager",
+            "text": "Alle Artikel im Shop liegen bei uns in Büren. Was Sie bestellen, geht direkt aus unserem Lager an Sie – kein Dropshipping, keine Lieferung über Dritte."
+          }
+        },
+        "point_versand": {
+          "type": "point",
+          "settings": {
+            "icon": "truck",
+            "heading": "Versand an jedem Werktag",
+            "text": "Bestellungen bis 13 Uhr verlassen unser Lager noch am selben Werktag – in der Regel mit DHL, sperrige Ware per Spedition."
+          }
+        },
+        "point_pruefung": {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "heading": "Geprüft und klar gekennzeichnet",
+            "text": "Jede Bestellung wird von Hand kommissioniert und kontrolliert. Zustand, Lieferumfang und Herstellerangaben stehen bei jedem Artikel – B-Ware und aufbereitete Geräte kennzeichnen wir eindeutig."
+          }
+        },
+        "point_service": {
+          "type": "point",
+          "settings": {
+            "icon": "headset",
+            "heading": "Kundenservice vom Inhaber",
+            "text": "Fragen beantworten wir selbst, nicht ein Callcenter. Am schnellsten erreichen Sie uns per E-Mail an support@mahando.de; telefonisch ist der Inhaber Mo–Fr 8–15 Uhr erreichbar, soweit es das Tagesgeschäft zulässt."
+          }
+        }
+      },
+      "block_order": [
+        "fact_bestellungen",
+        "fact_paletten",
+        "fact_flaeche",
+        "fact_versand",
+        "point_lager",
+        "point_versand",
+        "point_pruefung",
+        "point_service"
+      ],
+      "settings": {
+        "eyebrow": "Über uns",
+        "heading": "Onlinehandel aus Büren – seit 2022 auf Amazon, eBay und Kaufland, jetzt auch direkt.",
+        "intro": "<p>Mahando ist der Onlinehandel von Marco Haase aus Büren in Ostwestfalen. Was 2022 mit gebrauchten Spielekonsolen begann, ist heute ein Handelsunternehmen mit drei Lagerhallen, mehr als 200.000 Bestellungen über die großen Marktplätze und einem kleinen Team, das jede Sendung selbst verpackt. Mit dem eigenen Shop verkaufen wir unsere Markenartikel jetzt auch direkt – aus eigenem Lager, zu marktüblichen Preisen und mit einem Kundenservice, der die Ware kennt.</p>",
+        "hero_alt": "Lagerhalle von Mahando in Büren mit Palettenware und Hubwagen",
+        "hero_caption": "Eine unserer drei Lagerhallen in Büren",
+        "story_heading": "Wie Mahando entstanden ist",
+        "story_text": "<p>Angefangen hat Marco Haase 2022 mit 18 Jahren im Gebrauchthandel: Spielekonsolen und Videospiele, angekauft, geprüft, instand gesetzt und wieder verkauft. Im August 2024 folgte der Wechsel zum Marktplatzhandel auf Amazon, eBay und Kaufland – mit Markenware aus dem Großhandel und Pokémon-Sammelkarten.</p><p>Verpackt wurde anfangs dort, wo Platz war. Heute lagern wir auf über 1.200 m² in drei Hallen in Büren, mit festen Abläufen für Wareneingang, Prüfung und Versand. Für 2026 rechnen wir mit einem Umsatz im achtstelligen Bereich. Neben dem Onlinehandel gibt es ein kleines Ladenlokal in der Postfiliale an der Haarener Straße 3 in Büren.</p>",
+        "story_alt": "Die Anfänge von Mahando: Bestellungen werden von Hand verpackt",
+        "story_caption": "Die Anfänge: verpackt wurde, wo Platz war.",
+        "points_heading": "So arbeiten wir",
+        "show_wide_image": true,
+        "wide_alt": "Palettenlager von Mahando mit Markenware",
+        "wide_caption": "Über 600 Paletten Ware: unser Lager in Büren",
+        "owner_role": "Inhaber",
+        "owner_name": "Marco Haase",
+        "owner_text": "<p>Marco Haase hat Mahando 2022 gegründet und führt das Unternehmen bis heute selbst – Einkauf, Lager und Kundenservice laufen über ihn und ein Team von fünf Mitarbeiterinnen und Mitarbeitern. Wer bei uns anruft oder schreibt, spricht mit Menschen, die die Ware kennen und selbst verpackt haben.</p>",
+        "cta_text": "Fragen zu einem Artikel oder zu Ihrer Bestellung?",
+        "cta_label": "Zum Kundenservice",
+        "cta_link": "/pages/contact",
+        "section_width": "page-width",
+        "padding-block-start": 8,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ueber_uns"
+  ]
+}
