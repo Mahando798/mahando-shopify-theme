@@ -1,8 +1,9 @@
 {%- doc -%}
   Versand- und Lieferbox in der Kaufbox (Vorbild: sfhandel.com).
   Serverseitig: Cut-off-Text und Lieferzeit aus den Theme-Einstellungen (Mahando).
-  Clientseitig (mahando-delivery.js): konkreter Versandtag (heute / nächster Werktag) und voraussichtliches
-  Lieferfenster in Werktagen, Wochenenden und bundesweite Feiertage (plus NRW) ausgenommen.
+  Clientseitig (mahando-delivery.js): konkreter Versandtag (heute / nächster Werktag), optional ein minütlich
+  aktualisierter Countdown bis zum Bestellschluss, und das voraussichtliche Lieferfenster in Werktagen
+  (Wochenenden und bundesweite Feiertage plus NRW ausgenommen).
   Bei nicht lieferbaren Artikeln bleibt die Box unsichtbar.
 {%- enddoc -%}
 
@@ -29,6 +30,7 @@
     data-text-today="{{ block.settings.text_today | escape }}"
     data-text-next="{{ block.settings.text_next | escape }}"
     data-text-window="{{ block.settings.text_window | escape }}"
+    {%- if block.settings.show_countdown %} data-text-countdown="{{ block.settings.text_countdown | escape }}"{% endif %}
     {{ block.shopify_attributes }}
   >
     <div class="mahando-delivery__box">
@@ -174,6 +176,20 @@
       "label": "Text: Versand heute",
       "info": "{cutoff} = Bestellschluss",
       "default": "Versand noch heute bei Bestellung bis {cutoff} Uhr"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Countdown bis zum Bestellschluss anzeigen",
+      "info": "Vor dem Bestellschluss zeigt die Box die verbleibende Zeit (minutengenau) statt der festen Uhrzeit.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text_countdown",
+      "label": "Text: Countdown",
+      "info": "{time} = verbleibende Zeit, z. B. „2 Std. 13 Min.“",
+      "default": "Versand noch heute bei Bestellung innerhalb von {time}"
     },
     {
       "type": "text",

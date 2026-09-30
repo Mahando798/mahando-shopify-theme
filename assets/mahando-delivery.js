@@ -4,7 +4,8 @@
  * bundesweite Feiertage (plus Fronleichnam und Allerheiligen für NRW) werden übersprungen.
  *
  * Attribute: data-cutoff (Stunde), data-min-days, data-max-days,
- *            data-text-today ({cutoff}), data-text-next ({day}), data-text-window ({from}, {to}).
+ *            data-text-today ({cutoff}), data-text-countdown ({time}, optional, ersetzt text-today vor dem
+ *            Bestellschluss und wird minütlich aktualisiert), data-text-next ({day}), data-text-window ({from}, {to}).
  * Refs:      title, window
  */
 const TIME_ZONE = 'Europe/Berlin';
@@ -106,8 +107,30 @@ function formatDay(utcMidnight) {
   return dayFormatter.format(new Date(utcMidnight));
 }
 
+/** @param {number} minutes → "2 Std. 13 Min." / "45 Min." */
+function formatRemaining(minutes) {
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  if (hours > 0) return `${hours} Std. ${rest} Min.`;
+  return `${Math.max(rest, 1)} Min.`;
+}
+
 class MahandoDelivery extends HTMLElement {
+  /** @type {ReturnType<typeof setInterval> | undefined} */
+  #timer;
+
   connectedCallback() {
+    this.#safeRender();
+    if (this.dataset.textCountdown) {
+      this.#timer = setInterval(() => this.#safeRender(), 60 * 1000);
+    }
+  }
+
+  disconnectedCallback() {
+    if (this.#timer) clearInterval(this.#timer);
+  }
+
+  #safeRender() {
     try {
       this.#render();
     } catch (error) {
@@ -130,9 +153,13 @@ class MahandoDelivery extends HTMLElement {
     const window_ = this.querySelector('[ref="window"]');
 
     if (title) {
-      const template = shipsToday ? this.dataset.textToday : this.dataset.textNext;
+      const countdown = shipsToday && this.dataset.textCountdown ? this.dataset.textCountdown : null;
+      const template = countdown || (shipsToday ? this.dataset.textToday : this.dataset.textNext);
       if (template) {
-        title.textContent = template.replace('{cutoff}', String(cutoff)).replace('{day}', formatDay(shipDate));
+        title.textContent = template
+          .replace('{time}', formatRemaining(cutoff * 60 - minutes))
+          .replace('{cutoff}', String(cutoff))
+          .replace('{day}', formatDay(shipDate));
       }
     }
     if (window_ && this.dataset.textWindow) {

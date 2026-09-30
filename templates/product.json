@@ -216,6 +216,8 @@
                     "min_days": 1,
                     "max_days": 3,
                     "text_today": "Versand noch heute bei Bestellung bis {cutoff} Uhr",
+                    "show_countdown": true,
+                    "text_countdown": "Versand noch heute bei Bestellung innerhalb von {time}",
                     "text_next": "Versand am {day}",
                     "text_window": "Lieferung voraussichtlich {from} – {to}",
                     "note": "Versand aus Deutschland · gilt werktags bei Zahlungseingang und Verfügbarkeit",
