@@ -86,6 +86,15 @@ im Theme-Editor werden zurück ins Repo committet.
 
 9. **Kategorietexte:** Alle Haupt- und Unterkategorien sowie Sale haben eine Beschreibung (2–3 Sätze, Sie-Form,
    gesetzt am 29.09.2026). Sie erscheint im Kopf der Kategorieseite; fehlt sie, zeigt das Theme einen Standardtext.
+10. **Seite „Über uns“** (`/pages/ueber-uns`, Template `page.ueber-uns.json`, Sektion `mahando-about`, Menü
+    „Informationen“, angelegt 30.09.2026): Einleitung, Lagerfoto, vier Kennzahlen, Geschichte, „So arbeiten wir“,
+    zweites Lagerfoto, Inhaber-Karte, Kontakt-Hinweis. Alle Texte und Zahlen stehen im Template bzw. in den
+    Sektions-Einstellungen (Theme-Editor). Die Fotos liegen als Fallback im Theme (`assets/mahando-ueber-uns-*.jpg`)
+    und können im Theme-Editor durch Bilder aus „Inhalt → Dateien“ ersetzt werden. Kennzahlen (Bestellungen,
+    Paletten, Fläche) bei Bedarf jährlich aktualisieren.
+11. **Adressen:** Firmenadresse (Impressum, Footer, Kontakt-Richtlinie, Datenschutz) ist Silbeker Weg 45, 33142 Büren;
+    Lager und Rücksende-/Widerrufsadresse ist Haarener Str. 3, 33142 Büren (steht in der Widerrufsbelehrung). Alle
+    Rechtstexte nennen support@mahando.de als Kontaktadresse.
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
@@ -173,7 +182,7 @@ Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
 ## Eigene Dateien (alles mit Präfix `mahando-`)
 
 - `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`,
-  `mahando-product-meta.js`, `mahando-delivery.js`
+  `mahando-product-meta.js`, `mahando-delivery.js`, `mahando-ueber-uns-*.jpg` (Fotos der Über-uns-Seite)
 - `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`, `mahando-zustand`, `mahando-product-category`,
   `mahando-shipping-bar`, `mahando-gewaehrleistung`
 - `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
@@ -182,7 +191,7 @@ Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
   `mahando-product-chips`, `mahando-card-button`, `mahando-gewaehrleistung`
 - `sections/`: `mahando-usp-bar`, `mahando-hero`, `mahando-icon-cards`, `mahando-categories`,
   `mahando-collection-chips`, `mahando-collection-header`, `mahando-breadcrumb`, `mahando-contact-info`,
-  `mahando-gewaehrleistung`, `mahando-footer-bar`
+  `mahando-gewaehrleistung`, `mahando-footer-bar`, `mahando-about`
 
 Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar bleiben): `layout/theme.liquid`,
 `layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
