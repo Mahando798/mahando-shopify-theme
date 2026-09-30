@@ -1,0 +1,245 @@
+{%- doc -%}
+  Amtlicher EU-Hinweis zur gesetzlichen Gewährleistung (Durchführungsverordnung (EU) 2025/1960, Pflicht seit 27.09.2026).
+  Das Plakat (assets/mahando-gewaehrleistung-de.png|svg) ist die unveränderte amtliche Vorlage der EU-Kommission und
+  darf nicht bearbeitet werden. Der QR-Code führt auf europa.eu/youreurope/garantien – derselbe Link wird immer auch
+  klickbar angeboten (Vorgabe der Kommissions-Leitlinien).
+
+  @param {string} [mode] - 'link' (Satz + Link, Plakat öffnet in einem Dialog) oder 'inline' (Plakat direkt sichtbar)
+  @param {string} [context] - Kennung für IDs/Klassen, z. B. 'product', 'cart', 'drawer', 'page'
+  @param {string} [sentence] - Text vor dem Link (Standard aus den Übersetzungen)
+  @param {string} [link_text] - Linktext (Standard aus den Übersetzungen)
+  @param {boolean} [show_title] - nur 'inline': Überschrift „Gesetzliche Gewährleistung“ über dem Plakat
+{%- enddoc -%}
+
+{%- liquid
+  assign mode = mode | default: 'link'
+  assign context = context | default: 'default'
+  assign sentence = sentence | default: nil
+  assign link_text = link_text | default: nil
+  if sentence == blank
+    assign sentence = 'mahando.legal_guarantee.sentence' | t
+  endif
+  if link_text == blank
+    assign link_text = 'mahando.legal_guarantee.link' | t
+  endif
+  assign png = 'mahando-gewaehrleistung-de.png' | asset_url
+  assign svg = 'mahando-gewaehrleistung-de.svg' | asset_url
+  assign alt = 'mahando.legal_guarantee.alt' | t
+  assign dialog_id = 'mahando-gw-' | append: context
+-%}
+
+<mahando-gewaehrleistung class="mahando-gw mahando-gw--{{ mode }} mahando-gw--{{ context }}">
+  {%- if mode == 'inline' -%}
+    {%- if show_title -%}
+      <p class="mahando-gw__title h4">{{ 'mahando.legal_guarantee.title' | t }}</p>
+    {%- endif -%}
+    <figure class="mahando-gw__figure">
+      <img
+        class="mahando-gw__image"
+        src="{{ png }}"
+        width="1654"
+        height="2339"
+        loading="lazy"
+        decoding="async"
+        alt="{{ alt | escape }}"
+      >
+      <figcaption class="mahando-gw__caption">
+        <a href="{{ svg }}" target="_blank" rel="noopener">{{ 'mahando.legal_guarantee.open_full' | t }}</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://europa.eu/youreurope/garantien" target="_blank" rel="noopener">{{ 'mahando.legal_guarantee.more_info' | t }}</a>
+      </figcaption>
+    </figure>
+  {%- else -%}
+    <p class="mahando-gw__line">
+      <span class="mahando-gw__lead">
+        {%- render 'mahando-icon', icon: 'shield', class: 'mahando-gw__icon' -%}
+        <span class="mahando-gw__sentence">{{ sentence }}</span>
+      </span>
+      <button type="button" class="mahando-gw__open" data-gw-open aria-haspopup="dialog" aria-controls="{{ dialog_id }}">{{ link_text }}</button>
+    </p>
+    <dialog id="{{ dialog_id }}" class="mahando-gw__dialog" aria-labelledby="{{ dialog_id }}-title">
+      <div class="mahando-gw__dialog-head">
+        <h2 id="{{ dialog_id }}-title" class="mahando-gw__dialog-title">{{ 'mahando.legal_guarantee.title' | t }}</h2>
+        <button type="button" class="mahando-gw__close button-unstyled" data-gw-close aria-label="{{ 'mahando.legal_guarantee.close' | t }}">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="mahando-gw__hint">{{ 'mahando.legal_guarantee.dialog_hint' | t }}</p>
+      <img
+        class="mahando-gw__image"
+        src="{{ png }}"
+        width="1654"
+        height="2339"
+        loading="lazy"
+        decoding="async"
+        alt="{{ alt | escape }}"
+      >
+      <p class="mahando-gw__caption">
+        <a href="{{ svg }}" target="_blank" rel="noopener">{{ 'mahando.legal_guarantee.open_full' | t }}</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://europa.eu/youreurope/garantien" target="_blank" rel="noopener">{{ 'mahando.legal_guarantee.more_info' | t }}</a>
+      </p>
+    </dialog>
+  {%- endif -%}
+</mahando-gewaehrleistung>
+
+<script>
+  if (!customElements.get('mahando-gewaehrleistung')) {
+    customElements.define(
+      'mahando-gewaehrleistung',
+      class extends HTMLElement {
+        connectedCallback() {
+          const dialog = this.querySelector('dialog');
+          if (!dialog) return;
+          this.querySelectorAll('[data-gw-open]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              if (typeof dialog.showModal === 'function') dialog.showModal();
+              else window.open(dialog.querySelector('img').src, '_blank', 'noopener');
+            });
+          });
+          this.querySelectorAll('[data-gw-close]').forEach((btn) => btn.addEventListener('click', () => dialog.close()));
+          dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) dialog.close();
+          });
+        }
+      }
+    );
+  }
+</script>
+
+{% stylesheet %}
+  .mahando-gw {
+    display: block;
+  }
+
+  .mahando-gw__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 6px;
+    margin: 0;
+    font-size: var(--font-size--sm);
+    line-height: 1.35;
+  }
+
+  .mahando-gw__lead {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mahando-gw__icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: #003399;
+  }
+
+  .mahando-gw__sentence {
+    font-weight: 600;
+  }
+
+  .mahando-gw__open {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: var(--color-primary-button-background, #0a7e83);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+
+  .mahando-gw__open:hover {
+    color: var(--color-foreground);
+  }
+
+  .mahando-gw--cart .mahando-gw__line,
+  .mahando-gw--drawer .mahando-gw__line {
+    margin-top: 10px;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-gw__dialog {
+    width: min(760px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
+    padding: 16px 18px 18px;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    color: #1d2b33;
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.3);
+  }
+
+  .mahando-gw__dialog::backdrop {
+    background: rgb(16 24 30 / 0.55);
+  }
+
+  .mahando-gw__dialog-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .mahando-gw__dialog-title {
+    margin: 0;
+    font-size: var(--font-size--lg);
+  }
+
+  .mahando-gw__close {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .mahando-gw__close:hover {
+    background: #eef3f5;
+  }
+
+  .mahando-gw__hint {
+    margin: 4px 0 12px;
+    font-size: var(--font-size--xs);
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-gw__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #dce5e9;
+    border-radius: 6px;
+  }
+
+  .mahando-gw__figure {
+    margin: 0;
+    max-width: 760px;
+  }
+
+  .mahando-gw__caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    margin: 10px 0 0;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-gw__caption a {
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-gw--page {
+    margin: 28px 0 8px;
+  }
+
+  .mahando-gw--page .mahando-gw__title {
+    margin: 0 0 12px;
+    font-size: var(--font-size--md);
+  }
+{% endstylesheet %}

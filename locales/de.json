@@ -412,6 +412,16 @@
     },
     "usp": {
       "phone_label": "Telefon"
+    },
+    "legal_guarantee": {
+      "title": "Gesetzliche Gewährleistung",
+      "sentence": "Mindestens zwei Jahre gesetzliche Gewährleistung.",
+      "link": "Ihre gesetzlichen Gewährleistungsrechte",
+      "dialog_hint": "Amtlicher Hinweis der Europäischen Union (Durchführungsverordnung (EU) 2025/1960).",
+      "open_full": "Hinweis in voller Größe öffnen",
+      "more_info": "Weitere Informationen: europa.eu/youreurope/garantien",
+      "close": "Schließen",
+      "alt": "Gesetzliche Gewährleistung – mindestens zwei Jahre gesetzliche Gewährleistung der Vertragsmäßigkeit für Waren, die in der Europäischen Union verkauft werden. Amtlicher Hinweis der Europäischen Union."
     }
   }
 }

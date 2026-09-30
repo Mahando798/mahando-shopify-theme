@@ -1,0 +1,87 @@
+{%- comment -%}
+  Seite „Gesetzliche Gewährleistung“: kurzer Einleitungstext und das amtliche EU-Plakat in voller Größe
+  (Durchführungsverordnung (EU) 2025/1960). Wird über den Footer-Link „Gesetzliche Gewährleistung“ erreicht.
+{%- endcomment -%}
+
+<div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="mahando-gw-section">
+    {%- if section.settings.text != blank -%}
+      <div class="mahando-gw-section__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {% render 'mahando-gewaehrleistung', mode: 'inline', context: 'page-full' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-gw-section {
+    display: grid;
+    gap: 18px;
+  }
+
+  .mahando-gw-section__text {
+    max-width: 70ch;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-gw-section__text p:last-child {
+    margin-bottom: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Gewährleistung (Mahando)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Einleitung",
+      "default": "<p>Für alle bei uns gekauften Waren gilt die gesetzliche Gewährleistung von mindestens zwei Jahren. Der folgende Hinweis ist der amtliche, EU-weit einheitliche Hinweis der Europäischen Kommission (Durchführungsverordnung (EU) 2025/1960). Bei Fragen zu einem Mangel wenden Sie sich bitte an support@mahando.de.</p>"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gewährleistung (Mahando)",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}
