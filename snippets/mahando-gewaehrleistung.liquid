@@ -51,8 +51,10 @@
     </figure>
   {%- else -%}
     <p class="mahando-gw__line">
-      {% render 'mahando-icon', icon: 'shield', class: 'mahando-gw__icon' %}
-      <span class="mahando-gw__sentence">{{ sentence }}</span>
+      <span class="mahando-gw__lead">
+        {%- render 'mahando-icon', icon: 'shield', class: 'mahando-gw__icon' -%}
+        <span class="mahando-gw__sentence">{{ sentence }}</span>
+      </span>
       <button type="button" class="mahando-gw__open" data-gw-open aria-haspopup="dialog" aria-controls="{{ dialog_id }}">{{ link_text }}</button>
     </p>
     <dialog id="{{ dialog_id }}" class="mahando-gw__dialog" aria-labelledby="{{ dialog_id }}-title">
@@ -118,6 +120,12 @@
     margin: 0;
     font-size: var(--font-size--sm);
     line-height: 1.35;
+  }
+
+  .mahando-gw__lead {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .mahando-gw__icon {
