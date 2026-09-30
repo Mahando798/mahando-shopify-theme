@@ -116,7 +116,7 @@ class MahandoDelivery extends HTMLElement {
   }
 
   #render() {
-    const cutoff = Number(this.dataset.cutoff || 13);
+    const cutoff = Number(this.dataset.cutoff || 14);
     const minDays = Math.max(1, Number(this.dataset.minDays || 1));
     const maxDays = Math.max(minDays, Number(this.dataset.maxDays || 3));
     const { date: today, minutes } = nowInBerlin();

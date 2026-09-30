@@ -12,7 +12,7 @@
   if product != blank and product.available == false
     assign available = false
   endif
-  assign cutoff = block.settings.cutoff_hour | default: 13
+  assign cutoff = block.settings.cutoff_hour | default: 14
   assign min_days = block.settings.min_days | default: 1
   assign max_days = block.settings.max_days | default: 3
 -%}
@@ -148,7 +148,7 @@
       "min": 8,
       "max": 20,
       "step": 1,
-      "default": 13
+      "default": 14
     },
     {
       "type": "range",

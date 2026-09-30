@@ -2256,7 +2256,7 @@
         "type": "text",
         "id": "mahando_cutoff_text",
         "label": "Versandhinweis (Produktseite)",
-        "default": "Bestellung bis 13 Uhr: Versand am selben Werktag"
+        "default": "Bestellung bis 14 Uhr: Versand am selben Werktag"
       },
       {
         "type": "header",

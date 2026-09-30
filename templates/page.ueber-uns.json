@@ -75,7 +75,7 @@
         "fact_versand": {
           "type": "fact",
           "settings": {
-            "value": "Bis 13 Uhr",
+            "value": "Bis 14 Uhr",
             "label": "bestellt – Versand noch am selben Werktag"
           }
         },
@@ -92,7 +92,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Versand an jedem Werktag",
-            "text": "Bestellungen bis 13 Uhr verlassen unser Lager noch am selben Werktag – in der Regel mit DHL, sperrige Ware per Spedition."
+            "text": "Bestellungen bis 14 Uhr verlassen unser Lager noch am selben Werktag – in der Regel mit DHL, sperrige Ware per Spedition."
           }
         },
         "point_pruefung": {

@@ -212,7 +212,7 @@
                 "lieferung": {
                   "type": "mahando-delivery-box",
                   "settings": {
-                    "cutoff_hour": 13,
+                    "cutoff_hour": 14,
                     "min_days": 1,
                     "max_days": 3,
                     "text_today": "Versand noch heute bei Bestellung bis {cutoff} Uhr",
