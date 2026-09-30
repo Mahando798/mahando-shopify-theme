@@ -116,6 +116,21 @@ im Theme-Editor werden zurück ins Repo committet.
 | Tefal | SEB S.A.S. (Groupe SEB) | 21260 Selongey, FR | Tefal-Service +49 7331 256 256, tefal.de/contact-form | – (Vertrieb DE: Groupe SEB WMF Consumer GmbH, Geislingen) – **mit Verpackung abgleichen** |
 | X-SHOT (ZURU) | ZURU Inc. | Energy Plaza, 92 Granville Road, Kowloon, Hongkong | care@zuru.com, +852 3746 9003 | ZURU Germany GmbH, Bleichstraße 8-10, 40211 Düsseldorf, care@zuru.com |
 
+## Rechtliche Pflichtelemente (Stand 30.09.2026)
+
+- **Gesetzlicher Gewährleistungshinweis** (Durchführungsverordnung (EU) 2025/1960, Pflicht seit 27.09.2026): Das amtliche
+  deutsche Plakat der EU-Kommission liegt unverändert unter `assets/mahando-gewaehrleistung-de.png` (Original-PNG
+  1654×2339) und `.svg`; es darf nicht bearbeitet werden. Eingebaut über `snippets/mahando-gewaehrleistung.liquid`:
+  Produktseite (Block `mahando-gewaehrleistung` in der Kaufbox: Satz + Link, Plakat im Dialog), Warenkorb-Drawer und
+  Warenkorbseite (Link direkt über dem Checkout-Button in `snippets/cart-summary.liquid`, auf der Warenkorbseite
+  zusätzlich das Plakat in voller Größe), Seite `/pages/gewaehrleistung` (Template `page.gewaehrleistung.json`,
+  Sektion `mahando-gewaehrleistung`, Footer-Menü „rechtliches“) sowie in der Bestellbestätigungs-Mail (Einstellungen →
+  Benachrichtigungen → Bestellbestätigung; Bild aus „Inhalt → Dateien“). Die Kommissions-Leitlinien erlauben die
+  Anzeige per Klick/Mouseover, verlangen aber immer den klickbaren Link auf europa.eu/youreurope/garantien.
+- **Widerrufsbutton** (§ 356a BGB, Pflicht seit 19.06.2026): hervorgehobener Button „Vertrag widerrufen“ ohne Login →
+  Formular (Name, Bestellnummer, E-Mail) → „Widerruf bestätigen“ → sofortige automatische Eingangsbestätigung mit
+  Datum/Uhrzeit. Umsetzung über die App „EU Widerrufsbutton Pro“ (Visionz GmbH); der Button wird im Footer eingebunden.
+
 ## Datenfluss aus Xentral
 
 | Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
@@ -141,14 +156,14 @@ Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
 - `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`,
   `mahando-product-meta.js`, `mahando-delivery.js`
 - `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`, `mahando-zustand`, `mahando-product-category`,
-  `mahando-shipping-bar`
+  `mahando-shipping-bar`, `mahando-gewaehrleistung`
 - `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
   `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`, `mahando-highlights`,
   `mahando-delivery-box`, `mahando-trust-list`, `mahando-details-table`, `mahando-section-title`,
-  `mahando-product-chips`, `mahando-card-button`
+  `mahando-product-chips`, `mahando-card-button`, `mahando-gewaehrleistung`
 - `sections/`: `mahando-usp-bar`, `mahando-hero`, `mahando-icon-cards`, `mahando-categories`,
   `mahando-collection-chips`, `mahando-collection-header`, `mahando-breadcrumb`, `mahando-contact-info`,
-  `mahando-footer-bar`
+  `mahando-gewaehrleistung`, `mahando-footer-bar`
 
 Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar bleiben): `layout/theme.liquid`,
 `layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
