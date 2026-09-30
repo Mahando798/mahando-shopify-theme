@@ -307,6 +307,17 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0
                   }
+                },
+                "gewaehrleistung": {
+                  "type": "mahando-gewaehrleistung",
+                  "settings": {
+                    "sentence": "Mindestens zwei Jahre gesetzliche Gewährleistung.",
+                    "link_text": "Ihre gesetzlichen Gewährleistungsrechte",
+                    "padding-block-start": 6,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  }
                 }
               },
               "block_order": [
@@ -316,6 +327,7 @@
                 "varianten",
                 "kaufen",
                 "vertrauen",
+                "gewaehrleistung",
                 "zahlung_label",
                 "zahlung"
               ],

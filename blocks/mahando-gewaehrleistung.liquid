@@ -1,0 +1,98 @@
+{%- doc -%}
+  Hinweis auf die gesetzliche Gewährleistung für die Produktseite (EU-Durchführungsverordnung 2025/1960).
+  Zeigt einen Satz mit Link; beim Klick öffnet sich das amtliche EU-Plakat in einem Dialog.
+{%- enddoc -%}
+
+<div
+  class="mahando-gw-block spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {% render 'mahando-gewaehrleistung',
+    mode: 'link',
+    context: 'product',
+    sentence: block.settings.sentence,
+    link_text: block.settings.link_text
+  %}
+</div>
+
+{% stylesheet %}
+  .mahando-gw-block {
+    width: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Gewährleistungshinweis",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Amtlicher EU-Hinweis zur gesetzlichen Gewährleistung (Pflicht seit 27.09.2026). Das Plakat selbst ist vorgegeben und kann nicht geändert werden."
+    },
+    {
+      "type": "text",
+      "id": "sentence",
+      "label": "Text",
+      "default": "Mindestens zwei Jahre gesetzliche Gewährleistung."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Linktext (öffnet das Plakat)",
+      "default": "Ihre gesetzlichen Gewährleistungsrechte"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gewährleistungshinweis",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

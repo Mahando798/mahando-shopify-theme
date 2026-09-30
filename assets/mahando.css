@@ -272,3 +272,8 @@ main[data-template="page.contact"] .page-width-content {
 .page-width-wide main[data-template="page.contact"] .page-width-content {
   --page-content-width: var(--wide-page-width);
 }
+
+/* Seite Gewährleistung: Titel auf Seitenbreite (wie Kontaktseite) */
+main[data-template="page.gewaehrleistung"] .page-width-content {
+  --page-content-width: var(--normal-page-width);
+}

@@ -48,6 +48,9 @@
       <div class="cart-page__items">
         {% render 'mahando-shipping-bar', context: 'page' %}
         {%- content_for 'block', id: 'cart-page-items', type: '_cart-products' %}
+        {%- unless cart.empty? -%}
+          {% render 'mahando-gewaehrleistung', mode: 'inline', context: 'page', show_title: true %}
+        {%- endunless -%}
       </div>
 
       {%- unless cart.empty? -%}

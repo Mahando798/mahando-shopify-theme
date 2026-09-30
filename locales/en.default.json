@@ -373,6 +373,16 @@
     }
   },
   "mahando": {
+    "legal_guarantee": {
+      "title": "Legal guarantee",
+      "sentence": "At least two years of legal guarantee.",
+      "link": "Your legal guarantee rights",
+      "dialog_hint": "Official notice of the European Union (Implementing Regulation (EU) 2025/1960).",
+      "open_full": "Open the notice in full size",
+      "more_info": "More information: europa.eu/youreurope/garantien",
+      "close": "Close",
+      "alt": "Legal guarantee – at least two years of legal guarantee of conformity for goods sold in the European Union. Official notice of the European Union."
+    },
     "badges": {
       "new": "New",
       "single": "One of a kind"
