@@ -131,6 +131,25 @@ im Theme-Editor werden zurück ins Repo committet.
   Formular (Name, Bestellnummer, E-Mail) → „Widerruf bestätigen“ → sofortige automatische Eingangsbestätigung mit
   Datum/Uhrzeit. Umsetzung über die App „EU Widerrufsbutton Pro“ (Visionz GmbH); der Button wird im Footer eingebunden.
 
+## Kunden-E-Mails (Stand 30.09.2026)
+
+- **Absender:** Einstellungen → Benachrichtigungen → Absender-E-Mail `info@mahando.de`. Damit Mails nicht als „über
+  shopifyemail.com“ erscheinen und nicht im Spam landen, muss die Domain authentifiziert sein (Einstellungen →
+  Benachrichtigungen → E-Mail-Domain-Authentifizierung). Shopify verlangt 6 CNAME-Einträge bei Hetzner
+  (`mailer2so`, `2so._domainkey`, `2so2._domainkey`, `mailerhzb`, `pdk1._domainkey.mailerhzb`,
+  `pdk2._domainkey.mailerhzb`); **Werte bei Hetzner immer mit Punkt am Ende** eintragen, sonst hängt Hetzner
+  `.mahando.de` an und Shopify meldet „DNS-Datensatz stimmt nicht überein“. Ein alter Eintrag `2so3._domainkey` wird
+  nicht mehr benötigt. Zusätzlich empfohlen: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:info@mahando.de`.
+- **Sprache/Anrede:** Alle 40 Kundenbenachrichtigungen (Einstellungen → Benachrichtigungen → Kundenbenachrichtigungen)
+  sind auf Deutsch und in der Sie-Form (umgestellt 30.09.2026, inkl. Betreffzeilen; „Hallo“ → „Guten Tag“). Nicht
+  angefasst: POS- und B2B-Vorlagen (`buy_online`, `pos_send_cart`, `store_receipt`, `pos_exchange_v2_receipt`,
+  `company_*`), da nicht im Einsatz. Wer eine Vorlage über „Auf Standard zurücksetzen“ zurücksetzt, bekommt wieder
+  Shopifys Du-Form.
+- **Bestellbestätigung** enthält zusätzlich den gesetzlichen Gewährleistungshinweis (siehe unten).
+- **Abgebrochener Checkout** („You left an item in your basket“) kommt nicht aus den Benachrichtigungen, sondern aus
+  Apps → Messaging → Automatisierungen → „Abgebrochener Checkout“ (Shopify Email). Texte dort im E-Mail-Editor auf
+  Deutsch/Sie pflegen; Shopifys deutsche Vorlagen sind in der Du-Form.
+
 ## Datenfluss aus Xentral
 
 | Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
