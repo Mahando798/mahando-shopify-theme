@@ -91,7 +91,7 @@
         {%- if section.settings.owner_image != blank -%}
           {{ section.settings.owner_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 800', sizes: '(min-width: 750px) 300px, 60vw', alt: section.settings.owner_name | escape }}
         {%- else -%}
-          <img src="{{ owner_fallback }}" width="840" height="840" alt="{{ section.settings.owner_name | escape }}" loading="lazy">
+          <img src="{{ owner_fallback }}" width="400" height="400" alt="{{ section.settings.owner_name | escape }}" loading="lazy">
         {%- endif -%}
       </div>
       <div class="mahando-about__owner-body">
