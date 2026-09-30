@@ -69,7 +69,7 @@
           "type": "fact",
           "settings": {
             "value": "1.200 m²",
-            "label": "Lagerfläche in drei Hallen in Büren"
+            "label": "Lagerfläche in drei Lagerhallen"
           }
         },
         "fact_versand": {
@@ -84,7 +84,7 @@
           "settings": {
             "icon": "box",
             "heading": "Eigenes Lager",
-            "text": "Alle Artikel im Shop liegen bei uns in Büren. Was Sie bestellen, geht direkt aus unserem Lager an Sie – kein Dropshipping, keine Lieferung über Dritte."
+            "text": "Alle Artikel im Shop liegen in unseren eigenen Lagerhallen. Was Sie bestellen, geht direkt von uns an Sie – kein Dropshipping, keine Lieferung über Dritte."
           }
         },
         "point_versand": {
@@ -126,16 +126,16 @@
         "eyebrow": "",
         "heading": "Multichannel-Händler aus Büren – seit 2022",
         "intro": "<p>Mahando ist ein Onlinehandel mit Sitz in Büren in Ostwestfalen. Was 2022 mit gebrauchten Spielekonsolen begann, ist heute ein Handelsunternehmen mit drei Lagerhallen, mehr als 200.000 Bestellungen über die großen Marktplätze und einem kleinen Team, das jede Sendung selbst verpackt.</p><p>Mit dem eigenen Shop erfüllen wir uns einen kleinen Traum: ohne Marktplatz dazwischen, mit direktem Kontakt zu unseren Kunden – und einem Kundenservice, der die Ware kennt.</p>",
-        "hero_alt": "Lagerhalle von Mahando in Büren mit Palettenware und Hubwagen",
-        "hero_caption": "Eine unserer drei Lagerhallen in Büren",
+        "hero_alt": "Lagerhalle von Mahando mit Palettenware und Hubwagen",
+        "hero_caption": "Eine unserer drei Lagerhallen",
         "story_heading": "Wie Mahando entstanden ist",
-        "story_text": "<p>Angefangen hat Marco Haase 2022 mit 18 Jahren im Gebrauchthandel: Spielekonsolen und Videospiele, angekauft, geprüft, instand gesetzt und wieder verkauft. Im August 2024 folgte der Wechsel zum Marktplatzhandel auf Amazon, eBay und Kaufland – mit Markenware aus dem Großhandel und Pokémon-Sammelkarten.</p><p>Verpackt wurde anfangs dort, wo Platz war. Heute lagern wir auf über 1.200 m² in drei Hallen in Büren, mit festen Abläufen für Wareneingang, Prüfung und Versand. Für 2026 rechnen wir mit einem Umsatz im achtstelligen Bereich. Neben dem Onlinehandel gibt es ein kleines Ladenlokal in der Postfiliale an der Haarener Straße 3 in Büren.</p>",
+        "story_text": "<p>Angefangen hat die Geschichte 2022 im Gebrauchthandel: Mit 18 gründete Marco Haase Mahando und handelte mit Spielekonsolen und Videospielen; Konsolen wurden außerdem modifiziert, repariert und refurbished. Im August 2023 folgte der Wechsel zum Marktplatzhandel auf Amazon, eBay und Kaufland – mit Markenware aus dem Großhandel und Pokémon-Sammelkarten.</p><p>Verpackt wurde anfangs dort, wo Platz war. Heute lagern wir auf über 1.200 m² in drei Hallen, mit festen Abläufen für Wareneingang, Prüfung und Versand. Für 2026 rechnen wir mit einem Umsatz im achtstelligen Bereich. Neben dem Onlinehandel beliefern wir ein kleines Ladenlokal in der Postfiliale an der Haarener Straße 3 in Büren.</p>",
         "story_alt": "Die Anfänge von Mahando: Bestellungen werden von Hand verpackt",
         "story_caption": "Die Anfänge: verpackt wurde, wo Platz war.",
         "points_heading": "So arbeiten wir",
         "show_wide_image": true,
         "wide_alt": "Palettenlager von Mahando mit Markenware",
-        "wide_caption": "Über 600 Paletten Ware: unser Lager in Büren",
+        "wide_caption": "Über 600 Paletten Ware in unseren drei Lagerhallen",
         "owner_role": "Inhaber",
         "owner_name": "Marco Haase",
         "owner_text": "<p>Marco Haase hat Mahando 2022 gegründet und führt das Unternehmen bis heute selbst – Einkauf, Lager und Kundenservice laufen über ihn und ein Team von fünf Mitarbeiterinnen und Mitarbeitern. Wer bei uns anruft oder schreibt, spricht mit Menschen, die die Ware kennen und selbst verpackt haben.</p>",
