@@ -282,3 +282,44 @@ main[data-template="page.gewaehrleistung"] .page-width-content {
 main[data-template="page.ueber-uns"] .page-width-content {
   --page-content-width: var(--normal-page-width);
 }
+
+/* Widerrufsbutton (§ 356a BGB) in der Footer-Spalte „Rechtliches“ – eigene Optik auch gegen die !important-Styles der App */
+.mahando-footer-withdraw {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  margin-top: 4px;
+}
+
+.mahando-footer-withdraw a.mahando-withdraw-button,
+.mahando-footer-withdraw a.mahando-withdraw-button[href$='#widerrufsbutton'] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 18px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid currentColor !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  font-family: var(--font-heading--family);
+  font-weight: 600 !important;
+  font-size: var(--font-size--sm) !important;
+  letter-spacing: 0.01em;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.mahando-footer-withdraw a.mahando-withdraw-button:hover,
+.mahando-footer-withdraw a.mahando-withdraw-button:focus-visible {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: #1d2b33 !important;
+}
+
+.mahando-footer-withdraw__note {
+  font-size: var(--font-size--xs);
+  opacity: 0.75;
+}

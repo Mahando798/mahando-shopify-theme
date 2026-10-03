@@ -31,10 +31,10 @@
             "image_gap": 4,
             "large_first_image": false,
             "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
+            "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "left",
-            "thumbnail_width": 44,
+            "thumbnail_width": 64,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -46,7 +46,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "thumbnail_radius": 8
           },
           "blocks": {}
         },
@@ -120,20 +121,11 @@
                     "wrap": "pretty"
                   },
                   "blocks": {}
-                },
-                "meta": {
-                  "type": "mahando-product-meta",
-                  "settings": {
-                    "show_sku": true,
-                    "show_ean": true,
-                    "show_condition": true
-                  }
                 }
               },
               "block_order": [
                 "hersteller",
-                "titel",
-                "meta"
+                "titel"
               ],
               "name": "Kopf"
             },
@@ -145,13 +137,6 @@
                 "fallback_description": true,
                 "more_text": "Mehr Details anzeigen",
                 "more_anchor": "beschreibung"
-              }
-            },
-            "chips": {
-              "type": "mahando-product-chips",
-              "settings": {
-                "show_vendor": true,
-                "show_category": true
               }
             },
             "zustand": {
@@ -339,7 +324,6 @@
           "block_order": [
             "kopf",
             "highlights",
-            "chips",
             "zustand",
             "kaufbox"
           ]

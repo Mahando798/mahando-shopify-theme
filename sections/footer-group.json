@@ -61,17 +61,6 @@
             "link_preset": "paragraph"
           }
         },
-        "menu_rechtliches": {
-          "type": "menu",
-          "settings": {
-            "menu": "rechtliches",
-            "heading": "Rechtliches",
-            "menu_spacing": 8,
-            "show_as_accordion": false,
-            "heading_preset": "h6",
-            "link_preset": "paragraph"
-          }
-        },
         "group_newsletter": {
           "type": "group",
           "settings": {
@@ -140,12 +129,50 @@
             "email_signup_nl",
             "text_nl_hint"
           ]
+        },
+        "group_rechtliches": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "gap": 14,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "menu_rechtliches": {
+              "type": "menu",
+              "settings": {
+                "menu": "rechtliches",
+                "heading": "Rechtliches",
+                "menu_spacing": 8,
+                "show_as_accordion": false,
+                "heading_preset": "h6",
+                "link_preset": "paragraph"
+              }
+            },
+            "widerruf_button": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "{%- comment -%} Widerrufsbutton nach § 356a BGB – öffnet das Formular der App „EU Widerrufsbutton“ (App-Einbettung muss aktiv sein) {%- endcomment -%}\n<div class=\"mahando-footer-withdraw\">\n  <a class=\"mahando-withdraw-button\" href=\"#widerrufsbutton\">Vertrag widerrufen</a>\n  <span class=\"mahando-footer-withdraw__note\">Widerrufsformular – Widerruf innerhalb von 14 Tagen</span>\n</div>"
+              }
+            }
+          },
+          "block_order": [
+            "menu_rechtliches",
+            "widerruf_button"
+          ]
         }
       },
       "block_order": [
         "group_kontakt",
         "menu_informationen",
-        "menu_rechtliches",
+        "group_rechtliches",
         "group_newsletter"
       ],
       "name": "t:names.footer",
@@ -167,7 +194,7 @@
         "background_color": "{{ settings.color_palette.foreground }}",
         "text_color": "#C9D5DB",
         "divider_color": "#3B4B54",
-        "show_withdraw": true,
+        "show_withdraw": false,
         "withdraw_label": "Vertrag widerrufen",
         "withdraw_url": "#widerrufsbutton",
         "withdraw_note": "Widerruf innerhalb von 14 Tagen – Formular öffnet sich direkt"
