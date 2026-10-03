@@ -1,7 +1,8 @@
 {%- comment -%}
   Kopfbereich der Kategorieseite (Vorbild: sfhandel.com/collections/elektronik):
-  links eine Karte mit Dachzeile (übergeordnete Kategorie), Titel, Beschreibung und zwei Buttons,
-  rechts eine dunkle Karte mit Kollektionsbild (sofern hinterlegt) und drei Vertrauenspunkten.
+  links eine Karte mit Dachzeile (übergeordnete Kategorie), Titel, Beschreibung, zwei Buttons und dem
+  Kategoriebild (Kollektionsbild, ersatzweise erstes Produktbild oder Bild der übergeordneten Kategorie),
+  rechts eine dunkle Karte mit optionalem Foto und drei Vertrauenspunkten.
 {%- endcomment -%}
 
 {%- liquid
@@ -13,6 +14,7 @@
     assign description = section.settings.fallback_text
   endif
 
+  assign parent_image = blank
   for link in linklists[menu_handle].links
     if link.type != 'collection_link' or link.object == blank
       continue
@@ -23,6 +25,7 @@
     for sub in link.links
       if sub.type == 'collection_link' and sub.object != blank and sub.object.handle == collection.handle
         assign eyebrow = link.title
+        assign parent_image = link.object.image
         break
       endif
     endfor
@@ -32,11 +35,32 @@
   endfor
 
   assign image = section.settings.image
+
+  # Kategoriebild für die linke Karte: Kollektionsbild, sonst je nach Einstellung erstes Produktbild / Bild der Oberkategorie
+  assign visual = blank
+  if section.settings.show_collection_image
+    if collection.image != blank
+      assign visual = collection.image
+    elsif section.settings.image_fallback == 'product' and collection.products.size > 0 and collection.products.first.featured_image != blank
+      assign visual = collection.products.first.featured_image
+    endif
+    if visual == blank and section.settings.image_fallback != 'none' and parent_image != blank
+      assign visual = parent_image
+    endif
+  endif
+  assign visual_is_cutout = false
+  if visual != blank
+    assign visual_src = visual.src | downcase | split: '?' | first
+    if visual_src contains '.png' or visual_src contains '.webp'
+      assign visual_is_cutout = true
+    endif
+  endif
 -%}
 
 <div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="mahando-colhead{% if section.settings.show_side %} mahando-colhead--with-side{% endif %}">
-    <div class="mahando-colhead__main">
+    <div class="mahando-colhead__main{% if visual != blank %} mahando-colhead__main--visual{% endif %}">
+      <div class="mahando-colhead__content">
       {%- if eyebrow != blank -%}
         <p class="mahando-eyebrow">{{ eyebrow }}</p>
       {%- endif -%}
@@ -52,6 +76,16 @@
           {%- if section.settings.button_2_label != blank -%}
             <a class="button button-secondary" href="{{ section.settings.button_2_url | default: routes.collections_url }}">{{ section.settings.button_2_label }}</a>
           {%- endif -%}
+        </div>
+      {%- endif -%}
+      </div>
+      {%- if visual != blank -%}
+        <div class="mahando-colhead__visual{% if visual_is_cutout %} mahando-colhead__visual--cutout{% endif %}" aria-hidden="true">
+          {{
+            visual
+            | image_url: width: 720
+            | image_tag: loading: 'eager', fetchpriority: 'high', class: 'mahando-colhead__visual-img', alt: '', widths: '360, 540, 720', sizes: '(min-width: 990px) 300px, 40vw'
+          }}
         </div>
       {%- endif -%}
     </div>
@@ -104,6 +138,46 @@
     border-radius: 16px;
     padding: 28px 28px 26px;
     min-width: 0;
+  }
+
+  .mahando-colhead__main--visual {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 30%, 300px);
+    gap: 28px;
+    align-items: center;
+  }
+
+  .mahando-colhead__content {
+    min-width: 0;
+  }
+
+  .mahando-colhead__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+  }
+
+  .mahando-colhead__visual-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 210px;
+    object-fit: contain;
+  }
+
+  .mahando-colhead__visual--cutout .mahando-colhead__visual-img {
+    filter: drop-shadow(0 14px 22px rgb(29 43 51 / 0.14));
+  }
+
+  @media screen and (max-width: 749px) {
+    .mahando-colhead__main--visual {
+      display: block;
+    }
+
+    .mahando-colhead__visual {
+      display: none;
+    }
   }
 
   .mahando-colhead__title {
@@ -257,6 +331,28 @@
       "id": "button_2_url",
       "label": "Button 2 – Ziel",
       "info": "Standard: Kategorieübersicht"
+    },
+    {
+      "type": "header",
+      "content": "Kategoriebild"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Kategoriebild in der Karte anzeigen",
+      "info": "Nimmt das Bild der Kollektion (Produkte → Kategorien → Bild). Auf dem Handy wird es ausgeblendet.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_fallback",
+      "label": "Ersatz, wenn die Kollektion kein Bild hat",
+      "options": [
+        { "value": "product", "label": "Erstes Produktbild, sonst Bild der Oberkategorie" },
+        { "value": "parent", "label": "Bild der Oberkategorie" },
+        { "value": "none", "label": "Kein Bild" }
+      ],
+      "default": "product"
     },
     {
       "type": "header",
