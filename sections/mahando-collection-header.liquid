@@ -161,6 +161,8 @@
     height: auto;
     max-height: 210px;
     object-fit: contain;
+    /* Fast weiße Bildhintergründe (z. B. 245/245/245) auf Weiß ziehen, damit kein Kasten sichtbar bleibt */
+    filter: brightness(1.04);
     mix-blend-mode: multiply;
   }
 
