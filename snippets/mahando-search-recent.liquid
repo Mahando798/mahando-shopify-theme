@@ -1,0 +1,63 @@
+{%- doc -%}
+  „Zuletzt angesehen“ im Such-Dialog als kompakte Produktzeilen (Mahando).
+  Die Struktur (id predictive-search-products, recently-viewed-wrapper, refs) erwartet predictive-search.js,
+  das diese Zeilen in den leeren Zustand des Dialogs einsetzt und per „Löschen“ entfernt.
+
+  @param {object[]} products - Produkte (search.results)
+  @param {string[]} [order_ids] - Produkt-IDs in der gewünschten Reihenfolge
+  @param {number} [limit] - Maximale Anzahl (Standard 4)
+{%- enddoc -%}
+
+{%- liquid
+  assign limit = limit | default: 4
+-%}
+
+<div id="predictive-search-products" class="mahando-search-results mahando-search-results--modal">
+  <div class="recently-viewed-wrapper" ref="recentlyViewedWrapper">
+    <p class="mahando-search-heading mahando-search-heading--recent" ref="recentlyViewedTitle[]">
+      {{ 'content.recently_viewed_products' | t }}
+      <button
+        class="mahando-search-clear button button-unstyled"
+        type="button"
+        on:click="/clearRecentlyViewedProducts"
+      >
+        {{ 'actions.clear' | t }}
+      </button>
+    </p>
+    <ul class="predictive-search-results__list mahando-search-list mahando-search-list--products list-unstyled" role="group">
+      {%- if order_ids != blank -%}
+        {%- for _id in order_ids limit: limit -%}
+          {%- assign int_id = _id | times: 1 -%}
+          {%- assign product = products | find: 'id', int_id -%}
+          {%- if product -%}
+            {%- render 'mahando-search-row', product: product, ref: 'recentlyViewedItems[]' -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for product in products limit: limit -%}
+          {%- render 'mahando-search-row', product: product, ref: 'recentlyViewedItems[]' -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .mahando-search-heading--recent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .mahando-search-clear {
+    font-size: var(--font-size--xs);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-foreground-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+{% endstylesheet %}

@@ -441,6 +441,17 @@
     },
     "usp": {
       "phone_label": "Phone"
+    },
+    "search": {
+      "in_stock": "In stock",
+      "suggestions": "Search suggestions",
+      "collections": "Categories",
+      "pages": "Pages",
+      "no_results": "No results for “{{ terms }}”.",
+      "no_results_hint": "Check the spelling or search by item number or EAN.",
+      "view_all": "Show all results for “{{ terms }}”",
+      "search_page": "Run a full search for “{{ terms }}”",
+      "clear": "Clear input"
     }
   }
 }

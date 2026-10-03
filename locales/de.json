@@ -199,7 +199,7 @@
     "errors": "Fehler",
     "price_from": "Ab {{ price }}",
     "search": "Suche",
-    "search_results_no_results_check_spelling": "Keine Ergebnisse für „{{ terms }}“ gefunden. Überprüfe die Schreibweise oder versuche es mit einer anderen Suchanfrage.",
+    "search_results_no_results_check_spelling": "Keine Ergebnisse für „{{ terms }}“ gefunden. Überprüfen Sie die Schreibweise oder versuchen Sie es mit einer anderen Suchanfrage.",
     "featured_products": "Vorgestellte Produkte",
     "filters": "Filter",
     "no_products_found": "Keine Produkte gefunden.",
@@ -422,6 +422,17 @@
       "more_info": "Weitere Informationen: europa.eu/youreurope/garantien",
       "close": "Schließen",
       "alt": "Gesetzliche Gewährleistung – mindestens zwei Jahre gesetzliche Gewährleistung der Vertragsmäßigkeit für Waren, die in der Europäischen Union verkauft werden. Amtlicher Hinweis der Europäischen Union."
+    },
+    "search": {
+      "in_stock": "Auf Lager",
+      "suggestions": "Suchvorschläge",
+      "collections": "Kategorien",
+      "pages": "Seiten",
+      "no_results": "Keine Treffer für „{{ terms }}“.",
+      "no_results_hint": "Prüfen Sie die Schreibweise oder suchen Sie nach Artikelnummer oder EAN.",
+      "view_all": "Alle Ergebnisse für „{{ terms }}“ anzeigen",
+      "search_page": "Vollständige Suche nach „{{ terms }}“ starten",
+      "clear": "Eingabe löschen"
     }
   }
 }

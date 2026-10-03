@@ -1,0 +1,49 @@
+{%- doc -%}
+  Eine Produktzeile in den Suchvorschlägen (Mahando): kleines Bild, Titel (max. zwei Zeilen),
+  darunter Hersteller, Preis und Verfügbarkeit. Wird von den Suchvorschlägen im Header-Dropdown,
+  im mobilen Such-Dialog und für „Zuletzt angesehen“ verwendet.
+
+  @param {object} product - Das Produkt
+  @param {string} [ref] - ref-Attribut für die Zeile (Standard: resultsItems[])
+{%- enddoc -%}
+
+{%- liquid
+  assign row_ref = ref | default: 'resultsItems[]'
+  assign image = product.featured_image
+-%}
+
+<li
+  class="mahando-search-row mahando-search-row--product"
+  ref="{{ row_ref }}"
+  role="option"
+  aria-label="{{ product.title | escape }}"
+>
+  <a class="mahando-search-row__link" href="{{ product.url }}" data-search-item tabindex="-1">
+    <span class="mahando-search-row__media" aria-hidden="true">
+      {%- if image -%}
+        {{ image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '56px', alt: '' }}
+      {%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag: 'mahando-search-row__placeholder' }}
+      {%- endif -%}
+    </span>
+    <span class="mahando-search-row__body">
+      <span class="mahando-search-row__title">{{ product.title | escape }}</span>
+      <span class="mahando-search-row__meta">
+        {%- if product.vendor != blank -%}
+          <span class="mahando-search-row__vendor">{{ product.vendor | escape }}</span>
+        {%- endif -%}
+        <span class="mahando-search-row__price">
+          {{- product.price | money -}}
+          {%- if product.compare_at_price > product.price -%}
+            <s>{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+        </span>
+        {%- if product.available -%}
+          <span class="mahando-search-row__stock">{{ 'mahando.search.in_stock' | t }}</span>
+        {%- else -%}
+          <span class="mahando-search-row__stock mahando-search-row__stock--out">{{ 'mahando.availability.out_of_stock' | t }}</span>
+        {%- endif -%}
+      </span>
+    </span>
+  </a>
+</li>

@@ -319,6 +319,14 @@ class PredictiveSearchComponent extends Component {
     const url = new URL(Theme.routes.predictive_search_url, location.origin);
     url.searchParams.set('q', searchTerm);
     url.searchParams.set('resources[limit_scope]', 'each');
+    // Mahando: Suchbegriff-Vorschläge mitliefern, Artikelnummer (SKU) und EAN (Barcode) durchsuchen
+    url.searchParams.set('resources[type]', 'product,collection,page,query');
+    url.searchParams.set('resources[limit]', '6');
+    url.searchParams.set('resources[options][unavailable_products]', 'last');
+    url.searchParams.set(
+      'resources[options][fields]',
+      'title,product_type,variants.title,vendor,variants.sku,variants.barcode'
+    );
 
     const { predictiveSearchResults } = this.refs;
 

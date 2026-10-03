@@ -1,0 +1,15 @@
+{%- comment -%}
+  Suchvorschläge für die Header-Suchleiste (Mahando). Wird nicht in Templates platziert, sondern von
+  assets/mahando-search.js über die Section Rendering API geladen:
+  /search/suggest?q=…&section_id=mahando-search-suggest&resources[type]=product,collection,page,query&…
+{%- endcomment -%}
+{%- if predictive_search.performed -%}
+  {%- render 'mahando-search-results', context: 'dropdown', product_limit: 6 -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Suchvorschläge (Mahando)",
+  "settings": []
+}
+{% endschema %}
