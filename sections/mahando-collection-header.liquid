@@ -48,13 +48,6 @@
       assign visual = parent_image
     endif
   endif
-  assign visual_is_cutout = false
-  if visual != blank
-    assign visual_src = visual.src | downcase | split: '?' | first
-    if visual_src contains '.png' or visual_src contains '.webp'
-      assign visual_is_cutout = true
-    endif
-  endif
 -%}
 
 <div class="section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
@@ -80,7 +73,7 @@
       {%- endif -%}
       </div>
       {%- if visual != blank -%}
-        <div class="mahando-colhead__visual{% if visual_is_cutout %} mahando-colhead__visual--cutout{% endif %}" aria-hidden="true">
+        <div class="mahando-colhead__visual" aria-hidden="true">
           {{
             visual
             | image_url: width: 720
@@ -142,7 +135,7 @@
 
   .mahando-colhead__main--visual {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(200px, 30%, 300px);
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 32%, 340px);
     gap: 28px;
     align-items: center;
   }
@@ -162,12 +155,8 @@
     display: block;
     width: 100%;
     height: auto;
-    max-height: 210px;
+    max-height: 230px;
     object-fit: contain;
-  }
-
-  .mahando-colhead__visual--cutout .mahando-colhead__visual-img {
-    filter: drop-shadow(0 14px 22px rgb(29 43 51 / 0.14));
   }
 
   @media screen and (max-width: 749px) {
