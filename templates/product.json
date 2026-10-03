@@ -235,7 +235,6 @@
                     "quantity": {
                       "type": "quantity",
                       "static": true,
-                      "disabled": true,
                       "settings": {},
                       "blocks": {}
                     },
