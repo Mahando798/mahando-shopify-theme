@@ -148,6 +148,29 @@ product-card a.contents p[role="heading"] {
   height: auto;
 }
 
+/* Preisfilter: Betrag rechtsbündig, Währungszeichen dahinter und vertikal zentriert (Horizon setzt es oben links) */
+.price-facet .price-facet__field {
+  align-items: center;
+}
+
+.price-facet .price-facet__input,
+.price-facet .price-facet__label {
+  font-size: inherit;
+}
+
+.price-facet .price-facet__input {
+  text-align: end;
+  padding-inline: var(--input-padding-x) calc(var(--input-padding-x) + 1.25em);
+}
+
+.price-facet .price-facet__label {
+  top: 50%;
+  inset-inline: auto var(--input-padding-x);
+  transform: translateY(-50%);
+  padding: 0;
+  line-height: 1;
+}
+
 /* Kategorieseite: schmale Filterkarte links (2 von 12 Spalten), vier Karten je Reihe */
 @media screen and (min-width: 750px) {
   .facets-block-wrapper--vertical .facets--vertical:not(.facets--drawer) {
@@ -177,8 +200,11 @@ product-card a.contents p[role="heading"] {
     padding-block: 2px 10px;
   }
 
-  .facets--vertical:not(.facets--drawer) .price-facet__input {
+  .facets--vertical:not(.facets--drawer) .price-facet__field {
     font-size: var(--font-size--xs);
+  }
+
+  .facets--vertical:not(.facets--drawer) .price-facet__input {
     padding-block: 6px;
   }
 
