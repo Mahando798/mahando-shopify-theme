@@ -95,6 +95,15 @@ im Theme-Editor werden zurück ins Repo committet.
 11. **Adressen:** Firmenadresse (Impressum, Footer, Kontakt-Richtlinie, Datenschutz) ist Silbeker Weg 45, 33142 Büren;
     Lager und Rücksende-/Widerrufsadresse ist Haarener Str. 3, 33142 Büren (steht in der Widerrufsbelehrung). Alle
     Rechtstexte nennen support@mahando.de als Kontaktadresse.
+12. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein
+    echtes Suchfeld (`snippets/search.liquid`, Element `<mahando-search>`, Skript `assets/mahando-search.js`). Ab zwei
+    Zeichen lädt es die Section `mahando-search-suggest` über `/search/suggest` und zeigt die Vorschläge direkt unter
+    der Leiste: Suchbegriffe, bis zu sechs Produkte als Zeilen (Bild, Titel, Hersteller, Preis, Verfügbarkeit),
+    Kategorien/Seiten als Chips und den Link zur Ergebnisseite. Durchsucht werden Titel, Produkttyp, Hersteller,
+    Variantentitel, Artikelnummer (SKU) und EAN (Barcode). Tastatur: Pfeile, Enter, Escape. Der Such-Dialog (Lupe,
+    mobil/Tablet) nutzt dieselben Zeilen (`snippets/mahando-search-results.liquid`, `mahando-search-row.liquid`,
+    `mahando-search-recent.liquid`) und zeigt im Leerzustand nur noch „Zuletzt angesehen“, keine Zufallsprodukte.
+    Suchbegriff-Vorschläge („queries“) liefert Shopify erst, wenn der Shop genügend Suchanfragen gesammelt hat.
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
@@ -191,12 +200,15 @@ Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
   `mahando-product-chips`, `mahando-card-button`, `mahando-gewaehrleistung`
 - `sections/`: `mahando-usp-bar`, `mahando-hero`, `mahando-icon-cards`, `mahando-categories`,
   `mahando-collection-chips`, `mahando-collection-header`, `mahando-breadcrumb`, `mahando-contact-info`,
-  `mahando-gewaehrleistung`, `mahando-footer-bar`, `mahando-about`
+  `mahando-gewaehrleistung`, `mahando-footer-bar`, `mahando-about`, `mahando-search-suggest`
+- Suche: `snippets/mahando-search-results.liquid`, `snippets/mahando-search-row.liquid`,
+  `snippets/mahando-search-recent.liquid`, `assets/mahando-search.js`
 
 Angepasste Horizon-Dateien (klein gehalten, damit Upstream-Updates mergebar bleiben): `layout/theme.liquid`,
 `layout/password.liquid`, `blocks/_header-logo.liquid`, `blocks/_product-card-gallery.liquid`, `blocks/price.liquid`,
 `blocks/_product-card.liquid`, `blocks/product-card.liquid`, `blocks/_product-card-group.liquid`,
 `snippets/card-gallery.liquid`, `snippets/theme-styles-variables.liquid`, `snippets/search.liquid`, `snippets/fonts.liquid`,
+`sections/predictive-search.liquid`, `snippets/predictive-search-empty-state.liquid`, `assets/predictive-search.js`,
 `sections/header.liquid`, `snippets/meta-tags.liquid`, `snippets/cart-drawer.liquid`, `sections/main-cart.liquid`, `config/*`, `locales/de.json`, `locales/en.default.json`, Templates und Section-Groups.
 Andere Sprachdateien wurden entfernt (Shop läuft auf Deutsch, Englisch bleibt als Fallback).
 

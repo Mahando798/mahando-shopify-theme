@@ -21,7 +21,7 @@
   <a class="mahando-search-row__link" href="{{ product.url }}" data-search-item tabindex="-1">
     <span class="mahando-search-row__media" aria-hidden="true">
       {%- if image -%}
-        {{ image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '56px', alt: '' }}
+        {{ image | image_url: width: 120 | image_tag: loading: 'eager', widths: '60, 120', sizes: '56px', alt: '' }}
       {%- else -%}
         {{ 'product-apparel-1' | placeholder_svg_tag: 'mahando-search-row__placeholder' }}
       {%- endif -%}
