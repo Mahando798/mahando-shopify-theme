@@ -205,8 +205,9 @@
                     "text_countdown": "Versand noch heute bei Bestellung innerhalb von {time}",
                     "text_next": "Versand am {day}",
                     "text_window": "Lieferung voraussichtlich {from} – {to}",
-                    "note": "Versand aus Deutschland · gilt werktags bei Zahlungseingang und Verfügbarkeit",
-                    "show_shipping_cost": true
+                    "note": "gilt werktags bei Zahlungseingang und Verfügbarkeit",
+                    "show_shipping_cost": true,
+                    "shipping_cost_inline": true
                   }
                 },
                 "varianten": {
@@ -234,6 +235,7 @@
                     "quantity": {
                       "type": "quantity",
                       "static": true,
+                      "disabled": true,
                       "settings": {},
                       "blocks": {}
                     },

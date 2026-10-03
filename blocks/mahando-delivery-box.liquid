@@ -21,6 +21,27 @@
 {%- if available or request.design_mode -%}
   <script src="{{ 'mahando-delivery.js' | asset_url }}" type="module" fetchpriority="low"></script>
 
+  {%- liquid
+    # Versandkosten: eigene Zeile unter der Box oder (kompakter) in der Hinweiszeile
+    assign cost_text = ''
+    assign cost_inline = false
+    if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank
+      assign cost_text = 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from
+      if block.settings.shipping_cost_inline
+        assign cost_inline = true
+      endif
+    endif
+    capture cost_html
+      if cost_text != blank
+        if shop.shipping_policy.body != blank
+          echo '<a href="' | append: shop.shipping_policy.url | append: '">' | append: cost_text | append: '</a>'
+        else
+          echo '<span>' | append: cost_text | append: '</span>'
+        endif
+      endif
+    endcapture
+    assign cost_html = cost_html | strip
+  -%}
   <mahando-delivery
     class="mahando-delivery spacing-style"
     style="{% render 'spacing-style', settings: block.settings %}"
@@ -48,19 +69,21 @@
             {{ 'mahando.availability.delivery_time' | t: delivery: settings.mahando_delivery_time }}
           {%- endif -%}
         </span>
-        {%- if block.settings.note != blank -%}
-          <span class="mahando-delivery__note">{{ block.settings.note }}</span>
+        {%- if block.settings.note != blank or cost_inline -%}
+          <span class="mahando-delivery__note">
+            {%- if cost_inline -%}
+              {{ cost_html }}
+              {%- if block.settings.note != blank %} · {% endif -%}
+            {%- endif -%}
+            {{- block.settings.note -}}
+          </span>
         {%- endif -%}
       </div>
     </div>
-    {%- if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank -%}
+    {%- if cost_text != blank and cost_inline == false -%}
       <p class="mahando-delivery__cost">
         {% render 'mahando-icon', icon: 'box', class: 'mahando-delivery__cost-icon' %}
-        {%- if shop.shipping_policy.body != blank -%}
-          <a href="{{ shop.shipping_policy.url }}">{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</a>
-        {%- else -%}
-          <span>{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</span>
-        {%- endif -%}
+        {{ cost_html }}
       </p>
     {%- endif -%}
   </mahando-delivery>
@@ -127,7 +150,8 @@
     height: 16px;
   }
 
-  .mahando-delivery__cost a {
+  .mahando-delivery__cost a,
+  .mahando-delivery__note a {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -214,8 +238,15 @@
     {
       "type": "checkbox",
       "id": "show_shipping_cost",
-      "label": "Versandkosten-Zeile anzeigen",
+      "label": "Versandkosten anzeigen",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "shipping_cost_inline",
+      "label": "Versandkosten in der Hinweiszeile statt als eigene Zeile",
+      "info": "Spart eine Zeile in der Kaufbox; der Link zur Versandseite bleibt erhalten.",
+      "default": false
     },
     {
       "type": "header",
