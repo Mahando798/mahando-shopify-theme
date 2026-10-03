@@ -144,19 +144,24 @@
     min-width: 0;
   }
 
+  /* Weiße Kachel ohne Rahmen: Produktfotos haben einen weißen Hintergrund, so entsteht kein sichtbarer Kasten */
   .mahando-colhead__visual {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 160px;
+    min-height: 180px;
+    padding: 12px;
+    border-radius: 14px;
+    background: #fff;
   }
 
   .mahando-colhead__visual-img {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 230px;
+    max-height: 210px;
     object-fit: contain;
+    mix-blend-mode: multiply;
   }
 
   @media screen and (max-width: 749px) {
