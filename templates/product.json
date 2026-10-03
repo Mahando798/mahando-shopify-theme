@@ -324,9 +324,9 @@
           },
           "block_order": [
             "kopf",
+            "highlights",
             "zustand",
-            "kaufbox",
-            "highlights"
+            "kaufbox"
           ]
         },
         "disclosures": {

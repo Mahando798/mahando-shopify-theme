@@ -120,6 +120,14 @@ product-card a.contents p[role="heading"] {
   }
 }
 
+/* Produktseite: „Auf einen Blick“ auf dem Desktop zwischen Titel und Kaufbox, auf dem Handy unter die Kaufbox
+   (dort zählt jeder Pixel bis zu Preis und Warenkorb-Button) */
+@media screen and (max-width: 749px) {
+  .product-details > .group-block > .group-block-content > .mahando-highlights {
+    order: 10;
+  }
+}
+
 /* Produktseite: Titel kompakter, Kaufbox-Elemente in voller Breite */
 .product-details h1 {
   line-height: 1.15;
