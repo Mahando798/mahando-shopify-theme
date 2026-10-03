@@ -259,8 +259,9 @@
                   "settings": {
                     "icon_1": "shield",
                     "text_1": "Sicherer Checkout, SSL-verschlüsselt",
-                    "icon_2": "truck",
-                    "text_2": "Versand aus Deutschland",
+                    "icon_2": "box",
+                    "text_2": "Händler seit 2022 · über 200.000 Bestellungen",
+                    "url_2": "/pages/ueber-uns",
                     "icon_3": "undo",
                     "text_3": "14 Tage Widerrufsrecht",
                     "url_3": "/policies/refund-policy",
@@ -323,9 +324,9 @@
           },
           "block_order": [
             "kopf",
-            "highlights",
             "zustand",
-            "kaufbox"
+            "kaufbox",
+            "highlights"
           ]
         },
         "disclosures": {

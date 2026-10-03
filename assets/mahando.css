@@ -113,6 +113,13 @@ product-card a.contents p[role="heading"] {
   }
 }
 
+/* Produktgalerie: Pfeile im Hauptbild ausblenden, sobald Vorschaubilder angezeigt werden (Desktop) */
+@media screen and (min-width: 750px) {
+  .product-information media-gallery:has(slideshow-controls[thumbnails]) slideshow-arrows {
+    display: none;
+  }
+}
+
 /* Produktseite: Titel kompakter, Kaufbox-Elemente in voller Breite */
 .product-details h1 {
   line-height: 1.15;
