@@ -126,17 +126,19 @@
   }
 
   .mahando-colhead__main {
-    background: var(--color-background);
+    background: #fff;
     border: 1px solid var(--color-border);
     border-radius: 16px;
     padding: 28px 28px 26px;
     min-width: 0;
+    overflow: hidden;
   }
 
+  /* Karte mit Kategoriebild: Text links, Bild rechts in voller Kartenhöhe bis an den Rand (Produktfotos auf Weiß) */
   .mahando-colhead__main--visual {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(220px, 32%, 340px);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 38%, 440px);
+    gap: 24px;
     align-items: center;
   }
 
@@ -144,23 +146,23 @@
     min-width: 0;
   }
 
-  /* Weiße Kachel ohne Rahmen: Produktfotos haben einen weißen Hintergrund, so entsteht kein sichtbarer Kasten */
   .mahando-colhead__visual {
+    align-self: stretch;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 180px;
-    padding: 12px;
-    border-radius: 14px;
-    background: #fff;
+    margin: -28px -28px -26px 0;
+    padding: 14px 18px;
+    min-height: 220px;
   }
 
   .mahando-colhead__visual-img {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 210px;
+    height: 100%;
+    max-height: 280px;
     object-fit: contain;
+    object-position: center;
     /* Fast weiße Bildhintergründe (z. B. 245/245/245) auf Weiß ziehen, damit kein Kasten sichtbar bleibt */
     filter: brightness(1.04);
     mix-blend-mode: multiply;
