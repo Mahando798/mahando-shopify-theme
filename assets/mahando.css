@@ -380,3 +380,81 @@ main[data-template="page.ueber-uns"] .page-width-content {
     display: none;
   }
 }
+
+/* Hauptmenü (Desktop): klassisches Dropdown direkt unter dem Menüpunkt statt Horizon-Mega-Menü über die volle Breite */
+@media screen and (min-width: 990px) {
+  #header-component[data-menu-style='menu'] .header__underlay-open {
+    height: var(--header-height);
+  }
+
+  #header-component[data-menu-style='menu'] .header__underlay-open::after {
+    display: none;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__list-item:where(:not([slot='overflow'])) {
+    position: relative;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu {
+    width: max-content;
+    min-width: 240px;
+    max-width: min(440px, calc(100vw - 32px));
+    inset-inline-start: calc(var(--padding-xs, 8px) * -1);
+    top: 100%;
+    /* unsichtbarer Steg über den Zeilenabstand, damit der Mauszeiger das Dropdown erreicht */
+    padding: calc(var(--padding-block-end, var(--header-padding, 12px)) + var(--border-bottom-width, 0px)) 0 0;
+    clip-path: none;
+    transition: none;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu .menu-list__submenu-inner {
+    display: block;
+    padding: 8px 0;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-background);
+    box-shadow: 0 14px 36px rgb(0 0 0 / 0.14);
+    transform: none;
+    max-height: calc(80vh - var(--header-height));
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__grid,
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__list,
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__column {
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__column + .mega-menu__column {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__link {
+    display: block;
+    padding: 9px 20px;
+    white-space: nowrap;
+  }
+
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__link:hover,
+  #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu__link:focus-visible {
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  /* Dropdowns der letzten Menüpunkte rechtsbündig anlegen, damit sie nicht aus dem Fenster laufen */
+  #header-component[data-menu-style='menu'] .menu-list__list-item:where(:not([slot='overflow'])):nth-last-child(-n + 2) > .menu-list__submenu {
+    inset-inline-start: auto;
+    inset-inline-end: calc(var(--padding-xs, 8px) * -1);
+  }
+}
