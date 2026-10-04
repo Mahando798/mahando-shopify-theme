@@ -35,6 +35,11 @@
   endfor
 
   assign image = section.settings.image
+  # Rechte Karte: ohne gewähltes Foto das Lagerfoto aus dem Theme (assets/mahando-colhead-lager.jpg)
+  assign side_default_photo = false
+  if image == blank and section.settings.side_default_photo
+    assign side_default_photo = true
+  endif
 
   # Kategoriebild für die linke Karte: Kollektionsbild, sonst je nach Einstellung erstes Produktbild / Bild der Oberkategorie
   assign visual = blank
@@ -84,13 +89,22 @@
     </div>
 
     {%- if section.settings.show_side -%}
-      <aside class="mahando-colhead__side{% if image != blank %} mahando-colhead__side--image{% endif %}">
+      <aside class="mahando-colhead__side{% if image != blank or side_default_photo %} mahando-colhead__side--image{% endif %}">
         {%- if image != blank -%}
           {{
             image
             | image_url: width: 900
-            | image_tag: loading: 'lazy', class: 'mahando-colhead__image', alt: collection.title, widths: '450, 700, 900', sizes: '(min-width: 990px) 360px, 100vw'
+            | image_tag: loading: 'lazy', class: 'mahando-colhead__image', alt: '', widths: '450, 700, 900', sizes: '(min-width: 990px) 360px, 100vw'
           }}
+        {%- elsif side_default_photo -%}
+          <img
+            class="mahando-colhead__image"
+            src="{{ 'mahando-colhead-lager.jpg' | asset_url }}"
+            width="900"
+            height="750"
+            alt=""
+            loading="lazy"
+          >
         {%- endif -%}
         <div class="mahando-colhead__side-body">
           {%- if section.settings.side_heading != blank -%}
@@ -222,7 +236,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgb(16 24 30 / 0.85) 0%, rgb(16 24 30 / 0.35) 60%, rgb(16 24 30 / 0.15) 100%);
+    background: linear-gradient(to top, rgb(16 24 30 / 0.88) 0%, rgb(16 24 30 / 0.55) 45%, rgb(16 24 30 / 0.2) 100%);
   }
 
   .mahando-colhead__side-body {
@@ -366,6 +380,12 @@
       "type": "image_picker",
       "id": "image",
       "label": "Foto für die rechte Karte (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "side_default_photo",
+      "label": "Ohne eigenes Foto das Lagerfoto aus dem Theme zeigen",
+      "default": true
     },
     {
       "type": "text",
