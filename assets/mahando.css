@@ -324,6 +324,11 @@ main[data-template="page.ueber-uns"] .page-width-content {
   --page-content-width: var(--normal-page-width);
 }
 
+/* Seite Für Händler (B2B): Titel und Einleitung auf Seitenbreite, bündig mit den Karten */
+main[data-template="page.b2b"] .page-width-content {
+  --page-content-width: var(--normal-page-width);
+}
+
 /* Widerrufsbutton (§ 356a BGB) in der Footer-Spalte „Rechtliches“ – eigene Optik auch gegen die !important-Styles der App */
 .mahando-footer-withdraw {
   display: grid;

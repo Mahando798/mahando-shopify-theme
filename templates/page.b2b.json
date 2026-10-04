@@ -1,0 +1,201 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "title": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "content": {
+          "type": "text",
+          "name": "t:names.content",
+          "settings": {
+            "text": "{{ closest.page.content }}",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "content"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 16,
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      }
+    },
+    "bieten": {
+      "type": "mahando-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "box",
+            "heading": "Markenware in Stückzahlen",
+            "text": "Technik, Haushalt und Spielzeug namhafter Hersteller – als Einzelposten oder in größeren Mengen, dazu Überbestände und Auslaufmodelle."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "check",
+            "heading": "Geprüft und klar deklariert",
+            "text": "Original verpackte Neuware. Abweichungen wie B-Ware, Refurbished oder beschädigte Verpackung weisen wir im Angebot aus."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "tag",
+            "heading": "Preise nach Menge",
+            "text": "Staffelpreise je nach Abnahmemenge. Angebote erstellen wir individuell und unverbindlich."
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "truck",
+            "heading": "Lieferung ab Lager Büren",
+            "text": "Versand aus unseren eigenen Lagerhallen in Deutschland – per Paket oder Spedition, mit Rechnung und Sendungsverfolgung."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "style": "card",
+        "columns": "4",
+        "eyebrow": "Händler & Wiederverkäufer",
+        "heading": "Was wir bieten",
+        "background_color": "",
+        "padding-block-start": 8,
+        "padding-block-end": 40
+      }
+    },
+    "ablauf": {
+      "type": "mahando-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "mail",
+            "heading": "1. Anfrage senden",
+            "text": "Schreiben Sie uns, welche Artikel oder Kategorien und welche Mengen Sie interessieren – gern mit Firmendaten und USt-IdNr."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "heading": "2. Angebot erhalten",
+            "text": "Sie erhalten in der Regel innerhalb eines Werktags ein unverbindliches Angebot mit Preisen, Verfügbarkeit und Lieferzeit."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "truck",
+            "heading": "3. Lieferung",
+            "text": "Nach Ihrer Bestätigung versenden wir ab Lager Büren – sicher verpackt, mit Rechnung und Sendungsverfolgung."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "style": "card",
+        "columns": "3",
+        "eyebrow": "In drei Schritten",
+        "heading": "So läuft es ab",
+        "background_color": "",
+        "padding-block-start": 8,
+        "padding-block-end": 40
+      }
+    },
+    "kontakt": {
+      "type": "mahando-contact-info",
+      "settings": {
+        "eyebrow": "Händlerkontakt",
+        "heading": "So erreichen Sie uns",
+        "text": "<p>Für Händleranfragen erreichen Sie uns direkt per E-Mail oder telefonisch. Bitte nennen Sie bei Anfragen Ihren Firmennamen und Ihre USt-IdNr.</p>",
+        "email_label": "E-Mail für Händler",
+        "email": "b2b@mahando.de",
+        "email_note": "Angebot in der Regel innerhalb eines Werktags.",
+        "phone_label": "Telefon",
+        "phone": "",
+        "hours_prefix": "Erreichbar",
+        "hours": "",
+        "returns_label": "Anfrage",
+        "returns_link": "Händleranfrage stellen",
+        "returns_subject": "Händleranfrage",
+        "returns_note": "Artikel oder Kategorien, gewünschte Mengen, Firmenname und USt-IdNr. – mehr brauchen wir für ein erstes Angebot nicht.",
+        "section_width": "page-width",
+        "padding-block-start": 8,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bieten",
+    "ablauf",
+    "kontakt"
+  ]
+}
