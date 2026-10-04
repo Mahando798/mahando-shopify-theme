@@ -419,6 +419,7 @@ main[data-template="page.ueber-uns"] .page-width-content {
   }
 
   #header-component[data-menu-style='menu'] .menu-list__submenu .mega-menu {
+    display: block;
     width: auto;
     max-width: none;
     margin: 0;
