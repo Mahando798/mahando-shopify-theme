@@ -82,7 +82,7 @@
           "settings": {
             "icon": "shield",
             "heading": "Sichere Zahlung",
-            "text": "PayPal, Klarna, Karte, Rechnung"
+            "text": "PayPal, Klarna, Karte"
           }
         },
         "trust_4": {
