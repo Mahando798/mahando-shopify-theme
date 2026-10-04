@@ -102,6 +102,11 @@ im Theme-Editor werden zurück ins Repo committet.
     (`snippets/product-grid.liquid`, `sections/main-collection.liquid`). Leerzustand der Suche: Kollektion „bestseller“
     (Theme-Einstellung `empty_state_collection`). Warenkorb-Wording in `locales/de.json`: „Zur Kasse“, „Gesamtbetrag“,
     „Inkl. MwSt. … an der Kasse berechnet“.
+    Seite „Für Händler (B2B)“ neu: Template `page.b2b.json` (Einleitung aus dem Seiteninhalt, Karten „Was wir bieten“,
+    „So läuft es ab“, Händlerkontakt b2b@mahando.de), Sie-Form, ohne „Restposten“. Versandrichtlinie um den Abschnitt
+    „Zahlungsarten“ ergänzt (PayPal, Klarna, Kreditkarte, Maestro, Apple Pay, Google Pay, Shop Pay – kein Rechnungskauf).
+    Hauptmenü auf dem Desktop als klassisches Dropdown unter dem Menüpunkt (CSS in `assets/mahando.css`, Horizon-Mega-Menü
+    bleibt im Code erhalten).
 13. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein
     echtes Suchfeld (`snippets/search.liquid`, Element `<mahando-search>`, Skript `assets/mahando-search.js`). Ab zwei
     Zeichen lädt es die Section `mahando-search-suggest` über `/search/suggest` und zeigt die Vorschläge direkt unter
