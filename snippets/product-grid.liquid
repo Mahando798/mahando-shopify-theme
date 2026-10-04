@@ -108,12 +108,26 @@
       {% render 'price-styles' %}
       {% render 'product-card-gallery-zoom-details-styles' %}
       <div class="main-collection-grid__empty">
-        <h2 class="main-collection-grid__empty-title h2">
-          {{ 'content.no_products_found' | t }}
-        </h2>
-        <p>
-          {{ 'content.use_fewer_filters_html' | t: link: collection.url, class: 'main-collection-grid__empty-link' }}
-        </p>
+        {%- if template.name == 'collection' and collection.all_products_count == 0 -%}
+          {%- comment -%} Mahando: Kategorie ohne Artikel – kein Filterhinweis, sondern Verweis auf Bestseller und Kategorien {%- endcomment -%}
+          <h2 class="main-collection-grid__empty-title h2">
+            {{ 'mahando.collection.empty_title' | t }}
+          </h2>
+          <p>{{ 'mahando.collection.empty_text' | t }}</p>
+          <div class="mahando-empty-actions">
+            {%- if collections['bestseller'] != blank and collections['bestseller'].all_products_count > 0 -%}
+              <a class="button" href="{{ collections['bestseller'].url }}">{{ 'mahando.collection.empty_button_bestseller' | t }}</a>
+            {%- endif -%}
+            <a class="button button-secondary" href="{{ routes.collections_url }}">{{ 'mahando.collection.empty_button_all' | t }}</a>
+          </div>
+        {%- else -%}
+          <h2 class="main-collection-grid__empty-title h2">
+            {{ 'content.no_products_found' | t }}
+          </h2>
+          <p>
+            {{ 'content.use_fewer_filters_html' | t: link: collection.url, class: 'main-collection-grid__empty-link' }}
+          </p>
+        {%- endif -%}
       </div>
     {% else %}
       {% if enable_infinite_scroll %}

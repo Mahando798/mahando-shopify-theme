@@ -18,7 +18,7 @@
     if percent > 100
       assign percent = 100
     endif
-    assign threshold_money = threshold | money
+    assign threshold_money = threshold | money_without_trailing_zeros
     assign remaining_money = remaining | money
   -%}
   <div

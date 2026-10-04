@@ -442,6 +442,12 @@
     "usp": {
       "phone_label": "Phone"
     },
+    "collection": {
+      "empty_title": "No items are available in this category at the moment.",
+      "empty_text": "We are continuously expanding our range. Check back soon or browse our bestsellers.",
+      "empty_button_bestseller": "View bestsellers",
+      "empty_button_all": "All categories"
+    },
     "search": {
       "in_stock": "In stock",
       "suggestions": "Search suggestions",

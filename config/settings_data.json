@@ -126,6 +126,7 @@
     "mahando_logo_fallback": true,
     "mahando_search_bar": true,
     "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …",
+    "empty_state_collection": "bestseller",
     "mahando_badge_sale_percent": true,
     "mahando_new_badge_days": 30,
     "mahando_badge_single": true,

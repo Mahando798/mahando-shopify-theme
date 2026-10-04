@@ -44,12 +44,15 @@
     <div
       class="collection-wrapper grid gap-style{% if section.settings.product_grid_width == 'full-width' %} collection-wrapper--grid-full-width{% endif %}"
     >
-      {% content_for 'block',
-        type: 'filters',
-        id: 'filters',
-        results: collection,
-        results_size: collection.products_count
-      %}
+      {%- comment -%} Mahando: ohne Artikel in der Kategorie weder Filter noch Sortierung anzeigen {%- endcomment -%}
+      {% if collection.all_products_count > 0 %}
+        {% content_for 'block',
+          type: 'filters',
+          id: 'filters',
+          results: collection,
+          results_size: collection.products_count
+        %}
+      {% endif %}
 
       {% assign products_per_page = 24 %}
 

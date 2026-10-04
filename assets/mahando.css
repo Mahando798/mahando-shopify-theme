@@ -364,3 +364,19 @@ main[data-template="page.ueber-uns"] .page-width-content {
   font-size: var(--font-size--xs);
   opacity: 0.75;
 }
+
+/* Kategorie ohne Artikel: Buttons unter dem Hinweis */
+.mahando-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Suchseite: auf dem Desktop steht das Suchfeld im Header – das zweite Feld auf der Seite ausblenden */
+@media screen and (min-width: 990px) {
+  body:has(#header-component[data-menu-style='menu'] mahando-search.search-action--bar) search-page-input-component {
+    display: none;
+  }
+}
