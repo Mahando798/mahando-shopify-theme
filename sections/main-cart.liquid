@@ -48,9 +48,10 @@
       <div class="cart-page__items">
         {% render 'mahando-shipping-bar', context: 'page' %}
         {%- content_for 'block', id: 'cart-page-items', type: '_cart-products' %}
-        {%- unless cart.empty? -%}
-          {% render 'mahando-gewaehrleistung', mode: 'inline', context: 'page', show_title: true %}
-        {%- endunless -%}
+        {%- comment -%}
+          Mahando: Der Gewährleistungshinweis steht als Satz mit Link (Plakat im Dialog) in der Zusammenfassung
+          über dem Button „Zur Kasse“ (snippets/cart-summary.liquid) – wie im Warenkorb-Drawer.
+        {%- endcomment -%}
       </div>
 
       {%- unless cart.empty? -%}

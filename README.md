@@ -95,7 +95,14 @@ im Theme-Editor werden zurück ins Repo committet.
 11. **Adressen:** Firmenadresse (Impressum, Footer, Kontakt-Richtlinie, Datenschutz) ist Silbeker Weg 45, 33142 Büren;
     Lager und Rücksende-/Widerrufsadresse ist Haarener Str. 3, 33142 Büren (steht in der Widerrufsbelehrung). Alle
     Rechtstexte nennen support@mahando.de als Kontaktadresse.
-12. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein
+12. **Store-Check 04.10.2026:** 23 Kollektionen des Vorgänger-Shops gelöscht (star-wars, barbie, pokemon, hot-wheels,
+    brandneu, rabattaktionen, sonderaktionen, spielzeug-alt, elektronikartikel, neu-eingetroffen, frontpage u. a.) und
+    per URL-Weiterleitung auf die passenden neuen Kategorien bzw. `/collections/all` umgeleitet. Kategorien ohne Artikel
+    zeigen einen eigenen Leerzustand (Hinweis + Buttons zu Bestsellern/Kategorien) und blenden Filter/Sortierung aus
+    (`snippets/product-grid.liquid`, `sections/main-collection.liquid`). Leerzustand der Suche: Kollektion „bestseller“
+    (Theme-Einstellung `empty_state_collection`). Warenkorb-Wording in `locales/de.json`: „Zur Kasse“, „Gesamtbetrag“,
+    „Inkl. MwSt. … an der Kasse berechnet“.
+13. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein
     echtes Suchfeld (`snippets/search.liquid`, Element `<mahando-search>`, Skript `assets/mahando-search.js`). Ab zwei
     Zeichen lädt es die Section `mahando-search-suggest` über `/search/suggest` und zeigt die Vorschläge direkt unter
     der Leiste: Suchbegriffe, bis zu sechs Produkte als Zeilen (Bild, Titel, Hersteller, Preis, Verfügbarkeit),
@@ -140,8 +147,8 @@ im Theme-Editor werden zurück ins Repo committet.
   deutsche Plakat der EU-Kommission liegt unverändert unter `assets/mahando-gewaehrleistung-de.png` (Original-PNG
   1654×2339) und `.svg`; es darf nicht bearbeitet werden. Eingebaut über `snippets/mahando-gewaehrleistung.liquid`:
   Produktseite (Block `mahando-gewaehrleistung` in der Kaufbox: Satz + Link, Plakat im Dialog), Warenkorb-Drawer und
-  Warenkorbseite (Link direkt über dem Checkout-Button in `snippets/cart-summary.liquid`, auf der Warenkorbseite
-  zusätzlich das Plakat in voller Größe), Seite `/pages/gewaehrleistung` (Template `page.gewaehrleistung.json`,
+  Warenkorbseite (Link direkt über dem Button „Zur Kasse“ in `snippets/cart-summary.liquid`; das Plakat in voller
+  Größe auf der Warenkorbseite wurde am 04.10.2026 entfernt), Seite `/pages/gewaehrleistung` (Template `page.gewaehrleistung.json`,
   Sektion `mahando-gewaehrleistung`, Footer-Menü „rechtliches“) sowie in der Bestellbestätigungs-Mail (Einstellungen →
   Benachrichtigungen → Bestellbestätigung; Bild aus „Inhalt → Dateien“). Die Kommissions-Leitlinien erlauben die
   Anzeige per Klick/Mouseover, verlangen aber immer den klickbaren Link auf europa.eu/youreurope/garantien.
