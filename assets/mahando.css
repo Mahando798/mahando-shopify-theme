@@ -454,3 +454,13 @@ main[data-template="page.ueber-uns"] .page-width-content {
   }
 
 }
+
+/* Such-Dialog: „Löschen“-Button nicht abschneiden (Horizon begrenzt ihn auf 44 px) */
+.predictive-search__reset-button {
+  width: auto;
+  flex: none;
+  padding-inline: 10px;
+  font-size: var(--font-size--sm);
+  white-space: nowrap;
+  overflow: visible;
+}
