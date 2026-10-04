@@ -453,9 +453,4 @@ main[data-template="page.ueber-uns"] .page-width-content {
     background: rgb(var(--color-foreground-rgb) / 0.06);
   }
 
-  /* Dropdowns der letzten Menüpunkte rechtsbündig anlegen, damit sie nicht aus dem Fenster laufen */
-  #header-component[data-menu-style='menu'] .menu-list__list-item:where(:not([slot='overflow'])):nth-last-child(-n + 3) > .menu-list__submenu {
-    inset-inline-start: auto;
-    inset-inline-end: calc(var(--padding-xs, 8px) * -1);
-  }
 }
