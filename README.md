@@ -149,7 +149,16 @@ im Theme-Editor werden zurück ins Repo committet.
     GmbH“ (= Yule, Lage; Lagerplatz KleinlagerSF). Dafür neue Kategorie **Beauty + Pflege → Parfum** (Kollektionen
     `beauty-pflege`, `parfum`, Regeln Typ/Tag wie bei den anderen Kategorien; Hauptmenü vor „Sale“). Grundpreis: bei
     100-ml-Flakons ist der Grundpreis mit dem Gesamtpreis identisch und darf entfallen (§ 4 Abs. 3 PAngV); andere
-    Füllmengen brauchen die Grundpreisangabe (Shopify-Variante → Maßeinheit).
+    Füllmengen brauchen die Grundpreisangabe (Shopify-Variante → Maßeinheit). Die sechs Düfte sind zusätzlich direkt in
+    Shopify angelegt (Status **Entwurf**, SKU = Xentral-Nummer, Bestand wie Xentral, Shopify-Produktkategorie „Eau de
+    Parfum“/„Parfümextrakte“), damit der „Initiale Datenimport“ des Connectors sie samt Bildern nach Xentral übernimmt.
+    **Bilder:** Quelle ist der Amazon-Katalog (wie im eBay-Listing-Tool, dort per SP-API `GET /catalog/2022-04-01/items`
+    mit `includedData=images`; Marco hält die Nutzungsrechte für sein Sortiment). Je Artikel die zwei größten Fassungen
+    (MAIN + PT01) als Shopify-Dateien über `fileCreate(originalSource)` geladen und per `fileUpdate(referencesToAdd)` an
+    die Produkte gehängt; ein Download in die Sandbox ist nicht möglich (Netz-Allowlist), Xentral-Seiten verbieten per
+    CSP jedes fremde fetch – deshalb der Weg über Shopify. Für die Anreicherungs-Pipeline auf dem Server
+    (`C:\\fbm-retouren`, `spapi.js`) gilt: Bilder per SP-API holen und über `POST /api/v1/productMedia` (Base64) in
+    Xentral ablegen.
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
