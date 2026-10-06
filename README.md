@@ -107,6 +107,14 @@ im Theme-Editor werden zurück ins Repo committet.
     „Zahlungsarten“ ergänzt (PayPal, Klarna, Kreditkarte, Maestro, Apple Pay, Google Pay, Shop Pay – kein Rechnungskauf).
     Hauptmenü auf dem Desktop als klassisches Dropdown unter dem Menüpunkt (CSS in `assets/mahando.css`, Horizon-Mega-Menü
     bleibt im Code erhalten).
+    **Leere Kategorien** (Stand 06.10.2026): Kollektions-Links ohne Artikel werden automatisch ausgeblendet – im
+    Desktop-Dropdown, in der Navigationsleiste, im Mobil-Drawer und in den Chips der Kategorieseite
+    (`snippets/mahando-menu-visible.liquid`, eingebunden in `blocks/_header-menu.liquid`, `snippets/mega-menu-list.liquid`,
+    `snippets/header-drawer.liquid`, `sections/mahando-collection-chips.liquid`). Hauptkategorien mit Unterpunkten bleiben
+    immer sichtbar (ohne Dropdown, wenn alle Unterpunkte leer sind); ein Hauptpunkt ohne Unterpunkte (z. B. „Sale“) erscheint
+    erst, wenn die Kollektion Artikel hat. „Sale“ ist eine automatische Kollektion (Regel: Streichpreis gesetzt). Der leere
+    Blog „News“ wurde gelöscht. Startseiten-Newsletter zweispaltig (Text links, Formular rechts). Rücksendeweg einheitlich:
+    per E-Mail an support@mahando.de mit Bestellnummer (Startseite, Kontaktseite, Produktseite).
 13. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein
     echtes Suchfeld (`snippets/search.liquid`, Element `<mahando-search>`, Skript `assets/mahando-search.js`). Ab zwei
     Zeichen lädt es die Section `mahando-search-suggest` über `/search/suggest` und zeigt die Vorschläge direkt unter
