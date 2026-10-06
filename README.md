@@ -124,6 +124,17 @@ im Theme-Editor werden zurück ins Repo committet.
     mobil/Tablet) nutzt dieselben Zeilen (`snippets/mahando-search-results.liquid`, `mahando-search-row.liquid`,
     `mahando-search-recent.liquid`) und zeigt im Leerzustand nur noch „Zuletzt angesehen“, keine Zufallsprodukte.
     Suchbegriff-Vorschläge („queries“) liefert Shopify erst, wenn der Shop genügend Suchanfragen gesammelt hat.
+14. **Verknüpfung mit Xentral** (06.10.2026): Die Xentral-Shopify-App gleicht Artikel ausschließlich über die SKU ab
+    (Shopify-SKU = Xentral-Artikelnummer; „Fremdnummern“ sind aus). Alle 18 Startartikel tragen jetzt ihre
+    Xentral-Artikelnummer als SKU, fehlende EANs wurden aus Xentral ergänzt (ABUS 57/45, 57/50, Hisense HS205G, X-SHOT).
+    Zuordnung: ABUS 57/45 → 100028, ABUS 57/50 → 100027, FRITZ!Box 7581 (refurbished) → 100222, Derbystar → 100005,
+    Hisense HS205G → 100058, Kärcher Battery Power 18/25 → 100016, Kärcher Schnellladegerät → 100015, New Era → 100035,
+    Tefal Duetto+ G71944 → 100639 (Xentral-Name korrigiert, hieß fälschlich „Duetto A70544“), Duetto+ G71946 → 100993,
+    OptiGrill+ GC712D → 100410 (EAN in Xentral ergänzt), X-SHOT Trace Fire → 100258. Neu in Xentral angelegt (API,
+    Nummern aus dem Nummernkreis): 101027 Kärcher GSH 4-4 Plus **Battery Set** (1.445-321.0; 100203 ist die Solo-Version
+    1.445-320.0), 101028 FRITZ!Box 6660 Cable neu, 101029 FRITZ!Box 6660 Cable refurbished (gleiche EAN, Freifeld
+    Zustand), 101030 Bosch EasyGrassCut 23, 101031 Kärcher LTR 3-18 Dual Battery Set, 101032 Tefal Easy Fry Oven & Grill
+    FW5018. Zustand steht in Xentral im Freifeld 1 „Zustand“ (`neu`, `refurbished`, `gebraucht`).
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
@@ -189,6 +200,14 @@ im Theme-Editor werden zurück ins Repo committet.
   Deutsch/Sie pflegen; Shopifys deutsche Vorlagen sind in der Du-Form.
 
 ## Datenfluss aus Xentral
+
+**Stand der Anbindung (06.10.2026):** In Xentral (Einstellungen → Verkaufen → Shops/Marktplätze → Shopify) existiert die
+Integration „Shopify“ im Modus **Entwicklung** (Produktivmodus aus), die **Artikelzuordnung (Artikelfilter) ist noch nicht
+konfiguriert** – ohne Filter würde Xentral alle rund 1.000 Artikel synchronisieren; sinnvoll ist ein Filter wie
+„Artikel Nr. IN …“ oder ein Tag `shopify`. Alle sieben Features sind eingeschaltet. Vor dem Produktivschalten zu klären:
+Artikel-, Kategorie- und Preisabgleich (Xentral → Shop) überschreiben Shopify-Titel/-Texte/-Preise mit den Xentral-Daten;
+der Bestandsabgleich würde mit dem aktuellen Xentral-Bestand (0 bei allen Artikeln) alle Artikel auf „Ausverkauft“
+setzen – vorher Bestände in Xentral buchen. Die Shopify-Bestände (99–6000) sind bis dahin Platzhalter.
 
 | Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
 |---|---|---|
