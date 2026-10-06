@@ -135,6 +135,21 @@ im Theme-Editor werden zurück ins Repo committet.
     1.445-320.0), 101028 FRITZ!Box 6660 Cable neu, 101029 FRITZ!Box 6660 Cable refurbished (gleiche EAN, Freifeld
     Zustand), 101030 Bosch EasyGrassCut 23, 101031 Kärcher LTR 3-18 Dual Battery Set, 101032 Tefal Easy Fry Oven & Grill
     FW5018. Zustand steht in Xentral im Freifeld 1 „Zustand“ (`neu`, `refurbished`, `gebraucht`).
+15. **Xentral als Master, Datenmodell** (06.10.2026): Artikeldaten werden künftig in Xentral gepflegt (auch per
+    KI-Anreicherung) und vom Shopify-Connector in den Shop geschrieben. Zuordnung der Xentral-Felder:
+    Artikelname → Titel · Artikelbeschreibung (HTML) → Beschreibung · Hersteller → Vendor · Warengruppe → Produkttyp
+    (angelegt: „Eau de Parfum“, „Parfum“) · Xentral-Tags → Shopify-Tags (angelegt: „Parfum“ (id 21), „neu“ (id 22)) ·
+    Freifelder → Metafelder `mahando.*`: 1 `Zustand` → zustand, 2 `zustand_hinweis`, 3 `highlights`, 4 `technische_daten`,
+    5 `lieferumfang`, 6 `sicherheitshinweise`, 7 `hersteller_name`, 8 `hersteller_anschrift`, 9 `hersteller_kontakt`,
+    10 `eu_verantwortlicher` (Freifelder nehmen per API mehrzeiligen Text, >1.200 Zeichen getestet). **Freifeld 11 = `ja`**
+    ist der Shop-Schalter: der Artikelfilter des Connectors lautet `Freifeld 11 == "ja"`; nur diese Artikel werden
+    synchronisiert. Verkaufspreise liegen in Xentral **netto** (Standardpreis, Menge 1); der Connector muss Bruttopreise
+    (19 %) an Shopify übergeben. Erste Artikel nach diesem Muster: sechs 100-ml-Düfte (101033–101038: Dior Sauvage Parfum,
+    J'adore, Miss Dior, YSL MYSLF, Creed Aventus, Tom Ford Ombré Leather) mit Bestand im Lager „Außenlager S&F Handels
+    GmbH“ (= Yule, Lage; Lagerplatz KleinlagerSF). Dafür neue Kategorie **Beauty + Pflege → Parfum** (Kollektionen
+    `beauty-pflege`, `parfum`, Regeln Typ/Tag wie bei den anderen Kategorien; Hauptmenü vor „Sale“). Grundpreis: bei
+    100-ml-Flakons ist der Grundpreis mit dem Gesamtpreis identisch und darf entfallen (§ 4 Abs. 3 PAngV); andere
+    Füllmengen brauchen die Grundpreisangabe (Shopify-Variante → Maßeinheit).
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
@@ -164,6 +179,10 @@ im Theme-Editor werden zurück ins Repo committet.
 | New Era | New Era Cap Co., Inc. | 160 Delaware Avenue, Buffalo, NY 14202, USA | customer.care@neweracap.com | New Era Cap GmbH, Lichtstraße 25, 50825 Köln, germany@neweracap.com |
 | Tefal | SEB S.A.S. (Groupe SEB) | 21260 Selongey, FR | Tefal-Service +49 7331 256 256, tefal.de/contact-form | – (Vertrieb DE: Groupe SEB WMF Consumer GmbH, Geislingen) – **mit Verpackung abgleichen** |
 | X-SHOT (ZURU) | ZURU Inc. | Energy Plaza, 92 Granville Road, Kowloon, Hongkong | care@zuru.com, +852 3746 9003 | ZURU Germany GmbH, Bleichstraße 8-10, 40211 Düsseldorf, care@zuru.com |
+| Dior (Düfte) | Parfums Christian Dior | 33 avenue Hoche, 75008 Paris, FR | www.dior.com (Kundenservice) | – |
+| Yves Saint Laurent (Düfte) | YSL Beauté (L'Oréal) | 281 Rue Saint-Honoré, 75008 Paris, FR | fragen@loreal-group.com | – |
+| Creed | Kering Beauté Distribution | 40 Rue de Sèvres, 75007 Paris, FR | www.creedboutique.com (Kundenservice) | – – **mit Verpackung abgleichen** |
+| Tom Ford (Düfte) | Tom Ford Beauty – The Estée Lauder Companies Inc. | 767 Fifth Avenue, New York, NY 10153, USA | www.tomfordbeauty.com (Kundenservice) | offen – US-Ware (UPC); EU-Verantwortlicher laut Verpackung prüfen, sonst gilt der Importeur als verantwortliche Person (Kosmetik-VO Art. 4) |
 
 ## Rechtliche Pflichtelemente (Stand 30.09.2026)
 
