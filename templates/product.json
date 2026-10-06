@@ -495,7 +495,7 @@
                     "versandtext": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Versand aus eigenem Lager in Deutschland, in der Regel mit DHL; hochwertige oder sperrige Artikel liefern wir per Spedition. Versandkosten: 4,99 € pro Bestellung, ab 300 € Bestellwert versandkostenfrei. Wir liefern derzeit ausschließlich innerhalb Deutschlands.</p><p>14 Tage Widerrufsrecht. Den Ablauf einer Rücksendung finden Sie in der Widerrufsbelehrung.</p>",
+                        "text": "<p>Versand aus eigenem Lager in Deutschland, in der Regel mit DHL; hochwertige oder sperrige Artikel liefern wir per Spedition. Versandkosten: 4,99 € pro Bestellung, ab 300 € Bestellwert versandkostenfrei. Wir liefern derzeit ausschließlich innerhalb Deutschlands.</p><p>14 Tage Widerrufsrecht. Rücksendungen melden Sie per E-Mail an support@mahando.de an – bitte mit Bestellnummer. Den Ablauf finden Sie in der Widerrufsbelehrung.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "type_preset": "custom",
