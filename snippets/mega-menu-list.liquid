@@ -106,7 +106,8 @@
         echo '<li class="mega-menu__column ' | append: span_class | append: '">'
       endif
     %}
-    <div>
+    {%- capture link_visible %}{% render 'mahando-menu-visible', link: link %}{% endcapture -%}
+    <div{% if link_visible contains 'false' %} class="mega-menu__item--empty" hidden{% endif %}>
       <a
         href="{{ link.url }}"
         class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
@@ -144,10 +145,12 @@
         >
           {% for childLink in link.links %}
             {% assign break_after_modulo = forloop.index | modulo: links_before_wrap %}
+            {%- capture child_visible %}{% render 'mahando-menu-visible', link: childLink %}{% endcapture -%}
             <li
               {% if break_after_modulo == 0 and should_break_columns %}
                 style="break-after: column;"
               {% endif %}
+              {% if child_visible contains 'false' %}class="mega-menu__item--empty" hidden{% endif %}
             >
               <a
                 href="{{ childLink.url }}"

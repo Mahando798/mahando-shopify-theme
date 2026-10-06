@@ -44,6 +44,8 @@
         <a class="mahando-chip{% unless any_active %} mahando-chip--on{% endunless %}" href="{{ collection.url }}">{{ section.settings.all_label }}</a>
       {%- endif -%}
       {%- for link in menu.links -%}
+        {%- capture link_visible %}{% render 'mahando-menu-visible', link: link %}{% endcapture -%}
+        {%- if link_visible contains 'false' and link.active == false %}{% continue %}{% endif -%}
         <a class="mahando-chip{% if link.active %} mahando-chip--on{% endif %}" href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
       {%- endfor -%}
     </nav>

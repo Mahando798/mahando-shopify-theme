@@ -1,0 +1,43 @@
+{%- doc -%}
+  Entscheidet, ob ein Menüpunkt angezeigt wird (Mahando): Kollektions-Links ohne Artikel werden ausgeblendet,
+  damit das Menü keine leeren Kategorien bewirbt. Gibt „true“ oder „false“ aus – per capture auswerten:
+
+    {% capture visible %}{% render 'mahando-menu-visible', link: link, is_top: true %}{% endcapture %}
+    {% if visible contains 'false' %}{% continue %}{% endif %}
+
+  Regeln:
+  - Kein Kollektions-Link (Seite, Produkt, Link …): immer sichtbar.
+  - Kollektions-Link mit Artikeln: sichtbar.
+  - Hauptmenüpunkt (is_top) mit Unterpunkten: immer sichtbar, auch wenn die Kategorie leer ist –
+    die Hauptkategorien beschreiben das Sortiment; leere zeigen auf der Kategorieseite den Hinweis.
+  - Sonst sichtbar, sobald mindestens ein Unterpunkt sichtbar wäre.
+  - Kollektions-Link auf eine gelöschte Kollektion: ausgeblendet.
+
+  @param {object} link - Der Menüpunkt (link)
+  @param {boolean} [is_top] - true für Hauptmenüpunkte
+{%- enddoc -%}
+
+{%- liquid
+  assign show = true
+  if link.type == 'collection_link'
+    if link.object == blank
+      assign show = false
+    elsif link.object.all_products_count == 0
+      assign show = false
+      if is_top and link.links != blank
+        assign show = true
+      else
+        for sub in link.links
+          if sub.type != 'collection_link'
+            assign show = true
+            break
+          elsif sub.object != blank and sub.object.all_products_count > 0
+            assign show = true
+            break
+          endif
+        endfor
+      endif
+    endif
+  endif
+  echo show
+-%}

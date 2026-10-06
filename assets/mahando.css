@@ -469,3 +469,8 @@ main[data-template="page.b2b"] .page-width-content {
   white-space: nowrap;
   overflow: visible;
 }
+
+/* Menü: Kollektions-Links ohne Artikel (snippets/mahando-menu-visible.liquid) */
+.mega-menu__item--empty {
+  display: none !important;
+}

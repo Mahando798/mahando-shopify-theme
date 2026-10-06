@@ -110,12 +110,31 @@
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {%- liquid
+                # Mahando: Kategorien ohne Artikel ausblenden (Hauptpunkte mit Unterpunkten bleiben)
+                capture link_visible
+                  render 'mahando-menu-visible', link: link, is_top: true
+                endcapture
+                if link_visible contains 'false'
+                  continue
+                endif
+                assign has_children = false
+                for sub in link.links
+                  capture sub_visible
+                    render 'mahando-menu-visible', link: sub
+                  endcapture
+                  if sub_visible contains 'true'
+                    assign has_children = true
+                    break
+                  endif
+                endfor
+              -%}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 style="--menu-drawer-animation-index: {{ animation_index }};"
                 class="{%- if block_settings.drawer_accordion -%}menu-drawer__list-item--deep{%- else -%}menu-drawer__list-item--flat{%- endif -%}{% if block_settings.drawer_dividers %} menu-drawer__list-item--divider{% endif %}"
               >
-                {% if block_settings.drawer_accordion and link.links != blank %}
+                {% if block_settings.drawer_accordion and has_children %}
                   {%- comment -%}
                     Accordion for links with children, in menus with fewer than 3 levels of links
                   {%- endcomment -%}
@@ -156,6 +175,8 @@
                         tabindex="-1"
                       >
                         {%- for childlink in link.links -%}
+                          {%- capture child_visible %}{% render 'mahando-menu-visible', link: childlink %}{% endcapture -%}
+                          {%- if child_visible contains 'false' %}{% continue %}{% endif -%}
                           <li
                             class="menu-drawer__list-item"
                             style="--menu-drawer-animation-index: {{ forloop.index }};"
@@ -186,7 +207,7 @@
                     children: accordion_children,
                     open_by_default_on_mobile: should_open_first
                   %}
-                {% elsif block_settings.drawer_accordion == false and link.links != blank %}
+                {% elsif block_settings.drawer_accordion == false and has_children %}
                   {%- comment -%}
                     Flat menus for links with children, in menus with fewer than 3 levels of links
                   {%- endcomment -%}
@@ -217,6 +238,8 @@
                     tabindex="-1"
                   >
                     {%- for childlink in link.links -%}
+                      {%- capture child_visible %}{% render 'mahando-menu-visible', link: childlink %}{% endcapture -%}
+                      {%- if child_visible contains 'false' %}{% continue %}{% endif -%}
                       <li
                         class="menu-drawer__list-item"
                         style="--menu-drawer-animation-index: {{ animation_index }};"

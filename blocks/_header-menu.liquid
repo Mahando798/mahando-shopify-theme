@@ -45,6 +45,8 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {%- capture link_visible %}{% render 'mahando-menu-visible', link: link, is_top: true %}{% endcapture -%}
+              {%- if link_visible contains 'false' %}{% continue %}{% endif -%}
               <li>
                 <a
                   href="{{ link.url }}"
@@ -93,13 +95,32 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {%- liquid
+          # Mahando: Kategorien ohne Artikel ausblenden (Hauptpunkte mit Unterpunkten bleiben, siehe Snippet)
+          capture link_visible
+            render 'mahando-menu-visible', link: link, is_top: true
+          endcapture
+          if link_visible contains 'false'
+            continue
+          endif
+          assign has_children = false
+          for sub in link.links
+            capture sub_visible
+              render 'mahando-menu-visible', link: sub
+            endcapture
+            if sub_visible contains 'true'
+              assign has_children = true
+              break
+            endif
+          endfor
+        -%}
         <li
           class="menu-list__list-item"
           on:blur="/deactivate"
           on:pointerenter="/activate"
           on:pointerleave="/deactivate"
         >
-          {%- if link.links != blank -%}
+          {%- if has_children -%}
             <span class="menu-list__trigger">
           {%- endif -%}
           <a
@@ -113,7 +134,7 @@
           >
             <span class="menu-list__link-title">{{- link.title -}}</span>
           </a>
-          {%- if link.links != blank -%}
+          {%- if has_children -%}
             <button
               type="button"
               class="menu-list__disclosure button-unstyled"
