@@ -159,6 +159,18 @@ im Theme-Editor werden zurück ins Repo committet.
     CSP jedes fremde fetch – deshalb der Weg über Shopify. Für die Anreicherungs-Pipeline auf dem Server
     (`C:\\fbm-retouren`, `spapi.js`) gilt: Bilder per SP-API holen und über `POST /api/v1/productMedia` (Base64) in
     Xentral ablegen.
+16. **Abgleich Shopify → Xentral per API statt Initialimport** (08.10.2026): Die Bilder-Pipeline aus dem Monorepo
+    `Mahando798/mahando-tools` (`fbm-retouren/backend/src/xentral-bilder.js`, Cron alle 15 Min.) hatte bereits am
+    07.10. 22 der 24 Shop-Artikel mit Amazon-Katalogbildern in Xentral bebildert. Der initiale Datenimport des
+    Connectors hätte die Shopify-Bilder zusätzlich nach Xentral gelegt (Dubletten im Shop) – deshalb **kein Import**;
+    die Daten der 18 Altartikel wurden per API nach Xentral übertragen (Shopify-Titel → Artikelname,
+    Beschreibung HTML → Artikelbeschreibung, Metafelder `mahando.*` → Freifelder 1–10, Produkttyp → neue Warengruppen
+    3–15, Shopify-Tags → Xentral-Tags 23–61 mit identischen Namen, Hersteller = Vendor, Shopify-Bruttopreis →
+    Standardpreis netto). Xentral ist damit vollständiger Master; **Bilder:** beim Go-live im Connector „Bilder anlegen
+    und löschen“ wählen, dann zeigt der Shop genau die Xentral-Bilder (die bisherigen Shopify-Bilder waren ebenfalls
+    Katalogbilder). 100639 und 101027 (kein/zu kleiner Katalogtreffer) bekommen ihre Shopify-Bilder per
+    `POST /api/xentral/bilder` mit `urls`. Für das Pflichtfeld „Collection für reduzierten Steuersatz“ des Importers
+    existiert die leere Smart-Collection „Ermäßigter Steuersatz 7 %“ (Tag `steuer-7`, nicht im Menü).
 
 ## Datenstandard je Artikel (so sind die 18 Startartikel gepflegt)
 
@@ -229,13 +241,16 @@ im Theme-Editor werden zurück ins Repo committet.
 
 ## Datenfluss aus Xentral
 
-**Stand der Anbindung (06.10.2026):** In Xentral (Einstellungen → Verkaufen → Shops/Marktplätze → Shopify) existiert die
-Integration „Shopify“ im Modus **Entwicklung** (Produktivmodus aus), die **Artikelzuordnung (Artikelfilter) ist noch nicht
-konfiguriert** – ohne Filter würde Xentral alle rund 1.000 Artikel synchronisieren; sinnvoll ist ein Filter wie
-„Artikel Nr. IN …“ oder ein Tag `shopify`. Alle sieben Features sind eingeschaltet. Vor dem Produktivschalten zu klären:
-Artikel-, Kategorie- und Preisabgleich (Xentral → Shop) überschreiben Shopify-Titel/-Texte/-Preise mit den Xentral-Daten;
-der Bestandsabgleich würde mit dem aktuellen Xentral-Bestand (0 bei allen Artikeln) alle Artikel auf „Ausverkauft“
-setzen – vorher Bestände in Xentral buchen. Die Shopify-Bestände (99–6000) sind bis dahin Platzhalter.
+**Stand der Anbindung (08.10.2026):** Integration „Shopify“ in Xentral (Einstellungen → Verkaufen → Shops/Marktplätze →
+Shopify) im Modus **Entwicklung**, Artikelfilter `Freifeld 11 == "ja"` (24 Artikel), Workflows konfiguriert (Artikel:
+Stammdaten/Freifelder/Bilder/Tags, Update-Strategie „bestehende updaten, neue anlegen“, Freifeldzuordnung 1–10, Sales
+Channels Online Store + Shop; Kategorie: Warengruppe → Produkttyp; Bestand: S&F + Hauptlager → Silbeker Weg 45; Aufträge:
+Projekt Shopify, Kreditkarte/Paypal, Standardversand → DHL Paket National, Porto 100964, Rabatt 100965; Tracking: DHL).
+Xentral-Daten der 24 Artikel sind mit Shopify abgeglichen (siehe Punkt 16). **Noch offen vor dem Produktivschalten:**
+Migrationsmodus beenden (ohne Import), Vorschaubilder der 24 Artikel in Xentral sichten, Medien-Strategie „Bilder anlegen
+und löschen“, Produktivmodus + „Aktiv“-Schalter je Workflow, Testsync (Text-/Bestandsänderung in Xentral → Shop), danach
+Düfte Entwurf → Aktiv. Der Bestandsabgleich schreibt den Xentral-Bestand (S&F + Hauptlager, abzüglich Reservierungen)
+nach Shopify – die Shopify-Bestände der 18 Altartikel sind bis dahin Platzhalter; Bestände vorher in Xentral buchen.
 
 | Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
 |---|---|---|
