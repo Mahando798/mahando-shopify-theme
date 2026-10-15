@@ -241,16 +241,21 @@ im Theme-Editor werden zurück ins Repo committet.
 
 ## Datenfluss aus Xentral
 
-**Stand der Anbindung (08.10.2026):** Integration „Shopify“ in Xentral (Einstellungen → Verkaufen → Shops/Marktplätze →
-Shopify) im Modus **Entwicklung**, Artikelfilter `Freifeld 11 == "ja"` (24 Artikel), Workflows konfiguriert (Artikel:
-Stammdaten/Freifelder/Bilder/Tags, Update-Strategie „bestehende updaten, neue anlegen“, Freifeldzuordnung 1–10, Sales
-Channels Online Store + Shop; Kategorie: Warengruppe → Produkttyp; Bestand: S&F + Hauptlager → Silbeker Weg 45; Aufträge:
-Projekt Shopify, Kreditkarte/Paypal, Standardversand → DHL Paket National, Porto 100964, Rabatt 100965; Tracking: DHL).
-Xentral-Daten der 24 Artikel sind mit Shopify abgeglichen (siehe Punkt 16). **Noch offen vor dem Produktivschalten:**
-Migrationsmodus beenden (ohne Import), Vorschaubilder der 24 Artikel in Xentral sichten, Medien-Strategie „Bilder anlegen
-und löschen“, Produktivmodus + „Aktiv“-Schalter je Workflow, Testsync (Text-/Bestandsänderung in Xentral → Shop), danach
-Düfte Entwurf → Aktiv. Der Bestandsabgleich schreibt den Xentral-Bestand (S&F + Hauptlager, abzüglich Reservierungen)
-nach Shopify – die Shopify-Bestände der 18 Altartikel sind bis dahin Platzhalter; Bestände vorher in Xentral buchen.
+**Stand der Anbindung (15.10.2026):** Integration „Shopify“ in Xentral (Einstellungen → Verkaufen → Shops/Marktplätze →
+Shopify) läuft im **Produktivmodus**, Artikelfilter `Freifeld 11 == "ja"` (24 Artikel). Aktive Workflows: Artikel
+(Stammdaten/Freifelder/Bilder/Tags, Update-Strategie „bestehende updaten, neue anlegen“, Freifeldzuordnung 1–10, Sales
+Channels Online Store + Shop), Kategorie (Warengruppe → Produkttyp), Preise, Aufträge (Projekt Shopify, Kreditkarte/Paypal,
+Standardversand → DHL Paket National, Porto 100964, Rabatt 100965), Tracking (DHL), Rückzahlungen. Medien-Strategie
+„Bilder anlegen und löschen“ – Shopify zeigt exakt die Xentral-Bilder (Testsync 100028 am 08.10. ohne Datenverlust).
+Migrationsmodus ohne Initialimport beendet; die Düfte 101033–101038 sind seit 08.10. aktiv und auf allen Kanälen.
+**Bewusst noch aus: Workflow Bestand** – er würde den Xentral-Bestand (S&F + Hauptlager, abzüglich Reservierungen) nach
+Shopify schreiben; erst einschalten, wenn die Bestände der 18 Altartikel in Xentral gebucht sind. Bis dahin sind die
+Shopify-Bestände Platzhalter.
+
+Katalogbilder aus dem Amazon-Katalog sind teils Querformat (z. B. FRITZ!Box 6660: 1200 × 800). Das Theme passt
+Produktbilder deshalb **ein** statt sie zuzuschneiden (Theme-Einstellungen → Mahando → Produktbilder; Produktseite:
+Abschnitt „Produktmedien“ → Medienanpassung „Einpassen“). Horizon-Standard wäre Zuschneiden („cover“), was bei
+3:2-Bildern links und rechts je ein Sechstel abschneidet.
 
 | Shopify-Feld | Quelle in Xentral | Wirkung im Theme |
 |---|---|---|
@@ -267,8 +272,9 @@ Badge „Neu“ erscheint automatisch für Artikel jünger als 30 Tage (Theme-Ei
 
 ## Theme-Einstellungen → Mahando
 
-Schriften, eingebautes Logo, Suchleiste im Header, Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle,
-Lieferzeit- und Versandtexte, Telefon/Servicezeiten, Entsorgungshinweis.
+Schriften, eingebautes Logo, Suchleiste im Header, Produktbilder (einpassen/zuschneiden – gilt für alle Produktkacheln),
+Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle, Lieferzeit- und Versandtexte, Telefon/Servicezeiten,
+Entsorgungshinweis.
 
 ## Eigene Dateien (alles mit Präfix `mahando-`)
 

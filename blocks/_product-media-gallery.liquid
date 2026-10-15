@@ -238,7 +238,8 @@
         }
       ],
       "default": "cover",
-      "visible_if": "{{ block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport == true }}"
+      "info": "Mahando: gilt auch bei festem Seitenverhältnis – „Einpassen“ zeigt Querformat-Bilder vollständig.",
+      "visible_if": "{{ block.settings.aspect_ratio != 'adapt' or block.settings.constrain_to_viewport == true }}"
     },
     {
       "type": "range",

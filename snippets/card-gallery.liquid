@@ -69,6 +69,12 @@
       assign media_fit = block_settings.constrain_to_viewport
     endif
   endif
+
+  # Mahando: Bei festem Seitenverhaeltnis (z. B. Quadrat) entscheidet die Theme-Einstellung, ob Katalogbilder im
+  # Querformat eingepasst (contain) oder zugeschnitten (cover) werden. Horizon-Standard war immer cover.
+  if media_fit == blank
+    assign media_fit = settings.mahando_product_media_fit | default: 'cover'
+  endif
 %}
 
 <div

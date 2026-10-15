@@ -2207,6 +2207,27 @@
       },
       {
         "type": "header",
+        "content": "Produktbilder"
+      },
+      {
+        "type": "select",
+        "id": "mahando_product_media_fit",
+        "label": "Bilder in Produktkacheln",
+        "options": [
+          {
+            "value": "contain",
+            "label": "Komplett zeigen (einpassen)"
+          },
+          {
+            "value": "cover",
+            "label": "Fläche füllen (zuschneiden)"
+          }
+        ],
+        "default": "contain",
+        "info": "Gilt für alle Produktkacheln (Kategorie, Startseite, Suche, Empfehlungen). „Einpassen“ zeigt Katalogbilder im Querformat vollständig statt links und rechts beschnitten. Die Galerie der Produktseite hat die gleiche Einstellung im Abschnitt „Produktmedien“."
+      },
+      {
+        "type": "header",
         "content": "Badges auf Produktkarten"
       },
       {

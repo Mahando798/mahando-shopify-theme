@@ -157,13 +157,13 @@
   if block_settings.constrain_to_viewport
     assign product_media_container_class = product_media_container_class | append: ' constrain-height'
   endif
-  if block_settings.aspect_ratio != 'adapt'
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-cover'
-  elsif block_settings.constrain_to_viewport
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-' | append: block_settings.media_fit
-  else
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-contain'
+  # Mahando: Die Einstellung „Medienanpassung“ (media_fit) gilt auch bei festem Seitenverhaeltnis. Horizon erzwang
+  # dort immer „cover“, wodurch Katalogbilder im Querformat (z. B. 3:2) links und rechts beschnitten wurden.
+  assign gallery_fit = block_settings.media_fit | default: 'cover'
+  if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport != true
+    assign gallery_fit = 'contain'
   endif
+  assign product_media_container_class = product_media_container_class | append: ' media-fit-' | append: gallery_fit
 
   if block_settings.aspect_ratio == 'adapt'
     assign lowest_aspect_ratio = 50
@@ -254,46 +254,26 @@
     }
   {% endunless %}
 
-  {% if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport %}
-    .media-fit-{{ block_settings.media_fit }} {
-      --product-media-fit: {{ block_settings.media_fit }};
-    }
+  {% # Mahando: gallery_fit (cover/contain) gilt fuer jedes Seitenverhaeltnis, siehe Zuweisung oben. %}
+  .media-fit-{{ gallery_fit }} {
+    --product-media-fit: {{ gallery_fit }};
+  }
 
-    /* Media fit for all media elements */
-    .media-fit-{{ block_settings.media_fit }} :is(img, video, iframe, .deferred-media__poster-image) {
-      object-fit: {{ block_settings.media_fit }};
-      width: 100%;
-      height: 100%;
-    }
+  /* Media fit for all media elements */
+  .media-fit-{{ gallery_fit }} :is(img, video, iframe, .deferred-media__poster-image) {
+    object-fit: {{ gallery_fit }};
+    width: 100%;
+    height: 100%;
+  }
 
-    /* 3D Models (no object-fit support, just sizing) */
-    .media-fit-{{ block_settings.media_fit }} model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-  {% endif %}
-
-  {% unless block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport %}
-    .media-fit-cover {
-      --product-media-fit: cover;
-    }
-
-    /* Media fit for all media elements - default to cover */
-    .media-fit-cover :is(img, video, iframe, .deferred-media__poster-image) {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* 3D Models (no object-fit support, just sizing) */
-    .media-fit-cover model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-  {% endunless %}
+  /* 3D Models (no object-fit support, just sizing) */
+  .media-fit-{{ gallery_fit }} model-viewer {
+    width: 100%;
+    height: 100%;
+  }
 
   /* Add background color so carousel arrows' mix-blend-mode works correctly even on transparent areas. */
-  {% if block_settings.media_fit == 'contain' %}
+  {% if gallery_fit == 'contain' %}
     .media-fit-contain :is(img, .deferred-media__poster-image) {
       background-color: var(--color-background);
     }
@@ -322,9 +302,7 @@
       object-position: var(--gallery-media-focal-point, center);
     }
   {% endcapture %}
-  {% if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport == false %}
-    {{ view_transition_styles_contain }}
-  {% elsif block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport == true and block_settings.media_fit == 'contain' %}
+  {% if gallery_fit == 'contain' %}
     {{ view_transition_styles_contain }}
   {% else %}
     {{ view_transition_styles_cover }}
@@ -404,7 +382,7 @@
           class: class,
           style: style,
           attributes: attributes,
-          media_fit: block_settings.media_fit,
+          media_fit: gallery_fit,
         %}
       {% endfor %}
     {% endcapture %}
