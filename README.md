@@ -12,7 +12,7 @@ alles Mahando-Spezifische liegt in eigenen Dateien mit dem Präfix `mahando-`.
 | Rabatt/Sale | Pink `#D82A6F` | `badge_sale_background_color` |
 | Text | Dunkelgrau `#1D2B33` | `color_palette.foreground` |
 | Flächen / Rahmen | `#EEF3F5` / `#DCE5E9` | `color2` / `color3` |
-| Seitenhintergrund | `#F5F8F9` | `page_background_color` |
+| Seitenhintergrund | Weiß `#FFFFFF` (bis 15.10.2026 `#F5F8F9` – auf Grau wirkten die weißen Katalogbilder wie Kästen) | `page_background_color` |
 | Überschriften | Outfit 600/700 | `snippets/mahando-fonts.liquid` |
 | Fließtext, Preise | Source Sans 3 | `snippets/mahando-fonts.liquid` |
 

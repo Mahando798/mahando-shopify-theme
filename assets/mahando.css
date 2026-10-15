@@ -229,9 +229,10 @@ product-card a.contents p[role="heading"] {
   font-family: var(--font-heading--family);
 }
 
-/* Produktkarten: Bildfläche leicht abgesetzt, Titel reserviert zwei Zeilen, Button unten bündig */
+/* Produktkarten: Bildfläche weiß wie die Katalogbilder (seit 15.10.2026 werden Bilder eingepasst, eine Tönung
+   würde als Kasten um das Bild sichtbar), Titel reserviert zwei Zeilen, Button unten bündig */
 .product-card .card-gallery {
-  background: #f5f8f9;
+  background: #fff;
 }
 
 product-card a.contents p[role="heading"] {
@@ -294,10 +295,10 @@ product-card a.contents p[role="heading"] {
   text-underline-offset: 2px;
 }
 
-/* Warenkorb: Artikelbilder einpassen statt beschneiden (Freisteller auf Weiß) */
+/* Warenkorb: Artikelbilder einpassen statt beschneiden (Freisteller auf Weiß, Fläche deshalb weiß) */
 .cart-items__media-image {
   object-fit: contain;
-  background: #f5f8f9;
+  background: #fff;
   padding: 4px;
 }
 
