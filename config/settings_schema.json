@@ -2296,6 +2296,12 @@
         "default": "300 €"
       },
       {
+        "type": "collection",
+        "id": "mahando_free_shipping_collection",
+        "label": "Kollektion mit kostenlosem Versand",
+        "info": "Artikel dieser Kollektion zeigen auf der Produktseite „Versandkostenfrei“ statt der Pauschale. Der Versand selbst wird über ein eigenes Versandprofil in Shopify (Einstellungen → Versand) geregelt."
+      },
+      {
         "type": "number",
         "id": "mahando_free_shipping_amount",
         "label": "Versandkostenfrei ab (Betrag in Euro, für die Fortschrittsanzeige)",

@@ -409,7 +409,8 @@
       },
       "out_of_stock": "Sold out",
       "delivery_time": "Delivery {{ delivery }} within Germany",
-      "shipping_flat": "Shipping {{ flat }} flat · free from {{ free }}"
+      "shipping_flat": "Shipping {{ flat }} flat · free from {{ free }}",
+      "shipping_free": "Free shipping within Germany"
     },
     "product": {
       "sku": "SKU {{ sku }}",

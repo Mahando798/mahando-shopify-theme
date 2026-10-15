@@ -25,7 +25,21 @@
     # Versandkosten: eigene Zeile unter der Box oder (kompakter) in der Hinweiszeile
     assign cost_text = ''
     assign cost_inline = false
-    if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank
+    # Artikel aus der Kollektion mit kostenlosem Versand (Theme-Einstellung, z. B. Parfum) zeigen „Versandkostenfrei“
+    assign free_shipping_product = false
+    if settings.mahando_free_shipping_collection != blank and product != blank
+      for free_collection in product.collections
+        if free_collection.handle == settings.mahando_free_shipping_collection.handle
+          assign free_shipping_product = true
+        endif
+      endfor
+    endif
+    if block.settings.show_shipping_cost and free_shipping_product
+      assign cost_text = 'mahando.availability.shipping_free' | t
+      if block.settings.shipping_cost_inline
+        assign cost_inline = true
+      endif
+    elsif block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank
       assign cost_text = 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from
       if block.settings.shipping_cost_inline
         assign cost_inline = true

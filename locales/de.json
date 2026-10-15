@@ -380,7 +380,8 @@
       },
       "out_of_stock": "Ausverkauft",
       "delivery_time": "Lieferzeit {{ delivery }} innerhalb Deutschlands",
-      "shipping_flat": "Versand {{ flat }} pauschal · ab {{ free }} kostenlos"
+      "shipping_flat": "Versand {{ flat }} pauschal · ab {{ free }} kostenlos",
+      "shipping_free": "Versandkostenfrei innerhalb Deutschlands"
     },
     "product": {
       "sku": "Art.-Nr. {{ sku }}",

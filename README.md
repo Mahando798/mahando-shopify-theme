@@ -273,8 +273,9 @@ Badge „Neu“ erscheint automatisch für Artikel jünger als 30 Tage (Theme-Ei
 ## Theme-Einstellungen → Mahando
 
 Schriften, eingebautes Logo, Suchleiste im Header, Produktbilder (einpassen/zuschneiden – gilt für alle Produktkacheln),
-Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle, Lieferzeit- und Versandtexte, Telefon/Servicezeiten,
-Entsorgungshinweis.
+Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle, Lieferzeit- und Versandtexte, Kollektion mit kostenlosem
+Versand (seit 15.10.2026 `parfum` – die Düfte haben in Shopify ein eigenes Versandprofil „Parfum (versandkostenfrei)“, die
+Produktseite zeigt dafür „Versandkostenfrei“ statt der Pauschale), Telefon/Servicezeiten, Entsorgungshinweis.
 
 ## Eigene Dateien (alles mit Präfix `mahando-`)
 

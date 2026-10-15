@@ -20,14 +20,33 @@
       <span>{{ settings.mahando_cutoff_text }}</span>
     </li>
   {%- endif -%}
-  {%- if block.settings.show_shipping_cost and settings.mahando_shipping_flat != blank -%}
+  {%- liquid
+    # Artikel aus der Kollektion mit kostenlosem Versand (Theme-Einstellung, z. B. Parfum) zeigen „Versandkostenfrei“
+    assign shipping_cost_text = ''
+    if block.settings.show_shipping_cost
+      assign free_shipping_product = false
+      if settings.mahando_free_shipping_collection != blank and closest.product != blank
+        for free_collection in closest.product.collections
+          if free_collection.handle == settings.mahando_free_shipping_collection.handle
+            assign free_shipping_product = true
+          endif
+        endfor
+      endif
+      if free_shipping_product
+        assign shipping_cost_text = 'mahando.availability.shipping_free' | t
+      elsif settings.mahando_shipping_flat != blank
+        assign shipping_cost_text = 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from
+      endif
+    endif
+  -%}
+  {%- if shipping_cost_text != blank -%}
     <li>
       {% render 'mahando-icon', icon: 'box' %}
       <span>
         {%- if shop.shipping_policy.body != blank -%}
-          <a href="{{ shop.shipping_policy.url }}">{{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}</a>
+          <a href="{{ shop.shipping_policy.url }}">{{ shipping_cost_text }}</a>
         {%- else -%}
-          {{ 'mahando.availability.shipping_flat' | t: flat: settings.mahando_shipping_flat, free: settings.mahando_free_shipping_from }}
+          {{ shipping_cost_text }}
         {%- endif -%}
       </span>
     </li>
