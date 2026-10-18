@@ -187,6 +187,8 @@ im Theme-Editor werden zurück ins Repo committet.
 | `mahando.zustand` / `zustand_hinweis` | nur bei Nicht-Neuware | `refurbished` / „Professionell aufbereitet, geprüft …“ |
 | `mahando.hersteller_*`, `eu_verantwortlicher` | GPSR-Angaben je Marke (siehe Tabelle) | |
 
+**Ausnahme Düfte (Stand 18.10.2026):** Die sechs Parfums haben eine längere Beschreibung mit Zwischenüberschriften (`<h3>`): Einordnung (Parfümeur, Jahr, Charakter) → „Duftnoten“ (Liste Kopf-/Herz-/Basisnote) → „Charakter und Anlass“ (Haltbarkeit, Sillage, Jahreszeit, für wen) → „Anwendung“ → „Lieferung“. In `mahando.technische_daten` stehen zusätzlich `Kopfnote`, `Herznote`, `Basisnote`, `Parfümeur(in)`, `Markteinführung`. Die h3 im Beschreibungsblock werden über `assets/mahando.css` (`.text-block[class*="__beschreibung"] h3`) kleiner gesetzt. Dieselben Texte gehören als Artikelbeschreibung nach Xentral (Master), sonst überschreibt der nächste Sync sie. Miss Dior: EAN 3348901362832 = Fassung 2017 (2021er = 3348901571456) – Text und Duftnoten entsprechend.
+
 **GPSR-Herstellerangaben je Marke** (Stand 29.09.2026, Quellen: Hersteller-Impressum/-Anleitungen, GPSR-Blöcke bei Otto/Alternate/Hornbach; in Xentral als Hersteller-Stammdaten pflegen):
 
 | Marke | Hersteller | Anschrift | Kontakt | EU-Verantwortlicher |
