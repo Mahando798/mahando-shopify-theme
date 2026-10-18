@@ -58,7 +58,7 @@ im Theme-Editor werden zurück ins Repo committet.
 4. **Rechtstexte** (Einstellungen → Richtlinien): Versandrichtlinie unbedingt ausfüllen – der Link „zzgl. Versandkosten“
    an jedem Preis zeigt dorthin. Widerruf, AGB, Datenschutz, Impressum als Seiten anlegen und im Menü `rechtliches`
    verlinken. Rechtstexte am besten über einen Anbieter (IT-Recht Kanzlei / Händlerbund) mit Shopify-Schnittstelle.
-5. **Zahlungen:** Shopify Payments (Karte, Apple/Google Pay, Klarna) + PayPal. Die Icons im Footer folgen automatisch.
+5. **Zahlungen:** Shopify Payments (Karte, Apple/Google Pay, Klarna – in DE inkl. Rechnungskauf/Ratenkauf/Sofort, Auswahl trifft Klarna) + PayPal. Die Icons im Footer folgen automatisch.
 6. **Steuern:** Einstellungen → Steuern und Zollgebühren: „Umsatzsteuer in Produktpreis und Versandtarif einschließen“
    und „Umsatzsteuer auf Versand erheben“ an; unter „Europäische Union“ muss für Deutschland die MwSt.-Erhebung mit
    der USt-IdNr. aktiv sein (seit 29.09.2026 aktiv – vorher rechnete Shopify mit 0 %). Kein OSS, da nur Deutschland
@@ -104,7 +104,7 @@ im Theme-Editor werden zurück ins Repo committet.
     „Inkl. MwSt. … an der Kasse berechnet“.
     Seite „Für Händler (B2B)“ neu: Template `page.b2b.json` (Einleitung aus dem Seiteninhalt, Karten „Was wir bieten“,
     „So läuft es ab“, Händlerkontakt b2b@mahando.de), Sie-Form, ohne „Restposten“. Versandrichtlinie um den Abschnitt
-    „Zahlungsarten“ ergänzt (PayPal, Klarna, Kreditkarte, Maestro, Apple Pay, Google Pay, Shop Pay – kein Rechnungskauf).
+    „Zahlungsarten“ ergänzt (PayPal, Klarna, Kreditkarte, Maestro, Apple Pay, Google Pay, Shop Pay; seit 18.10.2026 mit Hinweis auf Rechnungskauf über Klarna).
     Hauptmenü auf dem Desktop als klassisches Dropdown unter dem Menüpunkt (CSS in `assets/mahando.css`, Horizon-Mega-Menü
     bleibt im Code erhalten).
     **Leere Kategorien** (Stand 06.10.2026): Kollektions-Links ohne Artikel werden automatisch ausgeblendet – im
