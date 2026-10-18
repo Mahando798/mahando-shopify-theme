@@ -2352,6 +2352,20 @@
         "default": "Mo–Fr 8–15 Uhr"
       },
       {
+        "type": "text",
+        "id": "mahando_whatsapp",
+        "label": "WhatsApp-Nummer",
+        "info": "International mit Ländervorwahl, z. B. +49 1575 4851510. Leer lassen, um WhatsApp auszublenden.",
+        "default": "+49 1575 4851510"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_whatsapp_float",
+        "label": "Schwebenden WhatsApp-Button anzeigen",
+        "info": "Runder Button unten rechts auf allen Seiten (nicht im Checkout).",
+        "default": true
+      },
+      {
         "type": "header",
         "content": "Produktdaten"
       },

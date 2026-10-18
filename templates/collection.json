@@ -24,7 +24,7 @@
       "settings": {
         "menu": "main-menu",
         "eyebrow_default": "Sortiment",
-        "fallback_text": "<p>Markenware, neu und original verpackt. Versand aus eigenem Lager in Deutschland, 14 Tage Widerrufsrecht.</p>",
+        "fallback_text": "<p>Markenware, neu und original verpackt. Versand aus eigenem Lager in Deutschland, 30 Tage Rückgaberecht.</p>",
         "button_1_label": "Produkte ansehen",
         "button_1_url": "#produkte",
         "button_2_label": "Alle Kategorien",
@@ -33,7 +33,7 @@
         "side_text": "Geprüfte Neuware, faire Preise und schneller Versand aus eigenem Lager.",
         "usp_1": "Versand aus Deutschland",
         "usp_2": "Sichere Zahlung: PayPal, Klarna, Karte",
-        "usp_3": "14 Tage Widerrufsrecht",
+        "usp_3": "30 Tage Rückgaberecht",
         "section_width": "page-width",
         "padding-block-start": 4,
         "padding-block-end": 14

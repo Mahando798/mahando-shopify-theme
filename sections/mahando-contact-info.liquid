@@ -38,6 +38,15 @@
       </div>
     {%- endif -%}
 
+    {%- if settings.mahando_whatsapp != blank and section.settings.show_whatsapp -%}
+      <div class="mahando-contact__card">
+        <span class="mahando-contact__icon">{% render 'mahando-icon', icon: 'whatsapp' %}</span>
+        <p class="mahando-contact__label">WhatsApp</p>
+        {% render 'mahando-whatsapp', class: 'mahando-contact__value', label: settings.mahando_whatsapp %}
+        {%- if section.settings.whatsapp_note != blank -%}<p class="mahando-contact__note">{{ section.settings.whatsapp_note }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
     {%- if section.settings.returns_label != blank -%}
       <div class="mahando-contact__card">
         <span class="mahando-contact__icon">{% render 'mahando-icon', icon: 'undo' %}</span>
@@ -70,8 +79,18 @@
 
   .mahando-contact__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 14px;
+  }
+
+  .mahando-contact__card .mahando-whatsapp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mahando-contact__card .mahando-whatsapp-link__icon {
+    display: none;
   }
 
   .mahando-contact__card {
@@ -214,6 +233,23 @@
       "id": "hours",
       "label": "Servicezeiten",
       "info": "Leer lassen, um die Servicezeiten aus den Theme-Einstellungen zu verwenden."
+    },
+    {
+      "type": "header",
+      "content": "WhatsApp"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_whatsapp",
+      "label": "WhatsApp-Karte anzeigen",
+      "info": "Nummer aus den Theme-Einstellungen (Mahando → Kontakt → WhatsApp-Nummer).",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_note",
+      "label": "Hinweis",
+      "default": "Kurze Fragen zu Artikeln und Bestellungen, Antwort zu den Servicezeiten."
     },
     {
       "type": "header",

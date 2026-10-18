@@ -291,14 +291,20 @@ Versandrichtlinie im Merchant Center: Bestellannahmeschluss 14:00 Uhr (Berlin), 
 Schriften, eingebautes Logo, Suchleiste im Header, Produktbilder (einpassen/zuschneiden – gilt für alle Produktkacheln),
 Badges (Prozent, Neu-Frist, Einzelstück), Verfügbarkeits-Schwelle, Lieferzeit- und Versandtexte, Kollektion mit kostenlosem
 Versand (seit 15.10.2026 `parfum` – die Düfte haben in Shopify ein eigenes Versandprofil „Parfum (versandkostenfrei)“, die
-Produktseite zeigt dafür „Versandkostenfrei“ statt der Pauschale), Telefon/Servicezeiten, Entsorgungshinweis.
+Produktseite zeigt dafür „Versandkostenfrei“ statt der Pauschale), Telefon/Servicezeiten, WhatsApp-Nummer (seit 18.10.2026:
+Link in der USP-Leiste, Karte auf der Kontaktseite, schwebender Button unten rechts – abschaltbar), Entsorgungshinweis.
+
+**Rückgabe (seit 18.10.2026):** Der Shop wirbt mit „30 Tage Rückgaberecht“ (freiwillig, zusätzlich zum gesetzlichen
+14-Tage-Widerruf; Bedingungen in der Widerrufsbelehrung/Rückgabe-Policy im Admin). Der Widerrufsbutton im Footer bleibt
+auf 14 Tage – das ist das gesetzliche Recht. Texte: Trust-Liste Produktseite, Kollektions-Hero, Akkordeon „Versand &
+Rückgabe“, Merchant Center Rückgabebedingungen.
 
 ## Eigene Dateien (alles mit Präfix `mahando-`)
 
 - `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`,
   `mahando-product-meta.js`, `mahando-delivery.js`, `mahando-ueber-uns-*.jpg` (Fotos der Über-uns-Seite)
 - `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`, `mahando-zustand`, `mahando-product-category`,
-  `mahando-shipping-bar`, `mahando-gewaehrleistung`
+  `mahando-shipping-bar`, `mahando-gewaehrleistung`, `mahando-whatsapp`
 - `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
   `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`, `mahando-highlights`,
   `mahando-delivery-box`, `mahando-trust-list`, `mahando-details-table`, `mahando-section-title`,

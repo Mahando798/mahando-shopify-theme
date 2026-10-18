@@ -459,6 +459,11 @@
       "view_all": "Show all results for “{{ terms }}”",
       "search_page": "Run a full search for “{{ terms }}”",
       "clear": "Clear input"
+    },
+    "whatsapp": {
+      "label": "WhatsApp",
+      "aria": "Message us on WhatsApp",
+      "message": "Hello, I have a question about a product at Mahando."
     }
   }
 }

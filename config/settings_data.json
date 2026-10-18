@@ -143,6 +143,8 @@
     "mahando_seo_description": "Markenware zu fairen Preisen: Computer, Foto, Gaming, Handy, Haushalt & Garten, Spielzeug, Wohnen, Sport. Versand aus Deutschland, ab 300 € versandkostenfrei.",
     "mahando_phone": "+49 1575 4851510",
     "mahando_hours": "Mo–Fr 8–15 Uhr",
+    "mahando_whatsapp": "+49 1575 4851510",
+    "mahando_whatsapp_float": true,
     "content_for_index": [],
     "blocks": {
       "693622622015853636": {
@@ -285,6 +287,8 @@
       "mahando_free_shipping_from": "300 €",
       "mahando_phone": "+49 1575 4851510",
       "mahando_hours": "Mo–Fr 8–15 Uhr",
+      "mahando_whatsapp": "+49 1575 4851510",
+      "mahando_whatsapp_float": true,
       "mahando_badge_new_background": "#EEF3F5",
       "mahando_badge_new_text": "#34454E",
       "mahando_badge_condition_background": "#FDF1DC",

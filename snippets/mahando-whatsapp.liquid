@@ -1,0 +1,46 @@
+{%- doc -%}
+  WhatsApp-Kontakt (Mahando). Nummer aus Theme-Einstellungen → Mahando → Kontakt → WhatsApp-Nummer.
+  Gibt nichts aus, wenn keine Nummer hinterlegt ist.
+
+  @param {string} [variant] - 'link' (Textlink mit Icon, Standard) oder 'float' (runder Button unten rechts)
+  @param {string} [class] - Zusätzliche CSS-Klasse für den Link
+  @param {string} [label] - Linktext (Standard: Übersetzung mahando.whatsapp.label)
+{%- enddoc -%}
+
+{%- liquid
+  assign number = settings.mahando_whatsapp | default: ''
+  assign digits = number | remove: ' ' | remove: '-' | remove: '/' | remove: '(' | remove: ')' | remove: '+'
+  if digits == blank
+    break
+  endif
+  if digits contains '0049'
+    assign digits = digits | remove_first: '00'
+  endif
+  assign message = 'mahando.whatsapp.message' | t | url_encode
+  assign href = 'https://wa.me/' | append: digits | append: '?text=' | append: message
+  assign text = label | default: 'mahando.whatsapp.label' | t
+  assign variant = variant | default: 'link'
+-%}
+
+{%- if variant == 'float' -%}
+  <a
+    class="mahando-whatsapp-float"
+    href="{{ href }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="{{ 'mahando.whatsapp.aria' | t }}"
+    title="{{ 'mahando.whatsapp.aria' | t }}"
+  >
+    {% render 'mahando-icon', icon: 'whatsapp', class: 'mahando-whatsapp-float__icon' %}
+  </a>
+{%- else -%}
+  <a
+    class="mahando-whatsapp-link{% if class != blank %} {{ class }}{% endif %}"
+    href="{{ href }}"
+    target="_blank"
+    rel="noopener"
+  >
+    {% render 'mahando-icon', icon: 'whatsapp', class: 'mahando-whatsapp-link__icon' %}
+    <span>{{ text }}</span>
+  </a>
+{%- endif -%}

@@ -475,3 +475,63 @@ main[data-template="page.b2b"] .page-width-content {
 .mega-menu__item--empty {
   display: none !important;
 }
+
+/* WhatsApp-Kontakt (snippets/mahando-whatsapp.liquid) */
+.mahando-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.mahando-whatsapp-link__icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.mahando-whatsapp-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mahando-whatsapp-float:hover,
+.mahando-whatsapp-float:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.22);
+  color: #fff;
+}
+
+.mahando-whatsapp-float__icon {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.6;
+}
+
+@media screen and (max-width: 749px) {
+  .mahando-whatsapp-float {
+    right: 14px;
+    bottom: 14px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Button nicht über den Warenkorb-Drawer oder geöffnete Dialoge legen */
+body:has(dialog[open]) .mahando-whatsapp-float,
+body:has(cart-drawer-component[open]) .mahando-whatsapp-float {
+  display: none;
+}
