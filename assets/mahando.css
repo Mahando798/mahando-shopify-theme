@@ -535,3 +535,24 @@ body:has(dialog[open]) .mahando-whatsapp-float,
 body:has(cart-drawer-component[open]) .mahando-whatsapp-float {
   display: none;
 }
+
+/* Produktbeschreibung: Zwischenüberschriften (h3) deutlich kleiner als der Abschnittstitel,
+   Duftnoten-Listen kompakt (Block „beschreibung“ in templates/product.json) */
+.text-block[class*="__beschreibung"] h3 {
+  font-size: var(--font-size--lg, 1.125rem);
+  line-height: 1.3;
+  margin: 1.5em 0 0.45em;
+}
+
+.text-block[class*="__beschreibung"] h3:first-child {
+  margin-top: 0;
+}
+
+.text-block[class*="__beschreibung"] ul {
+  margin: 0 0 0.9em;
+  padding-inline-start: 1.2em;
+}
+
+.text-block[class*="__beschreibung"] li {
+  margin-bottom: 0.25em;
+}
