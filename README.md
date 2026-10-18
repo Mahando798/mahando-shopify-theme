@@ -270,6 +270,22 @@ Abschnitt „Produktmedien“ → Medienanpassung „Einpassen“). Horizon-Stan
 
 Badge „Neu“ erscheint automatisch für Artikel jünger als 30 Tage (Theme-Einstellung) oder mit Tag `neu`.
 
+## Google Merchant Center / Shopping (Stand 18.10.2026)
+
+Produktdaten kommen über die Shopify-App „Google & YouTube“ ins Merchant Center 5555346815 (Quelle „Shopify App API“,
+Versandkosten werden automatisch aus dem allgemeinen Shopify-Versandprofil übernommen). Die automatische Website-Erfassung
+(„Gefunden von Google“) ist abgeschaltet – sie hatte Dubletten mit veralteten Preisen angelegt.
+
+Die App überträgt **kein** eigenes Versandprofil, deshalb kennt Google den kostenlosen Parfum-Versand nicht. Lösung:
+ergänzende Datenquelle `feeds/google-shipping-labels.txt` in diesem Repo (öffentlich über
+`https://raw.githubusercontent.com/Mahando798/mahando-shopify-theme/main/feeds/google-shipping-labels.txt`, Merchant Center
+holt sie täglich). Sie setzt `shipping_label = parfum` für die Düfte; die Versandrichtlinie „Parfum versandkostenfrei“ im
+Merchant Center greift auf dieses Label. Neue Düfte: Zeile mit der Angebots-ID `shopify_ZZ_<ProduktID>_<VariantenID>`
+ergänzen. Die Datei liegt außerhalb der Theme-Ordner und wird nicht in den Shop synchronisiert.
+
+Versandrichtlinie im Merchant Center: Bestellannahmeschluss 14:00 Uhr (Berlin), Bearbeitung 0 Tage Mo–Fr, Laufzeit
+1–2 Werktage → Google zeigt „Lieferung bis …“ passend zum Bestellschluss im Shop.
+
 ## Theme-Einstellungen → Mahando
 
 Schriften, eingebautes Logo, Suchleiste im Header, Produktbilder (einpassen/zuschneiden – gilt für alle Produktkacheln),
