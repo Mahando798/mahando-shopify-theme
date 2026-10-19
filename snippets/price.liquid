@@ -79,7 +79,7 @@
     {% comment %} Volume pricing display {% endcomment %}
     {% if show_compare_price %}
       <span class="price-item__group compare-at-price">
-        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        <span class="compare-at-price__label">{{ 'content.price_regular' | t }}</span>
         <bdi>{{- compare_at_price -}}</bdi>
       </span>
     {% endif %}
@@ -96,12 +96,12 @@
           <bdi>{{ price | default: '&nbsp;' }}</bdi>
         </span>
         <span class="price-item__group price-item--regular compare-at-price">
-          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+          <span class="compare-at-price__label">{{ 'content.price_regular' | t }}</span>
           <bdi>{{- compare_at_price -}}</bdi>
         </span>
       {% else %}
         <span class="price-item__group price-item--regular compare-at-price">
-          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+          <span class="compare-at-price__label">{{ 'content.price_regular' | t }}</span>
           <bdi>{{- compare_at_price -}}</bdi>
         </span>
         <span class="price-item__group price">

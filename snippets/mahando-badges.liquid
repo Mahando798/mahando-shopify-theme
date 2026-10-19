@@ -96,7 +96,7 @@
           <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sold-out">{{ 'content.product_badge_sold_out' | t }}</div>
         {%- when 'sale' -%}
           <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sale">
-            {%- if value != blank -%}&minus;{{ value }}&nbsp;%{%- else -%}{{ 'content.product_badge_sale' | t }}{%- endif -%}
+            {%- if value != blank -%}&minus;{{ value }}&nbsp;% {{ 'mahando.badges.uvp' | t }}{%- else -%}{{ 'content.product_badge_sale' | t }}{%- endif -%}
           </div>
         {%- when 'cond' -%}
           <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-condition">

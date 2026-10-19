@@ -356,7 +356,8 @@
   "mahando": {
     "badges": {
       "new": "Neu",
-      "single": "Einzelstück"
+      "single": "Einzelstück",
+      "uvp": "UVP"
     },
     "condition": {
       "label": "Zustand",

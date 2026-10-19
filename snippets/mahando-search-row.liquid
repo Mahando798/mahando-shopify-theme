@@ -35,7 +35,7 @@
         <span class="mahando-search-row__price">
           {{- product.price | money -}}
           {%- if product.compare_at_price > product.price -%}
-            <s>{{ product.compare_at_price | money }}</s>
+            <s><span class="mahando-search-row__uvp">{{ 'mahando.badges.uvp' | t }}</span> {{ product.compare_at_price | money }}</s>
           {%- endif -%}
         </span>
         {%- if product.available -%}
