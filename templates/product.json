@@ -199,7 +199,7 @@
                   "settings": {
                     "cutoff_hour": 14,
                     "min_days": 1,
-                    "max_days": 3,
+                    "max_days": 2,
                     "text_today": "Versand noch heute bei Bestellung bis {cutoff} Uhr",
                     "show_countdown": true,
                     "text_countdown": "Versand noch heute bei Bestellung innerhalb von {time}",
