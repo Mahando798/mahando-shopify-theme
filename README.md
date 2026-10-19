@@ -272,6 +272,24 @@ Abschnitt „Produktmedien“ → Medienanpassung „Einpassen“). Horizon-Stan
 
 Badge „Neu“ erscheint automatisch für Artikel jünger als 30 Tage (Theme-Einstellung) oder mit Tag `neu`.
 
+## Conversion-Hebel Parfum (Stand 19.10.2026)
+
+- **UVP als Vergleichspreis:** Der Shopify-Vergleichspreis (`compare_at_price`) ist im Shop ausschließlich die
+  **Hersteller-UVP** (Quelle: Herstellerpreis bzw. UVP-Angabe bei Douglas, Stand 19.10.2026): Sauvage Parfum 184 €,
+  J'adore EdP 180 €, MYSLF EdP 147 €, Creed Aventus 330 €, Tom Ford Ombré Leather EdP 210 € (je 100 ml). Miss Dior
+  erst nach Klärung der Edition (2017 vs. 2021). Darstellung: `snippets/price.liquid` zeigt das Label „UVP“ sichtbar
+  vor dem Streichpreis (`content.price_regular`), der Rabatt-Badge lautet „−x % UVP“ (`mahando.badges.uvp`), die
+  Suchzeile ebenso. Keine eigenen Streichpreise ohne UVP-Bezug verwenden (PAngV § 11 würde sonst den 30-Tage-Tiefstpreis
+  verlangen). Xentral überträgt den Vergleichspreis nicht – nach einem Artikel-Sync prüfen, ob er erhalten bleibt.
+- **Echtheits-Block** (`blocks/mahando-authenticity.liquid`): Karte „Originalware – garantiert“ in der Kaufbox, nur bei
+  Produkten mit Tag „Parfum“ (einstellbar). Darunter optional Händler-Nachweis und eBay-Bewertung aus den
+  Theme-Einstellungen → Mahando → **Vertrauen** (`mahando_trust_line`, `mahando_ebay_rating`, `mahando_ebay_url`);
+  leer = Zeile wird nicht angezeigt.
+- **Lieferversprechen:** `mahando-delivery-box` zeigt vor 14 Uhr einen Countdown („Versand noch heute bei Bestellung
+  innerhalb von …“), danach den nächsten Versandtag; Lieferfenster 1–2 Werktage (wie Merchant-Center-Richtlinie).
+- **Abgebrochener Checkout:** Shopify-Flow „Abgebrochener Checkout“ aktiv (Marketing → Automatisierungen); Wartezeit
+  im Flow von 10 h auf 1 h stellen (Marco), Durchlauf-Fehler im Verlauf prüfen.
+
 ## Google Merchant Center / Shopping (Stand 18.10.2026)
 
 Produktdaten kommen über die Shopify-App „Google & YouTube“ ins Merchant Center 5555346815 (Quelle „Shopify App API“,
