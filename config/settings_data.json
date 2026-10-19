@@ -145,6 +145,9 @@
     "mahando_hours": "Mo–Fr 8–15 Uhr",
     "mahando_whatsapp": "+49 1575 4851510",
     "mahando_whatsapp_float": true,
+    "mahando_trust_line": "",
+    "mahando_ebay_rating": "",
+    "mahando_ebay_url": "",
     "content_for_index": [],
     "blocks": {
       "693622622015853636": {
@@ -289,6 +292,9 @@
       "mahando_hours": "Mo–Fr 8–15 Uhr",
       "mahando_whatsapp": "+49 1575 4851510",
       "mahando_whatsapp_float": true,
+    "mahando_trust_line": "",
+    "mahando_ebay_rating": "",
+    "mahando_ebay_url": "",
       "mahando_badge_new_background": "#EEF3F5",
       "mahando_badge_new_text": "#34454E",
       "mahando_badge_condition_background": "#FDF1DC",

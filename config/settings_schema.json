@@ -2367,6 +2367,27 @@
       },
       {
         "type": "header",
+        "content": "Vertrauen"
+      },
+      {
+        "type": "text",
+        "id": "mahando_trust_line",
+        "label": "Händler-Nachweis",
+        "info": "Erscheint im Echtheits-Block der Produktseite (optional; die Vertrauensliste darüber nennt bereits „Händler seit 2022 · über 200.000 Bestellungen“). Nur belegbare Angaben eintragen."
+      },
+      {
+        "type": "text",
+        "id": "mahando_ebay_rating",
+        "label": "eBay-Bewertung",
+        "info": "z. B. „99,3 % positive Bewertungen auf eBay“. Leer lassen = Zeile wird nicht angezeigt."
+      },
+      {
+        "type": "url",
+        "id": "mahando_ebay_url",
+        "label": "Link zum eBay-Bewertungsprofil"
+      },
+      {
+        "type": "header",
         "content": "Produktdaten"
       },
       {

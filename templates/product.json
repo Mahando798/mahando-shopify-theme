@@ -269,6 +269,20 @@
                     "padding-block-start": 4
                   }
                 },
+                "echtheit": {
+                  "type": "mahando-authenticity",
+                  "settings": {
+                    "tag_filter": "Parfum",
+                    "heading": "Originalware – garantiert",
+                    "line_1": "Originalware vom Fachgroßhandel, keine Tester",
+                    "line_2": "Versiegelt in ungeöffneter Originalverpackung",
+                    "line_3": "Chargennummer auf Flakon und Verpackung",
+                    "line_4": "Rechnung mit ausgewiesener MwSt.",
+                    "show_trust": true,
+                    "padding-block-start": 10,
+                    "padding-block-end": 2
+                  }
+                },
                 "zahlung_label": {
                   "type": "text",
                   "settings": {
@@ -316,6 +330,7 @@
                 "varianten",
                 "kaufen",
                 "vertrauen",
+                "echtheit",
                 "gewaehrleistung",
                 "zahlung_label",
                 "zahlung"

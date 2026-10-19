@@ -1,0 +1,237 @@
+{%- doc -%}
+  Echtheits-Block für Markenware (Mahando): kompakte Karte mit Schild-Icon, Überschrift und bis zu vier
+  Nachweiszeilen (Originalware, versiegelt, Chargennummer, Rechnung). Optional darunter der Händler-Nachweis
+  und die eBay-Bewertung aus den Theme-Einstellungen (Mahando → Vertrauen).
+
+  Wird nur gerendert, wenn das Produkt das im Block eingestellte Tag trägt (Standard: „Parfum“);
+  leeres Tag-Feld = auf allen Produktseiten.
+{%- enddoc -%}
+
+{%- liquid
+  assign product_resource = closest.product
+  assign show = true
+  assign tag_filter = block.settings.tag_filter | strip
+  if tag_filter != blank
+    assign show = false
+    assign tag_filter_down = tag_filter | downcase
+    for tag in product_resource.tags
+      assign tag_down = tag | downcase
+      if tag_down == tag_filter_down
+        assign show = true
+        break
+      endif
+    endfor
+  endif
+
+  assign lines = ''
+  for i in (1..4)
+    assign key = 'line_' | append: i
+    assign line = block.settings[key]
+    if line != blank
+      assign lines = lines | append: line | append: '||'
+    endif
+  endfor
+  assign lines = lines | split: '||'
+-%}
+
+{%- if show and lines.size > 0 -%}
+  <div
+    class="mahando-authenticity spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="mahando-authenticity__head">
+      {% render 'mahando-icon', icon: 'shield', class: 'mahando-authenticity__icon' %}
+      <span class="mahando-authenticity__heading">{{ block.settings.heading }}</span>
+    </div>
+    <ul class="mahando-authenticity__list" role="list">
+      {%- for line in lines -%}
+        <li>{% render 'mahando-icon', icon: 'check', class: 'mahando-authenticity__check' %}<span>{{ line }}</span></li>
+      {%- endfor -%}
+    </ul>
+    {%- if block.settings.show_trust and settings.mahando_trust_line != blank or block.settings.show_trust and settings.mahando_ebay_rating != blank -%}
+      <p class="mahando-authenticity__trust">
+        {%- if settings.mahando_trust_line != blank -%}
+          <span>{{ settings.mahando_trust_line }}</span>
+        {%- endif -%}
+        {%- if settings.mahando_ebay_rating != blank -%}
+          {%- if settings.mahando_trust_line != blank -%}<span class="mahando-authenticity__sep" aria-hidden="true">·</span>{%- endif -%}
+          {%- if settings.mahando_ebay_url != blank -%}
+            <a href="{{ settings.mahando_ebay_url }}" target="_blank" rel="noopener">{{ settings.mahando_ebay_rating }}</a>
+          {%- else -%}
+            <span>{{ settings.mahando_ebay_rating }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-authenticity {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: #f4f8f9;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-authenticity__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-authenticity__icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-authenticity__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 3px;
+  }
+
+  .mahando-authenticity__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    line-height: 1.35;
+  }
+
+  .mahando-authenticity__check {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-authenticity__trust {
+    margin: 8px 0 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-foreground-subdued);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .mahando-authenticity__trust a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Echtheits-Block (Mahando)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag_filter",
+      "label": "Nur bei Produkten mit Tag",
+      "info": "Leer lassen = auf allen Produktseiten.",
+      "default": "Parfum"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Originalware – garantiert"
+    },
+    {
+      "type": "text",
+      "id": "line_1",
+      "label": "Zeile 1",
+      "default": "Originalware vom Fachgroßhandel, keine Tester"
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Zeile 2",
+      "default": "Versiegelt in ungeöffneter Originalverpackung"
+    },
+    {
+      "type": "text",
+      "id": "line_3",
+      "label": "Zeile 3",
+      "default": "Chargennummer auf Flakon und Verpackung"
+    },
+    {
+      "type": "text",
+      "id": "line_4",
+      "label": "Zeile 4",
+      "default": "Rechnung mit ausgewiesener MwSt."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust",
+      "label": "Händler-Nachweis und eBay-Bewertung anzeigen",
+      "info": "Texte in den Theme-Einstellungen → Mahando → Vertrauen.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Echtheits-Block (Mahando)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
