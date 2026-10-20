@@ -103,7 +103,7 @@
         {% comment %} Mahando: Zeile 1 = Ersparnis-Badge + „UVP: 184,00 €“, Zeile 2 = Preis {% endcomment %}
         <span class="mahando-uvp">
           {%- if show_saving_badge -%}
-            <span class="mahando-uvp__badge color-custom-badge-sale">{{ 'mahando.price.you_save' | t: percent: saving_percent }}</span>
+            <span class="mahando-uvp__badge color-custom-badge-sale">{{ 'mahando.price.you_save_percent' | t: percent: saving_percent }}</span>
           {%- endif -%}
           <span class="price-item__group price-item--regular compare-at-price">
             <span class="compare-at-price__label">{{ 'content.price_regular' | t }}:</span>

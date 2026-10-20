@@ -403,7 +403,7 @@
       "weight_label": "Gewicht"
     },
     "price": {
-      "you_save": "Sie sparen: {{ percent }} %",
+      "you_save_percent": "Sie sparen: {{ percent }} %",
       "shipping_note_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
       "shipping_note": "zzgl. Versandkosten",
       "you_save": "Sie sparen {{ amount }}"
