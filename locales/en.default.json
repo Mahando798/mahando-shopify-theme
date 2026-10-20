@@ -432,6 +432,7 @@
       "gpsr_note": "Information according to the EU General Product Safety Regulation (GPSR)."
     },
     "price": {
+      "you_save": "You save {{ percent }}%",
       "shipping_note_html": "plus <a href=\"{{ link }}\">shipping</a>",
       "shipping_note": "plus shipping",
       "you_save": "You save {{ amount }}"

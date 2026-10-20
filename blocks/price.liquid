@@ -51,10 +51,19 @@
   "
   {{ block.shopify_attributes }}
 >
+  {%- liquid
+    # Mahando: Ersparnis-Badge nur beim Seitenprodukt auf der Produktseite (Karten haben den Eck-Badge)
+    assign show_saving_badge = false
+    if template.name == 'product' and product_resource.handle == product.handle
+      assign show_saving_badge = true
+    endif
+  -%}
   {% render 'price',
     show_unit_price: true,
     product_resource: product_resource,
-    show_sale_price_first: block_settings.show_sale_price_first
+    show_sale_price_first: block_settings.show_sale_price_first,
+    layout: 'stacked',
+    show_saving_badge: show_saving_badge
   %}
 
   {% if block_settings.show_tax_info %}

@@ -5,6 +5,9 @@
   @param {product} product_resource - The product to render
   @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
+  @param {string} [layout] - 'stacked' (Standard, Mahando: Ersparnis-Badge + „UVP:“ in einer Zeile, Preis darunter)
+                             oder 'inline' (kompakt in einer Zeile, z. B. Sticky-Leiste)
+  @param {boolean} [show_saving_badge] - Badge „Sie sparen: x %“ vor der UVP anzeigen (nur Produktseite)
 {%- enddoc -%}
 
 {% render 'price-styles' %}
@@ -16,9 +19,15 @@
   assign price = selected_variant.price
   assign compare_at_price = selected_variant.compare_at_price
 
+  assign layout = layout | default: 'stacked'
+  assign show_saving_badge = show_saving_badge | default: false
+
   assign show_compare_price = false
+  assign saving_percent = 0
   if compare_at_price > price
     assign show_compare_price = true
+    assign saving_diff = compare_at_price | minus: price
+    assign saving_percent = saving_diff | times: 100.0 | divided_by: compare_at_price | round
   endif
 
   if product_resource == blank
@@ -90,7 +99,22 @@
   {% else %}
     {% comment %} Standard pricing display: render only the active branch (regular or sale) {% endcomment %}
     {% if show_compare_price %}
-      {% if show_sale_price_first %}
+      {% if layout == 'stacked' %}
+        {% comment %} Mahando: Zeile 1 = Ersparnis-Badge + „UVP: 184,00 €“, Zeile 2 = Preis {% endcomment %}
+        <span class="mahando-uvp">
+          {%- if show_saving_badge -%}
+            <span class="mahando-uvp__badge color-custom-badge-sale">{{ 'mahando.price.you_save' | t: percent: saving_percent }}</span>
+          {%- endif -%}
+          <span class="price-item__group price-item--regular compare-at-price">
+            <span class="compare-at-price__label">{{ 'content.price_regular' | t }}:</span>
+            <bdi>{{- compare_at_price -}}</bdi>
+          </span>
+        </span>
+        <span class="price-item__group price mahando-uvp__price">
+          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          <bdi>{{ price | default: '&nbsp;' }}</bdi>
+        </span>
+      {% elsif show_sale_price_first %}
         <span class="price-item__group price">
           <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
           <bdi>{{ price | default: '&nbsp;' }}</bdi>

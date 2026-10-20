@@ -573,3 +573,52 @@ body:has(cart-drawer-component[open]) .mahando-whatsapp-float {
   text-decoration: none;
   font-size: 0.85em;
 }
+
+/* UVP-Darstellung (Stand 20.10.2026): Zeile 1 = Badge „Sie sparen: x %“ + „UVP: 184,00 €“, Zeile 2 = Preis */
+.mahando-uvp {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-bottom: 2px;
+  font-family: var(--font-body--family);
+  font-size: var(--font-size--sm);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.mahando-uvp__badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mahando-uvp .compare-at-price {
+  font-size: 0.95em;
+}
+
+.mahando-uvp .compare-at-price .compare-at-price__label {
+  font-size: 1em;
+  font-weight: 600;
+  margin-inline-end: 0.3em;
+}
+
+.mahando-uvp__price {
+  display: block;
+}
+
+/* Produktkarten: kleiner, ohne Badge (der Eck-Badge „−x % UVP“ bleibt) */
+.product-card .mahando-uvp,
+.resource-card .mahando-uvp {
+  font-size: var(--font-size--xs);
+  gap: 4px 8px;
+  margin-bottom: 0;
+}
