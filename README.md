@@ -306,6 +306,25 @@ ergänzen. Die Datei liegt außerhalb der Theme-Ordner und wird nicht in den Sho
 Versandrichtlinie im Merchant Center: Bestellannahmeschluss 14:00 Uhr (Berlin), Bearbeitung 0 Tage Mo–Fr, Laufzeit
 1–2 Werktage → Google zeigt „Lieferung bis …“ passend zum Bestellschluss im Shop.
 
+## Zoho PageSense (Stand 27.10.2026)
+
+Heatmaps, Session-Recordings, Funnels und A/B-Tests laufen über Zoho PageSense (Projekt `marcohaasee`, EU-Rechenzentrum).
+Der Loader liegt in `snippets/mahando-pagesense.liquid` und wird aus `layout/theme.liquid` im `<head>` gerendert –
+nicht als Custom Pixel, weil PageSense für Tests die Seite verändern muss und die Pixel-Sandbox das nicht erlaubt.
+
+- **Consent:** Das Script lädt erst, wenn der Besucher im Shopify-Cookie-Banner Analyse-Cookies akzeptiert hat
+  (Customer Privacy API `analyticsProcessingAllowed()`, Event `visitorConsentCollected`). Ohne Zustimmung wird nichts von
+  pagesense.io geladen. Voraussetzung: Cookie-Banner in Shopify → Einstellungen → Kundendatenschutz bleibt für Deutschland
+  aktiv. Die Datenschutzerklärung braucht einen Abschnitt zu Zoho PageSense (Zoho Corporation, EU-Server, Cookies, Zweck
+  Reichweitenmessung/Optimierung, Rechtsgrundlage Einwilligung).
+- **Kein Anti-Flicker:** Zohos Original-Snippet blendet die Seite aus, bis das Script geladen ist (bis zu 10 s bei
+  Störungen). Das ist für Heatmaps/Recordings unnötig und kostet Conversion, deshalb weggelassen. Sobald A/B-Tests laufen,
+  die sichtbare Elemente ändern, Anti-Flicker nur für Besucher mit bereits gespeicherter Zustimmung nachrüsten (sonst
+  blinkt die Seite nach dem Klick im Banner).
+- **Abschalten:** Theme-Einstellungen → Mahando → Tracking → „Zoho PageSense laden“. Im Theme-Editor lädt es nie.
+- **Neuer Snippet aus Zoho:** Nur die Script-URL (`cdn-eu.pagesense.io/js/marcohaasee/….js`) im Snippet tauschen, nicht
+  den Loader ersetzen.
+
 ## Theme-Einstellungen → Mahando
 
 Schriften, eingebautes Logo, Suchleiste im Header, Produktbilder (einpassen/zuschneiden – gilt für alle Produktkacheln),
@@ -324,7 +343,7 @@ Rückgabe“, Merchant Center Rückgabebedingungen.
 - `assets/`: `mahando.css` (globale Feinjustierung), `mahando-*.woff2` (Schriften), `mahando-logo*.svg`,
   `mahando-product-meta.js`, `mahando-delivery.js`, `mahando-ueber-uns-*.jpg` (Fotos der Über-uns-Seite)
 - `snippets/`: `mahando-fonts`, `mahando-icon`, `mahando-badges`, `mahando-zustand`, `mahando-product-category`,
-  `mahando-shipping-bar`, `mahando-gewaehrleistung`, `mahando-whatsapp`
+  `mahando-shipping-bar`, `mahando-gewaehrleistung`, `mahando-whatsapp`, `mahando-pagesense`
 - `blocks/`: `mahando-availability`, `mahando-product-type`, `mahando-product-meta`, `mahando-condition`,
   `mahando-shipping-info`, `mahando-specs`, `mahando-gpsr`, `mahando-metafield-text`, `mahando-highlights`,
   `mahando-delivery-box`, `mahando-trust-list`, `mahando-details-table`, `mahando-section-title`,
