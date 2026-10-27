@@ -36,6 +36,8 @@
     {{ 'mahando.css' | asset_url | stylesheet_tag }}
     {%- comment -%} Google Merchant Center: Verifizierung von mahando.de (Konto 5555346815, 15.10.2026) {%- endcomment -%}
     <meta name="google-site-verification" content="ALjhf4u1l_QwPwGjrqiGi2HU2ap3M0jQTzdKTb9HzYw">
+    {%- comment -%} Zoho PageSense – lädt erst nach Cookie-Zustimmung (siehe snippets/mahando-pagesense.liquid) {%- endcomment -%}
+    {%- render 'mahando-pagesense' -%}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">

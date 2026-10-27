@@ -2388,6 +2388,17 @@
       },
       {
         "type": "header",
+        "content": "Tracking"
+      },
+      {
+        "type": "checkbox",
+        "id": "mahando_pagesense_enabled",
+        "label": "Zoho PageSense laden",
+        "info": "Heatmaps, Session-Recordings und A/B-Tests (Projekt marcohaasee). Lädt erst, nachdem der Besucher im Cookie-Banner Analyse-Cookies akzeptiert hat.",
+        "default": true
+      },
+      {
+        "type": "header",
         "content": "Produktdaten"
       },
       {

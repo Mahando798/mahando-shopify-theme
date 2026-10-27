@@ -1,0 +1,60 @@
+{%- doc -%}
+  Zoho PageSense (Heatmaps, Session-Recordings, Funnels, A/B-Tests) für mahando.de.
+  Projekt „marcohaasee“, EU-Rechenzentrum (cdn-eu.pagesense.io).
+
+  Datenschutz: PageSense setzt Cookies und zeichnet Sitzungen auf, deshalb wird das Script erst
+  geladen, wenn der Besucher im Shopify-Cookie-Banner Analyse-Cookies akzeptiert hat
+  (Shopify Customer Privacy API, Zweck „analytics“). Vorher wird nichts von pagesense.io geladen.
+  Wurde die Zustimmung schon früher erteilt, lädt das Script direkt beim Seitenaufruf; wird sie
+  gerade erst im Banner gegeben, lädt es sofort danach ohne Neuladen der Seite.
+
+  Bewusst ohne Zohos „Anti-Flicker“ (Seite ausblenden, bis das Script geladen ist): Für Heatmaps und
+  Recordings nicht nötig, und ein ausgeblendeter Shop kostet Conversion. Falls später A/B-Tests laufen,
+  siehe README → Zoho PageSense.
+
+  Abschaltbar in den Theme-Einstellungen → Mahando → Tracking. Im Theme-Editor wird nichts geladen.
+{%- enddoc -%}
+
+{%- if settings.mahando_pagesense_enabled and request.design_mode != true -%}
+  <script id="pagesenseCode">
+    (function () {
+      var SRC = 'https://cdn-eu.pagesense.io/js/marcohaasee/d3575bf3811146cbae9c709709e6c3fd.js';
+      var loaded = false;
+
+      function loadPageSense() {
+        if (loaded) return;
+        loaded = true;
+        window._ps_conf = window._ps_conf || {};
+        window._ps_conf.version = '1.0';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = SRC;
+        (document.head || document.getElementsByTagName('head')[0]).appendChild(s);
+      }
+
+      function analyticsAllowed() {
+        var cp = window.Shopify && window.Shopify.customerPrivacy;
+        return !!(cp && cp.analyticsProcessingAllowed && cp.analyticsProcessingAllowed());
+      }
+
+      function start() {
+        if (analyticsAllowed()) {
+          loadPageSense();
+          return;
+        }
+        document.addEventListener('visitorConsentCollected', function () {
+          if (analyticsAllowed()) loadPageSense();
+        });
+      }
+
+      if (window.Shopify && window.Shopify.customerPrivacy) {
+        start();
+      } else if (window.Shopify && window.Shopify.loadFeatures) {
+        window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (error) {
+          if (!error) start();
+        });
+      }
+    })();
+  </script>
+{%- endif -%}

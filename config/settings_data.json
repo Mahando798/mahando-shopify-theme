@@ -148,6 +148,7 @@
     "mahando_trust_line": "",
     "mahando_ebay_rating": "",
     "mahando_ebay_url": "",
+    "mahando_pagesense_enabled": true,
     "content_for_index": [],
     "blocks": {
       "693622622015853636": {
@@ -295,6 +296,7 @@
     "mahando_trust_line": "",
     "mahando_ebay_rating": "",
     "mahando_ebay_url": "",
+    "mahando_pagesense_enabled": true,
       "mahando_badge_new_background": "#EEF3F5",
       "mahando_badge_new_text": "#34454E",
       "mahando_badge_condition_background": "#FDF1DC",
