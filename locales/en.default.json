@@ -435,6 +435,7 @@
       "you_save_percent": "You save {{ percent }}%",
       "shipping_note_html": "plus <a href=\"{{ link }}\">shipping</a>",
       "shipping_note": "plus shipping",
+      "shipping_free_note": "free shipping",
       "you_save": "You save {{ amount }}"
     },
     "cart": {
