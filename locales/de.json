@@ -409,6 +409,9 @@
       "shipping_free_note": "versandkostenfrei",
       "you_save": "Sie sparen {{ amount }}"
     },
+    "footer": {
+      "cookie_settings": "Cookie-Einstellungen"
+    },
     "cart": {
       "shipping_bar_remaining_html": "Noch <strong>{{ amount }}</strong> bis zum kostenlosen Versand",
       "shipping_bar_reached": "Versandkostenfrei – Ihre Bestellung wird ohne Versandkosten geliefert",

@@ -41,6 +41,24 @@
     {%- if section.settings.note != blank -%}
       <p class="mahando-footer-bar__note">{{ section.settings.note }}</p>
     {%- endif -%}
+    {%- if section.settings.show_cookie_settings -%}
+      {%- comment -%}
+        Öffnet die Cookie-Einstellungen des Shopify-Cookie-Banners erneut (Widerruf der Einwilligung, DSGVO/TDDDG).
+        Ohne Banner-Script führt der Link zur Datenschutzerklärung.
+      {%- endcomment -%}
+      <a class="mahando-footer-bar__cookies" href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" data-mahando-cookie-settings>{{ 'mahando.footer.cookie_settings' | t }}</a>
+      <script>
+        document.addEventListener('click', function (event) {
+          var link = event.target.closest('[data-mahando-cookie-settings]');
+          if (!link) return;
+          var banner = window.privacyBanner;
+          if (banner && typeof banner.showPreferences === 'function') {
+            event.preventDefault();
+            banner.showPreferences();
+          }
+        });
+      </script>
+    {%- endif -%}
   </div>
 </div>
 
@@ -53,6 +71,17 @@
     align-items: center;
     gap: 16px 28px;
     font-size: var(--font-size--xs);
+  }
+
+  .mahando-footer-bar__cookies {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.85;
+  }
+
+  .mahando-footer-bar__cookies:hover {
+    opacity: 1;
   }
 
   .mahando-footer-bar__payments {
@@ -195,6 +224,13 @@
       "id": "note",
       "label": "Hinweiszeile",
       "default": "Alle Preise inkl. gesetzlicher MwSt., zzgl. Versandkosten."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cookie_settings",
+      "label": "Link „Cookie-Einstellungen“ anzeigen",
+      "info": "Öffnet den Shopify-Cookie-Banner erneut, damit Besucher ihre Einwilligung ändern können.",
+      "default": true
     },
     {
       "type": "header",
