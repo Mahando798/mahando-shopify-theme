@@ -1,0 +1,25 @@
+{%- doc -%}
+  Gibt „true“ aus, wenn für das Produkt kein Streichpreis (UVP), kein „Sie sparen“-Badge und kein
+  Rabatt-Badge gezeigt werden soll – sonst nichts. Per capture auswerten:
+
+    {% capture hide_uvp %}{% render 'mahando-hide-uvp', product: product %}{% endcapture %}
+    {% if hide_uvp contains 'true' %} … {% endif %}
+
+  Regel: Artikel der Kollektion aus den Theme-Einstellungen → Mahando → „Kollektion ohne UVP-/Ersparnis-Anzeige“
+  (Stand 14.11.2026: Parfum). Hintergrund: Bei Düften sind Herstellerpreise keine belastbare Vergleichsbasis,
+  und der Rabatt-Look passt nicht zum sachlichen Auftritt. Der Vergleichspreis bleibt im Produkt gespeichert
+  (die Sale-Kollektion und die Feeds nutzen ihn weiter), er wird nur nicht angezeigt.
+
+  @param {product} product - Das Produkt
+{%- enddoc -%}
+
+{%- liquid
+  if settings.mahando_hide_uvp_collection != blank and product != blank
+    for hide_collection in product.collections
+      if hide_collection.handle == settings.mahando_hide_uvp_collection.handle
+        echo 'true'
+        break
+      endif
+    endfor
+  endif
+-%}

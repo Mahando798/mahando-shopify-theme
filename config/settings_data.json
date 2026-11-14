@@ -138,6 +138,7 @@
     "mahando_free_shipping_from": "300 €",
     "mahando_free_shipping_amount": 300,
     "mahando_free_shipping_collection": "parfum",
+    "mahando_hide_uvp_collection": "parfum",
     "mahando_shipping_bar": true,
     "mahando_seo_title": "Mahando – Technik, Haushalt und Spielzeug online kaufen",
     "mahando_seo_description": "Markenware zu fairen Preisen: Computer, Foto, Gaming, Handy, Haushalt & Garten, Spielzeug, Wohnen, Sport. Versand aus Deutschland, ab 300 € versandkostenfrei.",
@@ -293,10 +294,10 @@
       "mahando_hours": "Mo–Fr 8–15 Uhr",
       "mahando_whatsapp": "+49 1575 4851510",
       "mahando_whatsapp_float": true,
-    "mahando_trust_line": "",
-    "mahando_ebay_rating": "",
-    "mahando_ebay_url": "",
-    "mahando_pagesense_enabled": true,
+      "mahando_trust_line": "",
+      "mahando_ebay_rating": "",
+      "mahando_ebay_url": "",
+      "mahando_pagesense_enabled": true,
       "mahando_badge_new_background": "#EEF3F5",
       "mahando_badge_new_text": "#34454E",
       "mahando_badge_condition_background": "#FDF1DC",
@@ -305,7 +306,8 @@
       "mahando_badge_neutral_text": "#1D2B33",
       "mahando_badge_neutral_border": "#B9C8CF",
       "mahando_search_bar": true,
-      "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …"
+      "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …",
+      "mahando_hide_uvp_collection": "parfum"
     }
   }
 }

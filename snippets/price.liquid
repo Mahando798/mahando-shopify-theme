@@ -30,6 +30,15 @@
     assign saving_percent = saving_diff | times: 100.0 | divided_by: compare_at_price | round
   endif
 
+  # Mahando: Kollektion ohne UVP-/Ersparnis-Anzeige (Theme-Einstellung, z. B. Parfum) → nur der Preis
+  capture hide_uvp
+    render 'mahando-hide-uvp', product: product_resource
+  endcapture
+  if hide_uvp contains 'true'
+    assign show_compare_price = false
+    assign show_saving_badge = false
+  endif
+
   if product_resource == blank
     assign price = 1999
   endif

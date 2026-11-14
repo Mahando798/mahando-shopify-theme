@@ -5,7 +5,8 @@
   Reihenfolge: Ausverkauft > Rabatt (−X %) > Zustand > Neu > Einzelstück, maximal 3 Badges.
 
   Datenquellen:
-  - Rabatt: Vergleichspreis (UVP) der ausgewählten Variante > Preis
+  - Rabatt: Vergleichspreis (UVP) der ausgewählten Variante > Preis – außer bei Artikeln der Kollektion
+            ohne UVP-Anzeige (Theme-Einstellung, siehe snippets/mahando-hide-uvp.liquid)
   - Zustand: Metafeld mahando.zustand (verpackung-beschaedigt | b-ware | refurbished | auslaufmodell | neu)
              oder Tags: verpackung-beschaedigt, b-ware, refurbished, auslaufmodell
   - Neu: Tag "neu" oder Anlagedatum jünger als settings.mahando_new_badge_days
@@ -19,8 +20,15 @@
   assign variant = product.selected_or_first_available_variant
   assign badge_list = ''
 
+  capture hide_uvp
+    render 'mahando-hide-uvp', product: product
+  endcapture
+
   if product.available == false
     assign badge_list = badge_list | append: 'soldout|'
+  elsif variant.compare_at_price > variant.price and hide_uvp contains 'true'
+    # Mahando: Kollektion ohne UVP-/Ersparnis-Anzeige (z. B. Parfum) – kein Rabatt-Badge
+    assign badge_list = badge_list
   elsif variant.compare_at_price > variant.price
     if settings.mahando_badge_sale_percent
       assign diff = variant.compare_at_price | minus: variant.price

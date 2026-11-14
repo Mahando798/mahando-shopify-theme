@@ -2302,6 +2302,12 @@
         "info": "Artikel dieser Kollektion zeigen auf der Produktseite „Versandkostenfrei“ statt der Pauschale. Der Versand selbst wird über ein eigenes Versandprofil in Shopify (Einstellungen → Versand) geregelt."
       },
       {
+        "type": "collection",
+        "id": "mahando_hide_uvp_collection",
+        "label": "Kollektion ohne UVP-/Ersparnis-Anzeige",
+        "info": "Artikel dieser Kollektion zeigen nur den Preis: kein Streichpreis (UVP), kein „Sie sparen“-Badge, kein Rabatt-Badge auf Karten. Der Vergleichspreis bleibt im Produkt gespeichert."
+      },
+      {
         "type": "number",
         "id": "mahando_free_shipping_amount",
         "label": "Versandkostenfrei ab (Betrag in Euro, für die Fortschrittsanzeige)",
