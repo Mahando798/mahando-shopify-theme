@@ -18,7 +18,7 @@
   {%- endif -%}
 
   {%- assign tile_style = section.settings.style | default: 'icon' -%}
-  <div class="mahando-categories mahando-categories--{{ tile_style }}">
+  <div class="mahando-categories mahando-categories--{{ tile_style }}" style="--mahando-cat-count: {{ section.blocks.size | at_least: 1 }};">
     {%- for block in section.blocks -%}
       {%- liquid
         assign collection = block.settings.collection
@@ -51,7 +51,7 @@
         >
           <span class="mahando-category__media mahando-category__media--{{ photo_fit }}">
             {%- if photo != blank -%}
-              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 400px, (min-width: 750px) 33vw, 50vw' }}
+              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 160px, (min-width: 750px) 20vw, 33vw' }}
             {%- else -%}
               <span class="mahando-category__media-fallback">{% render 'mahando-icon', icon: block.settings.icon %}</span>
             {%- endif -%}
@@ -91,9 +91,14 @@
 {% stylesheet %}
   .mahando-categories {
     display: grid;
-    /* 3 Spalten: neun Hauptkategorien ergeben drei volle Reihen (bei 4 Spalten bliebe eine Kachel allein) */
+    /* Kompakt: alle Hauptkategorien in einer Reihe (Desktop), damit die Startseite nicht von Kacheln dominiert wird */
+    grid-template-columns: repeat(var(--mahando-cat-count, 9), minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* Icon-Kacheln (alternativer Stil) bleiben dreispaltig */
+  .mahando-categories--icon {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
   }
 
   .mahando-category {
@@ -171,8 +176,7 @@
 
   .mahando-category__media {
     display: block;
-    /* 16:10 statt 4:3 – bei drei Spalten bleiben die Kacheln sonst sehr hoch */
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1 / 1;
     background: #fff;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border);
@@ -209,24 +213,29 @@
   }
 
   .mahando-category--photo .mahando-category__body {
-    padding: 14px 16px 16px;
+    padding: 8px 10px 10px;
+  }
+
+  /* Foto-Kacheln kompakt: nur Titel, keine Unterzeile */
+  .mahando-categories--photo .mahando-category__title {
+    font-size: var(--font-size--xs, 0.8125rem);
+    line-height: 1.25;
+  }
+
+  .mahando-categories--photo .mahando-category__subtitle {
+    display: none;
   }
 
   @media screen and (max-width: 989px) {
     .mahando-categories {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
 
   @media screen and (max-width: 749px) {
     .mahando-categories {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    /* Ungerade Anzahl: letzte Kachel über die volle Breite, statt allein in der halben Reihe */
-    .mahando-category:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
     }
 
     .mahando-category {
