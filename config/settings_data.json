@@ -109,6 +109,7 @@
     "quick_add_text": "{{ settings.color_palette.background }}",
     "show_second_image_on_hover": false,
     "product_card_carousel": false,
+    "empty_state_collection": "bestseller",
     "product_corner_radius": 8,
     "card_corner_radius": 12,
     "show_variant_image": false,
@@ -127,7 +128,6 @@
     "mahando_search_bar": true,
     "mahando_search_placeholder": "Suchbegriff, Artikelnummer oder EAN eingeben …",
     "mahando_product_media_fit": "contain",
-    "empty_state_collection": "bestseller",
     "mahando_badge_sale_percent": true,
     "mahando_new_badge_days": 30,
     "mahando_badge_single": true,
@@ -136,9 +136,9 @@
     "mahando_cutoff_text": "Bestellung bis 14 Uhr: Versand am selben Werktag",
     "mahando_shipping_flat": "4,99 €",
     "mahando_free_shipping_from": "300 €",
-    "mahando_free_shipping_amount": 300,
     "mahando_free_shipping_collection": "parfum",
     "mahando_hide_uvp_collection": "parfum",
+    "mahando_free_shipping_amount": 300,
     "mahando_shipping_bar": true,
     "mahando_seo_title": "Mahando – Technik, Haushalt und Spielzeug online kaufen",
     "mahando_seo_description": "Markenware zu fairen Preisen: Computer, Foto, Gaming, Handy, Haushalt & Garten, Spielzeug, Wohnen, Sport. Versand aus Deutschland, ab 300 € versandkostenfrei.",
@@ -154,6 +154,11 @@
     "blocks": {
       "693622622015853636": {
         "type": "shopify://apps/eu-widerrufsbutton/blocks/withdrawal-embed/019de290-9ade-77f0-8396-e9790911a457",
+        "disabled": false,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
       }
