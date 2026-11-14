@@ -18,7 +18,7 @@
   {%- endif -%}
 
   {%- assign tile_style = section.settings.style | default: 'icon' -%}
-  <div class="mahando-categories mahando-categories--{{ tile_style }}" style="--mahando-cat-count: {{ section.blocks.size | at_least: 1 }};">
+  <div class="mahando-categories mahando-categories--{{ tile_style }}">
     {%- for block in section.blocks -%}
       {%- liquid
         assign collection = block.settings.collection
@@ -51,7 +51,7 @@
         >
           <span class="mahando-category__media mahando-category__media--{{ photo_fit }}">
             {%- if photo != blank -%}
-              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 160px, (min-width: 750px) 20vw, 33vw' }}
+              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 240px, (min-width: 750px) 25vw, 33vw' }}
             {%- else -%}
               <span class="mahando-category__media-fallback">{% render 'mahando-icon', icon: block.settings.icon %}</span>
             {%- endif -%}
@@ -91,8 +91,8 @@
 {% stylesheet %}
   .mahando-categories {
     display: grid;
-    /* Kompakt: alle Hauptkategorien in einer Reihe (Desktop), damit die Startseite nicht von Kacheln dominiert wird */
-    grid-template-columns: repeat(var(--mahando-cat-count, 9), minmax(0, 1fr));
+    /* Desktop: 6 Kategorien pro Reihe */
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 12px;
   }
 
@@ -218,7 +218,7 @@
 
   /* Foto-Kacheln kompakt: nur Titel, keine Unterzeile */
   .mahando-categories--photo .mahando-category__title {
-    font-size: var(--font-size--xs, 0.8125rem);
+    font-size: var(--font-size--sm, 0.875rem);
     line-height: 1.25;
   }
 
@@ -228,7 +228,7 @@
 
   @media screen and (max-width: 989px) {
     .mahando-categories {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 

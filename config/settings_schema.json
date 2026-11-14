@@ -2308,6 +2308,12 @@
         "info": "Artikel dieser Kollektion zeigen nur den Preis: kein Streichpreis (UVP), kein „Sie sparen“-Badge, kein Rabatt-Badge auf Karten. Der Vergleichspreis bleibt im Produkt gespeichert."
       },
       {
+        "type": "collection",
+        "id": "mahando_no_review_collection",
+        "label": "Kollektion ohne Bewertungsabgabe",
+        "info": "Artikel dieser Kollektion zeigen vorhandene Kundenbewertungen, aber keinen Button „Bewertung schreiben“. Ohne Bewertungen wird der Bereich ausgeblendet. Bewertungsanfragen per E-Mail für diese Artikel in Judge.me → Produktverwaltung abschalten."
+      },
+      {
         "type": "number",
         "id": "mahando_free_shipping_amount",
         "label": "Versandkostenfrei ab (Betrag in Euro, für die Fortschrittsanzeige)",

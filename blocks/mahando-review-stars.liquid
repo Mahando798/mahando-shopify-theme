@@ -1,0 +1,31 @@
+{%- doc -%}
+  Judge.me-Sternebewertung (Durchschnitt + Anzahl) unter dem Produkttitel.
+  Rendert den Judge.me-Platzhalter; das Judge.me-App-Embed (Theme-Einstellungen → App-Einbettungen) füllt ihn.
+  Ohne Bewertungen bleibt der Block leer.
+{%- enddoc -%}
+
+{%- assign product = closest.product -%}
+{%- if product != blank -%}
+  <div class="mahando-review-stars spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}" data-template="product" data-auto-install="false">
+      {{- product.metafields.judgeme.badge -}}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-review-stars { width: 100%; }
+  .mahando-review-stars .jdgm-prev-badge { display: flex; align-items: center; gap: 6px; font-size: var(--font-size--xs); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bewertung (Sterne)",
+  "tag": null,
+  "settings": [
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Bewertung (Sterne)" }]
+}
+{% endschema %}

@@ -121,11 +121,18 @@
                     "wrap": "pretty"
                   },
                   "blocks": {}
+                },
+                "sterne": {
+                  "type": "mahando-review-stars",
+                  "settings": {
+                    "padding-block-start": 2
+                  }
                 }
               },
               "block_order": [
                 "hersteller",
-                "titel"
+                "titel",
+                "sterne"
               ],
               "name": "Kopf"
             },
@@ -441,13 +448,21 @@
                 "max_rows": 60,
                 "padding-block-start": 8
               }
+            },
+            "bewertungen": {
+              "type": "mahando-reviews",
+              "settings": {
+                "heading": "Kundenbewertungen",
+                "padding-block-start": 24
+              }
             }
           },
           "block_order": [
             "titel_beschreibung",
             "beschreibung",
             "lieferumfang",
-            "daten"
+            "daten",
+            "bewertungen"
           ],
           "name": "Inhalt"
         },
