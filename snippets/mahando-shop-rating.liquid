@@ -1,0 +1,20 @@
+{%- comment -%}
+  Shop-Gesamtbewertung aus Judge.me (shop.metafields.judgeme.all_reviews_rating / all_reviews_count).
+  Wird nur ausgegeben, wenn mindestens eine Bewertung vorhanden ist.
+  Parameter: url (optional, Link zur Bewertungsseite), class (optional)
+{%- endcomment -%}
+{%- liquid
+  assign count = shop.metafields.judgeme.all_reviews_count.value | default: shop.metafields.judgeme.all_reviews_count | plus: 0
+  assign rating = shop.metafields.judgeme.all_reviews_rating.value | default: shop.metafields.judgeme.all_reviews_rating | times: 1.0
+-%}
+{%- if count > 0 -%}
+  {%- capture inner -%}
+    {% render 'mahando-stars', rating: rating, size: 15 %}
+    <span class="mahando-shop-rating__text"><strong>{{ rating | round: 1 | replace: '.', ',' }}</strong> von 5 · {{ count }} {% if count == 1 %}Bewertung{% else %}Bewertungen{% endif %}</span>
+  {%- endcapture -%}
+  {%- if url != blank -%}
+    <a class="mahando-shop-rating {{ class }}" href="{{ url }}">{{ inner }}</a>
+  {%- else -%}
+    <span class="mahando-shop-rating {{ class }}">{{ inner }}</span>
+  {%- endif -%}
+{%- endif -%}

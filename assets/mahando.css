@@ -625,3 +625,31 @@ body:has(cart-drawer-component[open]) .mahando-whatsapp-float {
   gap: 4px 8px;
   margin-bottom: 0;
 }
+
+/* ---------- Sterne & Shop-Gesamtbewertung ---------- */
+.mahando-stars {
+  display: inline-flex;
+  gap: 1px;
+  color: #e8a317;
+  line-height: 0;
+  vertical-align: middle;
+}
+.mahando-stars__star {
+  width: var(--mahando-star-size, 16px);
+  height: var(--mahando-star-size, 16px);
+  fill: currentColor;
+}
+.mahando-stars__star--empty {
+  fill: #d5dde1;
+}
+.mahando-shop-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+a.mahando-shop-rating:hover .mahando-shop-rating__text {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

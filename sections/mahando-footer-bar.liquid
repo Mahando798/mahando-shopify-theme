@@ -23,6 +23,17 @@
         </ul>
       </div>
     {%- endif -%}
+    {%- if section.settings.show_shop_rating -%}
+      {%- capture rating_html -%}{% render 'mahando-shop-rating', url: section.settings.shop_rating_url %}{%- endcapture -%}
+      {%- if rating_html != blank -%}
+        <div class="mahando-footer-bar__rating">
+          {%- if section.settings.shop_rating_label != blank -%}
+            <span class="mahando-footer-bar__label">{{ section.settings.shop_rating_label }}</span>
+          {%- endif -%}
+          {{ rating_html }}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
     {%- if section.settings.badge_html != blank -%}
       <div class="mahando-footer-bar__badge">{{ section.settings.badge_html }}</div>
     {%- endif -%}
@@ -115,6 +126,17 @@
   .mahando-footer-bar__icons svg {
     width: 38px;
     height: 24px;
+  }
+
+  .mahando-footer-bar__rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mahando-footer-bar__rating .mahando-stars__star--empty {
+    fill: rgb(255 255 255 / 0.25);
   }
 
   .mahando-footer-bar__badge {
@@ -212,6 +234,25 @@
       "id": "payment_label",
       "label": "Beschriftung",
       "default": "Zahlungsarten"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_rating",
+      "label": "Shop-Bewertung (Judge.me) anzeigen",
+      "info": "Sterne, Durchschnitt und Anzahl aller Bewertungen. Wird nur angezeigt, wenn Bewertungen vorhanden sind.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shop_rating_label",
+      "label": "Bezeichnung Shop-Bewertung",
+      "default": "Kundenbewertungen"
+    },
+    {
+      "type": "text",
+      "id": "shop_rating_url",
+      "label": "Link Shop-Bewertung",
+      "default": "/pages/bewertungen"
     },
     {
       "type": "liquid",

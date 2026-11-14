@@ -1,0 +1,31 @@
+{%- comment -%}
+  Fünf Sterne als Inline-SVG (voll / halb / leer).
+  Parameter: rating (Zahl 0–5), size (px, optional, Standard 16)
+{%- endcomment -%}
+{%- liquid
+  assign r = rating | default: 0 | times: 1.0
+  assign s = size | default: 16
+-%}
+<span class="mahando-stars" role="img" aria-label="{{ r | round: 1 | replace: '.', ',' }} von 5 Sternen" style="--mahando-star-size: {{ s }}px;">
+  {%- for i in (1..5) -%}
+    {%- liquid
+      assign half_at = i | minus: 0.75
+      assign full_from = i | minus: 0.25
+      if r >= full_from
+        assign kind = 'full'
+      elsif r >= half_at
+        assign kind = 'half'
+      else
+        assign kind = 'empty'
+      endif
+    -%}
+    <svg class="mahando-stars__star mahando-stars__star--{{ kind }}" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      {%- if kind == 'half' -%}
+        <defs><linearGradient id="mhs-half"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="#d5dde1"/></linearGradient></defs>
+        <path fill="url(#mhs-half)" d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 5.9L10 14.8l-5.3 2.9 1.2-5.9L1.4 7.7l6-.7z"/>
+      {%- else -%}
+        <path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 5.9L10 14.8l-5.3 2.9 1.2-5.9L1.4 7.7l6-.7z"/>
+      {%- endif -%}
+    </svg>
+  {%- endfor -%}
+</span>
