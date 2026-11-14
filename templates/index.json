@@ -358,7 +358,7 @@
             "button": {
               "type": "_product-list-button",
               "settings": {
-                "label": "Alle Bestseller",
+                "label": "Alle beliebten Artikel",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -464,7 +464,7 @@
           ]
         }
       },
-      "name": "Bestseller dieser Woche",
+      "name": "Beliebte Artikel",
       "settings": {
         "collection": "bestseller",
         "layout_type": "grid",
@@ -1038,7 +1038,7 @@
       "block_order": [
         "panel_newsletter"
       ],
-      "name": "idealo & Newsletter",
+      "name": "Newsletter",
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
@@ -1146,7 +1146,7 @@
                 "eyebrow": {
                   "type": "text",
                   "settings": {
-                    "text": "Neu eingetroffen",
+                    "text": "<p>Neu eingetroffen</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1202,7 +1202,7 @@
             "button": {
               "type": "_product-list-button",
               "settings": {
-                "label": "Alle Bestseller",
+                "label": "Alle neuen Artikel",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -1308,7 +1308,7 @@
           ]
         }
       },
-      "name": "Bestseller dieser Woche",
+      "name": "Neu im Shop",
       "settings": {
         "collection": "neu-im-shop",
         "layout_type": "grid",
