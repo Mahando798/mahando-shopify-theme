@@ -202,6 +202,16 @@
             "icon": "drop",
             "highlight": false
           }
+        },
+        "cat_sale": {
+          "type": "category",
+          "settings": {
+            "collection": "sale",
+            "title": "Sale",
+            "subtitle": "Reduzierte Artikel",
+            "icon": "tag",
+            "highlight": false
+          }
         }
       },
       "block_order": [
@@ -213,7 +223,8 @@
         "cat_sammelkarten",
         "cat_wohnen",
         "cat_sport",
-        "cat_beauty"
+        "cat_beauty",
+        "cat_sale"
       ],
       "settings": {
         "eyebrow": "Kategorien",
