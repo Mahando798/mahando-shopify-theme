@@ -51,7 +51,7 @@
         >
           <span class="mahando-category__media mahando-category__media--{{ photo_fit }}">
             {%- if photo != blank -%}
-              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 300px, (min-width: 750px) 33vw, 50vw' }}
+              {{ photo | image_url: width: 640 | image_tag: loading: 'lazy', alt: '', widths: '320, 480, 640', sizes: '(min-width: 990px) 400px, (min-width: 750px) 33vw, 50vw' }}
             {%- else -%}
               <span class="mahando-category__media-fallback">{% render 'mahando-icon', icon: block.settings.icon %}</span>
             {%- endif -%}
@@ -171,7 +171,8 @@
 
   .mahando-category__media {
     display: block;
-    aspect-ratio: 4 / 3;
+    /* 16:10 statt 4:3 – bei drei Spalten bleiben die Kacheln sonst sehr hoch */
+    aspect-ratio: 16 / 10;
     background: #fff;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border);
