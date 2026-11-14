@@ -111,7 +111,7 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {%- liquid
-                # Mahando: Kategorien ohne Artikel ausblenden (Hauptpunkte mit Unterpunkten bleiben)
+                # Mahando: Kategorien ohne Artikel ausblenden – auch Hauptpunkte, sobald alle Unterpunkte leer sind
                 capture link_visible
                   render 'mahando-menu-visible', link: link, is_top: true
                 endcapture

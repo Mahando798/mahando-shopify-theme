@@ -96,7 +96,7 @@
     {% capture children %}
       {% for link in block_settings.menu.links %}
         {%- liquid
-          # Mahando: Kategorien ohne Artikel ausblenden (Hauptpunkte mit Unterpunkten bleiben, siehe Snippet)
+          # Mahando: Kategorien ohne Artikel ausblenden – auch Hauptpunkte, sobald alle Unterpunkte leer sind (siehe Snippet)
           capture link_visible
             render 'mahando-menu-visible', link: link, is_top: true
           endcapture

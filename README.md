@@ -110,9 +110,10 @@ im Theme-Editor werden zurück ins Repo committet.
     **Leere Kategorien** (Stand 06.10.2026): Kollektions-Links ohne Artikel werden automatisch ausgeblendet – im
     Desktop-Dropdown, in der Navigationsleiste, im Mobil-Drawer und in den Chips der Kategorieseite
     (`snippets/mahando-menu-visible.liquid`, eingebunden in `blocks/_header-menu.liquid`, `snippets/mega-menu-list.liquid`,
-    `snippets/header-drawer.liquid`, `sections/mahando-collection-chips.liquid`). Hauptkategorien mit Unterpunkten bleiben
-    immer sichtbar (ohne Dropdown, wenn alle Unterpunkte leer sind); ein Hauptpunkt ohne Unterpunkte (z. B. „Sale“) erscheint
-    erst, wenn die Kollektion Artikel hat. „Sale“ ist eine automatische Kollektion (Regel: Streichpreis gesetzt). Der leere
+    `snippets/header-drawer.liquid`, `sections/mahando-collection-chips.liquid`). Seit 14.11.2026 gilt das auch für
+    Hauptkategorien: eine leere Hauptkategorie (z. B. „Foto + Video“ ohne Ware) verschwindet aus dem Menü und erscheint
+    automatisch wieder, sobald der erste Artikel aktiv ist (Entwürfe zählen nicht). Vorher blieben Hauptkategorien mit
+    Unterpunkten immer sichtbar. „Sale“ ist eine automatische Kollektion (Regel: Streichpreis gesetzt). Der leere
     Blog „News“ wurde gelöscht. Startseiten-Newsletter zweispaltig (Text links, Formular rechts). Rücksendeweg einheitlich:
     per E-Mail an support@mahando.de mit Bestellnummer (Startseite, Kontaktseite, Produktseite).
 13. **Suche** (Stand 03.10.2026): Die Header-Suchleiste (Desktop, Theme-Einstellung „Große Suchleiste“) ist ein

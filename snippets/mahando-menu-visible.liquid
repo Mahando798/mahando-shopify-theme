@@ -8,13 +8,18 @@
   Regeln:
   - Kein Kollektions-Link (Seite, Produkt, Link …): immer sichtbar.
   - Kollektions-Link mit Artikeln: sichtbar.
-  - Hauptmenüpunkt (is_top) mit Unterpunkten: immer sichtbar, auch wenn die Kategorie leer ist –
-    die Hauptkategorien beschreiben das Sortiment; leere zeigen auf der Kategorieseite den Hinweis.
-  - Sonst sichtbar, sobald mindestens ein Unterpunkt sichtbar wäre.
+  - Leere Kollektion: sichtbar, sobald mindestens ein Unterpunkt sichtbar wäre (Unterkategorie mit
+    Artikeln oder ein Nicht-Kollektions-Link). Das gilt seit 14.11.2026 auch für Hauptmenüpunkte:
+    eine leere Hauptkategorie (z. B. „Foto + Video“ ohne Ware) verschwindet aus dem Menü und
+    erscheint automatisch wieder, sobald der erste Artikel aktiv ist.
   - Kollektions-Link auf eine gelöschte Kollektion: ausgeblendet.
 
+  Hinweis: Entwürfe (Status „Entwurf“) zählen nicht – eine Kategorie, die nur Entwürfe enthält,
+  bleibt ausgeblendet, bis ein Artikel aktiv ist.
+
   @param {object} link - Der Menüpunkt (link)
-  @param {boolean} [is_top] - true für Hauptmenüpunkte
+  @param {boolean} [is_top] - true für Hauptmenüpunkte (derzeit ohne Sonderbehandlung, wird für
+    künftige Ausnahmen weiter übergeben)
 {%- enddoc -%}
 
 {%- liquid
@@ -24,19 +29,15 @@
       assign show = false
     elsif link.object.all_products_count == 0
       assign show = false
-      if is_top and link.links != blank
-        assign show = true
-      else
-        for sub in link.links
-          if sub.type != 'collection_link'
-            assign show = true
-            break
-          elsif sub.object != blank and sub.object.all_products_count > 0
-            assign show = true
-            break
-          endif
-        endfor
-      endif
+      for sub in link.links
+        if sub.type != 'collection_link'
+          assign show = true
+          break
+        elsif sub.object != blank and sub.object.all_products_count > 0
+          assign show = true
+          break
+        endif
+      endfor
     endif
   endif
   echo show
