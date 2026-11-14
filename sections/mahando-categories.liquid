@@ -91,7 +91,8 @@
 {% stylesheet %}
   .mahando-categories {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* 3 Spalten: neun Hauptkategorien ergeben drei volle Reihen (bei 4 Spalten bliebe eine Kachel allein) */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -220,6 +221,11 @@
     .mahando-categories {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+    }
+
+    /* Ungerade Anzahl: letzte Kachel über die volle Breite, statt allein in der halben Reihe */
+    .mahando-category:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
     }
 
     .mahando-category {
@@ -355,7 +361,8 @@
             { "value": "drill", "label": "Bohrmaschine (Werkzeug)" },
             { "value": "teddy", "label": "Teddy (Spielzeug)" },
             { "value": "sofa", "label": "Sofa (Wohnen)" },
-            { "value": "drop", "label": "Tropfen (Beauty + Wellness)" },
+            { "value": "drop", "label": "Tropfen (Beauty + Pflege)" },
+            { "value": "cards", "label": "Karten (Sammelkarten)" },
             { "value": "ball", "label": "Ball (Sport + Freizeit)" },
             { "value": "tag", "label": "Preisschild (Sale)" },
             { "value": "star", "label": "Stern" },

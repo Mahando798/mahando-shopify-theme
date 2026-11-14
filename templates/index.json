@@ -43,9 +43,9 @@
         "hero_product_3"
       ],
       "settings": {
-        "eyebrow": "Markenware · Ab Lager",
-        "heading": "Ihr Onlinehändler für Technik, Haushalt und Spielzeug",
-        "text": "",
+        "eyebrow": "Händler seit 2022 · über 200.000 Bestellungen",
+        "heading": "Markenware für Technik, Haushalt, Spielzeug und Sammelkarten",
+        "text": "<p>Alle Artikel liegen in unserem Lager in Deutschland – Bestellungen bis 14 Uhr verlassen noch am selben Werktag das Haus.</p>",
         "button_label": "Bestseller ansehen",
         "button_link": "shopify://collections/bestseller",
         "button_label_2": "Alle Kategorien",
@@ -123,16 +123,6 @@
             "highlight": false
           }
         },
-        "cat_foto": {
-          "type": "category",
-          "settings": {
-            "collection": "foto-video",
-            "title": "Foto + Video",
-            "subtitle": "Actioncams, Drohnen, Überwachung",
-            "icon": "camera",
-            "highlight": false
-          }
-        },
         "cat_gaming": {
           "type": "category",
           "settings": {
@@ -158,7 +148,7 @@
           "settings": {
             "collection": "haushalt-garten",
             "title": "Haushalt + Garten",
-            "subtitle": "Küche, Reinigung, Werkzeug, Garten",
+            "subtitle": "Küche, Reinigung, Garten, Tierbedarf",
             "icon": "pot",
             "highlight": false
           }
@@ -168,7 +158,7 @@
           "settings": {
             "collection": "spielzeug",
             "title": "Spielzeug",
-            "subtitle": "Puzzles, Spielfiguren, Outdoor-Spielzeug",
+            "subtitle": "Bausteine, Spielfiguren, Fahrzeuge, Outdoor",
             "icon": "teddy",
             "highlight": false
           }
@@ -183,7 +173,7 @@
             "highlight": false
           }
         },
-        "cat_beauty": {
+        "cat_sport": {
           "type": "category",
           "settings": {
             "collection": "sport-freizeit",
@@ -192,16 +182,37 @@
             "icon": "ball",
             "highlight": false
           }
+        },
+        "cat_sammelkarten": {
+          "type": "category",
+          "settings": {
+            "collection": "sammelkarten",
+            "title": "Sammelkarten",
+            "subtitle": "Pokémon, Yu-Gi-Oh!, One Piece",
+            "icon": "cards",
+            "highlight": false
+          }
+        },
+        "cat_beauty": {
+          "type": "category",
+          "settings": {
+            "collection": "beauty-pflege",
+            "title": "Beauty + Pflege",
+            "subtitle": "Parfum, Haarpflege, Zahnpflege",
+            "icon": "drop",
+            "highlight": false
+          }
         }
       },
       "block_order": [
         "cat_computer",
-        "cat_foto",
         "cat_gaming",
         "cat_handy",
         "cat_haushalt",
         "cat_spielzeug",
+        "cat_sammelkarten",
         "cat_wohnen",
+        "cat_sport",
         "cat_beauty"
       ],
       "settings": {
@@ -316,7 +327,7 @@
                 "heading": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Bestseller dieser Woche</h2>",
+                    "text": "<h2>Beliebte Artikel</h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -781,110 +792,6 @@
     "newsletter": {
       "type": "section",
       "blocks": {
-        "panel_idealo": {
-          "type": "group",
-          "disabled": true,
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 10,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "{{ settings.color_palette.background }}",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "{{ settings.color_palette.color3 }}",
-            "border_radius": 14,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 26,
-            "padding-block-end": 26,
-            "padding-inline-start": 26,
-            "padding-inline-end": 26
-          },
-          "blocks": {
-            "idealo_heading": {
-              "type": "text",
-              "settings": {
-                "text": "<h3>Unser Shop bei idealo</h3>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "idealo_text": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Unsere Kundenbewertungen bei idealo werden hier nach dem Start des Shops eingebunden.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "idealo_badge": {
-              "type": "custom-liquid",
-              "settings": {
-                "custom_liquid": "<!-- idealo-Badge-Code hier einfügen -->"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "idealo_heading",
-            "idealo_text",
-            "idealo_badge"
-          ]
-        },
         "panel_newsletter": {
           "type": "group",
           "settings": {
@@ -1129,7 +1036,6 @@
         }
       },
       "block_order": [
-        "panel_idealo",
         "panel_newsletter"
       ],
       "name": "idealo & Newsletter",
@@ -1161,6 +1067,267 @@
         "padding-block-start": 0,
         "padding-block-end": 56
       }
+    },
+    "neu": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading-group": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 6,
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "eyebrow": {
+                  "type": "text",
+                  "settings": {
+                    "text": "Neu eingetroffen",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "loose",
+                    "case": "uppercase",
+                    "wrap": "pretty",
+                    "text_color": "#5b6b74",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "heading": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h2>Neu im Shop</h2>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "balance",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "eyebrow",
+                "heading"
+              ]
+            },
+            "button": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Alle Bestseller",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading-group",
+            "button"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 0,
+            "background_color": "{{ settings.color_palette.background }}",
+            "border": "solid",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "{{ settings.color_palette.color3 }}",
+            "border_radius": 14,
+            "padding-block-start": 12,
+            "padding-block-end": 12,
+            "padding-inline-start": 12,
+            "padding-inline-end": 12
+          },
+          "blocks": {
+            "card-gallery": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_radius": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "card-type": {
+              "type": "mahando-product-type",
+              "settings": {
+                "source": "vendor",
+                "padding-block-start": 8
+              }
+            },
+            "card-title": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "card-price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": true,
+                "type_preset": "h5",
+                "width": "100%",
+                "alignment": "left",
+                "padding-block-start": 4,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "card-availability": {
+              "type": "mahando-availability",
+              "settings": {
+                "show_delivery_time": true,
+                "padding-block-start": 6
+              }
+            }
+          },
+          "block_order": [
+            "card-gallery",
+            "card-type",
+            "card-title",
+            "card-price",
+            "card-availability"
+          ]
+        }
+      },
+      "name": "Bestseller dieser Woche",
+      "settings": {
+        "collection": "neu-im-shop",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 16,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 22,
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 44
+      }
     }
   },
   "order": [
@@ -1168,6 +1335,7 @@
     "mahando_trust",
     "mahando_categories",
     "bestseller",
+    "neu",
     "sale",
     "mahando_why",
     "newsletter"

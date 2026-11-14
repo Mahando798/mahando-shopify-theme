@@ -258,15 +258,19 @@
                 "vertrauen": {
                   "type": "mahando-trust-list",
                   "settings": {
-                    "icon_1": "shield",
-                    "text_1": "Sicherer Checkout, SSL-verschlüsselt",
+                    "icon_1": "truck",
+                    "text_1": "Versand aus eigenem Lager in Deutschland",
                     "icon_2": "box",
                     "text_2": "Händler seit 2022 · über 200.000 Bestellungen",
                     "url_2": "/pages/ueber-uns",
                     "icon_3": "undo",
                     "text_3": "30 Tage Rückgaberecht",
                     "url_3": "/policies/refund-policy",
-                    "padding-block-start": 4
+                    "padding-block-start": 4,
+                    "url_1": "/policies/shipping-policy",
+                    "icon_4": "headset",
+                    "text_4": "Kundenservice Mo–Fr 8–15 Uhr",
+                    "url_4": "/pages/contact"
                   }
                 },
                 "echtheit": {
