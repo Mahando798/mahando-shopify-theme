@@ -452,7 +452,7 @@
             "bewertungen": {
               "type": "mahando-reviews",
               "settings": {
-                "heading": "Kundenbewertungen",
+                "heading": "",
                 "padding-block-start": 24
               }
             }

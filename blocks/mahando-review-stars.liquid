@@ -1,11 +1,12 @@
 {%- doc -%}
   Judge.me-Sternebewertung (Durchschnitt + Anzahl) unter dem Produkttitel.
   Rendert den Judge.me-Platzhalter; das Judge.me-App-Embed (Theme-Einstellungen → App-Einbettungen) füllt ihn.
-  Ohne Bewertungen bleibt der Block leer.
+  Ohne Bewertungen wird nichts angezeigt (kein „Keine Bewertungen“ unter dem Titel).
 {%- enddoc -%}
 
 {%- assign product = closest.product -%}
-{%- if product != blank -%}
+{%- assign review_count = product.metafields.reviews.rating_count.value | default: 0 -%}
+{%- if product != blank and review_count > 0 -%}
   <div class="mahando-review-stars spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}" data-template="product" data-auto-install="false">
       {{- product.metafields.judgeme.badge -}}
