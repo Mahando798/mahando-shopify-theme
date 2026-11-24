@@ -684,3 +684,9 @@ media-gallery .slideshow-controls__thumbnail img {
   padding: 6%;
   box-sizing: border-box;
 }
+
+/* Produktgalerie scrollt normal mit der Seite (kein Mitlaufen/Sticky) */
+media-gallery.sticky-content {
+  position: static !important;
+  top: auto !important;
+}
