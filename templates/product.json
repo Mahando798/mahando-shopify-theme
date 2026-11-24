@@ -16,7 +16,7 @@
         "home_label": "Startseite",
         "section_width": "page-width",
         "padding-block-start": 16,
-        "padding-block-end": 4
+        "padding-block-end": 8
       }
     },
     "main": {
@@ -76,6 +76,66 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "kopf": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "background_media": "none",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "hersteller": {
+                  "type": "mahando-product-type",
+                  "settings": {
+                    "source": "vendor",
+                    "padding-block-start": 0
+                  }
+                },
+                "titel": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "wrap": "pretty"
+                  },
+                  "blocks": {}
+                },
+                "sterne": {
+                  "type": "mahando-review-stars",
+                  "settings": {
+                    "padding-block-start": 2
+                  }
+                }
+              },
+              "block_order": [
+                "hersteller",
+                "titel",
+                "sterne"
+              ],
+              "name": "Kopf"
+            },
             "zustand": {
               "type": "mahando-condition",
               "settings": {}
@@ -317,6 +377,7 @@
             }
           },
           "block_order": [
+            "kopf",
             "highlights",
             "zustand",
             "kaufbox"
@@ -1381,65 +1442,10 @@
       "block_order": [
         "karte"
       ]
-    },
-    "titel": {
-      "type": "section",
-      "name": "Produkttitel",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 6,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 4,
-        "padding-block-end": 16
-      },
-      "blocks": {
-        "hersteller": {
-          "type": "mahando-product-type",
-          "settings": {
-            "source": "vendor",
-            "padding-block-start": 0
-          }
-        },
-        "titel": {
-          "type": "text",
-          "settings": {
-            "text": "<h1>{{ closest.product.title }}</h1>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "h3",
-            "wrap": "pretty"
-          },
-          "blocks": {}
-        },
-        "sterne": {
-          "type": "mahando-review-stars",
-          "settings": {
-            "padding-block-start": 2
-          }
-        }
-      },
-      "block_order": [
-        "hersteller",
-        "titel",
-        "sterne"
-      ]
     }
   },
   "order": [
     "breadcrumb",
-    "titel",
     "main",
     "sprung",
     "info",

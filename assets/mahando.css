@@ -690,9 +690,3 @@ media-gallery.sticky-content {
   position: static !important;
   top: auto !important;
 }
-
-/* „Das Wichtigste auf einen Blick“: gleicher heller Rahmen wie Kaufbox und Bildbox */
-.product-details .mahando-highlights {
-  border-color: #dce5e9;
-  background: #fff;
-}
