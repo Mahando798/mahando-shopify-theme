@@ -364,10 +364,21 @@
                 "zahlung"
               ],
               "name": "Kaufbox"
+            },
+            "highlights": {
+              "type": "mahando-highlights",
+              "settings": {
+                "heading": "Das Wichtigste auf einen Blick",
+                "max_items": 4,
+                "fallback_description": true,
+                "more_text": "Mehr Details anzeigen",
+                "more_anchor": "beschreibung"
+              }
             }
           },
           "block_order": [
             "kopf",
+            "highlights",
             "zustand",
             "kaufbox"
           ]
