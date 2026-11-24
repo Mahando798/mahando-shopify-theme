@@ -25,6 +25,7 @@
 <script>
   (() => {
     const nav = document.currentScript.previousElementSibling;
+    const init = () => {
     if (!nav || !('IntersectionObserver' in window)) return;
     const links = [...nav.querySelectorAll('a[href^="#"]')];
     const targets = links.map((a) => document.getElementById(a.hash.slice(1))).filter(Boolean);
@@ -36,6 +37,9 @@
       });
     }, { rootMargin: '-30% 0px -60% 0px' });
     targets.forEach((t) => io.observe(t));
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
   })();
 </script>
 
