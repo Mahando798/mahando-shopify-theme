@@ -25,14 +25,14 @@
         <a class="mahando-mpr__platform" href="{{ p.url }}" target="_blank" rel="noopener nofollow">
           <span class="mahando-mpr__pname">{{ p.name }}{% if p.konto != blank %} · {{ p.konto }}{% endif %}</span>
           <span class="mahando-mpr__score">
-            {%- if p.prozent != blank -%}
-              <strong>{{ p.prozent | times: 1.0 | round: 1 | replace: '.', ',' }}&nbsp;%</strong>&nbsp;positiv
-            {%- else -%}
+            {%- if p.sterne != blank -%}
               {% render 'mahando-stars', rating: p.sterne, size: 18 %}
               <strong>{{ p.sterne | times: 1.0 | round: 1 | replace: '.', ',' }}</strong>&nbsp;von 5
+            {%- else -%}
+              <strong>{{ p.prozent | times: 1.0 | round: 1 | replace: '.', ',' }}&nbsp;%</strong>&nbsp;positiv
             {%- endif -%}
           </span>
-          <span class="mahando-mpr__count">{{ p.anzahl }} Bewertungen · {{ p.zeitraum }}</span>
+          <span class="mahando-mpr__count">{{ p.anzahl }} Bewertungen{% if p.sterne != blank and p.prozent != blank %} · {{ p.prozent | times: 1.0 | round: 1 | replace: '.', ',' }}&nbsp;% positiv{% endif %} · {{ p.zeitraum }}</span>
           <span class="mahando-mpr__link">Profil auf {{ p.name }} ansehen ›</span>
         </a>
       {%- endfor -%}
@@ -56,8 +56,9 @@
         Die Gesamtbewertungen und die gezeigten Rezensionen stammen aus unseren öffentlichen Verkäuferprofilen
         ({% for p in platforms %}{{ p.name }}{% if p.konto != blank %} „{{ p.konto }}“{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %})
         und beziehen sich auf Bestellungen, die dort abgewickelt wurden. Bewerten können dort nur Käufer, die über die
-        jeweilige Plattform bei uns bestellt haben. Bei eBay wird der Anteil positiver Bewertungen der letzten 12 Monate angezeigt,
-        bei Amazon die Sternebewertung über die gesamte Laufzeit. Wir zeigen eine Auswahl aktueller Rezensionen; alle Bewertungen –
+        jeweilige Plattform bei uns bestellt haben. Die Sterne bei eBay sind der Durchschnitt der detaillierten Verkäuferbewertungen (Artikelbeschreibung, Versandkosten,
+        Lieferzeit, Kommunikation) der letzten 12 Monate; dazu der Anteil positiver Bewertungen im selben Zeitraum.
+        Die Sterne bei Amazon sind die Verkäuferbewertung über die gesamte Laufzeit. Wir zeigen eine Auswahl aktueller Rezensionen; alle Bewertungen –
         auch kritische – finden Sie in den verlinkten Profilen. Stand: {{ stand }}.
       </p>
     </details>
