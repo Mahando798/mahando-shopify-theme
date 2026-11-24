@@ -6,7 +6,7 @@
 <nav
   class="mahando-jumpnav spacing-style"
   aria-label="{{ block.settings.aria_label | escape }}"
-  style="width: fit-content; max-width: 100%; flex-wrap: wrap; overflow: visible; border-color: #DCE5E9; {% render 'spacing-style', settings: block.settings %}"
+  style="width: 100%; flex-wrap: wrap; padding: 0; background: none; border: 0; border-radius: 0; {% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
   {%- for i in (1..6) -%}
@@ -17,7 +17,7 @@
       assign anchor = block.settings[ak] | strip | remove: '#'
     -%}
     {%- if label != blank and anchor != blank -%}
-      <a class="mahando-jumpnav__link{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}">{{ label }}</a>
+      <a class="mahando-jumpnav__link{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}" style="background: #FFFFFF; border: 1px solid #DCE5E9;">{{ label }}</a>
     {%- endif -%}
   {%- endfor -%}
 </nav>
@@ -73,9 +73,14 @@
     background: var(--color-background-secondary, #eef3f5);
   }
 
+  .mahando-jumpnav__link:hover {
+    border-color: #0a7e83 !important;
+  }
+
   .mahando-jumpnav__link.is-active {
-    background: var(--color-primary-button-background, #0a7e83);
-    color: var(--color-primary-button-text, #fff);
+    background: #0a7e83 !important;
+    border-color: #0a7e83 !important;
+    color: #fff;
   }
 {% endstylesheet %}
 
