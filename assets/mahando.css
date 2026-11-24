@@ -653,3 +653,34 @@ a.mahando-shop-rating:hover .mahando-shop-rating__text {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Produktgalerie: jede Bildfläche als gleich große weiße Box, unabhängig vom Fotoformat */
+media-gallery .product-media-container,
+media-gallery .product-media-container .product-media__image {
+  background-color: #fff;
+}
+
+media-gallery .product-media-container {
+  border: 1px solid #dce5e9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+media-gallery .product-media-container .product-media__image {
+  padding: 4%;
+  box-sizing: border-box;
+}
+
+media-gallery .slideshow-controls__thumbnail {
+  background-color: #fff;
+  border: 1px solid #dce5e9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+media-gallery .slideshow-controls__thumbnail img {
+  background-color: #fff;
+  object-fit: contain;
+  padding: 6%;
+  box-sizing: border-box;
+}
