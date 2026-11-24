@@ -26,16 +26,12 @@
       assign review_count = jm_count
     endif
   endif
-  comment
-    Ohne Bewertungen wird der Bereich ausgeblendet (kein leeres „Schreiben Sie die erste Bewertung“).
-    Bewertungsanfragen verschickt Judge.me weiterhin per E-Mail nach dem Kauf.
-  endcomment
+  # Ohne Bewertungen wird der Bereich ausgeblendet (Bewertungsanfragen verschickt Judge.me weiter per E-Mail).
   assign show = true
   if review_count == 0 and request.design_mode != true
     assign show = false
   endif
 -%}
-<!-- mahando-reviews rc={{ review_count }} show={{ show }} -->
 {%- if product != blank and show -%}
   <div
     id="Bewertungen"
