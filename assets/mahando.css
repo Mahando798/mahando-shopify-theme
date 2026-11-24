@@ -742,9 +742,9 @@ media-gallery.sticky-content {
 .mahando-mpr__positive { align-self: flex-start; padding: 3px 10px; border-radius: 6px; background: #e6f4ec; color: #1a7f4b; font-size: 0.8125rem; font-weight: 700; }
 .mahando-mpr__nav { position: absolute; top: calc(50% - 26px); z-index: 2; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid #dce5e9; border-radius: 50%; background: #fff; color: #1d2b33; cursor: pointer; box-shadow: 0 2px 8px rgb(0 0 0 / 0.08); }
 .mahando-mpr__nav:hover { border-color: #0a7e83; color: #0a7e83; }
-.mahando-mpr__nav--prev { left: -14px; }
-.mahando-mpr__nav--next { right: -14px; }
+.mahando-mpr__nav--prev { left: -22px; }
+.mahando-mpr__nav--next { right: -22px; }
 @media screen and (max-width: 749px) { .mahando-mpr__nav { display: none; } .mahando-mpr__list { grid-auto-columns: 78%; } }
-.mahando-mpr__note { margin: 0; max-width: 90ch; font-size: 0.8125rem; line-height: 1.6; color: #4c5d66; }
+.mahando-mpr__note { margin: 0; max-width: 130ch; font-size: 0.8125rem; line-height: 1.6; color: #4c5d66; }
 .mahando-mpr__note strong { color: #1d2b33; }
 .mahando-mpr__note a { color: inherit; text-decoration: underline; }
