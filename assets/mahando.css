@@ -690,3 +690,32 @@ media-gallery.sticky-content {
   position: static !important;
   top: auto !important;
 }
+
+/* Desktop: Bildbox wächst bis zur Unterkante der Kaufbox mit (Foto bleibt zentriert) */
+@media screen and (min-width: 750px) {
+  .product-information__media media-gallery {
+    height: calc(100% - 8px);
+  }
+
+  .product-information__media media-gallery slideshow-component {
+    height: 100%;
+    grid-template-rows: 1fr auto !important;
+  }
+
+  .product-information__media slideshow-container,
+  .product-information__media slideshow-slides {
+    height: 100%;
+  }
+
+  .product-information__media .product-media-container {
+    aspect-ratio: auto !important;
+    height: 100% !important;
+    max-height: none !important;
+  }
+
+  .product-information__media .product-media-container .product-media,
+  .product-information__media .product-media-constraint-wrapper {
+    height: 100%;
+    aspect-ratio: auto !important;
+  }
+}
