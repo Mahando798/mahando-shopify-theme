@@ -1,0 +1,108 @@
+{%- doc -%}
+  Vertrauenszeilen direkt beim Preis (Vorbild: shop.cejuron.de):
+  Shop-Gesamtbewertung aus Judge.me (nur wenn Bewertungen vorhanden) und bis zu drei kurze Textzeilen mit Häkchen.
+{%- enddoc -%}
+
+{%- liquid
+  capture rating_html
+    if block.settings.show_shop_rating
+      render 'mahando-shop-rating', url: block.settings.rating_url
+    endif
+  endcapture
+  assign rating_html = rating_html | strip
+  assign lines = ''
+  for i in (1..3)
+    assign key = 'text_' | append: i
+    assign t = block.settings[key] | strip
+    if t != blank
+      assign lines = lines | append: t | append: '||'
+    endif
+  endfor
+  assign lines = lines | split: '||'
+-%}
+
+{%- if rating_html != blank or lines.size > 0 -%}
+  <ul
+    class="mahando-price-trust spacing-style"
+    role="list"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if rating_html != blank -%}
+      <li class="mahando-price-trust__rating">
+        {{ rating_html }}
+        {%- if block.settings.rating_suffix != blank -%}
+          <span class="mahando-price-trust__suffix">{{ block.settings.rating_suffix }}</span>
+        {%- endif -%}
+      </li>
+    {%- endif -%}
+    {%- for line in lines -%}
+      <li>
+        {% render 'mahando-icon', icon: 'check', class: 'mahando-price-trust__icon' %}
+        <span>{{ line }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-price-trust {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-price-trust li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .mahando-price-trust__icon {
+    width: 14px;
+    height: 14px;
+    flex: none;
+    color: var(--color-success, #1a7f4b);
+  }
+
+  .mahando-price-trust__rating .mahando-shop-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .mahando-price-trust__rating a.mahando-shop-rating:hover .mahando-shop-rating__text {
+    text-decoration: underline;
+  }
+
+  .mahando-price-trust__suffix {
+    color: color-mix(in srgb, currentColor 65%, transparent);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Vertrauenszeilen (Preis)",
+  "tag": null,
+  "settings": [
+    { "type": "checkbox", "id": "show_shop_rating", "label": "Shop-Bewertung (Judge.me) anzeigen", "default": true },
+    { "type": "text", "id": "rating_suffix", "label": "Zusatz hinter der Bewertung", "default": "für den Shop" },
+    { "type": "url", "id": "rating_url", "label": "Link der Bewertung" },
+    { "type": "text", "id": "text_1", "label": "Zeile 1", "default": "Mahando · Händler aus Deutschland seit 2022" },
+    { "type": "text", "id": "text_2", "label": "Zeile 2", "default": "Rechnung mit ausgewiesener MwSt." },
+    { "type": "text", "id": "text_3", "label": "Zeile 3" },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "t:settings.left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "t:settings.right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Vertrauenszeilen (Preis)" }]
+}
+{% endschema %}
