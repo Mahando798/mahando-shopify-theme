@@ -1339,6 +1339,79 @@
         "padding-block-start": 0,
         "padding-block-end": 44
       }
+    },
+    "kundenstimmen": {
+      "type": "section",
+      "name": "Kundenstimmen Amazon",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 20,
+        "section_width": "page-width",
+        "background_media": "none",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      },
+      "blocks": {
+        "karte": {
+          "type": "group",
+          "name": "Bewertungen",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 24,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "solid",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "background_color": "#FFFFFF",
+            "border_color": "#DCE5E9"
+          },
+          "blocks": {
+            "amazon": {
+              "type": "mahando-marketplace-reviews",
+              "settings": {
+                "heading": "Das sagen unsere Kunden auf Amazon",
+                "max_items": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": [
+            "amazon"
+          ]
+        }
+      },
+      "block_order": [
+        "karte"
+      ]
     }
   },
   "order": [
@@ -1349,6 +1422,7 @@
     "neu",
     "sale",
     "mahando_why",
+    "kundenstimmen",
     "newsletter"
   ]
 }

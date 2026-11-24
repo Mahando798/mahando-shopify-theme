@@ -900,7 +900,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
+            "gap": 24,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -935,10 +935,22 @@
                 "heading": "",
                 "padding-block-start": 0
               }
+            },
+            "amazon": {
+              "type": "mahando-marketplace-reviews",
+              "settings": {
+                "heading": "Das sagen unsere Kunden auf Amazon",
+                "max_items": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
             }
           },
           "block_order": [
             "anker",
+            "amazon",
             "rev"
           ]
         }

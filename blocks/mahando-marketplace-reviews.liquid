@@ -1,0 +1,78 @@
+{%- doc -%}
+  Bewertungen von Marktplätzen (Vorbild: shop.cejuron.de).
+  Daten: Shop-Metafeld mahando.marktplatz_bewertungen (JSON) mit
+  { stand, plattformen: [{ name, verkaeufer, sterne, anzahl, zeitraum, url }],
+    bewertungen: [{ quelle, sterne, text, name, datum }] }.
+  Zeigt je Plattform die Gesamtbewertung mit Link zum Profil, ein Karussell ausgewählter Bewertungen
+  und einen Hinweis zur Herkunft (Transparenz nach § 5b Abs. 3 UWG).
+{%- enddoc -%}
+
+{%- liquid
+  assign data = shop.metafields.mahando.marktplatz_bewertungen.value
+  assign platforms = data.plattformen
+  assign reviews = data.bewertungen
+  assign stand = data.stand | date: '%d.%m.%Y'
+-%}
+
+{%- if platforms.size > 0 -%}
+  <div class="mahando-mpr spacing-style" style="width: 100%; {% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- if block.settings.heading != blank -%}
+      <h3 class="mahando-mpr__heading">{{ block.settings.heading }}</h3>
+    {%- endif -%}
+
+    <div class="mahando-mpr__summary">
+      {%- for p in platforms -%}
+        <a class="mahando-mpr__platform" href="{{ p.url }}" target="_blank" rel="noopener nofollow">
+          <span class="mahando-mpr__pname">{{ p.name }}</span>
+          <span class="mahando-mpr__score">
+            {% render 'mahando-stars', rating: p.sterne, size: 18 %}
+            <strong>{{ p.sterne | times: 1.0 | round: 1 | replace: '.', ',' }}</strong>&nbsp;von 5
+          </span>
+          <span class="mahando-mpr__count">{{ p.anzahl }} Bewertungen · {{ p.zeitraum }}</span>
+          <span class="mahando-mpr__link">Profil von {{ p.verkaeufer }} auf {{ p.name }} ansehen ›</span>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if reviews.size > 0 -%}
+      <ul class="mahando-mpr__list" role="list" aria-label="Ausgewählte Bewertungen">
+        {%- for r in reviews limit: block.settings.max_items -%}
+          <li class="mahando-mpr__card">
+            {% render 'mahando-stars', rating: r.sterne, size: 14 %}
+            <p class="mahando-mpr__text">„{{ r.text | escape }}“</p>
+            <p class="mahando-mpr__meta"><strong>{{ r.name | escape }}</strong> · Käufer bei {{ r.quelle }} · {{ r.datum | date: '%d.%m.%Y' }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <details class="mahando-mpr__note">
+      <summary>Woher stammen diese Bewertungen?</summary>
+      <p>
+        Die Gesamtbewertung und die gezeigten Rezensionen stammen aus dem öffentlichen Verkäuferprofil von
+        {% for p in platforms %}{{ p.verkaeufer }} bei {{ p.name }}{% unless forloop.last %} bzw. {% endunless %}{% endfor %}
+        und beziehen sich auf Bestellungen, die dort abgewickelt wurden. Bewerten können dort nur Käufer, die über die
+        jeweilige Plattform bestellt haben. Wir zeigen eine Auswahl aktueller Rezensionen; alle Bewertungen – auch kritische –
+        finden Sie im verlinkten Profil. Stand: {{ stand }}.
+      </p>
+    </details>
+  </div>
+{%- endif -%}
+
+
+
+{% schema %}
+{
+  "name": "Marktplatz-Bewertungen",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Das sagen unsere Kunden auf Amazon" },
+    { "type": "range", "id": "max_items", "label": "Maximal angezeigte Bewertungen", "min": 3, "max": 20, "step": 1, "default": 10 },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "t:settings.left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "t:settings.right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Marktplatz-Bewertungen" }]
+}
+{% endschema %}
