@@ -17,7 +17,7 @@
       assign anchor = block.settings[ak] | strip | remove: '#'
     -%}
     {%- if label != blank and anchor != blank -%}
-      <a class="mahando-jumpnav__link{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}" style="background: #FFFFFF; border: 1px solid #DCE5E9;">{{ label }}</a>
+      <a class="mahando-jumpnav__link{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}" style="border: 1px solid #DCE5E9;">{{ label }}</a>
     {%- endif -%}
   {%- endfor -%}
 </nav>
@@ -60,6 +60,7 @@
 
   .mahando-jumpnav__link {
     flex: none;
+    background: #fff;
     padding: 10px 16px;
     border-radius: 40px;
     font-size: var(--font-size--sm);
