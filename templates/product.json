@@ -939,12 +939,13 @@
             "amazon": {
               "type": "mahando-marketplace-reviews",
               "settings": {
-                "heading": "Das sagen unsere Kunden auf Amazon und eBay",
+                "heading": "Das sagen unsere Kunden",
                 "max_items": 12,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "subheading": "Bewertungen von Käufern, die bei Mahando über eBay und Amazon bestellt haben"
               }
             }
           },

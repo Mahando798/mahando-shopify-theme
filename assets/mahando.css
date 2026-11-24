@@ -720,122 +720,31 @@ media-gallery.sticky-content {
   }
 }
 
-/* Marktplatz-Bewertungen (Amazon) */
-.mahando-mpr {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.mahando-mpr__heading {
-  margin: 0;
-  font-size: 1.125rem;
-}
-
-.mahando-mpr__summary {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.mahando-mpr__platform {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 20px;
-  border: 1px solid #dce5e9;
-  border-radius: 10px;
-  background: #f4f8f9;
-  color: inherit;
-  text-decoration: none;
-  min-width: 240px;
-}
-
-.mahando-mpr__pname {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.mahando-mpr__score {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-}
-
-.mahando-mpr__score strong {
-  font-size: 1.375rem;
-}
-
-.mahando-mpr__count {
-  font-size: 0.875rem;
-}
-
-.mahando-mpr__link {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #0a7e83;
-}
-
-.mahando-mpr__platform:hover .mahando-mpr__link {
-  text-decoration: underline;
-}
-
-.mahando-mpr__list {
-  list-style: none;
-  margin: 0;
-  padding: 2px 2px 10px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 300px);
-  gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
-.mahando-mpr__card {
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  border: 1px solid #dce5e9;
-  border-radius: 10px;
-  background: #fff;
-}
-
-.mahando-mpr__text {
-  margin: 0;
-  flex: 1;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-
-.mahando-mpr__meta {
-  margin: 0;
-  font-size: 0.8125rem;
-  color: #4c5d66;
-}
-
-.mahando-mpr__note {
-  font-size: 0.8125rem;
-  color: #4c5d66;
-}
-
-.mahando-mpr__note summary {
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.mahando-mpr__note p {
-  margin: 6px 0 0;
-  max-width: 75ch;
-}
-
-.mahando-mpr__positive {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #1a7f4b;
-}
+/* Marktplatz-Bewertungen (Amazon/eBay) – Aufbau wie shop.cejuron.de */
+.mahando-mpr { display: flex; flex-direction: column; gap: 20px; }
+.mahando-mpr__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; }
+.mahando-mpr__intro { flex: 1 1 320px; min-width: 0; }
+.mahando-mpr__heading { margin: 0; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.2; }
+.mahando-mpr__sub { margin: 6px 0 0; font-size: 0.9375rem; color: #4c5d66; }
+.mahando-mpr__summary { display: flex; flex-wrap: wrap; gap: 12px; }
+.mahando-mpr__platform { display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; border: 1px solid #dce5e9; border-radius: 12px; background: #fff; color: inherit; text-decoration: none; min-width: 210px; }
+.mahando-mpr__platform:hover { border-color: #0a7e83; }
+.mahando-mpr__pname { font-size: 0.75rem; color: #4c5d66; letter-spacing: 0.02em; }
+.mahando-mpr__pname strong { color: #1d2b33; letter-spacing: 0.06em; }
+.mahando-mpr__score { display: flex; align-items: center; gap: 10px; font-size: 1.0625rem; }
+.mahando-mpr__count { font-size: 0.8125rem; color: #4c5d66; }
+.mahando-mpr__slider { position: relative; }
+.mahando-mpr__list { list-style: none; margin: 0; padding: 2px 2px 12px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, calc((100% - 64px) / 4.6)); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
+.mahando-mpr__card { scroll-snap-align: start; display: flex; flex-direction: column; gap: 12px; padding: 20px 18px; border: 1px solid #dce5e9; border-radius: 12px; background: #fff; min-height: 180px; }
+.mahando-mpr__text { margin: 0; flex: 1; font-size: 1rem; line-height: 1.55; }
+.mahando-mpr__meta { margin: 0; font-size: 0.8125rem; line-height: 1.45; color: #4c5d66; }
+.mahando-mpr__meta strong { color: #1d2b33; }
+.mahando-mpr__positive { align-self: flex-start; padding: 3px 10px; border-radius: 6px; background: #e6f4ec; color: #1a7f4b; font-size: 0.8125rem; font-weight: 700; }
+.mahando-mpr__nav { position: absolute; top: calc(50% - 26px); z-index: 2; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid #dce5e9; border-radius: 50%; background: #fff; color: #1d2b33; cursor: pointer; box-shadow: 0 2px 8px rgb(0 0 0 / 0.08); }
+.mahando-mpr__nav:hover { border-color: #0a7e83; color: #0a7e83; }
+.mahando-mpr__nav--prev { left: -14px; }
+.mahando-mpr__nav--next { right: -14px; }
+@media screen and (max-width: 749px) { .mahando-mpr__nav { display: none; } .mahando-mpr__list { grid-auto-columns: 78%; } }
+.mahando-mpr__note { margin: 0; max-width: 90ch; font-size: 0.8125rem; line-height: 1.6; color: #4c5d66; }
+.mahando-mpr__note strong { color: #1d2b33; }
+.mahando-mpr__note a { color: inherit; text-decoration: underline; }

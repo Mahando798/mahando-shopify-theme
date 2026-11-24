@@ -19,8 +19,19 @@
     endfor
   endif
   assign review_count = product.metafields.reviews.rating_count.value | default: 0
+  assign badge = product.metafields.judgeme.badge | append: ''
+  if badge contains 'data-number-of-reviews='
+    assign jm_count = badge | split: "data-number-of-reviews='" | last | split: "'" | first | plus: 0
+    if jm_count > review_count
+      assign review_count = jm_count
+    endif
+  endif
+  comment
+    Ohne Bewertungen wird der Bereich ausgeblendet (kein leeres „Schreiben Sie die erste Bewertung“).
+    Bewertungsanfragen verschickt Judge.me weiterhin per E-Mail nach dem Kauf.
+  endcomment
   assign show = true
-  if no_write and review_count == 0 and request.design_mode != true
+  if review_count == 0 and request.design_mode != true
     assign show = false
   endif
 -%}

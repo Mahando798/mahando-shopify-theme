@@ -1380,27 +1380,28 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "background_media": "none",
-            "border": "solid",
+            "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "rgba(0,0,0,0)",
             "border_color": "#DCE5E9"
           },
           "blocks": {
             "amazon": {
               "type": "mahando-marketplace-reviews",
               "settings": {
-                "heading": "Das sagen unsere Kunden auf Amazon und eBay",
+                "heading": "Das sagen unsere Kunden",
                 "max_items": 12,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "subheading": "Bewertungen von Käufern, die bei Mahando über eBay und Amazon bestellt haben"
               }
             }
           },
