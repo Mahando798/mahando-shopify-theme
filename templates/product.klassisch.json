@@ -136,6 +136,16 @@
               ],
               "name": "Kopf"
             },
+            "highlights": {
+              "type": "mahando-highlights",
+              "settings": {
+                "heading": "Auf einen Blick",
+                "max_items": 4,
+                "fallback_description": true,
+                "more_text": "Mehr Details anzeigen",
+                "more_anchor": "beschreibung"
+              }
+            },
             "zustand": {
               "type": "mahando-condition",
               "settings": {}
@@ -267,8 +277,7 @@
                     "url_1": "/policies/shipping-policy",
                     "icon_4": "headset",
                     "text_4": "Kundenservice Mo–Fr 8–15 Uhr",
-                    "url_4": "/pages/contact",
-                    "layout": "grid"
+                    "url_4": "/pages/contact"
                   }
                 },
                 "echtheit": {
@@ -364,16 +373,6 @@
                 "zahlung"
               ],
               "name": "Kaufbox"
-            },
-            "highlights": {
-              "type": "mahando-highlights",
-              "settings": {
-                "heading": "Das Wichtigste auf einen Blick",
-                "max_items": 4,
-                "fallback_description": true,
-                "more_text": "Mehr Details anzeigen",
-                "more_anchor": "beschreibung"
-              }
             }
           },
           "block_order": [
@@ -402,6 +401,256 @@
         "limit_details_width": false,
         "gap": 40,
         "padding-block-start": 0,
+        "padding-block-end": 32
+      }
+    },
+    "details": {
+      "type": "section",
+      "name": "Beschreibung & Details",
+      "blocks": {
+        "inhalt": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 24,
+            "width": "custom",
+            "custom_width": 64,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "titel_beschreibung": {
+              "type": "mahando-section-title",
+              "settings": {
+                "eyebrow": "Beschreibung",
+                "heading": "Produktbeschreibung",
+                "level": "h2",
+                "size": "h3",
+                "anchor": "beschreibung"
+              }
+            },
+            "beschreibung": {
+              "type": "product-description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            },
+            "lieferumfang": {
+              "type": "mahando-metafield-text",
+              "settings": {
+                "heading": "Lieferumfang",
+                "namespace": "mahando",
+                "key": "lieferumfang",
+                "use_disposal_setting": false,
+                "padding-block-start": 8
+              }
+            },
+            "daten": {
+              "type": "mahando-specs",
+              "settings": {
+                "heading": "Technische Daten",
+                "columns": "2",
+                "max_rows": 60,
+                "padding-block-start": 8
+              }
+            },
+            "bewertungen": {
+              "type": "mahando-reviews",
+              "settings": {
+                "heading": "",
+                "padding-block-start": 24
+              }
+            }
+          },
+          "block_order": [
+            "titel_beschreibung",
+            "beschreibung",
+            "lieferumfang",
+            "daten",
+            "bewertungen"
+          ],
+          "name": "Inhalt"
+        },
+        "seite": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 20,
+            "width": "custom",
+            "custom_width": 36,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "details": {
+              "type": "mahando-details-table",
+              "settings": {
+                "heading": "Produktdetails",
+                "show_vendor": true,
+                "show_sku": true,
+                "show_ean": true,
+                "show_category": true,
+                "show_condition": true,
+                "show_availability": true,
+                "show_shipping": true,
+                "shipping_text": "aus Deutschland, {delivery}",
+                "show_weight": false
+              }
+            },
+            "akkordeon": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "h6",
+                "padding-block-start": 4
+              },
+              "blocks": {
+                "row_versand": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Versand & Rückgabe",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "versandtext": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Versand aus eigenem Lager in Deutschland, in der Regel mit DHL; hochwertige oder sperrige Artikel liefern wir per Spedition. Versandkosten: 4,99 € pro Bestellung, ab 300 € Bestellwert versandkostenfrei. Wir liefern derzeit ausschließlich innerhalb Deutschlands.</p><p>30 Tage Rückgaberecht: Zusätzlich zum gesetzlichen Widerrufsrecht von 14 Tagen nehmen wir unbenutzte, original verpackte Artikel bis 30 Tage nach Erhalt zurück. Rücksendungen melden Sie per E-Mail an <a href=\"mailto:support@mahando.de?subject=R%C3%BCcksendung\">support@mahando.de</a> an – bitte mit Bestellnummer. Den Ablauf finden Sie in der <a href=\"/policies/refund-policy\">Widerrufsbelehrung</a>.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "versandtext"
+                  ]
+                },
+                "row_sicherheit": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Sicherheit & Hinweise",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "sicherheit": {
+                      "type": "mahando-metafield-text",
+                      "settings": {
+                        "namespace": "mahando",
+                        "key": "sicherheitshinweise",
+                        "extra_tags": "elektro, akku, batterie",
+                        "use_disposal_setting": true
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "sicherheit"
+                  ]
+                },
+                "row_gpsr": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Herstellerangaben (GPSR)",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "gpsr": {
+                      "type": "mahando-gpsr",
+                      "settings": {
+                        "fallback_vendor": true,
+                        "show_note": true
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "gpsr"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_versand",
+                "row_sicherheit",
+                "row_gpsr"
+              ]
+            }
+          },
+          "block_order": [
+            "details",
+            "akkordeon"
+          ],
+          "name": "Seitenleiste"
+        }
+      },
+      "block_order": [
+        "inhalt",
+        "seite"
+      ],
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 40,
+        "section_width": "page-width",
+        "background_media": "none",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 8,
         "padding-block-end": 32
       }
     },
@@ -541,668 +790,42 @@
         "padding-block-end": 56
       }
     },
-    "sprung": {
+    "faq": {
       "type": "section",
-      "name": "Sprungnavigation",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 20
-      },
+      "name": "Häufige Fragen",
       "blocks": {
-        "nav": {
-          "type": "mahando-jumpnav",
+        "spalte": {
+          "type": "group",
+          "name": "FAQ-Spalte",
           "settings": {
-            "aria_label": "Abschnitte",
-            "label_1": "Beschreibung",
-            "anchor_1": "beschreibung",
-            "label_2": "Technische Daten",
-            "anchor_2": "daten",
-            "label_3": "Lieferumfang",
-            "anchor_3": "lieferumfang",
-            "label_4": "Bewertungen",
-            "anchor_4": "bewertungen",
-            "label_5": "Versand & Hersteller",
-            "anchor_5": "service",
-            "label_6": "Fragen",
-            "anchor_6": "faq",
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 64,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
-          }
-        }
-      },
-      "block_order": [
-        "nav"
-      ]
-    },
-    "info": {
-      "type": "section",
-      "name": "Beschreibung & Details",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 20
-      },
-      "blocks": {
-        "beschreibung": {
-          "type": "group",
-          "name": "Beschreibung",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 64,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
           },
           "blocks": {
-            "t": {
+            "titel": {
               "type": "mahando-section-title",
               "settings": {
-                "eyebrow": "",
-                "heading": "Produktbeschreibung",
-                "level": "h2",
-                "size": "h3",
-                "anchor": "beschreibung"
-              }
-            },
-            "text": {
-              "type": "product-description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte"
-              },
-              "blocks": {}
-            },
-            "kacheln": {
-              "type": "mahando-keyfacts",
-              "settings": {
-                "max_items": 4,
-                "fallback_highlights": true
-              }
-            }
-          },
-          "block_order": [
-            "t",
-            "text",
-            "kacheln"
-          ]
-        },
-        "details": {
-          "type": "group",
-          "name": "Produktdetails",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 36,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "tab": {
-              "type": "mahando-details-table",
-              "settings": {
-                "heading": "Produktdetails",
-                "show_vendor": true,
-                "show_sku": true,
-                "show_ean": true,
-                "show_category": true,
-                "show_condition": true,
-                "show_availability": true,
-                "show_shipping": true,
-                "shipping_text": "aus Deutschland, {delivery}",
-                "show_weight": false,
-                "plain": true
-              }
-            }
-          },
-          "block_order": [
-            "tab"
-          ]
-        }
-      },
-      "block_order": [
-        "beschreibung",
-        "details"
-      ]
-    },
-    "daten": {
-      "type": "section",
-      "name": "Technische Daten & Lieferumfang",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 20
-      },
-      "blocks": {
-        "daten": {
-          "type": "group",
-          "name": "Technische Daten",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 64,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "Technische Daten",
-                "level": "h2",
-                "size": "h3",
-                "anchor": "daten"
-              }
-            },
-            "specs": {
-              "type": "mahando-specs",
-              "settings": {
-                "heading": "",
-                "style": "zebra",
-                "columns": "1",
-                "max_rows": 60
-              }
-            }
-          },
-          "block_order": [
-            "t",
-            "specs"
-          ]
-        },
-        "umfang": {
-          "type": "group",
-          "name": "Lieferumfang",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 36,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "Im Lieferumfang",
-                "level": "h2",
-                "size": "h4",
-                "anchor": "lieferumfang"
-              }
-            },
-            "liste": {
-              "type": "mahando-included",
-              "settings": {}
-            }
-          },
-          "block_order": [
-            "t",
-            "liste"
-          ]
-        }
-      },
-      "block_order": [
-        "daten",
-        "umfang"
-      ]
-    },
-    "bewertungen": {
-      "type": "section",
-      "name": "Bewertungen",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 20
-      },
-      "blocks": {
-        "karte": {
-          "type": "group",
-          "name": "Bewertungen",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "anker": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "",
-                "level": "h2",
-                "size": "h3",
-                "anchor": "bewertungen"
-              }
-            },
-            "rev": {
-              "type": "mahando-reviews",
-              "settings": {
-                "heading": "",
-                "padding-block-start": 0
-              }
-            }
-          },
-          "block_order": [
-            "anker",
-            "rev"
-          ]
-        }
-      },
-      "block_order": [
-        "karte"
-      ]
-    },
-    "service": {
-      "type": "section",
-      "name": "Versand, Hersteller, Gewährleistung",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 20
-      },
-      "blocks": {
-        "versand": {
-          "type": "group",
-          "name": "Versand",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 32,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "Versand & Rückgabe",
-                "level": "h2",
-                "size": "h4",
-                "anchor": "service"
-              }
-            },
-            "x": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Versand aus eigenem Lager in Deutschland, in der Regel mit DHL. Bestellungen bis 14 Uhr verlassen werktags noch am selben Tag das Lager. Versandkosten 4,99 €, ab 300 € versandkostenfrei.</p><p>30 Tage Rückgaberecht zusätzlich zum gesetzlichen Widerrufsrecht. Einzelheiten in der <a href=\"/policies/refund-policy\">Widerrufsbelehrung</a>.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "t",
-            "x"
-          ]
-        },
-        "hersteller": {
-          "type": "group",
-          "name": "Hersteller",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 34,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "Hersteller (Produktsicherheit)",
-                "level": "h2",
-                "size": "h4",
-                "anchor": ""
-              }
-            },
-            "g": {
-              "type": "mahando-gpsr",
-              "settings": {
-                "fallback_vendor": true,
-                "show_note": true
-              }
-            }
-          },
-          "block_order": [
-            "t",
-            "g"
-          ]
-        },
-        "gewaehr": {
-          "type": "group",
-          "name": "Gewährleistung",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 34,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
-                "heading": "Gewährleistung",
-                "level": "h2",
-                "size": "h4",
-                "anchor": ""
-              }
-            },
-            "g": {
-              "type": "mahando-gewaehrleistung",
-              "settings": {
-                "sentence": "Mindestens zwei Jahre gesetzliche Gewährleistung.",
-                "link_text": "Ihre gesetzlichen Gewährleistungsrechte",
-                "padding-block-start": 6,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
-            }
-          },
-          "block_order": [
-            "t",
-            "g"
-          ]
-        }
-      },
-      "block_order": [
-        "versand",
-        "hersteller",
-        "gewaehr"
-      ]
-    },
-    "faq": {
-      "type": "section",
-      "name": "Häufige Fragen",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 20,
-        "section_width": "page-width",
-        "background_media": "none",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 32
-      },
-      "blocks": {
-        "karte": {
-          "type": "group",
-          "name": "FAQ",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "background_media": "none",
-            "border": "solid",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12,
-            "padding-block-start": 28,
-            "padding-block-end": 28,
-            "padding-inline-start": 28,
-            "padding-inline-end": 28,
-            "background_color": "#FFFFFF",
-            "border_color": "#DCE5E9"
-          },
-          "blocks": {
-            "t": {
-              "type": "mahando-section-title",
-              "settings": {
-                "eyebrow": "",
+                "eyebrow": "Service",
                 "heading": "Häufige Fragen",
                 "level": "h2",
                 "size": "h3",
@@ -1434,24 +1057,38 @@
             }
           },
           "block_order": [
-            "t",
+            "titel",
             "fragen"
           ]
         }
       },
       "block_order": [
-        "karte"
-      ]
+        "spalte"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 12,
+        "section_width": "page-width",
+        "background_media": "none",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 32
+      }
     }
   },
   "order": [
     "breadcrumb",
     "main",
-    "sprung",
-    "info",
-    "daten",
-    "bewertungen",
-    "service",
+    "details",
     "faq",
     "product_recommendations_qggXJq"
   ]
