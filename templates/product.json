@@ -573,12 +573,12 @@
             "anchor_2": "daten",
             "label_3": "Lieferumfang",
             "anchor_3": "lieferumfang",
-            "label_4": "Bewertungen",
-            "anchor_4": "bewertungen",
-            "label_5": "Versand & Hersteller",
-            "anchor_5": "service",
-            "label_6": "Fragen",
-            "anchor_6": "faq",
+            "label_4": "Versand & Hersteller",
+            "anchor_4": "service",
+            "label_5": "Fragen",
+            "anchor_5": "faq",
+            "label_6": "Bewertungen",
+            "anchor_6": "bewertungen",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -886,7 +886,7 @@
         "border_opacity": 100,
         "border_radius": 0,
         "padding-block-start": 0,
-        "padding-block-end": 20
+        "padding-block-end": 32
       },
       "blocks": {
         "karte": {
@@ -1463,9 +1463,9 @@
     "sprung",
     "info",
     "daten",
-    "bewertungen",
+    "product_recommendations_qggXJq",
     "service",
     "faq",
-    "product_recommendations_qggXJq"
+    "bewertungen"
   ]
 }
