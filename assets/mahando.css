@@ -718,6 +718,19 @@ media-gallery.sticky-content {
     height: 100%;
     aspect-ratio: auto !important;
   }
+
+  /* Foto bestimmt die Höhe nicht mit (sonst werden hochformatige Bilder riesig) */
+  .product-information__media .product-media-container .product-media {
+    position: relative;
+  }
+
+  .product-information__media .product-media-container .product-media__image {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
 }
 
 /* Marktplatz-Bewertungen (Amazon/eBay) – Aufbau wie shop.cejuron.de */
