@@ -332,6 +332,15 @@
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
                   }
+                },
+                "zubehoer": {
+                  "type": "mahando-upsell",
+                  "settings": {
+                    "heading": "Passendes Zubehör dazu?",
+                    "hint": "Passt zu diesem Artikel",
+                    "button_label": "Hinzufügen",
+                    "max_items": 3
+                  }
                 }
               },
               "block_order": [
@@ -340,6 +349,7 @@
                 "lieferung",
                 "varianten",
                 "kaufen",
+                "zubehoer",
                 "vertrauen",
                 "echtheit",
                 "gewaehrleistung",

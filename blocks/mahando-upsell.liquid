@@ -1,0 +1,214 @@
+{%- doc -%}
+  Zubehör-Upsell in der Kaufbox („Passendes Zubehör dazu?“): zeigt bis zu 3 ergänzende Artikel mit Bild, Titel,
+  Preis und „Hinzufügen“-Button, der direkt in den Warenkorb legt (Horizon-Produktformular, Cart-Drawer).
+  Quelle: Metafeld „Ergänzende Produkte“ (shopify--discovery--product_recommendation.complementary_products),
+  pflegbar im Produkt-Admin oder in der App „Search & Discovery“. Ohne Einträge wird der Block nicht angezeigt.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign list = product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
+  assign max = block.settings.max_items | default: 3
+  assign shown = 0
+  for p in list
+    if p.available
+      assign shown = shown | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 -%}
+  <div class="mahando-upsell" {{ block.shopify_attributes }}>
+    {%- if block.settings.heading != blank -%}
+      <p class="mahando-upsell__title">{{ block.settings.heading }}</p>
+    {%- endif -%}
+    <ul class="mahando-upsell__list" role="list">
+      {%- assign count = 0 -%}
+      {%- for p in list -%}
+        {%- if p.available == false -%}{%- continue -%}{%- endif -%}
+        {%- if count >= max -%}{%- break -%}{%- endif -%}
+        {%- assign count = count | plus: 1 -%}
+        {%- assign v = p.selected_or_first_available_variant -%}
+        {%- assign form_id = 'MahandoUpsellForm-' | append: p.id | append: '-' | append: block.id -%}
+        <li class="mahando-upsell__item">
+          <a class="mahando-upsell__media" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+            {%- if p.featured_image -%}
+              {%- assign alt_text = p.title | escape -%}
+              {{ p.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt_text, width: 64, height: 64 }}
+            {%- endif -%}
+          </a>
+          <div class="mahando-upsell__info">
+            <a class="mahando-upsell__name" href="{{ p.url }}">{{ p.title }}</a>
+            {%- if block.settings.hint != blank -%}
+              <span class="mahando-upsell__hint">✓ {{ block.settings.hint }}</span>
+            {%- endif -%}
+            <span class="mahando-upsell__price">{{ v.price | money }}</span>
+          </div>
+          <div class="mahando-upsell__action">
+            {%- if p.variants_count > 1 -%}
+              <a class="button button-secondary mahando-upsell__button" href="{{ p.url }}">Ansehen</a>
+            {%- else -%}
+              <product-form-component
+                data-section-id="{{ section.id }}"
+                data-product-id="{{ p.id }}"
+                on:submit="/handleSubmit"
+                class="mahando-upsell__form"
+              >
+                <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+                {%- form 'product', p, id: form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input type="hidden" name="id" ref="variantId" value="{{ v.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  {% render 'add-to-cart-button',
+                    add_to_cart_text: block.settings.button_label,
+                    class: 'button-secondary mahando-upsell__button',
+                    can_add_to_cart: v.available,
+                    show_icon: false,
+                    product: p
+                  %}
+                {%- endform -%}
+              </product-form-component>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {% render 'add-to-cart-button-styles' %}
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-upsell {
+    width: 100%;
+    border: 1px solid rgb(29 43 51 / 0.14);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: var(--mahando-surface, #fff);
+  }
+
+  .mahando-upsell__title {
+    margin: 0 0 6px;
+    font-weight: 700;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-upsell__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mahando-upsell__item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding-block: 10px;
+  }
+
+  .mahando-upsell__item + .mahando-upsell__item {
+    border-top: 1px solid rgb(29 43 51 / 0.1);
+  }
+
+  .mahando-upsell__media {
+    display: block;
+    width: 56px;
+    height: 56px;
+  }
+
+  .mahando-upsell__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mahando-upsell__info {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+    font-size: var(--font-size--xs);
+  }
+
+  .mahando-upsell__name {
+    color: inherit;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.35;
+  }
+
+  .mahando-upsell__name:hover {
+    text-decoration: underline;
+  }
+
+  .mahando-upsell__hint {
+    color: #1f7a4d;
+  }
+
+  .mahando-upsell__price {
+    font-weight: 700;
+  }
+
+  .mahando-upsell__form,
+  .mahando-upsell__form .shopify-product-form,
+  .mahando-upsell__form add-to-cart-component {
+    display: block;
+  }
+
+  .mahando-upsell__button {
+    min-height: 36px;
+    padding: 6px 14px;
+    font-size: var(--font-size--xs);
+    white-space: nowrap;
+  }
+
+  .mahando-upsell__button .add-to-cart-text__content {
+    white-space: nowrap;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Zubehör-Upsell",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Zeigt die „Ergänzenden Produkte“ des Artikels (Produkt-Metafeld bzw. App „Search & Discovery“). Ohne Einträge bleibt der Block unsichtbar."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Passendes Zubehör dazu?"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Hinweiszeile",
+      "default": "Passt zu diesem Artikel"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "Hinzufügen"
+    },
+    {
+      "type": "range",
+      "id": "max_items",
+      "label": "Maximale Anzahl",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zubehör-Upsell"
+    }
+  ]
+}
+{% endschema %}
