@@ -6,7 +6,7 @@
 <nav
   class="mahando-jumpnav spacing-style"
   aria-label="{{ block.settings.aria_label | escape }}"
-  style="width: fit-content; max-width: 100%; {% render 'spacing-style', settings: block.settings %}"
+  style="width: fit-content; max-width: 100%; flex-wrap: wrap; overflow: visible; border-color: #DCE5E9; {% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
   {%- for i in (1..6) -%}
