@@ -794,243 +794,276 @@
       "type": "section",
       "name": "Häufige Fragen",
       "blocks": {
-        "titel": {
-          "type": "mahando-section-title",
+        "spalte": {
+          "type": "group",
+          "name": "FAQ-Spalte",
           "settings": {
-            "eyebrow": "Service",
-            "heading": "Häufige Fragen",
-            "level": "h2",
-            "size": "h3",
-            "anchor": "faq"
-          }
-        },
-        "fragen": {
-          "type": "accordion",
-          "settings": {
-            "icon": "plus",
-            "dividers": true,
-            "type_preset": "h6",
-            "padding-block-start": 4
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 64,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
-            "faq_1": {
-              "type": "_accordion-row",
+            "titel": {
+              "type": "mahando-section-title",
               "settings": {
-                "heading": "Wann kommt meine Bestellung?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Bestellungen, die werktags bis 14 Uhr eingehen und bezahlt sind, versenden wir am selben Tag aus unserem Lager in Deutschland. Mit DHL ist die Sendung in der Regel 1–2 Werktage unterwegs. Das voraussichtliche Lieferdatum sehen Sie direkt beim Preis. Sperrige oder besonders hochwertige Artikel liefern wir per Spedition; hier kann die Lieferung etwas länger dauern.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
-              ]
+                "eyebrow": "Service",
+                "heading": "Häufige Fragen",
+                "level": "h2",
+                "size": "h3",
+                "anchor": "faq"
+              }
             },
-            "faq_2": {
-              "type": "_accordion-row",
+            "fragen": {
+              "type": "accordion",
               "settings": {
-                "heading": "Was kostet der Versand?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "paragraph",
+                "padding-block-start": 4
               },
               "blocks": {
-                "antwort": {
-                  "type": "text",
+                "faq_1": {
+                  "type": "_accordion-row",
                   "settings": {
-                    "text": "<p>Der Versand kostet pauschal 4,99 € pro Bestellung. Ab einem Bestellwert von 300 € liefern wir versandkostenfrei. Wir liefern derzeit ausschließlich innerhalb Deutschlands.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
+                    "heading": "Wann kommt meine Bestellung?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
                   },
-                  "blocks": {}
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Bestellungen, die werktags bis 14 Uhr eingehen und bezahlt sind, versenden wir am selben Tag aus unserem Lager in Deutschland. Mit DHL ist die Sendung in der Regel 1–2 Werktage unterwegs. Das voraussichtliche Lieferdatum sehen Sie direkt beim Preis. Sperrige oder besonders hochwertige Artikel liefern wir per Spedition; hier kann die Lieferung etwas länger dauern.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_2": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Was kostet der Versand?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Der Versand kostet pauschal 4,99 € pro Bestellung. Ab einem Bestellwert von 300 € liefern wir versandkostenfrei. Wir liefern derzeit ausschließlich innerhalb Deutschlands.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_3": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Welche Zahlungsarten bieten Sie an?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Sie können mit PayPal, Klarna sowie per Kredit- oder Debitkarte bezahlen. Je nach Gerät stehen zusätzlich Apple Pay und Google Pay zur Verfügung. Die Zahlung wird verschlüsselt abgewickelt.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_4": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Erhalte ich eine Rechnung?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Ja. Zu jeder Bestellung erhalten Sie eine Rechnung mit ausgewiesener Mehrwertsteuer.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_5": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Ist die Ware neu?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Sofern beim Artikel nicht anders angegeben, handelt es sich um Neuware in Originalverpackung. Abweichungen – etwa eine beschädigte Umverpackung oder geprüfte Rückläufer – kennzeichnen wir beim jeweiligen Artikel unter „Zustand“.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_6": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Kann ich einen Artikel zurückgeben?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Zusätzlich zum gesetzlichen Widerrufsrecht von 14 Tagen nehmen wir unbenutzte, original verpackte Artikel bis 30 Tage nach Erhalt zurück. Melden Sie die Rücksendung bitte per E-Mail an <a href=\"mailto:support@mahando.de?subject=R%C3%BCcksendung\">support@mahando.de</a> an – mit Ihrer Bestellnummer. Einzelheiten finden Sie in der <a href=\"/policies/refund-policy\">Widerrufsbelehrung</a>.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
+                },
+                "faq_7": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Wie erreiche ich den Kundenservice?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "antwort": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Am schnellsten per E-Mail an <a href=\"mailto:support@mahando.de\">support@mahando.de</a>. Wir antworten Montag bis Freitag zwischen 8 und 15 Uhr, in der Regel noch am selben Werktag.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "antwort"
+                  ]
                 }
               },
               "block_order": [
-                "antwort"
-              ]
-            },
-            "faq_3": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Welche Zahlungsarten bieten Sie an?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Sie können mit PayPal, Klarna sowie per Kredit- oder Debitkarte bezahlen. Je nach Gerät stehen zusätzlich Apple Pay und Google Pay zur Verfügung. Die Zahlung wird verschlüsselt abgewickelt.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
-              ]
-            },
-            "faq_4": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Erhalte ich eine Rechnung?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Ja. Zu jeder Bestellung erhalten Sie eine Rechnung mit ausgewiesener Mehrwertsteuer.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
-              ]
-            },
-            "faq_5": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Ist die Ware neu?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Sofern beim Artikel nicht anders angegeben, handelt es sich um Neuware in Originalverpackung. Abweichungen – etwa eine beschädigte Umverpackung oder geprüfte Rückläufer – kennzeichnen wir beim jeweiligen Artikel unter „Zustand“.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
-              ]
-            },
-            "faq_6": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Kann ich einen Artikel zurückgeben?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Zusätzlich zum gesetzlichen Widerrufsrecht von 14 Tagen nehmen wir unbenutzte, original verpackte Artikel bis 30 Tage nach Erhalt zurück. Melden Sie die Rücksendung bitte per E-Mail an <a href=\"mailto:support@mahando.de?subject=R%C3%BCcksendung\">support@mahando.de</a> an – mit Ihrer Bestellnummer. Einzelheiten finden Sie in der <a href=\"/policies/refund-policy\">Widerrufsbelehrung</a>.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
-              ]
-            },
-            "faq_7": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Wie erreiche ich den Kundenservice?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "antwort": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Am schnellsten per E-Mail an <a href=\"mailto:support@mahando.de\">support@mahando.de</a>. Wir antworten Montag bis Freitag zwischen 8 und 15 Uhr, in der Regel noch am selben Werktag.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "antwort"
+                "faq_1",
+                "faq_2",
+                "faq_3",
+                "faq_4",
+                "faq_5",
+                "faq_6",
+                "faq_7"
               ]
             }
           },
           "block_order": [
-            "faq_1",
-            "faq_2",
-            "faq_3",
-            "faq_4",
-            "faq_5",
-            "faq_6",
-            "faq_7"
+            "titel",
+            "fragen"
           ]
         }
       },
       "block_order": [
-        "titel",
-        "fragen"
+        "spalte"
       ],
       "settings": {
         "content_direction": "column",
