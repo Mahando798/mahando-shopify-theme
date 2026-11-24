@@ -930,7 +930,7 @@
               }
             },
             "rev": {
-              "type": "mahando-product-reviews",
+              "type": "mahando-reviews",
               "settings": {
                 "heading": "",
                 "padding-block-start": 0
