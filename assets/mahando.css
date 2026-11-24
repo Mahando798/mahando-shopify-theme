@@ -833,3 +833,9 @@ media-gallery.sticky-content {
   margin: 6px 0 0;
   max-width: 75ch;
 }
+
+.mahando-mpr__positive {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1a7f4b;
+}
