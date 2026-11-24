@@ -690,3 +690,9 @@ media-gallery.sticky-content {
   position: static !important;
   top: auto !important;
 }
+
+/* Rechte Spalte als eine Karte: „Auf einen Blick“ als helle Fläche ohne eigenen Rahmen */
+.product-details .mahando-highlights {
+  border: 0;
+  background: #f4f8f9;
+}
