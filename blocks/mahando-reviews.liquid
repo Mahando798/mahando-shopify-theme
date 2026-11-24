@@ -18,7 +18,7 @@
       endif
     endfor
   endif
-  assign review_count = product.metafields.reviews.rating_count.value | default: 0
+  assign review_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0
   assign badge = product.metafields.judgeme.badge | append: ''
   if badge contains 'data-number-of-reviews='
     assign jm_count = badge | split: "data-number-of-reviews='" | last | split: "'" | first | plus: 0
