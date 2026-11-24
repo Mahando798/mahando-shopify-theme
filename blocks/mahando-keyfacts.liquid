@@ -1,0 +1,144 @@
+{%- doc -%}
+  Kennzahl-Kacheln unter der Beschreibung.
+  Quelle: Metafeld mahando.kennzahlen (mehrzeilig), eine Zeile pro Kachel im Format "Wert | Beschriftung",
+  z. B. "1:24 | Maßstab der Fahrzeuge". Ist das Feld leer, werden optional die Highlights
+  (mahando.highlights) als Häkchenliste gezeigt.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign raw = product.metafields.mahando.kennzahlen.value | strip
+  assign tiles = ''
+  if raw != blank
+    assign lines = raw | newline_to_br | split: '<br />'
+    for line in lines
+      assign clean = line | strip_html | strip
+      if clean contains '|'
+        assign tiles = tiles | append: clean | append: '§§'
+      endif
+    endfor
+  endif
+  assign tiles = tiles | split: '§§'
+
+  assign bullets = ''
+  if tiles.size == 0 and block.settings.fallback_highlights
+    assign hraw = product.metafields.mahando.highlights.value | strip
+    if hraw != blank
+      assign hl = hraw | newline_to_br | split: '<br />'
+      for line in hl limit: block.settings.max_items
+        assign clean = line | strip_html | strip | remove_first: '- ' | remove_first: '• '
+        if clean != blank
+          assign bullets = bullets | append: clean | append: '§§'
+        endif
+      endfor
+    endif
+  endif
+  assign bullets = bullets | split: '§§'
+-%}
+
+{%- if tiles.size > 0 -%}
+  <ul class="mahando-keyfacts spacing-style" role="list" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- for t in tiles limit: block.settings.max_items -%}
+      {%- assign parts = t | split: '|' -%}
+      <li class="mahando-keyfacts__tile">
+        <strong class="mahando-keyfacts__value">{{ parts[0] | strip }}</strong>
+        <span class="mahando-keyfacts__label">{{ t | remove_first: parts[0] | remove_first: '|' | strip }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- elsif bullets.size > 0 -%}
+  <ul class="mahando-keyfacts-list spacing-style" role="list" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- for b in bullets -%}
+      <li>{% render 'mahando-icon', icon: 'check', class: 'mahando-keyfacts-list__icon' %}<span>{{ b }}</span></li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-keyfacts {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .mahando-keyfacts {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .mahando-keyfacts__tile {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px;
+    border-radius: 10px;
+    background: var(--color-background-secondary, #eef3f5);
+  }
+
+  .mahando-keyfacts__value {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-keyfacts__label {
+    font-size: var(--font-size--sm);
+    line-height: 1.35;
+  }
+
+  .mahando-keyfacts-list {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 16px 18px;
+    display: grid;
+    gap: 8px;
+    border-radius: 10px;
+    background: var(--color-background-secondary, #eef3f5);
+    font-size: var(--font-size--sm);
+  }
+
+  @media screen and (min-width: 750px) {
+    .mahando-keyfacts-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+    }
+  }
+
+  .mahando-keyfacts-list li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .mahando-keyfacts-list__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Kennzahlen (Kacheln)",
+  "tag": null,
+  "settings": [
+    { "type": "range", "id": "max_items", "label": "Maximal", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "fallback_highlights", "label": "Ohne Kennzahlen: Highlights als Liste zeigen", "default": true },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "t:settings.left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "t:settings.right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Kennzahlen (Kacheln)" }]
+}
+{% endschema %}

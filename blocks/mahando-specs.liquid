@@ -11,7 +11,10 @@
   assign rows = ''
   for line in lines
     assign clean = line | strip_html | strip
-    if clean contains ':'
+    assign first_char = clean | slice: 0
+    if first_char == '#'
+      assign rows = rows | append: clean | append: '||'
+    elsif clean contains ':'
       assign rows = rows | append: clean | append: '||'
     endif
   endfor
@@ -27,8 +30,29 @@
     {%- if block.settings.heading != blank -%}
       <h3 class="mahando-specs__heading h6">{{ block.settings.heading }}</h3>
     {%- endif -%}
+    {%- if block.settings.style == 'zebra' -%}
+      <div class="mahando-specs__zebra">
+        {%- assign zi = 0 -%}
+        {%- for row in rows limit: block.settings.max_rows -%}
+          {%- assign first_char = row | slice: 0 -%}
+          {%- if first_char == '#' -%}
+            <h4 class="mahando-specs__group">{{ row | remove: '#' | strip }}</h4>
+            {%- assign zi = 0 -%}
+          {%- else -%}
+            {%- assign parts = row | split: ':' -%}
+            {%- assign zi = zi | plus: 1 -%}
+            <div class="mahando-specs__zrow{% assign zm = zi | modulo: 2 %}{% if zm == 1 %} is-odd{% endif %}">
+              <span class="mahando-specs__k">{{ parts[0] | strip }}</span>
+              <span class="mahando-specs__v">{{ row | remove_first: parts[0] | remove_first: ':' | strip }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
     <dl class="mahando-specs__list mahando-specs__list--{{ block.settings.columns }}">
       {%- for row in rows limit: block.settings.max_rows -%}
+        {%- assign first_char = row | slice: 0 -%}
+        {%- if first_char == '#' -%}{%- continue -%}{%- endif -%}
         {%- assign parts = row | split: ':' -%}
         {%- assign label = parts[0] | strip -%}
         {%- assign value = row | remove_first: parts[0] | remove_first: ':' | strip -%}
@@ -38,6 +62,7 @@
         </div>
       {%- endfor -%}
     </dl>
+    {%- endif -%}
   </div>
 {%- elsif request.design_mode -%}
   <div class="mahando-specs mahando-specs--empty" {{ block.shopify_attributes }}>
@@ -97,6 +122,46 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .mahando-specs__zebra {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-specs__group {
+    margin: 16px 0 6px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-specs__group:first-child {
+    margin-top: 0;
+  }
+
+  .mahando-specs__zrow {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+  }
+
+  .mahando-specs__zrow.is-odd {
+    background: var(--color-background-secondary, #f4f8f9);
+  }
+
+  .mahando-specs__k {
+    color: var(--color-foreground-muted);
+  }
+
+  .mahando-specs__v {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
   .mahando-specs__hint {
     margin: 0;
     padding: 10px 12px;
@@ -120,6 +185,16 @@
       "type": "text",
       "id": "heading",
       "label": "Überschrift"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Darstellung",
+      "options": [
+        { "value": "list", "label": "Liste mit Rahmen" },
+        { "value": "zebra", "label": "Tabelle gestreift (Gruppen mit #)" }
+      ],
+      "default": "list"
     },
     {
       "type": "select",

@@ -1,0 +1,102 @@
+{%- doc -%}
+  Sprungnavigation zu den Abschnitten der Produktseite (Pillen-Leiste).
+  Bis zu sechs Einträge aus Beschriftung und Anker (ohne #). Einträge ohne Beschriftung werden ausgelassen.
+{%- enddoc -%}
+
+<nav
+  class="mahando-jumpnav spacing-style"
+  aria-label="{{ block.settings.aria_label | escape }}"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..6) -%}
+    {%- liquid
+      assign lk = 'label_' | append: i
+      assign ak = 'anchor_' | append: i
+      assign label = block.settings[lk] | strip
+      assign anchor = block.settings[ak] | strip | remove: '#'
+    -%}
+    {%- if label != blank and anchor != blank -%}
+      <a class="mahando-jumpnav__link{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}">{{ label }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>
+
+<script>
+  (() => {
+    const nav = document.currentScript.previousElementSibling;
+    if (!nav || !('IntersectionObserver' in window)) return;
+    const links = [...nav.querySelectorAll('a[href^="#"]')];
+    const targets = links.map((a) => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    links.forEach((a) => { if (!document.getElementById(a.hash.slice(1))) a.hidden = true; });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((a) => a.classList.toggle('is-active', a.hash === '#' + e.target.id));
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    targets.forEach((t) => io.observe(t));
+  })();
+</script>
+
+{% stylesheet %}
+  .mahando-jumpnav {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 8px;
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    scrollbar-width: none;
+  }
+
+  .mahando-jumpnav__link {
+    flex: none;
+    padding: 10px 16px;
+    border-radius: 40px;
+    font-size: var(--font-size--sm);
+    font-weight: 600;
+    color: var(--color-foreground);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mahando-jumpnav__link:hover {
+    background: var(--color-background-secondary, #eef3f5);
+  }
+
+  .mahando-jumpnav__link.is-active {
+    background: var(--color-primary-button-background, #0a7e83);
+    color: var(--color-primary-button-text, #fff);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sprungnavigation",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Bezeichnung für Screenreader", "default": "Abschnitte" },
+    { "type": "text", "id": "label_1", "label": "Eintrag 1", "default": "Beschreibung" },
+    { "type": "text", "id": "anchor_1", "label": "Anker 1", "default": "beschreibung" },
+    { "type": "text", "id": "label_2", "label": "Eintrag 2", "default": "Technische Daten" },
+    { "type": "text", "id": "anchor_2", "label": "Anker 2", "default": "daten" },
+    { "type": "text", "id": "label_3", "label": "Eintrag 3", "default": "Lieferumfang" },
+    { "type": "text", "id": "anchor_3", "label": "Anker 3", "default": "lieferumfang" },
+    { "type": "text", "id": "label_4", "label": "Eintrag 4", "default": "Bewertungen" },
+    { "type": "text", "id": "anchor_4", "label": "Anker 4", "default": "bewertungen" },
+    { "type": "text", "id": "label_5", "label": "Eintrag 5", "default": "Versand & Hersteller" },
+    { "type": "text", "id": "anchor_5", "label": "Anker 5", "default": "service" },
+    { "type": "text", "id": "label_6", "label": "Eintrag 6", "default": "Fragen" },
+    { "type": "text", "id": "anchor_6", "label": "Anker 6", "default": "faq" },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "t:settings.left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "t:settings.right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Sprungnavigation" }]
+}
+{% endschema %}

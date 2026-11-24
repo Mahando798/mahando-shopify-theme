@@ -1,0 +1,94 @@
+{%- doc -%}
+  Lieferumfang als Häkchenliste plus Hinweis „Nicht enthalten“.
+  Quellen: mahando.lieferumfang (eine Zeile je Teil) und mahando.nicht_enthalten (eine Zeile je Teil).
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign inc_raw = product.metafields.mahando.lieferumfang.value | strip
+  assign exc_raw = product.metafields.mahando.nicht_enthalten.value | strip
+  assign inc = inc_raw | newline_to_br | split: '<br />'
+  assign exc = exc_raw | newline_to_br | split: '<br />'
+-%}
+
+{%- if inc_raw != blank or exc_raw != blank -%}
+  <div class="mahando-included spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- if inc_raw != blank -%}
+      <ul class="mahando-included__list" role="list">
+        {%- for line in inc -%}
+          {%- assign clean = line | strip_html | strip | remove_first: '- ' | remove_first: '• ' -%}
+          {%- if clean != blank -%}
+            <li>{% render 'mahando-icon', icon: 'check', class: 'mahando-included__icon' %}<span>{{ clean }}</span></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if exc_raw != blank -%}
+      <div class="mahando-included__missing">
+        <strong>{{ block.settings.missing_label }}</strong>
+        {%- for line in exc -%}
+          {%- assign clean = line | strip_html | strip | remove_first: '- ' | remove_first: '• ' -%}
+          {%- if clean != blank -%}<span>{{ clean }}</span>{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mahando-included {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .mahando-included__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    font-size: var(--font-size--sm);
+  }
+
+  .mahando-included__list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .mahando-included__icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    color: var(--color-primary-button-background, #0a7e83);
+  }
+
+  .mahando-included__missing {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fff6e5;
+    font-size: var(--font-size--sm);
+    line-height: 1.45;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lieferumfang (Liste)",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "missing_label", "label": "Überschrift „nicht enthalten“", "default": "Nicht im Lieferumfang:" },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "t:settings.left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "t:settings.right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Lieferumfang (Liste)" }]
+}
+{% endschema %}

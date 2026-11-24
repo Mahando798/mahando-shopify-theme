@@ -52,7 +52,7 @@
 <script src="{{ 'mahando-product-meta.js' | asset_url }}" type="module" fetchpriority="low"></script>
 
 <mahando-product-meta
-  class="mahando-details spacing-style"
+  class="mahando-details{% if block.settings.plain %} mahando-details--plain{% endif %} spacing-style"
   data-product-id="{{ product.id }}"
   style="{% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
@@ -123,6 +123,18 @@
     display: block;
     width: 100%;
     font-size: var(--font-size--sm);
+  }
+
+  .mahando-details--plain .mahando-details__list {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .mahando-details--plain .mahando-details__row {
+    padding-inline: 0;
+    background: none !important;
+    border-top: 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .mahando-details__heading {
@@ -198,6 +210,12 @@
       "id": "heading",
       "label": "Überschrift",
       "default": "Produktdetails"
+    },
+    {
+      "type": "checkbox",
+      "id": "plain",
+      "label": "Ohne Rahmen (für Karten)",
+      "default": false
     },
     {
       "type": "checkbox",

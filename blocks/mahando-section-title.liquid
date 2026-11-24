@@ -8,7 +8,7 @@
   assign level = block.settings.level | default: 'h2'
 -%}
 
-{%- if block.settings.heading != blank -%}
+{%- if block.settings.heading != blank or anchor != blank -%}
   <div
     class="mahando-section-head mahando-section-head--block spacing-style"
     {% if anchor != blank %}id="{{ anchor }}"{% endif %}
@@ -18,7 +18,9 @@
     {%- if block.settings.eyebrow != blank -%}
       <p class="mahando-eyebrow">{{ block.settings.eyebrow }}</p>
     {%- endif -%}
-    <{{ level }} class="mahando-section-head__title {{ block.settings.size }}">{{ block.settings.heading }}</{{ level }}>
+    {%- if block.settings.heading != blank -%}
+      <{{ level }} class="mahando-section-head__title {{ block.settings.size }}">{{ block.settings.heading }}</{{ level }}>
+    {%- endif -%}
   </div>
 {%- endif -%}
 
