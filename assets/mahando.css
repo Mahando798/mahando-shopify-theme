@@ -691,8 +691,8 @@ media-gallery.sticky-content {
   top: auto !important;
 }
 
-/* Rechte Spalte als eine Karte: „Auf einen Blick“ als helle Fläche ohne eigenen Rahmen */
+/* „Das Wichtigste auf einen Blick“: gleicher heller Rahmen wie Kaufbox und Bildbox */
 .product-details .mahando-highlights {
-  border: 0;
-  background: #f4f8f9;
+  border-color: #dce5e9;
+  background: #fff;
 }
